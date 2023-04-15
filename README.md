@@ -13,7 +13,8 @@ Full Solution.
 
 Code changes:
 
-[code]path := FileRead(A_ScriptDir "\log.txt")
+```autohotkey
+path := FileRead(A_ScriptDir "\log.txt")
 converter(path)
 converter(selected) {
     exe := "`"" A_ScriptDIr "\AutoHotKey Exe\AutoHotkeyV2.exe`""
@@ -22,12 +23,12 @@ converter(selected) {
     MsgBox(command)
     Run(command)
 }
-[/code]
+```
 
 code changed in autogui:
 
-[code]    
 
+```autohotkey
     Log := A_ScriptDir "\log.txt"
     if FileExist(Log){
         FileDelete %Log%
@@ -38,5 +39,5 @@ code changed in autogui:
     FileAppend %FullPath%, %Log%, %Encoding%
     Run, listener.exe, %A_ScriptDir%
 
-[/code]
+```
 
