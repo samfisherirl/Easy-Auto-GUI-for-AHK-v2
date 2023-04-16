@@ -9,9 +9,7 @@ AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
 Conversion happens when selecting "Save" or "Save as", command line parameters launch, read log for script path, and convert as ahkv2converter does.
 
- ![image](https://user-images.githubusercontent.com/98753696/232260868-8f4615eb-f721-4efc-bae7-d6e6e3224b81.png)
-
- ![image](https://user-images.githubusercontent.com/98753696/232260934-dd7c7d7b-c94c-4f88-b7ec-0988373a78ff.png)
+ ![image](https://user-images.githubusercontent.com/98753696/232280159-65310ed0-28eb-4f22-aa0d-461452f1a94a.png)
 
 
 
