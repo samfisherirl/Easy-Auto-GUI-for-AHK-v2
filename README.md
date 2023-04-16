@@ -14,10 +14,6 @@ Conversion happens when selecting "Save" or "Save as", command line parameters l
 
 
 
-Full Solution. https://github.com/samfisherirl/Auto-GUI-for-AHK-v2
-
-Full Solution. 
-
 Code changes:
 
 ```autohotkey
