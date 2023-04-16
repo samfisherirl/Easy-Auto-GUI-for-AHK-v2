@@ -2,7 +2,7 @@
 
 I'll be adding more details here soon. 
 
-Auto-GUI-v2 credit to https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901 
+Auto-GUI-v2 credit to Alguimist who built the entire app - https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901 
 
 AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
