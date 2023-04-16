@@ -21,7 +21,6 @@ So if you're looking for a powerful, easy-to-use tool that can help you create i
 
 
 I managed to copy an entire notepad++ window, and autoconvert to ahkv2.
- ![image](https://user-images.githubusercontent.com/98753696/232280159-65310ed0-28eb-4f22-aa0d-461452f1a94a.png)
 
 
 
