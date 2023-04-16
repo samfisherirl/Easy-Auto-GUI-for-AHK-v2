@@ -16,28 +16,31 @@ Code changes:
 ```autohotkey
 path := FileRead(A_ScriptDir "\log.txt")
 converter(path)
-converter(selected) {
+converter(path) {
     exe := "`"" A_ScriptDIr "\AutoHotKey Exe\AutoHotkeyV2.exe`""
-    convertahk := exe " `"" A_ScriptDIr "\v2converter.ahk`" "
-    command := convertahk . "`"" selected "`""
-    MsgBox(command)
+    convertahk := " `"" A_ScriptDIr "\convert\v2converter.ahk`" "
+    command := exe convertahk "`"" path "`""
     Run(command)
 }
+
 ```
 
 code changed in autogui:
 
 
 ```autohotkey
+    
+run_listener(SelectedFile){
+    q := """"
+    exe := q . A_ScriptDIr . "\AutoHotKey Exe\AutoHotkeyV2.exe" . q . " "
+    script := q . A_ScriptDIr . "\listener.ahk" . q 
+    com := exe . script
     Log := A_ScriptDir "\log.txt"
     if FileExist(Log){
         FileDelete %Log%
     }
-    FileDelete %FullPath%
-    FileAppend %SciText%, %FullPath%, %Encoding%
-    FileDelete %Log%
-    FileAppend %FullPath%, %Log%, %Encoding%
-    Run, listener.exe, %A_ScriptDir%
-
+    FileAppend %SelectedFile%, %Log%, %Encoding%
+    Run, %com%, %A_ScriptDir%
+}
 ```
 
