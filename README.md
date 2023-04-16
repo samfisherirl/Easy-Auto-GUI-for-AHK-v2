@@ -1,6 +1,6 @@
 # AutoGUI GUI-Designer GUI-Builder for ahk-v2
 
-I'll be adding more details here soon. Example, notepad++ clone to ahkv2
+I'll be adding more details here soon. Example, cloning notepad++ to ahkv2
 ![image](https://user-images.githubusercontent.com/98753696/232308834-5af87bbe-f920-4751-9019-44f834910c0b.jpg)
 
 Auto-GUI-v2 credit to Alguimist who built the entire app - https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901 
