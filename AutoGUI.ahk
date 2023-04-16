@@ -1478,12 +1478,9 @@ Save(n) {
         }
     }
 
-    Log := A_ScriptDir "\log.txt"
     FileDelete %FullPath%
     FileAppend %SciText%, %FullPath%, %Encoding%
-    FileDelete %Log%
-    FileAppend %FullPath%, %Log%, %Encoding%
-    Run, listener.exe, %A_ScriptDir%
+    run_listener(FullPath)
     If (ErrorLevel) {
         ErrorMsgBox("Error saving """ . FullPath . """.`n`n" . GetErrorMessage(A_LastError), "Auto", g_AppName)
         SetWindowTitle("Error saving file: " . FullPath)
@@ -1545,10 +1542,8 @@ SaveCopy:
     Encoding := GetSaveEncoding(SelectedFile)
     WriteFile(SelectedFile, SciText, Encoding)
     
-    Log := A_ScriptDir "\log.txt"
-    FileDelete %Log%
-    FileAppend %SelectedFile%, %Log%, %Encoding%
-    Run, listener.exe, %A_ScriptDir%
+    run_listener(SelectedFile)
+
     AddToRecentFiles(SelectedFile)
 Return
 
@@ -2834,6 +2829,19 @@ AhkRunGetStdErr(n, AhkPath, AhkScript, Parameters, WorkingDir, AhkDbgParams := "
             GoSub DebugError            
         }
     }
+}
+
+run_listener(SelectedFile){
+    q := """"
+    exe := q . A_ScriptDIr . "\AutoHotKey Exe\AutoHotkeyV2.exe" . q . " "
+    script := q . A_ScriptDIr . "\listener.ahk" . q 
+    com := exe . script
+    Log := A_ScriptDir "\log.txt"
+    if FileExist(Log){
+        FileDelete %Log%
+    }
+    FileAppend %SelectedFile%, %Log%, %Encoding%
+    Run, %com%, %A_ScriptDir%
 }
 
 GetSaveEncoding(Filename) {

@@ -4,11 +4,10 @@ AutoHotkeyV2.exe "C:\Users\dower\Downloads\AHK-v2-script-converter-master\v2conv
 */
 path := FileRead(A_ScriptDir "\log.txt")
 converter(path)
-converter(selected) {
+converter(path) {
     exe := "`"" A_ScriptDIr "\AutoHotKey Exe\AutoHotkeyV2.exe`""
-    convertahk := exe " `"" A_ScriptDIr "\v2converter.ahk`" "
-    command := convertahk . "`"" selected "`""
-    MsgBox(command)
+    convertahk := " `"" A_ScriptDIr "\convert\v2converter.ahk`" "
+    command := exe convertahk "`"" path "`""
     Run(command)
 }
 ;The script defines a class named "MyGui_Create" that creates a GUI and adds buttons to it. Each button is assigned an "OnEvent" method that is triggered when the user clicks on it. These methods contain commands to launch virtual environments and run the different packaging tools.
