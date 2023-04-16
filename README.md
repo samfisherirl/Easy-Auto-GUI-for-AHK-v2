@@ -26,7 +26,7 @@ I managed to copy an entire notepad++ window, and autoconvert to ahkv2.
 
 
 
-Code changes:
+Code added, listener.ahk:
 
 ```autohotkey
 path := FileRead(A_ScriptDir "\log.txt")
@@ -40,7 +40,7 @@ converter(path) {
 
 ```
 
-code changed in autogui:
+code changed, autogui:
 
 
 ```autohotkey
