@@ -20,10 +20,6 @@ So if you're looking for a powerful, easy-to-use tool that can help you create i
 
 
 
-I managed to copy an entire notepad++ window, and autoconvert to ahkv2.
-
-
-
 
 Code added, listener.ahk:
 
