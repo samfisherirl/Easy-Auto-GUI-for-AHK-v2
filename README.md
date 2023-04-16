@@ -5,10 +5,13 @@ I'll be adding more details here soon.
 Auto-GUI-v2 credit to https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901 
 
 AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
-
 I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
-Conversion happens when selecting "Save" or "Save as", command line parameters launch, read log for script path, and convert as ahkv2converter does.
 
+- This Runs standard Easy AutoGUI's v1 script
+- Conversion happens when selecting "Save" or "Save as..."
+- command line parameters pass the v1 script + path to ahkv2converter and convert as ahkv2converter does.
+
+I managed to copy an entire notepad++ window, and autoconvert to ahkv2.
  ![image](https://user-images.githubusercontent.com/98753696/232280159-65310ed0-28eb-4f22-aa0d-461452f1a94a.png)
 
 
