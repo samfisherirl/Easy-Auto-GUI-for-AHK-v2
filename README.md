@@ -7,6 +7,8 @@ Auto-GUI-v2 credit to Alguimist who built the entire app - https://www.autohotke
 
 AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 
+Instructions: Launch from Launch_AutoGUI, when saving the script automatically converts to v2. 
+
 Welcome to the AutoGUI GUI-Designer GUI-Builder for ahk-v2! If you're someone who spends a lot of time writing scripts in AutoHotkey, then you know how important it is to have the right tools at your disposal. AutoGUI GUI-Designer GUI-Builder for ahk-v2 is a powerful tool that can help you create intuitive, user-friendly interfaces for your AutoHotkey scripts.
 
 What's more, this tool is incredibly easy to use. All you have to do is run your standard Easy AutoGUI's v1 script, and then select "Save" or "Save as..." in order to initiate the conversion process. With the help of AHKv2converter, your script will be automatically converted to AHKv2, giving you access to all of the latest features and functions of this powerful scripting language.
