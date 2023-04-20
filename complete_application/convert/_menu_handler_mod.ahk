@@ -8,12 +8,13 @@
     ; && for loops
     newoutscript := ""
     intxt := FileRead(FNOut)
+    FileMove(FNOut, A_ScriptDir "\complete_application\temp.txt", 1)
     Loop Parse, intxt, "`n", "`r" {
         if (menuhandle == 0) && InStr(A_LoopField, "MenuHandler"){
             menuhandle := 1
             newoutscript .= A_LoopField . "`n"
         }
-        else if (menuhandle == 1) && (GuiEsc== 0) && InStr(A_LoopField, "GuiEscape(*)") {
+        else if (menuhandle == 1) && InStr(A_LoopField, "GuiEscape(*)") {
             newoutscript .= "MenuHandler(*) {`n`tToolTip `"Click!`", 100, 150`n}`n" A_LoopField
             GuiEsc:= 1
         }

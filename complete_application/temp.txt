@@ -1,6 +1,1 @@
-﻿Gui Show, w620 h420, Window
-Return
-
-GuiEscape:
-GuiClose:
-    ExitApp
+C:\Users\dower\Documents\Auto-GUI-v2\complete_application\runtime.txt

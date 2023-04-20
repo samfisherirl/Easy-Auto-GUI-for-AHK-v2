@@ -392,21 +392,33 @@
     /*
     add CUSTOM CODE HERE
     */
-
+    CurrentCode := ""
+    Last_Code := ""
     if (Code != ""){
         Runtime := A_ScriptDir "\runtime.txt"
         ReturnStatus := A_ScriptDir "\returnstatus.txt"
+        lastCode := A_ScriptDir "\lastCode.txt"
         Temp := A_ScriptDir "\temp.txt"
         Logs := A_ScriptDir "\log.txt"
-        Code_to_Test := "-0---"
-        if FileExist(Runtime) && (Code != ""){
-            FileRead, Code_to_Test, %Runtime%
+        if FileExist(lastCode){
+            FileRead, Code_to_Test, %lastCode%
             if (Code_to_Test == Code){
                 Goto, Nvm
             }
+        }
+        if FileExist(Runtime){
             FileMove, %Runtime%, %Temp%, 1
         }
+        if FileExist(Logs){
+            FileMove, %Logs%, %Temp%, 1
+        }
+        if FileExist(ReturnStatus){
+            FileMove, %ReturnStatus%, %Temp%, 1
+        }
+
+        ;FileMove, %Runtime%, %Temp%, 1
         FileAppend, %Code%, %Runtime%
+        FileAppend, %Code%, %lastCode%
         FileAppend, %Runtime%, %Logs%
         Loop 50
         {
@@ -414,16 +426,23 @@
             {
                 FileRead, CodeBack, %Runtime%
                 if (CodeBack == "") {
+                    Sleep, 100
                     continue
                 }
-                if (CodeBack != Code){
-                    Code := CodeBack
+                if FileExist(lastCode){
+                    FileRead, ToBeTested, %lastCode%
+                }
+                if (ToBeTested == Code){
+                    Goto, Nvm
                 }
                 if FileExist(Logs){
                     FileMove, %Logs%, %Temp%, 1
                 }
                 if FileExist(ReturnStatus){
                     FileMove, %ReturnStatus%, %Temp%, 1
+                }
+                if FileExist(Runtime){
+                    FileRead, RetCode, %Runtime%
                 }
                 break
             }
@@ -435,6 +454,14 @@
         }
 
     }
+    if (CodeBack) {
+        Code := CodeBack
+    }
+    Last_Code := Code
+    if FileExist(lastCode){
+        FileMove, %lastCode%, %Temp%, 1
+    }
+    FileAppend, %Last_Code%, %lastCode%
     Header := Code
     g_Signature := Code
     sci[g_GuiTab].SetReadOnly(0)
@@ -448,13 +475,12 @@
         TabEx.SetSel(g_GuiTab)
     }
 
-
     Header := ""
     Code := ""
     SciText := ""
     Nvm:
-}
+    }
 
-SetIndent() {
-    Indent := g_IndentWithSpaces ? Format("{1: " . g_TabSize . "}", "") : "`t"
-}
+    SetIndent() {
+        Indent := g_IndentWithSpaces ? Format("{1: " . g_TabSize . "}", "") : "`t"
+    }
