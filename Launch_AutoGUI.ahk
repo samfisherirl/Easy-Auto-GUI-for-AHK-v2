@@ -44,7 +44,7 @@ While ProcessExist(PID) {
        outfile.Close()
 
        add_menuhandler(path_to_convert)
-        FileMove(A_ScriptDir "\log.txt", A_ScriptDir "\temp.txt", 1)
+       FileMove(A_ScriptDir "\log.txt", A_ScriptDir "\complete_application\temp.txt", 1)
         }
     else {
         Sleep(100)
