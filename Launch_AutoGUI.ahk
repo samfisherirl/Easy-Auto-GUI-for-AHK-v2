@@ -3,8 +3,8 @@
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-exe := "`"" A_ScriptDIr "\AutoHotKey Exe\AutoHotkeyV1.exe`" "
-autogui := "`"" A_ScriptDIr "\AutoGUI.ahk`""
+exe := "`"" A_ScriptDIr "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "
+autogui := "`"" A_ScriptDIr "\complete_application\AutoGUI.ahk`""
 com := exe autogui
 Run(com, , , &PID)
 Sleep(1000)

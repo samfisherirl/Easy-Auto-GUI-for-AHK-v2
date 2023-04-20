@@ -52,6 +52,9 @@ If (FileExist(A_AppData . "\AutoGUI\AutoGUI.ini")) {
 }
 
 LoadSettings()
+Gui, Color, 000000
+Gui +LastFound  ; Make the GUI window the last found window for use by the line below.
+WinSet, TransColor, 000000
 
 Gui Auto: New, LabelAuto hWndhAutoWnd Resize MinSize680 -DPIScale, %g_AppName% v%g_Version%
 Gui Auto: Default
