@@ -19,33 +19,24 @@ Loop 10 {
     }
 }
 
-path := A_ScriptDir "\log.txt"
-
-if FileExist(path) {
-    FileDelete(path)
+logs := A_ScriptDir "\complete_application\log.txt"
+temps := A_ScriptDir "\complete_application\temps.txt"
+if FileExist(logs) {
+    FileMove(logs, temps, 1)
 }
 
 While ProcessExist(PID) {
-    if FileExist(A_ScriptDir "\log.txt")
+    if FileExist(logs)
     {
-       path_to_convert := FileRead(A_ScriptDir "\log.txt")
-       inscript := FileRead(path_to_convert)
-       outscript := Convert(inscript)
-       outfile := FileOpen(path_to_convert, "w", "utf-8")
-          
-       ;######################################################################################################################
-       ;##### AddedFuncs for Converter GUI Combination(): #####
-       ;######################################################################################################################
-
-       ;######################################################################################################################
-       ;##### AddedFuncs for Converter GUI Combination(): #####
-       ;######################################################################################################################
-       outfile.Write(outscript)
-       outfile.Close()
-
-       add_menuhandler(path_to_convert)
-       FileMove(A_ScriptDir "\log.txt", A_ScriptDir "\complete_application\temp.txt", 1)
-        }
+        path_to_convert := FileRead(logs)
+        inscript := FileRead(path_to_convert)
+        outscript := Convert(inscript)
+        outfile := FileOpen(path_to_convert, "w", "utf-8")
+        outfile.Write(outscript)
+        outfile.Close()
+        add_menuhandler(path_to_convert)
+        FileMove(logs, temps, 1)
+    }
     else {
         Sleep(100)
     }

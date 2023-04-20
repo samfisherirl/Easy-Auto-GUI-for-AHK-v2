@@ -2835,16 +2835,19 @@ AhkRunGetStdErr(n, AhkPath, AhkScript, Parameters, WorkingDir, AhkDbgParams := "
 }
 
 run_listener(SelectedFile){
+    /*
+
+
     q := """"
     exe := q . A_ScriptDIr . "\AutoHotKey Exe\AutoHotkeyV2.exe" . q . " "
     script := q . A_ScriptDIr . "\listener.ahk" . q 
     com := exe . script
-    Log := A_ScriptDir "\log.txt"
-    if FileExist(Log){
-        FileDelete %Log%
+    */
+    Logs := A_ScriptDir "\log.txt"
+    if FileExist(Logs){
+        FileDelete %Logs%
     }
-    FileAppend %SelectedFile%, %Log%, %Encoding%
-    Run, %com%, %A_ScriptDir%
+    FileAppend %SelectedFile%, %Logs%, %Encoding%
 }
 
 GetSaveEncoding(Filename) {
