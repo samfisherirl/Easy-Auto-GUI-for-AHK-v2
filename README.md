@@ -8,6 +8,5 @@ I'll be adding more details here soon. Example, cloning notepad++ to ahkv2
 
 
 - Instructions: Launch from Launch_AutoGUI
-- When saving the script it automatically converts to v2. 
 - I have accounted for changes such as naming of "menubar" but there will be unforseen errors. Please notify me of those changes that need to be made in the output v2 conversion. 
  
