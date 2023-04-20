@@ -3,8 +3,10 @@ Auto-GUI-v2 credit to Alguimist and his team who built the entire app - https://
 
 AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 
-I'll be adding more details here soon. Example, cloning notepad++ to ahkv2
+I'll be adding more details here soon. Example, cloning notepad++ to ahkv2. 
+
 I did very little work, only merging the two behemouth solutions. 
+
 Update: Live in IDE v2 code works. 
 
 ![image](https://user-images.githubusercontent.com/98753696/232308834-5af87bbe-f920-4751-9019-44f834910c0b.jpg)
