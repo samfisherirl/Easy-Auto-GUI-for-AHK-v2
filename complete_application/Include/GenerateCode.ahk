@@ -6,9 +6,9 @@
     }
 
     Header := "#SingleInstance Force" . CRLF
-            . "#NoEnv" . CRLF
-            . "SetWorkingDir `%A_ScriptDir`%" . CRLF
-            . "SetBatchLines -1" . CRLF
+        . "#NoEnv" . CRLF
+        . "SetWorkingDir `%A_ScriptDir`%" . CRLF
+        . "SetBatchLines -1" . CRLF
 
     Code := ""
 
@@ -184,19 +184,19 @@
 
             If (g[Item].ExplorerTheme) {
                 Code .= "DllCall(""UxTheme.dll\SetWindowTheme"", ""Ptr"", "
-                     . g[Item].hWndVar . ", ""WStr"", ""Explorer"", ""Ptr"", 0)" . CRLF
+                    . g[Item].hWndVar . ", ""WStr"", ""Explorer"", ""Ptr"", 0)" . CRLF
             }
 
             If (g[Item].HintText != "") {
                 If (g[Item].Type == "Edit") {
                     Code .= "SendMessage 0x1501, 1, """ . g[Item].HintText
-                         . """,, ahk_id %" . g[Item].hWndVar . "% `; EM_SETCUEBANNER" . CRLF
+                        . """,, ahk_id %" . g[Item].hWndVar . "% `; EM_SETCUEBANNER" . CRLF
 
                 } Else { ; ComboBox
                     Code .= "hCbxEdit := DllCall(""GetWindow"", ""Ptr"", " . g[Item].hWndVar
-                         . ", ""UInt"", 5, ""Ptr"") `; GW_CHILD" . CRLF
+                        . ", ""UInt"", 5, ""Ptr"") `; GW_CHILD" . CRLF
                     Code .= "SendMessage 0x1501, 1, """ . g[Item].HintText
-                         . """,, ahk_id %hCbxEdit% `; EM_SETCUEBANNER" . CRLF
+                        . """,, ahk_id %hCbxEdit% `; EM_SETCUEBANNER" . CRLF
                 }
             }
 
@@ -389,11 +389,58 @@
 
         Code .= Indent . "}" . CRLF . "}"
     }
+    /*
+    add CUSTOM CODE HERE
+    */
 
+    if (Code != ""){
+        Runtime := A_ScriptDir "\runtime.txt"
+        ReturnStatus := A_ScriptDir "\returnstatus.txt"
+        Temp := A_ScriptDir "\temp.txt"
+        Logs := A_ScriptDir "\log.txt"
+        Code_to_Test := "-0---"
+        if FileExist(Runtime) && (Code != ""){
+            FileRead, Code_to_Test, %Runtime%
+            if (Code_to_Test == Code){
+                Goto, Nvm
+            }
+            FileMove, %Runtime%, %Temp%, 1
+        }
+        FileAppend, %Code%, %Runtime%
+        FileAppend, %Runtime%, %Logs%
+        Loop 50
+        {
+            if FileExist(ReturnStatus)
+            {
+                FileRead, CodeBack, %Runtime%
+                if (CodeBack == "") {
+                    continue
+                }
+                if (CodeBack != Code){
+                    Code := CodeBack
+                }
+                if FileExist(Logs){
+                    FileMove, %Logs%, %Temp%, 1
+                }
+                if FileExist(ReturnStatus){
+                    FileMove, %ReturnStatus%, %Temp%, 1
+                }
+                break
+            }
+            else
+            {
+                Sleep, 50
+            }
+
+        }
+
+    }
+    Header := Code
+    g_Signature := Code
     sci[g_GuiTab].SetReadOnly(0)
     Sci[g_GuiTab].BeginUndoAction()
     Sci[g_GuiTab].ClearAll()
-    Sci[g_GuiTab].SetText("", g_Signature . Header . Code, 2)
+    Sci[g_GuiTab].SetText("", Code, 2)
     Sci[g_GuiTab].EndUndoAction()
     sci[g_GuiTab].SetReadOnly(1)
 
@@ -401,9 +448,11 @@
         TabEx.SetSel(g_GuiTab)
     }
 
+
     Header := ""
     Code := ""
     SciText := ""
+    Nvm:
 }
 
 SetIndent() {

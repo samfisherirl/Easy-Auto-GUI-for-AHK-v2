@@ -1,0 +1,14 @@
+myGui := Gui()
+myGui.Add("DropDownList", "x381 y116 w120", ["DropDownList", "", ""])
+myGui.Add("Edit", "x153 y78 w120 h21")
+ogcListViewListView := myGui.Add("ListView", "x137 y54 w200 h150 +LV0x4000", ["ListView"])
+myGui.Add("DropDownList", "x44 y110 w120", ["DropDownList", "", ""])
+myGui.Add("MonthCal", "x151 y227 w225 h160")
+myGui.Title := "Window"
+myGui.Show("w620 h420")
+Return
+GuiEscape(*)
+{ ; V1toV2: Added bracket
+GuiClose:
+    ExitApp()
+} ; Added bracket in the end

@@ -8,8 +8,9 @@
     ; && for loops
     newoutscript := ""
     intxt := FileRead(FNOut)
+    FileMove(FNOut, "temp.txt", 1)
     Loop Parse, intxt, "`n", "`r" {
-        if menuhandle == 0 && InStr(A_LoopField, "MenuHandler"){
+        if (menuhandle == 0) && InStr(A_LoopField, "MenuHandler"){
             menuhandle := 1
             newoutscript .= A_LoopField . "`n"
         }
@@ -49,7 +50,7 @@
             }
         }
         else if (A_Index == 2) {
-            newoutscript := "`;AutoGUI 2.5.8 `n`;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901`n`;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n"
+            newoutscript := "`n" ";AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
         else if InStr(A_LoopField, ".MenuToolbar := MenuBar") {
             newoutscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenBars")
@@ -59,6 +60,5 @@
             newoutscript .= A_LoopField . "`n"
         }
     }
-    FileDelete(FNOut)
     FileAppend(newoutscript, FNOut)
 }

@@ -5,8 +5,8 @@
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-exe := "`"" A_ScriptDIr "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "
-autogui := "`"" A_ScriptDIr "\complete_application\AutoGUI.ahk`""
+exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "
+autogui := "`"" A_ScriptDir "\complete_application\AutoGUI.ahk`""
 com := exe autogui
 Run(com, , , &PID)
 Sleep(1000)
@@ -20,7 +20,8 @@ Loop 10 {
 }
 
 logs := A_ScriptDir "\complete_application\log.txt"
-temps := A_ScriptDir "\complete_application\temps.txt"
+temps := A_ScriptDir "\complete_application\temp.txt"
+retstat := A_ScriptDir "\complete_application\returnstatus.txt"
 if FileExist(logs) {
     FileMove(logs, temps, 1)
 }
@@ -29,16 +30,21 @@ While ProcessExist(PID) {
     if FileExist(logs)
     {
         path_to_convert := FileRead(logs)
-        inscript := FileRead(path_to_convert)
-        outscript := Convert(inscript)
-        outfile := FileOpen(path_to_convert, "w", "utf-8")
-        outfile.Write(outscript)
-        outfile.Close()
-        add_menuhandler(path_to_convert)
-        FileMove(logs, temps, 1)
+        if FileExist(path_to_convert) {
+            inscript := FileRead(path_to_convert)
+            if (inscript != "") {
+                FileMove(logs, temps, 1)
+                outscript := Convert(inscript)
+                outfile := FileOpen(path_to_convert, "w", "utf-8")
+                outfile.Write(outscript)
+                outfile.Close()
+                add_menuhandler(path_to_convert)
+                FileAppend(retstat, retstat)
+            }
+        }
     }
     else {
-        Sleep(100)
+        Sleep(50)
     }
 }
 ExitApp
