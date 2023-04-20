@@ -1397,32 +1397,6 @@ Open(Files := "", Flag := 0) {
             } Else {
                 Sci[n].SetLexer(0)
             }
-                        /*
-            add CUSTOM CODE HERE
-            */
-            Runtime := A_ScriptDir "\runtime.txt"
-            Temp := A_ScriptDir "\temp.txt"
-            Logs := A_ScriptDir "\log.txt"
-            if FileExist(Runtime){
-                FileMove, %Runtime%, %Temp%, 1
-            }
-            if FileExist(Logs){
-                FileMove, %Logs%, %Temp%, 1
-            }
-            FileAppend,  %fRead%, %Runtime%, %Encoding%
-            FileAppend %Runtime%, %Logs%, %Encoding%
-            Loop 50 
-            {
-                if FileExist(Runtime)
-                {
-                    FileRead, fRead, %Runtime%
-                }
-                else {
-                    Sleep, 50
-                }
-
-            }
-
 
             Sci[n].FullName := File
             Sci[n].FileName := FileName
@@ -1715,7 +1689,6 @@ Compile() {
         WinGet hWnd, ID, Ahk2Exe ahk_pid %PID%
         WinActivate ahk_id %hWnd%
         WinWaitActive ahk_id %hWnd%
-        
 
         ControlSetText Edit1, %AhkScript%, ahk_id %hWnd%
 
@@ -2872,9 +2845,9 @@ run_listener(SelectedFile){
     */
     Logs := A_ScriptDir "\log.txt"
     if FileExist(Logs){
-        FileDelete, %Logs%
+        FileDelete %Logs%
     }
-    FileAppend, %SelectedFile%, %Logs%, %Encoding%
+    FileAppend %SelectedFile%, %Logs%, %Encoding%
 }
 
 GetSaveEncoding(Filename) {

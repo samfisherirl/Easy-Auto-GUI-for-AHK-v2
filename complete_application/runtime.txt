@@ -1,1672 +1,888 @@
-﻿myGui := Gui()
-myGui.OnEvent("Close", GuiEscape)
-myGui.OnEvent("Escape", GuiEscape)
-myGui.Opt("+Resize")
-FileMenuOpenContainingFolderMenu := Menu()
-FileMenuOpenContainingFolderMenu.Add("Explorer", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add("cmd", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add()
-FileMenuOpenContainingFolderMenu.Add("Folder as Workspace", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu := Menu()
-FileMenuCloseMultipleDocumentsMenu.Add("Close All but Active Document", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All to the Left", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All to the Right", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All Unchanged", MenuHandler)
-FileMenu := Menu()
-FileMenu.Add("&New`tCtrl+N", MenuHandler)
-FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
-FileMenu.Add("Open Containing &Folder", FileMenuOpenContainingFolderMenu)
-FileMenu.Add("Open in &Default Viewer", MenuHandler)
-FileMenu.Add("Open Folder as &Workspace...", MenuHandler)
-FileMenu.Add("Re&load from Disk`tCtrl+R", MenuHandler)
-FileMenu.Add("&Save`tCtrl+S", MenuHandler)
-FileMenu.Add("Save &As...`tCtrl+Alt+S", MenuHandler)
-FileMenu.Add("Save a Cop&y As...", MenuHandler)
-FileMenu.Add("Sa&ve All`tCtrl+Shift+S", MenuHandler)
-FileMenu.Add("&Rename...", MenuHandler)
-FileMenu.Add("&Close`tCtrl+W", MenuHandler)
-FileMenu.Add("Clos&e All`tCtrl+Shift+W", MenuHandler)
-FileMenu.Add("Close &Multiple Documents", FileMenuCloseMultipleDocumentsMenu)
-FileMenu.Add("Move to Recycle &Bin", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("Load Sess&ion...", MenuHandler)
-FileMenu.Add("Save Sess&ion...", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("&Print...`tCtrl+P", MenuHandler)
-FileMenu.Add("Print No&w", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("&1: C:\Users\dower\OneDrive\rawaccel\ahk\communication___layer__python_autohotkey_ahk__\AHK.ahk", MenuHandler)
-FileMenu.Add("&2: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com (1).json", MenuHandler)
-FileMenu.Add("&3: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com.json", MenuHandler)
-FileMenu.Add("&4: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\d3dx.ini", MenuHandler)
-FileMenu.Add("&5: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\doorstop_config.ini", MenuHandler)
-FileMenu.Add("&6: C:\Users\dower\OneDrive\RESOLUTION\KATANGA_LAUNCHER\pywebview_jinja2\JINJA2\examples\js_api.py", MenuHandler)
-FileMenu.Add("&7: C:\Users\dower\OneDrive\STEAM_VDF_2023\build\exe.win-amd64-3.11\export_command.py", MenuHandler)
-FileMenu.Add("&8: C:\Users\dower\Documents\GitHub\Inject-CSS-JS-into-Jinja2-Pywebview-without-Flask-example-main\bigger_example\main.py", MenuHandler)
-FileMenu.Add("&9: C:\Users\dower\Documents\GitHub\Inject-CSS-JS-into-Jinja2-Pywebview-without-Flask-example-main\simple_example\main.py", MenuHandler)
-FileMenu.Add("1&0: C:\Users\dower\Documents\GitHub\Inject-CSS-JS-into-Jinja2-Pywebview-without-Flask-example-main\simple_example\templates\inject_js_css.py", MenuHandler)
-FileMenu.Add("ERROR", MenuHandler)
-FileMenu.Add("Restore Recent Closed File`tCtrl+Shift+T", MenuHandler)
-FileMenu.Add("Open All Recent Files", MenuHandler)
-FileMenu.Add("Empty Recent Files List", MenuHandler)
-FileMenu.Add("ERROR", MenuHandler)
-FileMenu.Add("E&xit`tAlt+F4", MenuHandler)
-EditMenuInsertMenu := Menu()
-EditMenuInsertMenu.Add("Date Time (short)", MenuHandler)
-EditMenuInsertMenu.Add("Date Time (long)", MenuHandler)
-EditMenuInsertMenu.Add("Date Time (customized)", MenuHandler)
-EditMenuCopytoClipboardMenu := Menu()
-EditMenuCopytoClipboardMenu.Add("Copy Current Full File path", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy Current Filename", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy Current Dir. Path", MenuHandler)
-EditMenuCopytoClipboardMenu.Add()
-EditMenuCopytoClipboardMenu.Add("Copy All Filenames", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy All File Paths", MenuHandler)
-EditMenuIndentMenu := Menu()
-EditMenuIndentMenu.Add("Increase Line Indent", MenuHandler)
-EditMenuIndentMenu.Add("Decrease Line Indent", MenuHandler)
-EditMenuConvertCasetoMenu := Menu()
-EditMenuConvertCasetoMenu.Add("&UPPERCASE`tCtrl+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&lowercase`tCtrl+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&Proper Case`tAlt+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("Proper Case (blend)`tAlt+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&Sentence case`tCtrl+Alt+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("Sentence case (blend)`tCtrl+Alt+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&iNVERT cASE", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&ranDOm CasE", MenuHandler)
-EditMenuLineOperationsMenu := Menu()
-EditMenuLineOperationsMenu.Add("Duplicate Current Line`tCtrl+D", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Duplicate Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Consecutive Duplicate Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Split Lines`tCtrl+I", MenuHandler)
-EditMenuLineOperationsMenu.Add("Join Lines`tCtrl+J", MenuHandler)
-EditMenuLineOperationsMenu.Add("Move Up Current Line`tCtrl+Shift+Up", MenuHandler)
-EditMenuLineOperationsMenu.Add("Move Down Current Line`tCtrl+Shift+Down", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Empty Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Empty Lines (Containing Blank characters)", MenuHandler)
-EditMenuLineOperationsMenu.Add("Insert Blank Line Above Current`tCtrl+Alt+Enter", MenuHandler)
-EditMenuLineOperationsMenu.Add("Insert Blank Line Below Current`tCtrl+Alt+Shift+Enter", MenuHandler)
-EditMenuLineOperationsMenu.Add("Reverse Line Order", MenuHandler)
-EditMenuLineOperationsMenu.Add("Randomize Line Order", MenuHandler)
-EditMenuLineOperationsMenu.Add()
-EditMenuLineOperationsMenu.Add("Sort Lines Lexicographically Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines Lex. Ascending Ignoring Case", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Integers Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Comma) Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Dot) Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add()
-EditMenuLineOperationsMenu.Add("Sort Lines Lexicographically Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines Lex. Descending Ignoring Case", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Integers Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Comma) Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Dot) Descending", MenuHandler)
-EditMenuCommentUncommentMenu := Menu()
-EditMenuCommentUncommentMenu.Add("Toggle Single Line Comment`tCtrl+Q", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Single Line Comment`tCtrl+K", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Single Line Uncomment`tCtrl+Shift+K", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Block Comment`tCtrl+Shift+Q", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Block Uncomment", MenuHandler)
-EditMenuAutoCompletionMenu := Menu()
-EditMenuAutoCompletionMenu.Add("Function Completion`tCtrl+Spacebar", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Word Completion`tCtrl+Enter", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Hint`tCtrl+Shift+Spacebar", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Previous Hint`tAlt+Up", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Next Hint`tAlt+Down", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Path Completion`tCtrl+Alt+Spacebar", MenuHandler)
-EditMenuEOLConversionMenu := Menu()
-EditMenuEOLConversionMenu.Add("Windows (CR LF)", MenuHandler)
-EditMenuEOLConversionMenu.Add("Unix (LF)", MenuHandler)
-EditMenuEOLConversionMenu.Add("Macintosh (CR)", MenuHandler)
-EditMenuBlankOperationsMenu := Menu()
-EditMenuBlankOperationsMenu.Add("Trim Trailing Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim Leading Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim Leading and Trailing Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("EOL to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim both and EOL to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add()
-EditMenuBlankOperationsMenu.Add("TAB to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Space to TAB (All)", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Space to TAB (Leading)", MenuHandler)
-EditMenuPasteSpecialMenu := Menu()
-EditMenuPasteSpecialMenu.Add("Paste HTML Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Paste RTF Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add()
-EditMenuPasteSpecialMenu.Add("Copy Binary Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Cut Binary Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Paste Binary Content", MenuHandler)
-EditMenuOnSelectionMenu := Menu()
-EditMenuOnSelectionMenu.Add("Open File", MenuHandler)
-EditMenuOnSelectionMenu.Add("Open Containing Folder in Explorer", MenuHandler)
-EditMenuOnSelectionMenu.Add()
-EditMenuOnSelectionMenu.Add("Search on Internet", MenuHandler)
-EditMenuOnSelectionMenu.Add("Change Search Engine...", MenuHandler)
-EditMenu := Menu()
-EditMenu.Add("&Undo`tCtrl+Z or Alt+Backspace", MenuHandler)
-EditMenu.Add("&Redo`tCtrl+Y or Ctrl+Shift+Z", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("Cu&t`tCtrl+X or Shift+DEL", MenuHandler)
-EditMenu.Add("&Copy`tCtrl+C or Ctrl+INS", MenuHandler)
-EditMenu.Add("&Paste`tCtrl+V or Shift+INS", MenuHandler)
-EditMenu.Add("&Delete`tDEL", MenuHandler)
-EditMenu.Add("&Select All`tCtrl+A", MenuHandler)
-EditMenu.Add("Begin/End &Select`tCtrl+Shift+B", MenuHandler)
-EditMenu.Add("Begin/End Select in Column Mode`tAlt+Shift+B", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("Insert", EditMenuInsertMenu)
-EditMenu.Add("Cop&y to A_Clipboard", EditMenuCopytoClipboardMenu)
-EditMenu.Add("&Indent", EditMenuIndentMenu)
-EditMenu.Add("Con&vert Case to", EditMenuConvertCasetoMenu)
-EditMenu.Add("&Line Operations", EditMenuLineOperationsMenu)
-EditMenu.Add("Co&mment/Uncomment", EditMenuCommentUncommentMenu)
-EditMenu.Add("&Auto-Completion", EditMenuAutoCompletionMenu)
-EditMenu.Add("&EOL Conversion", EditMenuEOLConversionMenu)
-EditMenu.Add("&Blank Operations", EditMenuBlankOperationsMenu)
-EditMenu.Add("&Paste Special", EditMenuPasteSpecialMenu)
-EditMenu.Add("&On Selection", EditMenuOnSelectionMenu)
-EditMenu.Add()
-EditMenu.Add("Column Mode...", MenuHandler)
-EditMenu.Add("Colum&n Editor...`tAlt+C", MenuHandler)
-EditMenu.Add("Character &Panel", MenuHandler)
-EditMenu.Add("A_Clipboard &History", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("&Set Read-Only", MenuHandler)
-EditMenu.Add("Clear Read-Only Flag", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu := Menu()
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 1st Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 2nd Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 3rd Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 4th Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 5th Style", MenuHandler)
-SearchMenuStyleOneTokenMenu := Menu()
-SearchMenuStyleOneTokenMenu.Add("Using 1st Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 2nd Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 3rd Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 4th Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 5th Style", MenuHandler)
-SearchMenuClearStyleMenu := Menu()
-SearchMenuClearStyleMenu.Add("Clear 1st Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 2nd Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 3rd Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 4th Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 5th Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear all Styles", MenuHandler)
-SearchMenuJumpUpMenu := Menu()
-SearchMenuJumpUpMenu.Add("1st Style`tCtrl+Shift+1", MenuHandler)
-SearchMenuJumpUpMenu.Add("2nd Style`tCtrl+Shift+2", MenuHandler)
-SearchMenuJumpUpMenu.Add("3rd Style`tCtrl+Shift+3", MenuHandler)
-SearchMenuJumpUpMenu.Add("4th Style`tCtrl+Shift+4", MenuHandler)
-SearchMenuJumpUpMenu.Add("5th Style`tCtrl+Shift+5", MenuHandler)
-SearchMenuJumpUpMenu.Add("Find Mark Style`tCtrl+Shift+0", MenuHandler)
-SearchMenuJumpDownMenu := Menu()
-SearchMenuJumpDownMenu.Add("1st Style`tCtrl+1", MenuHandler)
-SearchMenuJumpDownMenu.Add("2nd Style`tCtrl+2", MenuHandler)
-SearchMenuJumpDownMenu.Add("3rd Style`tCtrl+3", MenuHandler)
-SearchMenuJumpDownMenu.Add("4th Style`tCtrl+4", MenuHandler)
-SearchMenuJumpDownMenu.Add("5th Style`tCtrl+5", MenuHandler)
-SearchMenuJumpDownMenu.Add("Find Mark Style`tCtrl+0", MenuHandler)
-SearchMenuCopyStyledTextMenu := Menu()
-SearchMenuCopyStyledTextMenu.Add("1st Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("2nd Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("3rd Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("4th Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("5th Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("All Styles", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("Find Mark Style", MenuHandler)
-SearchMenuBookmarkMenu := Menu()
-SearchMenuBookmarkMenu.Add("Toggle Bookmark`tCtrl+F2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Next Bookmark`tF2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Previous Bookmark`tShift+F2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Clear All Bookmarks", MenuHandler)
-SearchMenuBookmarkMenu.Add("Cut Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Copy Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Paste to (Replace) Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Remove Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Remove Non-Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Inverse Bookmark", MenuHandler)
-SearchMenu := Menu()
-SearchMenu.Add("&Find...`tCtrl+F", MenuHandler)
-SearchMenu.Add("Find in Fi&les...`tCtrl+Shift+F", MenuHandler)
-SearchMenu.Add("Find &Next`tF3", MenuHandler)
-SearchMenu.Add("Find &Previous`tShift+F3", MenuHandler)
-SearchMenu.Add("&Select and Find Next`tCtrl+F3", MenuHandler)
-SearchMenu.Add("&Select and Find Previous`tCtrl+Shift+F3", MenuHandler)
-SearchMenu.Add("Find (&Volatile) Next`tCtrl+Alt+F3", MenuHandler)
-SearchMenu.Add("Find (&Volatile) Previous`tCtrl+Alt+Shift+F3", MenuHandler)
-SearchMenu.Add("&Replace...`tCtrl+H", MenuHandler)
-SearchMenu.Add("&Incremental Search`tCtrl+Alt+I", MenuHandler)
-SearchMenu.Add("Search Results &Window`tF7", MenuHandler)
-SearchMenu.Add("Next Search Resul&t`tF4", MenuHandler)
-SearchMenu.Add("Previous Search Resul&t`tShift+F4", MenuHandler)
-SearchMenu.Add("&Go to...`tCtrl+G", MenuHandler)
-SearchMenu.Add("Go to &Matching Brace`tCtrl+B", MenuHandler)
-SearchMenu.Add("Select All Between &Matching Braces`tCtrl+Alt+B", MenuHandler)
-SearchMenu.Add("Mar&k...`tCtrl+M", MenuHandler)
-SearchMenu.Add()
-SearchMenu.Add("Style &All Occurrences of Token", SearchMenuStyleAllOccurrencesofTokenMenu)
-SearchMenu.Add("Style &One Token", SearchMenuStyleOneTokenMenu)
-SearchMenu.Add("Clear Style", SearchMenuClearStyleMenu)
-SearchMenu.Add("&Jump Up", SearchMenuJumpUpMenu)
-SearchMenu.Add("Jump &Down", SearchMenuJumpDownMenu)
-SearchMenu.Add("&Copy Styled Text", SearchMenuCopyStyledTextMenu)
-SearchMenu.Add()
-SearchMenu.Add("&Bookmark", SearchMenuBookmarkMenu)
-SearchMenu.Add()
-SearchMenu.Add("Find characters in rang&e...", MenuHandler)
-ViewMenuViewCurrentFileinMenu := Menu()
-ViewMenuViewCurrentFileinMenu.Add("Firefox", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("Chrome", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("Edge", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("IE", MenuHandler)
-ViewMenuShowSymbolMenu := Menu()
-ViewMenuShowSymbolMenu.Add("Show Space and Tab", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show End of Line", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show Non-Printing Characters", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show All Characters", MenuHandler)
-ViewMenuShowSymbolMenu.Add()
-ViewMenuShowSymbolMenu.Add("Show Indent Guide", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show Wrap Symbol", MenuHandler)
-ViewMenuZoomMenu := Menu()
-ViewMenuZoomMenu.Add("Zoom &In (Ctrl+Mouse Wheel Up)`tCtrl+Num +", MenuHandler)
-ViewMenuZoomMenu.Add("Zoom &Out (Ctrl+Mouse Wheel Down)`tCtrl+Num -", MenuHandler)
-ViewMenuZoomMenu.Add("Restore Default Zoom`tCtrl+Num /", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu := Menu()
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Move to Other View", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Clone to Other View", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Move to New Instance", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Open in New Instance", MenuHandler)
-ViewMenuTabMenu := Menu()
-ViewMenuTabMenu.Add("1st Tab`tCtrl+Numpad 1", MenuHandler)
-ViewMenuTabMenu.Add("2nd Tab`tCtrl+Numpad 2", MenuHandler)
-ViewMenuTabMenu.Add("3rd Tab`tCtrl+Numpad 3", MenuHandler)
-ViewMenuTabMenu.Add("4th Tab`tCtrl+Numpad 4", MenuHandler)
-ViewMenuTabMenu.Add("5th Tab`tCtrl+Numpad 5", MenuHandler)
-ViewMenuTabMenu.Add("6th Tab`tCtrl+Numpad 6", MenuHandler)
-ViewMenuTabMenu.Add("7th Tab`tCtrl+Numpad 7", MenuHandler)
-ViewMenuTabMenu.Add("8th Tab`tCtrl+Numpad 8", MenuHandler)
-ViewMenuTabMenu.Add("9th Tab`tCtrl+Numpad 9", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Next Tab`tCtrl+Page down", MenuHandler)
-ViewMenuTabMenu.Add("Previous Tab`tCtrl+Page up", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Move Tab Forward`tCtrl+Shift+Page down", MenuHandler)
-ViewMenuTabMenu.Add("Move Tab Backward`tCtrl+Shift+Page up", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Apply Color 1", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 2", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 3", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 4", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 5", MenuHandler)
-ViewMenuTabMenu.Add("Remove Color", MenuHandler)
-ViewMenuFoldLevelMenu := Menu()
-ViewMenuFoldLevelMenu.Add("1`tAlt+1", MenuHandler)
-ViewMenuFoldLevelMenu.Add("2`tAlt+2", MenuHandler)
-ViewMenuFoldLevelMenu.Add("3`tAlt+3", MenuHandler)
-ViewMenuFoldLevelMenu.Add("4`tAlt+4", MenuHandler)
-ViewMenuFoldLevelMenu.Add("5`tAlt+5", MenuHandler)
-ViewMenuFoldLevelMenu.Add("6`tAlt+6", MenuHandler)
-ViewMenuFoldLevelMenu.Add("7`tAlt+7", MenuHandler)
-ViewMenuFoldLevelMenu.Add("8`tAlt+8", MenuHandler)
-ViewMenuUnfoldLevelMenu := Menu()
-ViewMenuUnfoldLevelMenu.Add("1`tAlt+Shift+1", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("2`tAlt+Shift+2", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("3`tAlt+Shift+3", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("4`tAlt+Shift+4", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("5`tAlt+Shift+5", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("6`tAlt+Shift+6", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("7`tAlt+Shift+7", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("8`tAlt+Shift+8", MenuHandler)
-ViewMenuProjectPanelsMenu := Menu()
-ViewMenuProjectPanelsMenu.Add("Project Panel 1", MenuHandler)
-ViewMenuProjectPanelsMenu.Add("Project Panel 2", MenuHandler)
-ViewMenuProjectPanelsMenu.Add("Project Panel 3", MenuHandler)
-ViewMenu := Menu()
-ViewMenu.Add("Always on Top", MenuHandler)
-ViewMenu.Add("Toggle Full Screen Mode`tF11", MenuHandler)
-ViewMenu.Add("Post-It`tF12", MenuHandler)
-ViewMenu.Add("Distraction Free Mode", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("View Current File in", ViewMenuViewCurrentFileinMenu)
-ViewMenu.Add()
-ViewMenu.Add("Show Symbol", ViewMenuShowSymbolMenu)
-ViewMenu.Add("Zoom", ViewMenuZoomMenu)
-ViewMenu.Add("Move/Clone Current Document", ViewMenuMoveCloneCurrentDocumentMenu)
-ViewMenu.Add("Tab", ViewMenuTabMenu)
-ViewMenu.Add("Word wrap", MenuHandler)
-ViewMenu.Add("Focus on Another View`tF8", MenuHandler)
-ViewMenu.Add("Hide Lines`tAlt+H", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Fold All`tAlt+0", MenuHandler)
-ViewMenu.Add("Unfold All`tAlt+Shift+0", MenuHandler)
-ViewMenu.Add("Fold Current Level`tCtrl+Alt+F", MenuHandler)
-ViewMenu.Add("Unfold Current Level`tCtrl+Alt+Shift+F", MenuHandler)
-ViewMenu.Add("Fold Level", ViewMenuFoldLevelMenu)
-ViewMenu.Add("Unfold Level", ViewMenuUnfoldLevelMenu)
-ViewMenu.Add()
-ViewMenu.Add("Summary...", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Project Panels", ViewMenuProjectPanelsMenu)
-ViewMenu.Add("Folder as Workspace", MenuHandler)
-ViewMenu.Add("Document Map", MenuHandler)
-ViewMenu.Add("Document List", MenuHandler)
-ViewMenu.Add("Function List", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Synchronize Vertical Scrolling", MenuHandler)
-ViewMenu.Add("Synchronize Horizontal Scrolling", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Text Direction RTL`tCtrl+Alt+R", MenuHandler)
-ViewMenu.Add("Text Direction LTR`tCtrl+Alt+L", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Monitoring (tail -f)", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu := Menu()
-EncodingMenuCharactersetsMenuArabicMenu.Add("ISO 8859-6", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu.Add("OEM 720", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu.Add("Windows-1256", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu := Menu()
-EncodingMenuCharactersetsMenuBalticMenu.Add("ISO 8859-4", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("ISO 8859-13", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("OEM 775", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("Windows-1257", MenuHandler)
-EncodingMenuCharactersetsMenuCelticMenu := Menu()
-EncodingMenuCharactersetsMenuCelticMenu.Add("ISO 8859-14", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu := Menu()
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("ISO 8859-5", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("KOI8-R", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("KOI8-U", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("Macintosh", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("OEM 855", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("OEM 866", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("Windows-1251", MenuHandler)
-EncodingMenuCharactersetsMenuCentralEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuCentralEuropeanMenu.Add("OEM 852", MenuHandler)
-EncodingMenuCharactersetsMenuCentralEuropeanMenu.Add("Windows-1250", MenuHandler)
-EncodingMenuCharactersetsMenuChineseMenu := Menu()
-EncodingMenuCharactersetsMenuChineseMenu.Add("Big5 (Traditional)", MenuHandler)
-EncodingMenuCharactersetsMenuChineseMenu.Add("GB2312 (Simplified)", MenuHandler)
-EncodingMenuCharactersetsMenuEasternEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuEasternEuropeanMenu.Add("ISO 8859-2", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu := Menu()
-EncodingMenuCharactersetsMenuGreekMenu.Add("ISO 8859-7", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("OEM 737", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("OEM 869", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("Windows-1253", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu := Menu()
-EncodingMenuCharactersetsMenuHebrewMenu.Add("ISO 8859-8", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu.Add("OEM 862", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu.Add("Windows-1255", MenuHandler)
-EncodingMenuCharactersetsMenuJapaneseMenu := Menu()
-EncodingMenuCharactersetsMenuJapaneseMenu.Add("Shift-JIS", MenuHandler)
-EncodingMenuCharactersetsMenuKoreanMenu := Menu()
-EncodingMenuCharactersetsMenuKoreanMenu.Add("Windows 949", MenuHandler)
-EncodingMenuCharactersetsMenuKoreanMenu.Add("EUC-KR", MenuHandler)
-EncodingMenuCharactersetsMenuNorthEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuNorthEuropeanMenu.Add("OEM 861 : Icelandic", MenuHandler)
-EncodingMenuCharactersetsMenuNorthEuropeanMenu.Add("OEM 865 : Nordic", MenuHandler)
-EncodingMenuCharactersetsMenuThaiMenu := Menu()
-EncodingMenuCharactersetsMenuThaiMenu.Add("TIS-620", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu := Menu()
-EncodingMenuCharactersetsMenuTurkishMenu.Add("ISO 8859-3", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("ISO 8859-9", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("OEM 857", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("Windows-1254", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("ISO 8859-1", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("ISO 8859-15", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 850", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 858", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 860 : Portuguese", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 863 : French", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM-US", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("Windows-1252", MenuHandler)
-EncodingMenuCharactersetsMenuVietnameseMenu := Menu()
-EncodingMenuCharactersetsMenuVietnameseMenu.Add("Windows-1258", MenuHandler)
-EncodingMenuCharactersetsMenu := Menu()
-EncodingMenuCharactersetsMenu.Add("Arabic", EncodingMenuCharactersetsMenuArabicMenu)
-EncodingMenuCharactersetsMenu.Add("Baltic", EncodingMenuCharactersetsMenuBalticMenu)
-EncodingMenuCharactersetsMenu.Add("Celtic", EncodingMenuCharactersetsMenuCelticMenu)
-EncodingMenuCharactersetsMenu.Add("Cyrillic", EncodingMenuCharactersetsMenuCyrillicMenu)
-EncodingMenuCharactersetsMenu.Add("Central European", EncodingMenuCharactersetsMenuCentralEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Chinese", EncodingMenuCharactersetsMenuChineseMenu)
-EncodingMenuCharactersetsMenu.Add("Eastern European", EncodingMenuCharactersetsMenuEasternEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Greek", EncodingMenuCharactersetsMenuGreekMenu)
-EncodingMenuCharactersetsMenu.Add("Hebrew", EncodingMenuCharactersetsMenuHebrewMenu)
-EncodingMenuCharactersetsMenu.Add("Japanese", EncodingMenuCharactersetsMenuJapaneseMenu)
-EncodingMenuCharactersetsMenu.Add("Korean", EncodingMenuCharactersetsMenuKoreanMenu)
-EncodingMenuCharactersetsMenu.Add("North European", EncodingMenuCharactersetsMenuNorthEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Thai", EncodingMenuCharactersetsMenuThaiMenu)
-EncodingMenuCharactersetsMenu.Add("Turkish", EncodingMenuCharactersetsMenuTurkishMenu)
-EncodingMenuCharactersetsMenu.Add("Western European", EncodingMenuCharactersetsMenuWesternEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Vietnamese", EncodingMenuCharactersetsMenuVietnameseMenu)
-EncodingMenu := Menu()
-EncodingMenu.Add("ANSI", MenuHandler)
-EncodingMenu.Add("UTF-8", MenuHandler)
-EncodingMenu.Add("UTF-8-BOM", MenuHandler)
-EncodingMenu.Add("UTF-16 BE BOM", MenuHandler)
-EncodingMenu.Add("UTF-16 LE BOM", MenuHandler)
-EncodingMenu.Add("Character sets", EncodingMenuCharactersetsMenu)
-EncodingMenu.Add()
-EncodingMenu.Add("Convert to ANSI", MenuHandler)
-EncodingMenu.Add("Convert to UTF-8", MenuHandler)
-EncodingMenu.Add("Convert to UTF-8-BOM", MenuHandler)
-EncodingMenu.Add("Convert to UTF-16 BE BOM", MenuHandler)
-EncodingMenu.Add("Convert to UTF-16 LE BOM", MenuHandler)
-LanguageMenuAMenu := Menu()
-LanguageMenuAMenu.Add("ActionScript", MenuHandler)
-LanguageMenuAMenu.Add("Ada", MenuHandler)
-LanguageMenuAMenu.Add("ASN.1", MenuHandler)
-LanguageMenuAMenu.Add("ASP", MenuHandler)
-LanguageMenuAMenu.Add("Assembly", MenuHandler)
-LanguageMenuAMenu.Add("AutoIt", MenuHandler)
-LanguageMenuAMenu.Add("AviSynth", MenuHandler)
-LanguageMenuBMenu := Menu()
-LanguageMenuBMenu.Add("BaanC", MenuHandler)
-LanguageMenuBMenu.Add("Batch", MenuHandler)
-LanguageMenuBMenu.Add("Blitzbasic", MenuHandler)
-LanguageMenuCMenu := Menu()
-LanguageMenuCMenu.Add("C", MenuHandler)
-LanguageMenuCMenu.Add("C#", MenuHandler)
-LanguageMenuCMenu.Add("C++", MenuHandler)
-LanguageMenuCMenu.Add("Caml", MenuHandler)
-LanguageMenuCMenu.Add("CMake", MenuHandler)
-LanguageMenuCMenu.Add("COBOL", MenuHandler)
-LanguageMenuCMenu.Add("CSound", MenuHandler)
-LanguageMenuCMenu.Add("CoffeeScript", MenuHandler)
-LanguageMenuCMenu.Add("CSS", MenuHandler)
-LanguageMenuDMenu := Menu()
-LanguageMenuDMenu.Add("D", MenuHandler)
-LanguageMenuDMenu.Add("Diff", MenuHandler)
-LanguageMenuEMenu := Menu()
-LanguageMenuEMenu.Add("Erlang", MenuHandler)
-LanguageMenuEMenu.Add("ESCRIPT", MenuHandler)
-LanguageMenuFMenu := Menu()
-LanguageMenuFMenu.Add("Forth", MenuHandler)
-LanguageMenuFMenu.Add("Fortran (free form)", MenuHandler)
-LanguageMenuFMenu.Add("Fortran (fixed form)", MenuHandler)
-LanguageMenuFMenu.Add("Freebasic", MenuHandler)
-LanguageMenuGMenu := Menu()
-LanguageMenuGMenu.Add("GDScript", MenuHandler)
-LanguageMenuGMenu.Add("Gui4Cli", MenuHandler)
-LanguageMenuHMenu := Menu()
-LanguageMenuHMenu.Add("Haskell", MenuHandler)
-LanguageMenuHMenu.Add("Hollywood", MenuHandler)
-LanguageMenuHMenu.Add("HTML", MenuHandler)
-LanguageMenuIMenu := Menu()
-LanguageMenuIMenu.Add("INI file", MenuHandler)
-LanguageMenuIMenu.Add("Inno Setup", MenuHandler)
-LanguageMenuIMenu.Add("Intel HEX", MenuHandler)
-LanguageMenuJMenu := Menu()
-LanguageMenuJMenu.Add("Java", MenuHandler)
-LanguageMenuJMenu.Add("JavaScript", MenuHandler)
-LanguageMenuJMenu.Add("JSON", MenuHandler)
-LanguageMenuJMenu.Add("JSON5", MenuHandler)
-LanguageMenuJMenu.Add("JSP", MenuHandler)
-LanguageMenuLMenu := Menu()
-LanguageMenuLMenu.Add("LaTeX", MenuHandler)
-LanguageMenuLMenu.Add("LISP", MenuHandler)
-LanguageMenuLMenu.Add("Lua", MenuHandler)
-LanguageMenuMMenu := Menu()
-LanguageMenuMMenu.Add("Makefile", MenuHandler)
-LanguageMenuMMenu.Add("Matlab", MenuHandler)
-LanguageMenuMMenu.Add("Microsoft Transact-SQL", MenuHandler)
-LanguageMenuMMenu.Add("MMIXAL", MenuHandler)
-LanguageMenuMMenu.Add("MS-DOS Style", MenuHandler)
-LanguageMenuNMenu := Menu()
-LanguageMenuNMenu.Add("Nim", MenuHandler)
-LanguageMenuNMenu.Add("Nncrontab", MenuHandler)
-LanguageMenuNMenu.Add("NSIS", MenuHandler)
-LanguageMenuOMenu := Menu()
-LanguageMenuOMenu.Add("Objective-C", MenuHandler)
-LanguageMenuOMenu.Add("OScript", MenuHandler)
-LanguageMenuPMenu := Menu()
-LanguageMenuPMenu.Add("Pascal", MenuHandler)
-LanguageMenuPMenu.Add("Perl", MenuHandler)
-LanguageMenuPMenu.Add("PHP", MenuHandler)
-LanguageMenuPMenu.Add("PostScript", MenuHandler)
-LanguageMenuPMenu.Add("PowerShell", MenuHandler)
-LanguageMenuPMenu.Add("Properties", MenuHandler)
-LanguageMenuPMenu.Add("Purebasic", MenuHandler)
-LanguageMenuPMenu.Add("Python", MenuHandler)
-LanguageMenuRMenu := Menu()
-LanguageMenuRMenu.Add("R", MenuHandler)
-LanguageMenuRMenu.Add("REBOL", MenuHandler)
-LanguageMenuRMenu.Add("Registry", MenuHandler)
-LanguageMenuRMenu.Add("Resource file", MenuHandler)
-LanguageMenuRMenu.Add("Ruby", MenuHandler)
-LanguageMenuRMenu.Add("Rust", MenuHandler)
-LanguageMenuSMenu := Menu()
-LanguageMenuSMenu.Add("Shell", MenuHandler)
-LanguageMenuSMenu.Add("Scheme", MenuHandler)
-LanguageMenuSMenu.Add("Smalltalk", MenuHandler)
-LanguageMenuSMenu.Add("Spice", MenuHandler)
-LanguageMenuSMenu.Add("SQL", MenuHandler)
-LanguageMenuSMenu.Add("Swift", MenuHandler)
-LanguageMenuSMenu.Add("S-Record", MenuHandler)
-LanguageMenuTMenu := Menu()
-LanguageMenuTMenu.Add("TCL", MenuHandler)
-LanguageMenuTMenu.Add("Tektronix extended HEX", MenuHandler)
-LanguageMenuTMenu.Add("TeX", MenuHandler)
-LanguageMenuTMenu.Add("txt2tags", MenuHandler)
-LanguageMenuTMenu.Add("TypeScript", MenuHandler)
-LanguageMenuVMenu := Menu()
-LanguageMenuVMenu.Add("Visual Basic", MenuHandler)
-LanguageMenuVMenu.Add("Visual Prolog", MenuHandler)
-LanguageMenuVMenu.Add("VHDL", MenuHandler)
-LanguageMenuVMenu.Add("Verilog", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu := Menu()
-LanguageMenuUserDefinedLanguageMenu.Add("Define your language...", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu.Add("Open User Defined Language folder...", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu.Add("Notepad++ User Defined Languages Collection", MenuHandler)
-LanguageMenu := Menu()
-LanguageMenu.Add("None (Normal Text)", MenuHandler)
-LanguageMenu.Add()
-LanguageMenu.Add("A", LanguageMenuAMenu)
-LanguageMenu.Add("B", LanguageMenuBMenu)
-LanguageMenu.Add("C", LanguageMenuCMenu)
-LanguageMenu.Add("D", LanguageMenuDMenu)
-LanguageMenu.Add("E", LanguageMenuEMenu)
-LanguageMenu.Add("F", LanguageMenuFMenu)
-LanguageMenu.Add("G", LanguageMenuGMenu)
-LanguageMenu.Add("H", LanguageMenuHMenu)
-LanguageMenu.Add("I", LanguageMenuIMenu)
-LanguageMenu.Add("J", LanguageMenuJMenu)
-LanguageMenu.Add("KIXtart", MenuHandler)
-LanguageMenu.Add("L", LanguageMenuLMenu)
-LanguageMenu.Add("M", LanguageMenuMMenu)
-LanguageMenu.Add("N", LanguageMenuNMenu)
-LanguageMenu.Add("O", LanguageMenuOMenu)
-LanguageMenu.Add("P", LanguageMenuPMenu)
-LanguageMenu.Add("R", LanguageMenuRMenu)
-LanguageMenu.Add("S", LanguageMenuSMenu)
-LanguageMenu.Add("T", LanguageMenuTMenu)
-LanguageMenu.Add("V", LanguageMenuVMenu)
-LanguageMenu.Add("XML", MenuHandler)
-LanguageMenu.Add("YAML", MenuHandler)
-LanguageMenu.Add()
-LanguageMenu.Add("User Defined Language", LanguageMenuUserDefinedLanguageMenu)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("Autohotkey", MenuHandler)
-LanguageMenu.Add("a", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("Markdown (preinstalled)", MenuHandler)
-LanguageMenu.Add("Markdown (preinstalled dark mode)", MenuHandler)
-LanguageMenu.Add("User-Defined", MenuHandler)
-SettingsMenuImportMenu := Menu()
-SettingsMenuImportMenu.Add("Import plugin(s)...", MenuHandler)
-SettingsMenuImportMenu.Add("Import style theme(s)...", MenuHandler)
-SettingsMenu := Menu()
-SettingsMenu.Add("Preferences...", MenuHandler)
-SettingsMenu.Add("Style Configurator...", MenuHandler)
-SettingsMenu.Add("Shortcut Mapper...", MenuHandler)
-SettingsMenu.Add()
-SettingsMenu.Add("Import", SettingsMenuImportMenu)
-SettingsMenu.Add()
-SettingsMenu.Add("Edit Popup ContextMenu", MenuHandler)
-ToolsMenuMD5Menu := Menu()
-ToolsMenuMD5Menu.Add("Generate...", MenuHandler)
-ToolsMenuMD5Menu.Add("Generate from files...", MenuHandler)
-ToolsMenuMD5Menu.Add("Generate from selection into A_Clipboard", MenuHandler)
-ToolsMenuSHA256Menu := Menu()
-ToolsMenuSHA256Menu.Add("Generate...", MenuHandler)
-ToolsMenuSHA256Menu.Add("Generate from files...", MenuHandler)
-ToolsMenuSHA256Menu.Add("Generate from selection into A_Clipboard", MenuHandler)
-ToolsMenu := Menu()
-ToolsMenu.Add("MD5", ToolsMenuMD5Menu)
-ToolsMenu.Add("SHA-256", ToolsMenuSHA256Menu)
-MacroMenu := Menu()
-MacroMenu.Add("Start Re&cording", MenuHandler)
-MacroMenu.Add("S&top Recording", MenuHandler)
-MacroMenu.Add("&Playback`tCtrl+Shift+P", MenuHandler)
-MacroMenu.Add("&Save Current Recorded Macro...", MenuHandler)
-MacroMenu.Add("&Run a Macro Multiple Times...", MenuHandler)
-MacroMenu.Add("ERROR", MenuHandler)
-MacroMenu.Add("Trim Trailing Space and Save`tAlt+Shift+S", MenuHandler)
-MacroMenu.Add()
-MacroMenu.Add("Modify Shortcut/Delete Macro...", MenuHandler)
-RunMenu := Menu()
-RunMenu.Add("&Run...`tF5", MenuHandler)
-RunMenu.Add("ERROR", MenuHandler)
-RunMenu.Add("Get PHP help`tAlt+F1", MenuHandler)
-RunMenu.Add("Wikipedia Search`tAlt+F3", MenuHandler)
-RunMenu.Add("Open selected file path in new instance`tAlt+F6", MenuHandler)
-RunMenu.Add()
-RunMenu.Add("Modify Shortcut/Delete Command...", MenuHandler)
-PluginsMenuDarkThemeMenu := Menu()
-PluginsMenuDarkThemeMenu.Add("Enable", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Block ClearType", MenuHandler)
-PluginsMenuDarkThemeMenu.Add()
-PluginsMenuDarkThemeMenu.Add("Type: InverseRGB", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: InverseY", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: Grayscale", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: HSV Ramp*", MenuHandler)
-PluginsMenuDarkThemeMenu.Add()
-PluginsMenuDarkThemeMenu.Add("About", MenuHandler)
-PluginsMenuJsonToolsMenu := Menu()
-PluginsMenuJsonToolsMenu.Add("&Documentation", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Pretty-print current JSON file`tCtrl+Alt+Shift+P", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Compress current JSON file`tCtrl+Alt+Shift+C", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Path to current &line`tCtrl+Alt+Shift+L", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("Open &JSON tree viewer`tCtrl+Alt+Shift+J", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Get JSON from files and APIs`tCtrl+Alt+Shift+G", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Settings`tCtrl+Alt+Shift+S", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("Parse JSON Li&nes document", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Array to JSON Lines", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("&Validate JSON against JSON schema", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Generate sc&hema from JSON", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Generate &random JSON from schema", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("JSON to &YAML", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Run &tests", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("A&bout", MenuHandler)
-PluginsMenuMIMEToolsMenu := Menu()
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode with padding", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode with Unix EOL", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode by line", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode strict", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode by line", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("Quoted-printable Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Quoted-printable Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("URL Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Full URL Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("URL Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("SAML Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("About", MenuHandler)
-PluginsMenuConverterMenu := Menu()
-PluginsMenuConverterMenu.Add("ASCII -> HEX", MenuHandler)
-PluginsMenuConverterMenu.Add("HEX -> ASCII", MenuHandler)
-PluginsMenuConverterMenu.Add()
-PluginsMenuConverterMenu.Add("Conversion Panel", MenuHandler)
-PluginsMenuConverterMenu.Add()
-PluginsMenuConverterMenu.Add("Edit Configuration File", MenuHandler)
-PluginsMenuConverterMenu.Add("About", MenuHandler)
-PluginsMenuNppExportMenu := Menu()
-PluginsMenuNppExportMenu.Add("&Export to RTF", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Export to HTML", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy RTF to A_Clipboard", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy HTML to A_Clipboard", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy all formats to A_Clipboard", MenuHandler)
-PluginsMenuJSONViewerMenu := Menu()
-PluginsMenuJSONViewerMenu.Add("Show &JSON Viewer`tCtrl+Alt+Shift+J", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&Format JSON`tCtrl+Alt+Shift+M", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&Compress JSON`tCtrl+Alt+Shift+C", MenuHandler)
-PluginsMenuJSONViewerMenu.Add()
-PluginsMenuJSONViewerMenu.Add("&Setting", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&About", MenuHandler)
-PluginsMenuPyNPPMenu := Menu()
-PluginsMenuPyNPPMenu.Add("Run file in Python`tCtrl+Alt+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Run file in Python Interactive`tAlt+Shift+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Run file in PythonW`tCtrl+Alt+Shift+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Debug the file (PDB)", MenuHandler)
-PluginsMenuPyNPPMenu.Add()
-PluginsMenuPyNPPMenu.Add("Options", MenuHandler)
-PluginsMenuPyNPPMenu.Add("About PyNPP", MenuHandler)
-PluginsMenuPythonIndentMenu := Menu()
-PluginsMenuPythonIndentMenu.Add("Enable", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu := Menu()
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("BracketHighlighter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("ColumnLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("CTags Based Autocompletion", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Disable Virtual Space", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Enable Virtual Space", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("EnhancedPythonLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Event Handler Demo", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Formatter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("GotoLineCol", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("GotoLineCol_Barebones", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("HideLines", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("InsertRuler", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("LogfileLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("MultiEdit", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Multiples_SR", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Python Regex Replacements", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("RegexTester", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Remove and Modify selected lines", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("ReplaceDefaultReplaceDialog", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Sorter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("StartWithLocalPython", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Swap2Words", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenu := Menu()
-PluginsMenuPythonScriptMenuScriptsMenu.Add("Samples", PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu)
-PluginsMenuPythonScriptMenuScriptsMenu.Add("startup", MenuHandler)
-PluginsMenuPythonScriptMenu := Menu()
-PluginsMenuPythonScriptMenu.Add("New Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("Show Console", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Stop Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Run Previous Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("Scripts", PluginsMenuPythonScriptMenuScriptsMenu)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Configuration...", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Context-Help", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("About", MenuHandler)
-PluginsMenu := Menu()
-PluginsMenu.Add("Dark Theme", PluginsMenuDarkThemeMenu)
-PluginsMenu.Add("JsonTools", PluginsMenuJsonToolsMenu)
-PluginsMenu.Add("MIME Tools", PluginsMenuMIMEToolsMenu)
-PluginsMenu.Add("Converter", PluginsMenuConverterMenu)
-PluginsMenu.Add("NppExport", PluginsMenuNppExportMenu)
-PluginsMenu.Add("JSON Viewer", PluginsMenuJSONViewerMenu)
-PluginsMenu.Add("PyNPP", PluginsMenuPyNPPMenu)
-PluginsMenu.Add("Python Indent", PluginsMenuPythonIndentMenu)
-PluginsMenu.Add("Python Script", PluginsMenuPythonScriptMenu)
-PluginsMenu.Add()
-PluginsMenu.Add("Plugins Admin...", MenuHandler)
-PluginsMenu.Add()
-PluginsMenu.Add("Open Plugins Folder...", MenuHandler)
-WindowMenuSortByMenu := Menu()
-WindowMenuSortByMenu.Add("Name A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Name Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Path A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Path Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Type A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Type Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Size Smaller to Larger", MenuHandler)
-WindowMenuSortByMenu.Add("Size Larger to Smaller", MenuHandler)
-WindowMenu := Menu()
-WindowMenu.Add("Sort By", WindowMenuSortByMenu)
-WindowMenu.Add("&Windows...", MenuHandler)
-WindowMenu.Add()
-WindowMenu.Add("Recent Window", MenuHandler)
-Menu := Menu()
-Menu.Add("Command Line Arguments...", MenuHandler)
-Menu.Add()
-Menu.Add("Notepad++ Home", MenuHandler)
-Menu.Add("Notepad++ Project Page", MenuHandler)
-Menu.Add("Notepad++ Online User Manual", MenuHandler)
-Menu.Add("Notepad++ Community (Forum)", MenuHandler)
-Menu.Add()
-Menu.Add("Update Notepad++", MenuHandler)
-Menu.Add("Set Updater Proxy...", MenuHandler)
-Menu.Add()
-Menu.Add("Debug Info...", MenuHandler)
-Menu.Add("About Notepad++`tF1", MenuHandler)
-Menu.Add("Recent Window", MenuHandler)
-MenuBar := Menu()
-MenuBar.Add("&File", FileMenu)
-MenuBar.Add("&Edit", EditMenu)
-MenuBar.Add("&Search", SearchMenu)
-MenuBar.Add("&View", ViewMenu)
-MenuBar.Add("E&ncoding", EncodingMenu)
-MenuBar.Add("&Language", LanguageMenu)
-MenuBar.Add("Se&ttings", SettingsMenu)
-MenuBar.Add("T&ools", ToolsMenu)
-MenuBar.Add("&Macro", MacroMenu)
-MenuBar.Add("&Run", RunMenu)
-MenuBar.Add("&Plugins", PluginsMenu)
-MenuBar.Add("&Window", WindowMenu)
-MenuBar.Add("&?", Menu)
-MenuBar.Add("▼", Menu)
-myGui.MenuToolbar := MenuBar
+﻿Gui +Resize
+Menu SUBMENUMenuOpenRecentMenu, Add, Reopen Closed File, MenuHandler
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add, Clear Items, MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, UTF-8, MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, UTF-16 LE, MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, UTF-16 BE, MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Arabic (ISO 8859-6), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Arabic (Windows 1256), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Baltic (ISO 8859-4), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Baltic (Windows 1257), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Celtic (ISO 8859-14), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Central European (ISO 8859-2), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Central European (Mac), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Central European (Windows 1250), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Chinese (GB18030), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Cyrillic (ISO 8859-5), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Cyrillic (KOI8-R), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Cyrillic (KOI8-U), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Cyrillic (Windows 1251), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Cyrillic (Windows 866), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, DOS (CP 437), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Estonian (ISO 8859-13), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Greek (ISO 8859-7), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Greek (Windows 1253), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Hebrew (CP 862), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Hebrew (ISO 8859-8), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Hebrew (Windows 1255), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Nordic (ISO 8859-10), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Nordic (Windows 865), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Romanian (ISO 8859-16), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Turkish (ISO 8859-9), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Turkish (Windows 1254), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Vietnamese (Windows 1258), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Western (ISO 8859-1), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Western (ISO 8859-15), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Western (ISO 8859-3), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Western (Mac Roman), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Western (Windows 1252), MenuHandler
+Menu SUBMENUMenuReopenwithEncodingMenu, Add
+Menu SUBMENUMenuReopenwithEncodingMenu, Add, Hexadecimal, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, UTF-8, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, UTF-8 with BOM, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, UTF-16 LE, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, UTF-16 LE with BOM, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, UTF-16 BE, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, UTF-16 BE with BOM, MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Arabic (ISO 8859-6), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Arabic (Windows 1256), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Baltic (ISO 8859-4), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Baltic (Windows 1257), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Celtic (ISO 8859-14), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Central European (ISO 8859-2), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Central European (Mac), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Central European (Windows 1250), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Chinese (GB18030), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Cyrillic (ISO 8859-5), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Cyrillic (KOI8-R), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Cyrillic (KOI8-U), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Cyrillic (Windows 1251), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Cyrillic (Windows 866), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, DOS (CP 437), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Estonian (ISO 8859-13), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Greek (ISO 8859-7), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Greek (Windows 1253), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Hebrew (CP 862), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Hebrew (ISO 8859-8), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Hebrew (Windows 1255), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Nordic (ISO 8859-10), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Nordic (Windows 865), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Romanian (ISO 8859-16), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Turkish (ISO 8859-9), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Turkish (Windows 1254), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Vietnamese (Windows 1258), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Western (ISO 8859-1), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Western (ISO 8859-15), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Western (ISO 8859-3), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Western (Mac Roman), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Western (Windows 1252), MenuHandler
+Menu SUBMENUMenuSavewithEncodingMenu, Add
+Menu SUBMENUMenuSavewithEncodingMenu, Add, Hexadecimal, MenuHandler
+Menu SUBMENUMenu, Add, &New File, MenuHandler
+Menu SUBMENUMenu, Add, &Open File…, MenuHandler
+Menu SUBMENUMenu, Add, Open Folder…, MenuHandler
+Menu SUBMENUMenu, Add, Open &Recent, :SUBMENUMenuOpenRecentMenu
+Menu SUBMENUMenu, Add, Reopen with Encoding, :SUBMENUMenuReopenwithEncodingMenu
+Menu SUBMENUMenu, Add, Split Vi&ew, MenuHandler
+Menu SUBMENUMenu, Add, &Save, MenuHandler
+Menu SUBMENUMenu, Add, Save with Encoding, :SUBMENUMenuSavewithEncodingMenu
+Menu SUBMENUMenu, Add, Save &As…, MenuHandler
+Menu SUBMENUMenu, Add, Save A&ll, MenuHandler
+Menu SUBMENUMenu, Add, &Print…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, New &Window, MenuHandler
+Menu SUBMENUMenu, Add, Close Window, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Close File, MenuHandler
+Menu SUBMENUMenu, Add, Re&vert File, MenuHandler
+Menu SUBMENUMenu, Add, Close All Files, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, E&xit, MenuHandler
+Menu SUBMENUMenuUndoSelectionMenu, Add
+Menu SUBMENUMenuUndoSelectionMenu, Add
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuLineMenu, Add, Delete Line, MenuHandler
+Menu SUBMENUMenuLineMenu, Add
+Menu SUBMENUMenuCommentMenu, Add, Toggle Comment, MenuHandler
+Menu SUBMENUMenuCommentMenu, Add, Toggle Block Comment, MenuHandler
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTextMenu, Add, Insert Line Before, MenuHandler
+Menu SUBMENUMenuTextMenu, Add, Insert Line After, MenuHandler
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTextMenu, Add, Delete Word Forward, MenuHandler
+Menu SUBMENUMenuTextMenu, Add, Delete Word Backward, MenuHandler
+Menu SUBMENUMenuTextMenu, Add, Delete Line, MenuHandler
+Menu SUBMENUMenuTextMenu, Add, Delete to End, MenuHandler
+Menu SUBMENUMenuTextMenu, Add, Delete to Beginning, MenuHandler
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTextMenu, Add
+Menu SUBMENUMenuTagMenu, Add
+Menu SUBMENUMenuTagMenu, Add, Expand Selection to Tag, MenuHandler
+Menu SUBMENUMenuTagMenu, Add, Wrap Selection With Tag, MenuHandler
+Menu SUBMENUMenuMarkMenu, Add
+Menu SUBMENUMenuMarkMenu, Add, Select to Mark, MenuHandler
+Menu SUBMENUMenuMarkMenu, Add, Delete to Mark, MenuHandler
+Menu SUBMENUMenuMarkMenu, Add, Swap with Mark, MenuHandler
+Menu SUBMENUMenuMarkMenu, Add, Clear Mark, MenuHandler
+Menu SUBMENUMenuMarkMenu, Add
+Menu SUBMENUMenuMarkMenu, Add
+Menu SUBMENUMenuCodeFoldingMenu, Add
+Menu SUBMENUMenuCodeFoldingMenu, Add
+Menu SUBMENUMenuCodeFoldingMenu, Add, Unfold All, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold All, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 2, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 3, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 4, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 5, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 6, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 7, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 8, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Level 9, MenuHandler
+Menu SUBMENUMenuCodeFoldingMenu, Add
+Menu SUBMENUMenuCodeFoldingMenu, Add, Fold Tag Attributes, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, Title Case, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, Upper Case, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, Lower Case, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, Swap Case, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, lowerCamelCase, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, UpperCamelCase, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, snake_case, MenuHandler
+Menu SUBMENUMenuConvertCaseMenu, Add, kebab-case, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap Paragraph at Ruler, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap paragraph at 70 characters, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap paragraph at 72 characters, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap paragraph at 78 characters, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap paragraph at 80 characters, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap paragraph at 100 characters, MenuHandler
+Menu SUBMENUMenuWrapMenu, Add, Wrap paragraph at 120 characters, MenuHandler
+Menu SUBMENUMenuPermuteLinesMenu, Add, Reverse, MenuHandler
+Menu SUBMENUMenuPermuteLinesMenu, Add, Unique, MenuHandler
+Menu SUBMENUMenuPermuteLinesMenu, Add, Shuffle, MenuHandler
+Menu SUBMENUMenuPermuteSelectionsMenu, Add, Sort, MenuHandler
+Menu SUBMENUMenuPermuteSelectionsMenu, Add, Sort (Case Sensitive), MenuHandler
+Menu SUBMENUMenuPermuteSelectionsMenu, Add, Reverse, MenuHandler
+Menu SUBMENUMenuPermuteSelectionsMenu, Add, Unique, MenuHandler
+Menu SUBMENUMenuPermuteSelectionsMenu, Add, Shuffle, MenuHandler
+Menu SUBMENUMenuHighlightMenu, Add, Convert to HTML, MenuHandler
+Menu SUBMENUMenuHighlightMenu, Add, Convert to RTF, MenuHandler
+Menu SUBMENUMenuHighlightMenu, Add, View as HTML, MenuHandler
+Menu SUBMENUMenuHighlightMenu, Add, View as RTF, MenuHandler
+Menu SUBMENUMenuHighlightMenu, Add, Copy to clipboard as HTML, MenuHandler
+Menu SUBMENUMenuHighlightMenu, Add, Copy to clipboard as RTF, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Undo Selection, :SUBMENUMenuUndoSelectionMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Copy as HTML, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Paste from History, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Line, :SUBMENUMenuLineMenu
+Menu SUBMENUMenu, Add, Co&mment, :SUBMENUMenuCommentMenu
+Menu SUBMENUMenu, Add, &Text, :SUBMENUMenuTextMenu
+Menu SUBMENUMenu, Add, Tag, :SUBMENUMenuTagMenu
+Menu SUBMENUMenu, Add, Mark, :SUBMENUMenuMarkMenu
+Menu SUBMENUMenu, Add, Code Folding, :SUBMENUMenuCodeFoldingMenu
+Menu SUBMENUMenu, Add, Convert C&ase, :SUBMENUMenuConvertCaseMenu
+Menu SUBMENUMenu, Add, Wrap, :SUBMENUMenuWrapMenu
+Menu SUBMENUMenu, Add, Show Completions, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Sort Lines, MenuHandler
+Menu SUBMENUMenu, Add, Sort Lines (Case Sensitive), MenuHandler
+Menu SUBMENUMenu, Add, Permute Lines, :SUBMENUMenuPermuteLinesMenu
+Menu SUBMENUMenu, Add, Permute Selections, :SUBMENUMenuPermuteSelectionsMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Beautify HTML, MenuHandler
+Menu SUBMENUMenu, Add, Highlight, :SUBMENUMenuHighlightMenu
+Menu SUBMENUMenuTabSelectionMenu, Add, Unselect Others, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Unselect to Left, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Unselect to Right, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add
+Menu SUBMENUMenuTabSelectionMenu, Add, Select to Left, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Select to Right, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus to Left, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus to Right, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 1, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 2, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 3, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 4, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 5, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 6, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 7, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 8, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 9, MenuHandler
+Menu SUBMENUMenuTabSelectionMenu, Add, Focus Selected Tab 10, MenuHandler
+Menu SUBMENUMenu, Add, Split into Lines, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Expand Selection, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Line, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Word, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Block, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Paragraph, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Scope, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Brackets, MenuHandler
+Menu SUBMENUMenu, Add, Expand Selection to Indentation, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Add Previous Line, MenuHandler
+Menu SUBMENUMenu, Add, Add Next Line, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Tab Selection, :SUBMENUMenuTabSelectionMenu
+Menu SUBMENUMenuFindResultsMenu, Add, Show Results Panel, MenuHandler
+Menu SUBMENUMenuFindResultsMenu, Add
+Menu SUBMENUMenuFindResultsMenu, Add, Previous Result, MenuHandler
+Menu SUBMENUMenu, Add, Find…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Find Previous, MenuHandler
+Menu SUBMENUMenu, Add, Incremental Find, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Replace…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Quick Find, MenuHandler
+Menu SUBMENUMenu, Add, Quick Find All, MenuHandler
+Menu SUBMENUMenu, Add, Quick Add Next, MenuHandler
+Menu SUBMENUMenu, Add, Quick Skip Next, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Use Selection for Find, MenuHandler
+Menu SUBMENUMenu, Add, Use Selection for Replace, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Find in Files…, MenuHandler
+Menu SUBMENUMenu, Add, Find &Results, :SUBMENUMenuFindResultsMenu
+Menu SUBMENUMenu, Add, Cancel Find in Files, MenuHandler
+Menu SUBMENUMenuSideBarMenu, Add
+Menu SUBMENUMenuSideBarMenu, Add
+Menu SUBMENUMenuSideBarMenu, Add
+Menu SUBMENUMenuLayoutMenu, Add, Single, MenuHandler
+Menu SUBMENUMenuLayoutMenu, Add, Columns: 2, MenuHandler
+Menu SUBMENUMenuLayoutMenu, Add, Columns: 3, MenuHandler
+Menu SUBMENUMenuLayoutMenu, Add, Columns: 4, MenuHandler
+Menu SUBMENUMenuLayoutMenu, Add, Rows: 2, MenuHandler
+Menu SUBMENUMenuLayoutMenu, Add, Rows: 3, MenuHandler
+Menu SUBMENUMenuLayoutMenu, Add, Grid: 4, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, Move File to New Group, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, New Group, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, Close Group, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add
+Menu SUBMENUMenuGroupsMenu, Add, Max Columns: 1, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, Max Columns: 2, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, Max Columns: 3, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, Max Columns: 4, MenuHandler
+Menu SUBMENUMenuGroupsMenu, Add, Max Columns: 5, MenuHandler
+Menu SUBMENUMenuFocusGroupMenu, Add, Next, MenuHandler
+Menu SUBMENUMenuFocusGroupMenu, Add, Previous, MenuHandler
+Menu SUBMENUMenuFocusGroupMenu, Add
+Menu SUBMENUMenuFocusGroupMenu, Add, Group 1, MenuHandler
+Menu SUBMENUMenuFocusGroupMenu, Add, Group 2, MenuHandler
+Menu SUBMENUMenuFocusGroupMenu, Add, Group 3, MenuHandler
+Menu SUBMENUMenuFocusGroupMenu, Add, Group 4, MenuHandler
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add, Next, MenuHandler
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add, Previous, MenuHandler
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add, Group 1, MenuHandler
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add, Group 2, MenuHandler
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add, Group 3, MenuHandler
+Menu SUBMENUMenuMoveFiletoGroupMenu, Add, Group 4, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuASPMenu, Add, ASP, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuASPMenu, Add, HTML (ASP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuCMenu, Add, C#, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuCMenu, Add, NAnt Build File, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuClojureMenu, Add, Clojure, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuClojureMenu, Add, ClojureScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuErlangMenu, Add, Erlang, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuErlangMenu, Add, HTML (Erlang), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Attributes, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Code Owners, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Commit, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Commit Message, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Config, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Ignore, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Link, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Log, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Mailmap, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu, Add, Git Rebase Todo, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuHaskellMenu, Add, Haskell, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuHaskellMenu, Add, Literate Haskell, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuINIMenu, Add, EditorConfig, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuINIMenu, Add, INI, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuINIMenu, Add, REG, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaMenu, Add, HTML (JSP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaMenu, Add, Java, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaMenu, Add, Java Properties, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaScriptMenu, Add, JavaScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaScriptMenu, Add, JSX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaScriptMenu, Add, TSX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaScriptMenu, Add, TypeScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuLaTeXMenu, Add, BibTeX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuLaTeXMenu, Add, LaTeX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuLaTeXMenu, Add, LaTeX Log, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuLaTeXMenu, Add, TeX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuMarkdownMenu, Add, Markdown, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuMarkdownMenu, Add, MultiMarkdown, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuObjectiveCMenu, Add, Objective-C, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuObjectiveCMenu, Add, Objective-C++, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuOCamlMenu, Add, camlp4, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuOCamlMenu, Add, OCaml, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuOCamlMenu, Add, OCamllex, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuOCamlMenu, Add, OCamlyacc, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuPHPMenu, Add, CSS (PHP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuPHPMenu, Add, JavaScript (PHP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuPHPMenu, Add, PHP, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRMenu, Add, R, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRMenu, Add, R Console, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRMenu, Add, Rd (R Documentation), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu, Add, CSS (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu, Add, HAML, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu, Add, HTML (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu, Add, JavaScript (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu, Add, Ruby (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu, Add, SQL (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuTCLMenu, Add, HTML (Tcl), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuTCLMenu, Add, Tcl, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, ActionScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, AppleScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, ASP, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuASPMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, AutoHotkey, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, AutoHotkey2, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Bash, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Batch File, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, C, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, C#, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuCMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, C++, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Clojure, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuClojureMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, CSS, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, D, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Diff, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, DTD, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Erlang, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuErlangMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Git Formats, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuGitFormatsMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Go, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Graphviz (DOT), MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Groovy, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Haskell, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuHaskellMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, HTML, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, INI, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuINIMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Java, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, JavaScript, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuJavaScriptMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, JSON, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, LaTeX, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuLaTeXMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Lisp, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Lua, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Makefile, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Markdown, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuMarkdownMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, MATLAB, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Objective-C, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuObjectiveCMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, OCaml, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuOCamlMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Pascal, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Perl, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, PHP, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuPHPMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Plain Text, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Python, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Python3, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, R, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Rails, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuRailsMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Regular Expression, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, reStructuredText, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Ruby, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Rust, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Scala, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, SQL, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, TCL, :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenuTCLMenu
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, Textile, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, XML, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, XSL, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu, Add, YAML, MenuHandler
+Menu SUBMENUMenuSyntaxMenuASPMenu, Add, ASP, MenuHandler
+Menu SUBMENUMenuSyntaxMenuASPMenu, Add, HTML (ASP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuCMenu, Add, C#, MenuHandler
+Menu SUBMENUMenuSyntaxMenuCMenu, Add, NAnt Build File, MenuHandler
+Menu SUBMENUMenuSyntaxMenuClojureMenu, Add, Clojure, MenuHandler
+Menu SUBMENUMenuSyntaxMenuClojureMenu, Add, ClojureScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuErlangMenu, Add, Erlang, MenuHandler
+Menu SUBMENUMenuSyntaxMenuErlangMenu, Add, HTML (Erlang), MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Attributes, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Code Owners, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Commit, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Commit Message, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Config, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Ignore, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Link, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Log, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Mailmap, MenuHandler
+Menu SUBMENUMenuSyntaxMenuGitFormatsMenu, Add, Git Rebase Todo, MenuHandler
+Menu SUBMENUMenuSyntaxMenuHaskellMenu, Add, Haskell, MenuHandler
+Menu SUBMENUMenuSyntaxMenuHaskellMenu, Add, Literate Haskell, MenuHandler
+Menu SUBMENUMenuSyntaxMenuINIMenu, Add, EditorConfig, MenuHandler
+Menu SUBMENUMenuSyntaxMenuINIMenu, Add, INI, MenuHandler
+Menu SUBMENUMenuSyntaxMenuINIMenu, Add, REG, MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaMenu, Add, HTML (JSP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaMenu, Add, Java, MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaMenu, Add, Java Properties, MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaScriptMenu, Add, JavaScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaScriptMenu, Add, JSX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaScriptMenu, Add, TSX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuJavaScriptMenu, Add, TypeScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenuLaTeXMenu, Add, BibTeX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuLaTeXMenu, Add, LaTeX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuLaTeXMenu, Add, LaTeX Log, MenuHandler
+Menu SUBMENUMenuSyntaxMenuLaTeXMenu, Add, TeX, MenuHandler
+Menu SUBMENUMenuSyntaxMenuMarkdownMenu, Add, Markdown, MenuHandler
+Menu SUBMENUMenuSyntaxMenuMarkdownMenu, Add, MultiMarkdown, MenuHandler
+Menu SUBMENUMenuSyntaxMenuObjectiveCMenu, Add, Objective-C, MenuHandler
+Menu SUBMENUMenuSyntaxMenuObjectiveCMenu, Add, Objective-C++, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOCamlMenu, Add, camlp4, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOCamlMenu, Add, OCaml, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOCamlMenu, Add, OCamllex, MenuHandler
+Menu SUBMENUMenuSyntaxMenuOCamlMenu, Add, OCamlyacc, MenuHandler
+Menu SUBMENUMenuSyntaxMenuPHPMenu, Add, CSS (PHP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuPHPMenu, Add, JavaScript (PHP), MenuHandler
+Menu SUBMENUMenuSyntaxMenuPHPMenu, Add, PHP, MenuHandler
+Menu SUBMENUMenuSyntaxMenuRMenu, Add, R, MenuHandler
+Menu SUBMENUMenuSyntaxMenuRMenu, Add, R Console, MenuHandler
+Menu SUBMENUMenuSyntaxMenuRMenu, Add, Rd (R Documentation), MenuHandler
+Menu SUBMENUMenuSyntaxMenuRailsMenu, Add, CSS (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuRailsMenu, Add, HAML, MenuHandler
+Menu SUBMENUMenuSyntaxMenuRailsMenu, Add, HTML (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuRailsMenu, Add, JavaScript (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuRailsMenu, Add, Ruby (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuRailsMenu, Add, SQL (Rails), MenuHandler
+Menu SUBMENUMenuSyntaxMenuTCLMenu, Add, HTML (Tcl), MenuHandler
+Menu SUBMENUMenuSyntaxMenuTCLMenu, Add, Tcl, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Open all with current extension as..., :SUBMENUMenuSyntaxMenuOpenallwithcurrentextensionasMenu
+Menu SUBMENUMenuSyntaxMenu, Add
+Menu SUBMENUMenuSyntaxMenu, Add, ActionScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, AppleScript, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, ASP, :SUBMENUMenuSyntaxMenuASPMenu
+Menu SUBMENUMenuSyntaxMenu, Add, AutoHotkey, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, AutoHotkey2, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Bash, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Batch File, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, C, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, C#, :SUBMENUMenuSyntaxMenuCMenu
+Menu SUBMENUMenuSyntaxMenu, Add, C++, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Clojure, :SUBMENUMenuSyntaxMenuClojureMenu
+Menu SUBMENUMenuSyntaxMenu, Add, CSS, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, D, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Diff, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, DTD, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Erlang, :SUBMENUMenuSyntaxMenuErlangMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Git Formats, :SUBMENUMenuSyntaxMenuGitFormatsMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Go, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Graphviz (DOT), MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Groovy, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Haskell, :SUBMENUMenuSyntaxMenuHaskellMenu
+Menu SUBMENUMenuSyntaxMenu, Add, HTML, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, INI, :SUBMENUMenuSyntaxMenuINIMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Java, :SUBMENUMenuSyntaxMenuJavaMenu
+Menu SUBMENUMenuSyntaxMenu, Add, JavaScript, :SUBMENUMenuSyntaxMenuJavaScriptMenu
+Menu SUBMENUMenuSyntaxMenu, Add, JSON, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, LaTeX, :SUBMENUMenuSyntaxMenuLaTeXMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Lisp, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Lua, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Makefile, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Markdown, :SUBMENUMenuSyntaxMenuMarkdownMenu
+Menu SUBMENUMenuSyntaxMenu, Add, MATLAB, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Objective-C, :SUBMENUMenuSyntaxMenuObjectiveCMenu
+Menu SUBMENUMenuSyntaxMenu, Add, OCaml, :SUBMENUMenuSyntaxMenuOCamlMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Pascal, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Perl, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, PHP, :SUBMENUMenuSyntaxMenuPHPMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Plain Text, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Python, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Python3, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, R, :SUBMENUMenuSyntaxMenuRMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Rails, :SUBMENUMenuSyntaxMenuRailsMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Regular Expression, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, reStructuredText, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Ruby, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Rust, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, Scala, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, SQL, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, TCL, :SUBMENUMenuSyntaxMenuTCLMenu
+Menu SUBMENUMenuSyntaxMenu, Add, Textile, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, XML, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, XSL, MenuHandler
+Menu SUBMENUMenuSyntaxMenu, Add, YAML, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Indent Using Spaces, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 1, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 2, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 3, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 4, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 5, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 6, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 7, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Tab Width: 8, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add
+Menu SUBMENUMenuIndentationMenu, Add, Guess Settings From Buffer, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add
+Menu SUBMENUMenuIndentationMenu, Add, Convert Indentation to Spaces, MenuHandler
+Menu SUBMENUMenuIndentationMenu, Add, Convert Indentation to Tabs, MenuHandler
+Menu SUBMENUMenuLineEndingsMenu, Add, Windows, MenuHandler
+Menu SUBMENUMenuLineEndingsMenu, Add, Unix, MenuHandler
+Menu SUBMENUMenuLineEndingsMenu, Add, Mac OS 9, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add, Automatic, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add
+Menu SUBMENUMenuWordWrapColumnMenu, Add, 70, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add, 72, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add, 78, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add, 80, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add, 100, MenuHandler
+Menu SUBMENUMenuWordWrapColumnMenu, Add, 120, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add, None, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add
+Menu SUBMENUMenuRulerMenu, Add, 70, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add, 72, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add, 78, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add, 80, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add, 100, MenuHandler
+Menu SUBMENUMenuRulerMenu, Add, 120, MenuHandler
+Menu SUBMENUMenuDictionaryMenu, Add, en_GB, MenuHandler
+Menu SUBMENUMenuDictionaryMenu, Add, en_US, MenuHandler
+Menu SUBMENUMenu, Add, Side Bar, :SUBMENUMenuSideBarMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Layout, :SUBMENUMenuLayoutMenu
+Menu SUBMENUMenu, Add, Groups, :SUBMENUMenuGroupsMenu
+Menu SUBMENUMenu, Add, &Focus Group, :SUBMENUMenuFocusGroupMenu
+Menu SUBMENUMenu, Add, &Move File to Group, :SUBMENUMenuMoveFiletoGroupMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Syntax, :SUBMENUMenuSyntaxMenu
+Menu SUBMENUMenu, Add, &Indentation, :SUBMENUMenuIndentationMenu
+Menu SUBMENUMenu, Add, Li&ne Endings, :SUBMENUMenuLineEndingsMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Word Wrap, MenuHandler
+Menu SUBMENUMenu, Add, Word Wrap Column, :SUBMENUMenuWordWrapColumnMenu
+Menu SUBMENUMenu, Add, Ruler, :SUBMENUMenuRulerMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Spell Check, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Dictionary, :SUBMENUMenuDictionaryMenu
+Menu SUBMENUMenuSwitchFileMenu, Add, Next File, MenuHandler
+Menu SUBMENUMenuSwitchFileMenu, Add, Previous File, MenuHandler
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add, Next File in Stack, MenuHandler
+Menu SUBMENUMenuSwitchFileMenu, Add, Previous File in Stack, MenuHandler
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add, Switch &Header/Implementation, MenuHandler
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuSwitchFileMenu, Add
+Menu SUBMENUMenuScrollMenu, Add, Scroll to Selection, MenuHandler
+Menu SUBMENUMenuScrollMenu, Add, Line Up, MenuHandler
+Menu SUBMENUMenuScrollMenu, Add, Line Down, MenuHandler
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenuBookmarksMenu, Add
+Menu SUBMENUMenu, Add, Goto &Anything…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Goto Symbol…, MenuHandler
+Menu SUBMENUMenu, Add, Goto Symbol in Project…, MenuHandler
+Menu SUBMENUMenu, Add, Goto Definition…, MenuHandler
+Menu SUBMENUMenu, Add, Goto Reference…, MenuHandler
+Menu SUBMENUMenu, Add, Goto Line…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Next Modification, MenuHandler
+Menu SUBMENUMenu, Add, Previous Modification, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Jump Back, MenuHandler
+Menu SUBMENUMenu, Add, Jump Forward, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Swi&tch File, :SUBMENUMenuSwitchFileMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Scroll, :SUBMENUMenuScrollMenu
+Menu SUBMENUMenu, Add, &Bookmarks, :SUBMENUMenuBookmarksMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Jump to Matching Bracket, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Automatic, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add, ActionScript, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Ant, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, AutoHotkey, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, C Single File, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, C++ Single File, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Cargo, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, D, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, D dub, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Erlang, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Graphviz, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Haskell, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, JavaC, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Lua, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Make, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Perl, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Python, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Python3, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, R, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Ruby, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Rust, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, ShellScript, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add, Syntax Tests, MenuHandler
+Menu SUBMENUMenuBuildSystemMenu, Add
+Menu SUBMENUMenuBuildSystemMenu, Add, New Build System…, MenuHandler
+Menu SUBMENUMenuBuildResultsMenu, Add, &Show Build Results, MenuHandler
+Menu SUBMENUMenuBuildResultsMenu, Add
+Menu SUBMENUMenuBuildResultsMenu, Add, &Previous Result, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Add Line Before, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Add Line in Braces, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Add Line, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Delete Left Right, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Delete Line, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Delete to BOL, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Delete to EOL, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Delete to Hard BOL, MenuHandler
+Menu SUBMENUMenuMacrosMenu, Add, Delete to Hard EOL, MenuHandler
+Menu SUBMENUMenuDeveloperMenu, Add, New Plugin…, MenuHandler
+Menu SUBMENUMenuDeveloperMenu, Add, New Snippet…, MenuHandler
+Menu SUBMENUMenuDeveloperMenu, Add, New Syntax…, MenuHandler
+Menu SUBMENUMenuDeveloperMenu, Add
+Menu SUBMENUMenuDeveloperMenu, Add
+Menu SUBMENUMenuDeveloperMenu, Add
+Menu SUBMENUMenuDeveloperMenu, Add
+Menu SUBMENUMenuDeveloperMenu, Add
+Menu SUBMENUMenuDeveloperMenu, Add, View Package File…, MenuHandler
+Menu SUBMENUMenuDeveloperMenu, Add
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Default - Run, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Classic - Run, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Lexikos_A32 - Run, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Lexikos_U32 - Run, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Lexikos_U64 - Run, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Default - Compile, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Classic - Compile, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey Lexikos - Compile, MenuHandler
+Menu SUBMENUMenuAutoHotkeyMenu, Add, AutoHotkey - Run As &Piped Buffer, MenuHandler
+Menu SUBMENUMenu, Add, Command Palette…, MenuHandler
+Menu SUBMENUMenu, Add, Snippets…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, B&uild System, :SUBMENUMenuBuildSystemMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Build With…, MenuHandler
+Menu SUBMENUMenu, Add, &Cancel Build, MenuHandler
+Menu SUBMENUMenu, Add, Build &Results, :SUBMENUMenuBuildResultsMenu
+Menu SUBMENUMenu, Add, Save &All on Build, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, &Playback Macro, MenuHandler
+Menu SUBMENUMenu, Add, Sa&ve Macro…, MenuHandler
+Menu SUBMENUMenu, Add, Macros, :SUBMENUMenuMacrosMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Developer, :SUBMENUMenuDeveloperMenu
+Menu SUBMENUMenu, Add, Install Package Control…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, AutoHotkey, :SUBMENUMenuAutoHotkeyMenu
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add
+Menu SUBMENUMenuOpenRecentMenu, Add, Clear Items, MenuHandler
+Menu SUBMENUMenuOpenRecentMenu, Add, Remove Deleted, MenuHandler
+Menu SUBMENUMenu, Add, Open Project…, MenuHandler
+Menu SUBMENUMenu, Add, Switch Project…, MenuHandler
+Menu SUBMENUMenu, Add, Quick &Switch Project…, MenuHandler
+Menu SUBMENUMenu, Add, Open Recent, :SUBMENUMenuOpenRecentMenu
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Save Project &As…, MenuHandler
+Menu SUBMENUMenu, Add, &Close Project, MenuHandler
+Menu SUBMENUMenu, Add, Edit Project, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, New Workspace for Project, MenuHandler
+Menu SUBMENUMenu, Add, Save Workspace &As…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, A&dd Folder to Project…, MenuHandler
+Menu SUBMENUMenu, Add, Re&move all Folders from Project, MenuHandler
+Menu SUBMENUMenu, Add, R&efresh Folders, MenuHandler
+Menu SUBMENUMenuFontMenu, Add, Larger, MenuHandler
+Menu SUBMENUMenuFontMenu, Add, Smaller, MenuHandler
+Menu SUBMENUMenuFontMenu, Add
+Menu SUBMENUMenuFontMenu, Add, Reset, MenuHandler
+Menu SUBMENUMenuToolTiphelperMenu, Add, ToolTip Helper Settings – Default, MenuHandler
+Menu SUBMENUMenuToolTiphelperMenu, Add, ToolTip Helper Settings – User, MenuHandler
+Menu SUBMENUMenuToolTiphelperMenu, Add, Enter Data To Tooltip - Settings, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuAutoHotkeyMenu, Add, AutoHotkey Settings - Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuAutoHotkeyMenu, Add, AutoHotkey Settings - User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuHTMLBeautifyMenu, Add, Settings – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuHTMLBeautifyMenu, Add, Settings – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuPackageControlMenu, Add, Settings – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuPackageControlMenu, Add, Settings – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuPackageControlMenu, Add, Settings, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuPackageControlMenu, Add
+Menu SUBMENUMenuPackageSettingsMenuSublimeHighlightMenu, Add, README, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuSublimeHighlightMenu, Add
+Menu SUBMENUMenuPackageSettingsMenuSublimeHighlightMenu, Add, Settings – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuSublimeHighlightMenu, Add, Settings – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuSublimeHighlightMenu, Add
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add, Settings – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add, Settings – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add, Keymap – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add, Keymap – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add, Mousemap – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuJediMenu, Add, Mousemap – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuKiteMenu, Add, Settings – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuKiteMenu, Add, Settings – User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenuKiteMenu, Add
+Menu SUBMENUMenuPackageSettingsMenuKiteMenu, Add, Key Bindings – Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add, Settings - Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add, Settings - User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add, Key Bindings - Default, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add, Key Bindings - User, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add
+Menu SUBMENUMenuPackageSettingsMenutabnineMenu, Add, Open Tabnine Home, MenuHandler
+Menu SUBMENUMenuPackageSettingsMenu, Add, AutoHotkey, :SUBMENUMenuPackageSettingsMenuAutoHotkeyMenu
+Menu SUBMENUMenuPackageSettingsMenu, Add, HTMLBeautify, :SUBMENUMenuPackageSettingsMenuHTMLBeautifyMenu
+Menu SUBMENUMenuPackageSettingsMenu, Add, Package Control, :SUBMENUMenuPackageSettingsMenuPackageControlMenu
+Menu SUBMENUMenuPackageSettingsMenu, Add, SublimeHighlight, :SUBMENUMenuPackageSettingsMenuSublimeHighlightMenu
+Menu SUBMENUMenuPackageSettingsMenu, Add, Jedi, :SUBMENUMenuPackageSettingsMenuJediMenu
+Menu SUBMENUMenuPackageSettingsMenu, Add, Kite, :SUBMENUMenuPackageSettingsMenuKiteMenu
+Menu SUBMENUMenuPackageSettingsMenu, Add, ⌬ tabnine, :SUBMENUMenuPackageSettingsMenutabnineMenu
+Menu SUBMENUMenu, Add, &Browse Packages…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Settings, MenuHandler
+Menu SUBMENUMenu, Add, Settings – Syntax Specific, MenuHandler
+Menu SUBMENUMenu, Add, Settings – Distraction Free, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Key Bindings, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Select Color Scheme…, MenuHandler
+Menu SUBMENUMenu, Add, Customize Color Scheme, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Select Theme…, MenuHandler
+Menu SUBMENUMenu, Add, Customize Theme, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Font, :SUBMENUMenuFontMenu
+Menu SUBMENUMenu, Add, ToolTip helper, :SUBMENUMenuToolTiphelperMenu
+Menu SUBMENUMenu, Add, &Package Settings, :SUBMENUMenuPackageSettingsMenu
+Menu SUBMENUMenu, Add, Package &Control, MenuHandler
+Menu SUBMENUMenu, Add, Documentation, MenuHandler
+Menu SUBMENUMenu, Add, Report a Bug, MenuHandler
+Menu SUBMENUMenu, Add, Twitter, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Indexing Status…, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Enter License, MenuHandler
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add
+Menu SUBMENUMenu, Add, Check for Updates…, MenuHandler
+Menu SUBMENUMenu, Add, Changelog…, MenuHandler
+Menu SUBMENUMenu, Add, &About Sublime Text, MenuHandler
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Menu MenuBar, Add, SUBMENU, :SUBMENUMenu
+Gui Menu, MenuBar
 
-myGui.Add("Edit", "x2 y51 w1163 h750", "C:\Users\dower\OneDrive\MagicBox-1.0.4 - 1\AutoGUI_ahkv2\Auto-GUI-v2_local\complete_application\returnstatus.txt")
-myGui.Add("UpDown", "x1133 y30 w17 h17 -16")
-SB := myGui.Add("StatusBar", , "Normal text file")
-ogcButton := myGui.Add("Button", "x3 y808 w24 h23", "✕")
-ogcButton.OnEvent("Click", Button✕.Bind("Normal"))
-myGui.Add("Text", "x27 y813 w69 h20 +Right", "Find:")
-myGui.Add("Edit", "x98 y810 w263 h20")
-ogcButton := myGui.Add("Button", "x365 y808 w24 h23", "<")
-ogcButton.OnEvent("Click", Button<.Bind("Normal"))
-ogcButton := myGui.Add("Button", "x395 y808 w24 h23", ">")
-ogcButton.OnEvent("Click", Button>.Bind("Normal"))
-myGui.Add("CheckBox", "x435 y811 w150 h20", "Match &case")
-myGui.Add("CheckBox", "x600 y811 w150 h20", "&Highlight all")
-myGui.Add("Text", "x780 y813 w270 h20")
-Tab := myGui.Add("Tab3", "x780 y813 w270 h20", ["Tabindex-ecobeef - Copy (2).html", "TASystemSettings.ini", "PyNuitkaExe.ahk", "setres.py", "TASystemSettings - Copy.ini", "pywebview.py", "hello.py", "index.html", "hello.html", "products.html", "index-ecobeef.html", "index.html", "temp_index.html", "bookclub__.txt", "index.html", "hello.html", "index.html", "python.py", "index.html", "index.html", "py.py", "readlines.py", "readlines.py", "index.html", "ecobeef.css", "dxvk.conf", "dxvk.conf", "Assassin4.ini", "GFXSettings.AC4BFSP.xml", "AC4BFSP_d3d11.log", "d3dx (2022_06_29 21_43_16 UTC).ini", "AcroRd32.exe.cfg", "AllSettings.ini", "apps.json", "output.json", "Untitled (4).ahk", "log_updater_ahk.json", "github.ahk", "AhkHelpMenu.xml", "Demo_Button_Func_Calls.py", "temp.txt", "er.txt", "er.txt", "log_old.txt", "dlsstweaks.ini", "dlsstweaks.log", "Readme.txt", "Hillard Dane - Publishing Python Packages - 2023.txt", "V2GuiCreator.ini", "log_out.txt", "selenium_ahk.py", "button_functions.py", "PySimpleG-venv-Menu.py", "qUINT_rtgi.fx", "openai Chatbot chatgpt 3 template python.txt", "faster_airtable.py", "1.txt", "new_pyscript.html", "output.txt", "key.txt", "dictionary.json", "ERRORS.txt", "ERRORS.txt", "THINGS FOR AN INTERVIEW.txt", "er.txt", "openai Chatbot chatgpt 3 template python - Copy (3).txt", "debug.txt", "openai Chatbot chatgpt 3 template python - Copy (2).txt", "dl.py", "data.txt", "openai Chatbot chatgpt 3 template python - Copy (2) - Copy.txt", "key - Copy (2).txt", "new 1", "key - Copy.txt", "get.txt", "venvMENU_python.ahk", "scons-report.txt", "openai Chatbot chatgpt 3 template python - Copy (2).txt", "setup.py", "main.cpp", "ag_settings.json", "openai Chatbot chatgpt 3 template python - Copy (3) - Copy.txt", "ConsoleApp4.deps.json", "AHK_load.ahk", "file.json", "openai Chatbot chatgpt 3 template python - Copy (3).txt", "Program.cs", "license.txt", "config.json", "UnitySubsystemsManifest.json", "Flask_Web_Development_vtoroe_izdanie_2018.txt", "shutdown_pc.py", "config.json", "kant_prolegomeda_spark-notes.txt", "bookclub.txt", "QuickConvertorV2.ini", "log.txt", "codeHandler.ahk", "log.txt", "bookclub_kant_prolegomeda.txt", "my_commands.bat", "website stuff todo.txt", "response.json", "v2converter.ahk", "ConvertFuncs.ahk", "AutoGUI.ahk", "AutoGUI.ini", "v2converter.ahk", "ConvertFuncs.ahk", "Counter-Strike Global Offensive 2.ahk", "runtime.txt", "temp.txt"])
-Tab.UseTab()
-
-myGui.Title := "C:\Users\dower\OneDrive\MagicBox-1.0.4 - 1\AutoGUI_ahkv2\Auto-GUI-v2_local\complete_application\temp.txt - Notepad++ (Clone)"
-myGui.Show("w1167 h826")
+Gui Show, w1405 h885, C:\Users\dower\Downloads\Counter-Strike Global Offensive 2.ahk - Sublime Text (UNREGISTERED) (Clone)
 Return
 
-GuiEscape(*)
-{ ; V1toV2: Added bracket
+GuiEscape:
 GuiClose:
-    ExitApp()
-
-
-} ; Added bracket in the end
-
-
-myGui := Gui()
-myGui.Opt("+Resize")
-FileMenuOpenContainingFolderMenu := Menu()
-FileMenuOpenContainingFolderMenu.Add("Explorer", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add("cmd", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add()
-FileMenuOpenContainingFolderMenu.Add("Folder as Workspace", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu := Menu()
-FileMenuCloseMultipleDocumentsMenu.Add("Close All but Active Document", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All to the Left", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All to the Right", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All Unchanged", MenuHandler)
-FileMenu := Menu()
-FileMenu.Add("&New`tCtrl+N", MenuHandler)
-FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
-FileMenu.Add("Open Containing &Folder", FileMenuOpenContainingFolderMenu)
-FileMenu.Add("Open in &Default Viewer", MenuHandler)
-FileMenu.Add("Open Folder as &Workspace...", MenuHandler)
-FileMenu.Add("Re&load from Disk`tCtrl+R", MenuHandler)
-FileMenu.Add("&Save`tCtrl+S", MenuHandler)
-FileMenu.Add("Save &As...`tCtrl+Alt+S", MenuHandler)
-FileMenu.Add("Save a Cop&y As...", MenuHandler)
-FileMenu.Add("Sa&ve All`tCtrl+Shift+S", MenuHandler)
-FileMenu.Add("&Rename...", MenuHandler)
-FileMenu.Add("&Close`tCtrl+W", MenuHandler)
-FileMenu.Add("Clos&e All`tCtrl+Shift+W", MenuHandler)
-FileMenu.Add("Close &Multiple Documents", FileMenuCloseMultipleDocumentsMenu)
-FileMenu.Add("Move to Recycle &Bin", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("Load Sess&ion...", MenuHandler)
-FileMenu.Add("Save Sess&ion...", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("&Print...`tCtrl+P", MenuHandler)
-FileMenu.Add("Print No&w", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("&1: C:\Users\dower\OneDrive\rawaccel\ahk\communication___layer__python_autohotkey_ahk__\AHK.ahk", MenuHandler)
-FileMenu.Add("&2: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com (1).json", MenuHandler)
-FileMenu.Add("&3: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com.json", MenuHandler)
-FileMenu.Add("&4: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\d3dx.ini", MenuHandler)
-FileMenu.Add("&5: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\doorstop_config.ini", MenuHandler)
-FileMenu.Add("&6: C:\Users\dower\OneDrive\RESOLUTION\KATANGA_LAUNCHER\pywebview_jinja2\JINJA2\examples\js_api.py", MenuHandler)
-FileMenu.Add("&7: C:\Users\dower\OneDrive\STEAM_VDF_2023\build\exe.win-amd64-3.11\export_command.py", MenuHandler)
-FileMenu.Add("&8: C:\Users\dower\Documents\GitHub\Inject-CSS-JS-into-Jinja2-Pywebview-without-Flask-example-main\bigger_example\main.py", MenuHandler)
-FileMenu.Add("&9: C:\Users\dower\Documents\GitHub\Inject-CSS-JS-into-Jinja2-Pywebview-without-Flask-example-main\simple_example\main.py", MenuHandler)
-FileMenu.Add("1&0: C:\Users\dower\Documents\GitHub\Inject-CSS-JS-into-Jinja2-Pywebview-without-Flask-example-main\simple_example\templates\inject_js_css.py", MenuHandler)
-FileMenu.Add("ERROR", MenuHandler)
-FileMenu.Add("Restore Recent Closed File`tCtrl+Shift+T", MenuHandler)
-FileMenu.Add("Open All Recent Files", MenuHandler)
-FileMenu.Add("Empty Recent Files List", MenuHandler)
-FileMenu.Add("ERROR", MenuHandler)
-FileMenu.Add("E&xit`tAlt+F4", MenuHandler)
-EditMenuInsertMenu := Menu()
-EditMenuInsertMenu.Add("Date Time (short)", MenuHandler)
-EditMenuInsertMenu.Add("Date Time (long)", MenuHandler)
-EditMenuInsertMenu.Add("Date Time (customized)", MenuHandler)
-EditMenuCopytoClipboardMenu := Menu()
-EditMenuCopytoClipboardMenu.Add("Copy Current Full File path", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy Current Filename", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy Current Dir. Path", MenuHandler)
-EditMenuCopytoClipboardMenu.Add()
-EditMenuCopytoClipboardMenu.Add("Copy All Filenames", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy All File Paths", MenuHandler)
-EditMenuIndentMenu := Menu()
-EditMenuIndentMenu.Add("Increase Line Indent", MenuHandler)
-EditMenuIndentMenu.Add("Decrease Line Indent", MenuHandler)
-EditMenuConvertCasetoMenu := Menu()
-EditMenuConvertCasetoMenu.Add("&UPPERCASE`tCtrl+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&lowercase`tCtrl+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&Proper Case`tAlt+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("Proper Case (blend)`tAlt+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&Sentence case`tCtrl+Alt+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("Sentence case (blend)`tCtrl+Alt+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&iNVERT cASE", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&ranDOm CasE", MenuHandler)
-EditMenuLineOperationsMenu := Menu()
-EditMenuLineOperationsMenu.Add("Duplicate Current Line`tCtrl+D", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Duplicate Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Consecutive Duplicate Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Split Lines`tCtrl+I", MenuHandler)
-EditMenuLineOperationsMenu.Add("Join Lines`tCtrl+J", MenuHandler)
-EditMenuLineOperationsMenu.Add("Move Up Current Line`tCtrl+Shift+Up", MenuHandler)
-EditMenuLineOperationsMenu.Add("Move Down Current Line`tCtrl+Shift+Down", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Empty Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Empty Lines (Containing Blank characters)", MenuHandler)
-EditMenuLineOperationsMenu.Add("Insert Blank Line Above Current`tCtrl+Alt+Enter", MenuHandler)
-EditMenuLineOperationsMenu.Add("Insert Blank Line Below Current`tCtrl+Alt+Shift+Enter", MenuHandler)
-EditMenuLineOperationsMenu.Add("Reverse Line Order", MenuHandler)
-EditMenuLineOperationsMenu.Add("Randomize Line Order", MenuHandler)
-EditMenuLineOperationsMenu.Add()
-EditMenuLineOperationsMenu.Add("Sort Lines Lexicographically Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines Lex. Ascending Ignoring Case", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Integers Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Comma) Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Dot) Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add()
-EditMenuLineOperationsMenu.Add("Sort Lines Lexicographically Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines Lex. Descending Ignoring Case", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Integers Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Comma) Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Dot) Descending", MenuHandler)
-EditMenuCommentUncommentMenu := Menu()
-EditMenuCommentUncommentMenu.Add("Toggle Single Line Comment`tCtrl+Q", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Single Line Comment`tCtrl+K", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Single Line Uncomment`tCtrl+Shift+K", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Block Comment`tCtrl+Shift+Q", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Block Uncomment", MenuHandler)
-EditMenuAutoCompletionMenu := Menu()
-EditMenuAutoCompletionMenu.Add("Function Completion`tCtrl+Spacebar", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Word Completion`tCtrl+Enter", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Hint`tCtrl+Shift+Spacebar", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Previous Hint`tAlt+Up", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Next Hint`tAlt+Down", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Path Completion`tCtrl+Alt+Spacebar", MenuHandler)
-EditMenuEOLConversionMenu := Menu()
-EditMenuEOLConversionMenu.Add("Windows (CR LF)", MenuHandler)
-EditMenuEOLConversionMenu.Add("Unix (LF)", MenuHandler)
-EditMenuEOLConversionMenu.Add("Macintosh (CR)", MenuHandler)
-EditMenuBlankOperationsMenu := Menu()
-EditMenuBlankOperationsMenu.Add("Trim Trailing Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim Leading Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim Leading and Trailing Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("EOL to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim both and EOL to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add()
-EditMenuBlankOperationsMenu.Add("TAB to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Space to TAB (All)", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Space to TAB (Leading)", MenuHandler)
-EditMenuPasteSpecialMenu := Menu()
-EditMenuPasteSpecialMenu.Add("Paste HTML Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Paste RTF Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add()
-EditMenuPasteSpecialMenu.Add("Copy Binary Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Cut Binary Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Paste Binary Content", MenuHandler)
-EditMenuOnSelectionMenu := Menu()
-EditMenuOnSelectionMenu.Add("Open File", MenuHandler)
-EditMenuOnSelectionMenu.Add("Open Containing Folder in Explorer", MenuHandler)
-EditMenuOnSelectionMenu.Add()
-EditMenuOnSelectionMenu.Add("Search on Internet", MenuHandler)
-EditMenuOnSelectionMenu.Add("Change Search Engine...", MenuHandler)
-EditMenu := Menu()
-EditMenu.Add("&Undo`tCtrl+Z or Alt+Backspace", MenuHandler)
-EditMenu.Add("&Redo`tCtrl+Y or Ctrl+Shift+Z", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("Cu&t`tCtrl+X or Shift+DEL", MenuHandler)
-EditMenu.Add("&Copy`tCtrl+C or Ctrl+INS", MenuHandler)
-EditMenu.Add("&Paste`tCtrl+V or Shift+INS", MenuHandler)
-EditMenu.Add("&Delete`tDEL", MenuHandler)
-EditMenu.Add("&Select All`tCtrl+A", MenuHandler)
-EditMenu.Add("Begin/End &Select`tCtrl+Shift+B", MenuHandler)
-EditMenu.Add("Begin/End Select in Column Mode`tAlt+Shift+B", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("Insert", EditMenuInsertMenu)
-EditMenu.Add("Cop&y to A_Clipboard", EditMenuCopytoClipboardMenu)
-EditMenu.Add("&Indent", EditMenuIndentMenu)
-EditMenu.Add("Con&vert Case to", EditMenuConvertCasetoMenu)
-EditMenu.Add("&Line Operations", EditMenuLineOperationsMenu)
-EditMenu.Add("Co&mment/Uncomment", EditMenuCommentUncommentMenu)
-EditMenu.Add("&Auto-Completion", EditMenuAutoCompletionMenu)
-EditMenu.Add("&EOL Conversion", EditMenuEOLConversionMenu)
-EditMenu.Add("&Blank Operations", EditMenuBlankOperationsMenu)
-EditMenu.Add("&Paste Special", EditMenuPasteSpecialMenu)
-EditMenu.Add("&On Selection", EditMenuOnSelectionMenu)
-EditMenu.Add()
-EditMenu.Add("Column Mode...", MenuHandler)
-EditMenu.Add("Colum&n Editor...`tAlt+C", MenuHandler)
-EditMenu.Add("Character &Panel", MenuHandler)
-EditMenu.Add("A_Clipboard &History", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("&Set Read-Only", MenuHandler)
-EditMenu.Add("Clear Read-Only Flag", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu := Menu()
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 1st Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 2nd Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 3rd Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 4th Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 5th Style", MenuHandler)
-SearchMenuStyleOneTokenMenu := Menu()
-SearchMenuStyleOneTokenMenu.Add("Using 1st Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 2nd Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 3rd Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 4th Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 5th Style", MenuHandler)
-SearchMenuClearStyleMenu := Menu()
-SearchMenuClearStyleMenu.Add("Clear 1st Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 2nd Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 3rd Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 4th Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 5th Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear all Styles", MenuHandler)
-SearchMenuJumpUpMenu := Menu()
-SearchMenuJumpUpMenu.Add("1st Style`tCtrl+Shift+1", MenuHandler)
-SearchMenuJumpUpMenu.Add("2nd Style`tCtrl+Shift+2", MenuHandler)
-SearchMenuJumpUpMenu.Add("3rd Style`tCtrl+Shift+3", MenuHandler)
-SearchMenuJumpUpMenu.Add("4th Style`tCtrl+Shift+4", MenuHandler)
-SearchMenuJumpUpMenu.Add("5th Style`tCtrl+Shift+5", MenuHandler)
-SearchMenuJumpUpMenu.Add("Find Mark Style`tCtrl+Shift+0", MenuHandler)
-SearchMenuJumpDownMenu := Menu()
-SearchMenuJumpDownMenu.Add("1st Style`tCtrl+1", MenuHandler)
-SearchMenuJumpDownMenu.Add("2nd Style`tCtrl+2", MenuHandler)
-SearchMenuJumpDownMenu.Add("3rd Style`tCtrl+3", MenuHandler)
-SearchMenuJumpDownMenu.Add("4th Style`tCtrl+4", MenuHandler)
-SearchMenuJumpDownMenu.Add("5th Style`tCtrl+5", MenuHandler)
-SearchMenuJumpDownMenu.Add("Find Mark Style`tCtrl+0", MenuHandler)
-SearchMenuCopyStyledTextMenu := Menu()
-SearchMenuCopyStyledTextMenu.Add("1st Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("2nd Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("3rd Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("4th Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("5th Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("All Styles", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("Find Mark Style", MenuHandler)
-SearchMenuBookmarkMenu := Menu()
-SearchMenuBookmarkMenu.Add("Toggle Bookmark`tCtrl+F2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Next Bookmark`tF2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Previous Bookmark`tShift+F2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Clear All Bookmarks", MenuHandler)
-SearchMenuBookmarkMenu.Add("Cut Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Copy Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Paste to (Replace) Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Remove Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Remove Non-Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Inverse Bookmark", MenuHandler)
-SearchMenu := Menu()
-SearchMenu.Add("&Find...`tCtrl+F", MenuHandler)
-SearchMenu.Add("Find in Fi&les...`tCtrl+Shift+F", MenuHandler)
-SearchMenu.Add("Find &Next`tF3", MenuHandler)
-SearchMenu.Add("Find &Previous`tShift+F3", MenuHandler)
-SearchMenu.Add("&Select and Find Next`tCtrl+F3", MenuHandler)
-SearchMenu.Add("&Select and Find Previous`tCtrl+Shift+F3", MenuHandler)
-SearchMenu.Add("Find (&Volatile) Next`tCtrl+Alt+F3", MenuHandler)
-SearchMenu.Add("Find (&Volatile) Previous`tCtrl+Alt+Shift+F3", MenuHandler)
-SearchMenu.Add("&Replace...`tCtrl+H", MenuHandler)
-SearchMenu.Add("&Incremental Search`tCtrl+Alt+I", MenuHandler)
-SearchMenu.Add("Search Results &Window`tF7", MenuHandler)
-SearchMenu.Add("Next Search Resul&t`tF4", MenuHandler)
-SearchMenu.Add("Previous Search Resul&t`tShift+F4", MenuHandler)
-SearchMenu.Add("&Go to...`tCtrl+G", MenuHandler)
-SearchMenu.Add("Go to &Matching Brace`tCtrl+B", MenuHandler)
-SearchMenu.Add("Select All Between &Matching Braces`tCtrl+Alt+B", MenuHandler)
-SearchMenu.Add("Mar&k...`tCtrl+M", MenuHandler)
-SearchMenu.Add()
-SearchMenu.Add("Style &All Occurrences of Token", SearchMenuStyleAllOccurrencesofTokenMenu)
-SearchMenu.Add("Style &One Token", SearchMenuStyleOneTokenMenu)
-SearchMenu.Add("Clear Style", SearchMenuClearStyleMenu)
-SearchMenu.Add("&Jump Up", SearchMenuJumpUpMenu)
-SearchMenu.Add("Jump &Down", SearchMenuJumpDownMenu)
-SearchMenu.Add("&Copy Styled Text", SearchMenuCopyStyledTextMenu)
-SearchMenu.Add()
-SearchMenu.Add("&Bookmark", SearchMenuBookmarkMenu)
-SearchMenu.Add()
-SearchMenu.Add("Find characters in rang&e...", MenuHandler)
-ViewMenuViewCurrentFileinMenu := Menu()
-ViewMenuViewCurrentFileinMenu.Add("Firefox", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("Chrome", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("Edge", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("IE", MenuHandler)
-ViewMenuShowSymbolMenu := Menu()
-ViewMenuShowSymbolMenu.Add("Show Space and Tab", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show End of Line", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show Non-Printing Characters", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show All Characters", MenuHandler)
-ViewMenuShowSymbolMenu.Add()
-ViewMenuShowSymbolMenu.Add("Show Indent Guide", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show Wrap Symbol", MenuHandler)
-ViewMenuZoomMenu := Menu()
-ViewMenuZoomMenu.Add("Zoom &In (Ctrl+Mouse Wheel Up)`tCtrl+Num +", MenuHandler)
-ViewMenuZoomMenu.Add("Zoom &Out (Ctrl+Mouse Wheel Down)`tCtrl+Num -", MenuHandler)
-ViewMenuZoomMenu.Add("Restore Default Zoom`tCtrl+Num /", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu := Menu()
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Move to Other View", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Clone to Other View", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Move to New Instance", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Open in New Instance", MenuHandler)
-ViewMenuTabMenu := Menu()
-ViewMenuTabMenu.Add("1st Tab`tCtrl+Numpad 1", MenuHandler)
-ViewMenuTabMenu.Add("2nd Tab`tCtrl+Numpad 2", MenuHandler)
-ViewMenuTabMenu.Add("3rd Tab`tCtrl+Numpad 3", MenuHandler)
-ViewMenuTabMenu.Add("4th Tab`tCtrl+Numpad 4", MenuHandler)
-ViewMenuTabMenu.Add("5th Tab`tCtrl+Numpad 5", MenuHandler)
-ViewMenuTabMenu.Add("6th Tab`tCtrl+Numpad 6", MenuHandler)
-ViewMenuTabMenu.Add("7th Tab`tCtrl+Numpad 7", MenuHandler)
-ViewMenuTabMenu.Add("8th Tab`tCtrl+Numpad 8", MenuHandler)
-ViewMenuTabMenu.Add("9th Tab`tCtrl+Numpad 9", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Next Tab`tCtrl+Page down", MenuHandler)
-ViewMenuTabMenu.Add("Previous Tab`tCtrl+Page up", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Move Tab Forward`tCtrl+Shift+Page down", MenuHandler)
-ViewMenuTabMenu.Add("Move Tab Backward`tCtrl+Shift+Page up", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Apply Color 1", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 2", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 3", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 4", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 5", MenuHandler)
-ViewMenuTabMenu.Add("Remove Color", MenuHandler)
-ViewMenuFoldLevelMenu := Menu()
-ViewMenuFoldLevelMenu.Add("1`tAlt+1", MenuHandler)
-ViewMenuFoldLevelMenu.Add("2`tAlt+2", MenuHandler)
-ViewMenuFoldLevelMenu.Add("3`tAlt+3", MenuHandler)
-ViewMenuFoldLevelMenu.Add("4`tAlt+4", MenuHandler)
-ViewMenuFoldLevelMenu.Add("5`tAlt+5", MenuHandler)
-ViewMenuFoldLevelMenu.Add("6`tAlt+6", MenuHandler)
-ViewMenuFoldLevelMenu.Add("7`tAlt+7", MenuHandler)
-ViewMenuFoldLevelMenu.Add("8`tAlt+8", MenuHandler)
-ViewMenuUnfoldLevelMenu := Menu()
-ViewMenuUnfoldLevelMenu.Add("1`tAlt+Shift+1", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("2`tAlt+Shift+2", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("3`tAlt+Shift+3", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("4`tAlt+Shift+4", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("5`tAlt+Shift+5", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("6`tAlt+Shift+6", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("7`tAlt+Shift+7", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("8`tAlt+Shift+8", MenuHandler)
-ViewMenuProjectPanelsMenu := Menu()
-ViewMenuProjectPanelsMenu.Add("Project Panel 1", MenuHandler)
-ViewMenuProjectPanelsMenu.Add("Project Panel 2", MenuHandler)
-ViewMenuProjectPanelsMenu.Add("Project Panel 3", MenuHandler)
-ViewMenu := Menu()
-ViewMenu.Add("Always on Top", MenuHandler)
-ViewMenu.Add("Toggle Full Screen Mode`tF11", MenuHandler)
-ViewMenu.Add("Post-It`tF12", MenuHandler)
-ViewMenu.Add("Distraction Free Mode", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("View Current File in", ViewMenuViewCurrentFileinMenu)
-ViewMenu.Add()
-ViewMenu.Add("Show Symbol", ViewMenuShowSymbolMenu)
-ViewMenu.Add("Zoom", ViewMenuZoomMenu)
-ViewMenu.Add("Move/Clone Current Document", ViewMenuMoveCloneCurrentDocumentMenu)
-ViewMenu.Add("Tab", ViewMenuTabMenu)
-ViewMenu.Add("Word wrap", MenuHandler)
-ViewMenu.Add("Focus on Another View`tF8", MenuHandler)
-ViewMenu.Add("Hide Lines`tAlt+H", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Fold All`tAlt+0", MenuHandler)
-ViewMenu.Add("Unfold All`tAlt+Shift+0", MenuHandler)
-ViewMenu.Add("Fold Current Level`tCtrl+Alt+F", MenuHandler)
-ViewMenu.Add("Unfold Current Level`tCtrl+Alt+Shift+F", MenuHandler)
-ViewMenu.Add("Fold Level", ViewMenuFoldLevelMenu)
-ViewMenu.Add("Unfold Level", ViewMenuUnfoldLevelMenu)
-ViewMenu.Add()
-ViewMenu.Add("Summary...", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Project Panels", ViewMenuProjectPanelsMenu)
-ViewMenu.Add("Folder as Workspace", MenuHandler)
-ViewMenu.Add("Document Map", MenuHandler)
-ViewMenu.Add("Document List", MenuHandler)
-ViewMenu.Add("Function List", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Synchronize Vertical Scrolling", MenuHandler)
-ViewMenu.Add("Synchronize Horizontal Scrolling", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Text Direction RTL`tCtrl+Alt+R", MenuHandler)
-ViewMenu.Add("Text Direction LTR`tCtrl+Alt+L", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Monitoring (tail -f)", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu := Menu()
-EncodingMenuCharactersetsMenuArabicMenu.Add("ISO 8859-6", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu.Add("OEM 720", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu.Add("Windows-1256", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu := Menu()
-EncodingMenuCharactersetsMenuBalticMenu.Add("ISO 8859-4", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("ISO 8859-13", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("OEM 775", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("Windows-1257", MenuHandler)
-EncodingMenuCharactersetsMenuCelticMenu := Menu()
-EncodingMenuCharactersetsMenuCelticMenu.Add("ISO 8859-14", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu := Menu()
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("ISO 8859-5", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("KOI8-R", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("KOI8-U", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("Macintosh", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("OEM 855", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("OEM 866", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("Windows-1251", MenuHandler)
-EncodingMenuCharactersetsMenuCentralEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuCentralEuropeanMenu.Add("OEM 852", MenuHandler)
-EncodingMenuCharactersetsMenuCentralEuropeanMenu.Add("Windows-1250", MenuHandler)
-EncodingMenuCharactersetsMenuChineseMenu := Menu()
-EncodingMenuCharactersetsMenuChineseMenu.Add("Big5 (Traditional)", MenuHandler)
-EncodingMenuCharactersetsMenuChineseMenu.Add("GB2312 (Simplified)", MenuHandler)
-EncodingMenuCharactersetsMenuEasternEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuEasternEuropeanMenu.Add("ISO 8859-2", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu := Menu()
-EncodingMenuCharactersetsMenuGreekMenu.Add("ISO 8859-7", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("OEM 737", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("OEM 869", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("Windows-1253", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu := Menu()
-EncodingMenuCharactersetsMenuHebrewMenu.Add("ISO 8859-8", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu.Add("OEM 862", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu.Add("Windows-1255", MenuHandler)
-EncodingMenuCharactersetsMenuJapaneseMenu := Menu()
-EncodingMenuCharactersetsMenuJapaneseMenu.Add("Shift-JIS", MenuHandler)
-EncodingMenuCharactersetsMenuKoreanMenu := Menu()
-EncodingMenuCharactersetsMenuKoreanMenu.Add("Windows 949", MenuHandler)
-EncodingMenuCharactersetsMenuKoreanMenu.Add("EUC-KR", MenuHandler)
-EncodingMenuCharactersetsMenuNorthEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuNorthEuropeanMenu.Add("OEM 861 : Icelandic", MenuHandler)
-EncodingMenuCharactersetsMenuNorthEuropeanMenu.Add("OEM 865 : Nordic", MenuHandler)
-EncodingMenuCharactersetsMenuThaiMenu := Menu()
-EncodingMenuCharactersetsMenuThaiMenu.Add("TIS-620", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu := Menu()
-EncodingMenuCharactersetsMenuTurkishMenu.Add("ISO 8859-3", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("ISO 8859-9", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("OEM 857", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("Windows-1254", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("ISO 8859-1", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("ISO 8859-15", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 850", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 858", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 860 : Portuguese", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 863 : French", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM-US", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("Windows-1252", MenuHandler)
-EncodingMenuCharactersetsMenuVietnameseMenu := Menu()
-EncodingMenuCharactersetsMenuVietnameseMenu.Add("Windows-1258", MenuHandler)
-EncodingMenuCharactersetsMenu := Menu()
-EncodingMenuCharactersetsMenu.Add("Arabic", EncodingMenuCharactersetsMenuArabicMenu)
-EncodingMenuCharactersetsMenu.Add("Baltic", EncodingMenuCharactersetsMenuBalticMenu)
-EncodingMenuCharactersetsMenu.Add("Celtic", EncodingMenuCharactersetsMenuCelticMenu)
-EncodingMenuCharactersetsMenu.Add("Cyrillic", EncodingMenuCharactersetsMenuCyrillicMenu)
-EncodingMenuCharactersetsMenu.Add("Central European", EncodingMenuCharactersetsMenuCentralEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Chinese", EncodingMenuCharactersetsMenuChineseMenu)
-EncodingMenuCharactersetsMenu.Add("Eastern European", EncodingMenuCharactersetsMenuEasternEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Greek", EncodingMenuCharactersetsMenuGreekMenu)
-EncodingMenuCharactersetsMenu.Add("Hebrew", EncodingMenuCharactersetsMenuHebrewMenu)
-EncodingMenuCharactersetsMenu.Add("Japanese", EncodingMenuCharactersetsMenuJapaneseMenu)
-EncodingMenuCharactersetsMenu.Add("Korean", EncodingMenuCharactersetsMenuKoreanMenu)
-EncodingMenuCharactersetsMenu.Add("North European", EncodingMenuCharactersetsMenuNorthEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Thai", EncodingMenuCharactersetsMenuThaiMenu)
-EncodingMenuCharactersetsMenu.Add("Turkish", EncodingMenuCharactersetsMenuTurkishMenu)
-EncodingMenuCharactersetsMenu.Add("Western European", EncodingMenuCharactersetsMenuWesternEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Vietnamese", EncodingMenuCharactersetsMenuVietnameseMenu)
-EncodingMenu := Menu()
-EncodingMenu.Add("ANSI", MenuHandler)
-EncodingMenu.Add("UTF-8", MenuHandler)
-EncodingMenu.Add("UTF-8-BOM", MenuHandler)
-EncodingMenu.Add("UTF-16 BE BOM", MenuHandler)
-EncodingMenu.Add("UTF-16 LE BOM", MenuHandler)
-EncodingMenu.Add("Character sets", EncodingMenuCharactersetsMenu)
-EncodingMenu.Add()
-EncodingMenu.Add("Convert to ANSI", MenuHandler)
-EncodingMenu.Add("Convert to UTF-8", MenuHandler)
-EncodingMenu.Add("Convert to UTF-8-BOM", MenuHandler)
-EncodingMenu.Add("Convert to UTF-16 BE BOM", MenuHandler)
-EncodingMenu.Add("Convert to UTF-16 LE BOM", MenuHandler)
-LanguageMenuAMenu := Menu()
-LanguageMenuAMenu.Add("ActionScript", MenuHandler)
-LanguageMenuAMenu.Add("Ada", MenuHandler)
-LanguageMenuAMenu.Add("ASN.1", MenuHandler)
-LanguageMenuAMenu.Add("ASP", MenuHandler)
-LanguageMenuAMenu.Add("Assembly", MenuHandler)
-LanguageMenuAMenu.Add("AutoIt", MenuHandler)
-LanguageMenuAMenu.Add("AviSynth", MenuHandler)
-LanguageMenuBMenu := Menu()
-LanguageMenuBMenu.Add("BaanC", MenuHandler)
-LanguageMenuBMenu.Add("Batch", MenuHandler)
-LanguageMenuBMenu.Add("Blitzbasic", MenuHandler)
-LanguageMenuCMenu := Menu()
-LanguageMenuCMenu.Add("C", MenuHandler)
-LanguageMenuCMenu.Add("C#", MenuHandler)
-LanguageMenuCMenu.Add("C++", MenuHandler)
-LanguageMenuCMenu.Add("Caml", MenuHandler)
-LanguageMenuCMenu.Add("CMake", MenuHandler)
-LanguageMenuCMenu.Add("COBOL", MenuHandler)
-LanguageMenuCMenu.Add("CSound", MenuHandler)
-LanguageMenuCMenu.Add("CoffeeScript", MenuHandler)
-LanguageMenuCMenu.Add("CSS", MenuHandler)
-LanguageMenuDMenu := Menu()
-LanguageMenuDMenu.Add("D", MenuHandler)
-LanguageMenuDMenu.Add("Diff", MenuHandler)
-LanguageMenuEMenu := Menu()
-LanguageMenuEMenu.Add("Erlang", MenuHandler)
-LanguageMenuEMenu.Add("ESCRIPT", MenuHandler)
-LanguageMenuFMenu := Menu()
-LanguageMenuFMenu.Add("Forth", MenuHandler)
-LanguageMenuFMenu.Add("Fortran (free form)", MenuHandler)
-LanguageMenuFMenu.Add("Fortran (fixed form)", MenuHandler)
-LanguageMenuFMenu.Add("Freebasic", MenuHandler)
-LanguageMenuGMenu := Menu()
-LanguageMenuGMenu.Add("GDScript", MenuHandler)
-LanguageMenuGMenu.Add("Gui4Cli", MenuHandler)
-LanguageMenuHMenu := Menu()
-LanguageMenuHMenu.Add("Haskell", MenuHandler)
-LanguageMenuHMenu.Add("Hollywood", MenuHandler)
-LanguageMenuHMenu.Add("HTML", MenuHandler)
-LanguageMenuIMenu := Menu()
-LanguageMenuIMenu.Add("INI file", MenuHandler)
-LanguageMenuIMenu.Add("Inno Setup", MenuHandler)
-LanguageMenuIMenu.Add("Intel HEX", MenuHandler)
-LanguageMenuJMenu := Menu()
-LanguageMenuJMenu.Add("Java", MenuHandler)
-LanguageMenuJMenu.Add("JavaScript", MenuHandler)
-LanguageMenuJMenu.Add("JSON", MenuHandler)
-LanguageMenuJMenu.Add("JSON5", MenuHandler)
-LanguageMenuJMenu.Add("JSP", MenuHandler)
-LanguageMenuLMenu := Menu()
-LanguageMenuLMenu.Add("LaTeX", MenuHandler)
-LanguageMenuLMenu.Add("LISP", MenuHandler)
-LanguageMenuLMenu.Add("Lua", MenuHandler)
-LanguageMenuMMenu := Menu()
-LanguageMenuMMenu.Add("Makefile", MenuHandler)
-LanguageMenuMMenu.Add("Matlab", MenuHandler)
-LanguageMenuMMenu.Add("Microsoft Transact-SQL", MenuHandler)
-LanguageMenuMMenu.Add("MMIXAL", MenuHandler)
-LanguageMenuMMenu.Add("MS-DOS Style", MenuHandler)
-LanguageMenuNMenu := Menu()
-LanguageMenuNMenu.Add("Nim", MenuHandler)
-LanguageMenuNMenu.Add("Nncrontab", MenuHandler)
-LanguageMenuNMenu.Add("NSIS", MenuHandler)
-LanguageMenuOMenu := Menu()
-LanguageMenuOMenu.Add("Objective-C", MenuHandler)
-LanguageMenuOMenu.Add("OScript", MenuHandler)
-LanguageMenuPMenu := Menu()
-LanguageMenuPMenu.Add("Pascal", MenuHandler)
-LanguageMenuPMenu.Add("Perl", MenuHandler)
-LanguageMenuPMenu.Add("PHP", MenuHandler)
-LanguageMenuPMenu.Add("PostScript", MenuHandler)
-LanguageMenuPMenu.Add("PowerShell", MenuHandler)
-LanguageMenuPMenu.Add("Properties", MenuHandler)
-LanguageMenuPMenu.Add("Purebasic", MenuHandler)
-LanguageMenuPMenu.Add("Python", MenuHandler)
-LanguageMenuRMenu := Menu()
-LanguageMenuRMenu.Add("R", MenuHandler)
-LanguageMenuRMenu.Add("REBOL", MenuHandler)
-LanguageMenuRMenu.Add("Registry", MenuHandler)
-LanguageMenuRMenu.Add("Resource file", MenuHandler)
-LanguageMenuRMenu.Add("Ruby", MenuHandler)
-LanguageMenuRMenu.Add("Rust", MenuHandler)
-LanguageMenuSMenu := Menu()
-LanguageMenuSMenu.Add("Shell", MenuHandler)
-LanguageMenuSMenu.Add("Scheme", MenuHandler)
-LanguageMenuSMenu.Add("Smalltalk", MenuHandler)
-LanguageMenuSMenu.Add("Spice", MenuHandler)
-LanguageMenuSMenu.Add("SQL", MenuHandler)
-LanguageMenuSMenu.Add("Swift", MenuHandler)
-LanguageMenuSMenu.Add("S-Record", MenuHandler)
-LanguageMenuTMenu := Menu()
-LanguageMenuTMenu.Add("TCL", MenuHandler)
-LanguageMenuTMenu.Add("Tektronix extended HEX", MenuHandler)
-LanguageMenuTMenu.Add("TeX", MenuHandler)
-LanguageMenuTMenu.Add("txt2tags", MenuHandler)
-LanguageMenuTMenu.Add("TypeScript", MenuHandler)
-LanguageMenuVMenu := Menu()
-LanguageMenuVMenu.Add("Visual Basic", MenuHandler)
-LanguageMenuVMenu.Add("Visual Prolog", MenuHandler)
-LanguageMenuVMenu.Add("VHDL", MenuHandler)
-LanguageMenuVMenu.Add("Verilog", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu := Menu()
-LanguageMenuUserDefinedLanguageMenu.Add("Define your language...", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu.Add("Open User Defined Language folder...", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu.Add("Notepad++ User Defined Languages Collection", MenuHandler)
-LanguageMenu := Menu()
-LanguageMenu.Add("None (Normal Text)", MenuHandler)
-LanguageMenu.Add()
-LanguageMenu.Add("A", LanguageMenuAMenu)
-LanguageMenu.Add("B", LanguageMenuBMenu)
-LanguageMenu.Add("C", LanguageMenuCMenu)
-LanguageMenu.Add("D", LanguageMenuDMenu)
-LanguageMenu.Add("E", LanguageMenuEMenu)
-LanguageMenu.Add("F", LanguageMenuFMenu)
-LanguageMenu.Add("G", LanguageMenuGMenu)
-LanguageMenu.Add("H", LanguageMenuHMenu)
-LanguageMenu.Add("I", LanguageMenuIMenu)
-LanguageMenu.Add("J", LanguageMenuJMenu)
-LanguageMenu.Add("KIXtart", MenuHandler)
-LanguageMenu.Add("L", LanguageMenuLMenu)
-LanguageMenu.Add("M", LanguageMenuMMenu)
-LanguageMenu.Add("N", LanguageMenuNMenu)
-LanguageMenu.Add("O", LanguageMenuOMenu)
-LanguageMenu.Add("P", LanguageMenuPMenu)
-LanguageMenu.Add("R", LanguageMenuRMenu)
-LanguageMenu.Add("S", LanguageMenuSMenu)
-LanguageMenu.Add("T", LanguageMenuTMenu)
-LanguageMenu.Add("V", LanguageMenuVMenu)
-LanguageMenu.Add("XML", MenuHandler)
-LanguageMenu.Add("YAML", MenuHandler)
-LanguageMenu.Add()
-LanguageMenu.Add("User Defined Language", LanguageMenuUserDefinedLanguageMenu)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("Autohotkey", MenuHandler)
-LanguageMenu.Add("a", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("Markdown (preinstalled)", MenuHandler)
-LanguageMenu.Add("Markdown (preinstalled dark mode)", MenuHandler)
-LanguageMenu.Add("User-Defined", MenuHandler)
-SettingsMenuImportMenu := Menu()
-SettingsMenuImportMenu.Add("Import plugin(s)...", MenuHandler)
-SettingsMenuImportMenu.Add("Import style theme(s)...", MenuHandler)
-SettingsMenu := Menu()
-SettingsMenu.Add("Preferences...", MenuHandler)
-SettingsMenu.Add("Style Configurator...", MenuHandler)
-SettingsMenu.Add("Shortcut Mapper...", MenuHandler)
-SettingsMenu.Add()
-SettingsMenu.Add("Import", SettingsMenuImportMenu)
-SettingsMenu.Add()
-SettingsMenu.Add("Edit Popup ContextMenu", MenuHandler)
-ToolsMenuMD5Menu := Menu()
-ToolsMenuMD5Menu.Add("Generate...", MenuHandler)
-ToolsMenuMD5Menu.Add("Generate from files...", MenuHandler)
-ToolsMenuMD5Menu.Add("Generate from selection into A_Clipboard", MenuHandler)
-ToolsMenuSHA256Menu := Menu()
-ToolsMenuSHA256Menu.Add("Generate...", MenuHandler)
-ToolsMenuSHA256Menu.Add("Generate from files...", MenuHandler)
-ToolsMenuSHA256Menu.Add("Generate from selection into A_Clipboard", MenuHandler)
-ToolsMenu := Menu()
-ToolsMenu.Add("MD5", ToolsMenuMD5Menu)
-ToolsMenu.Add("SHA-256", ToolsMenuSHA256Menu)
-MacroMenu := Menu()
-MacroMenu.Add("Start Re&cording", MenuHandler)
-MacroMenu.Add("S&top Recording", MenuHandler)
-MacroMenu.Add("&Playback`tCtrl+Shift+P", MenuHandler)
-MacroMenu.Add("&Save Current Recorded Macro...", MenuHandler)
-MacroMenu.Add("&Run a Macro Multiple Times...", MenuHandler)
-MacroMenu.Add("ERROR", MenuHandler)
-MacroMenu.Add("Trim Trailing Space and Save`tAlt+Shift+S", MenuHandler)
-MacroMenu.Add()
-MacroMenu.Add("Modify Shortcut/Delete Macro...", MenuHandler)
-RunMenu := Menu()
-RunMenu.Add("&Run...`tF5", MenuHandler)
-RunMenu.Add("ERROR", MenuHandler)
-RunMenu.Add("Get PHP help`tAlt+F1", MenuHandler)
-RunMenu.Add("Wikipedia Search`tAlt+F3", MenuHandler)
-RunMenu.Add("Open selected file path in new instance`tAlt+F6", MenuHandler)
-RunMenu.Add()
-RunMenu.Add("Modify Shortcut/Delete Command...", MenuHandler)
-PluginsMenuDarkThemeMenu := Menu()
-PluginsMenuDarkThemeMenu.Add("Enable", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Block ClearType", MenuHandler)
-PluginsMenuDarkThemeMenu.Add()
-PluginsMenuDarkThemeMenu.Add("Type: InverseRGB", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: InverseY", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: Grayscale", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: HSV Ramp*", MenuHandler)
-PluginsMenuDarkThemeMenu.Add()
-PluginsMenuDarkThemeMenu.Add("About", MenuHandler)
-PluginsMenuJsonToolsMenu := Menu()
-PluginsMenuJsonToolsMenu.Add("&Documentation", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Pretty-print current JSON file`tCtrl+Alt+Shift+P", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Compress current JSON file`tCtrl+Alt+Shift+C", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Path to current &line`tCtrl+Alt+Shift+L", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("Open &JSON tree viewer`tCtrl+Alt+Shift+J", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Get JSON from files and APIs`tCtrl+Alt+Shift+G", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Settings`tCtrl+Alt+Shift+S", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("Parse JSON Li&nes document", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Array to JSON Lines", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("&Validate JSON against JSON schema", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Generate sc&hema from JSON", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Generate &random JSON from schema", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("JSON to &YAML", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Run &tests", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("A&bout", MenuHandler)
-PluginsMenuMIMEToolsMenu := Menu()
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode with padding", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode with Unix EOL", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode by line", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode strict", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode by line", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("Quoted-printable Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Quoted-printable Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("URL Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Full URL Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("URL Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("SAML Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("About", MenuHandler)
-PluginsMenuConverterMenu := Menu()
-PluginsMenuConverterMenu.Add("ASCII -> HEX", MenuHandler)
-PluginsMenuConverterMenu.Add("HEX -> ASCII", MenuHandler)
-PluginsMenuConverterMenu.Add()
-PluginsMenuConverterMenu.Add("Conversion Panel", MenuHandler)
-PluginsMenuConverterMenu.Add()
-PluginsMenuConverterMenu.Add("Edit Configuration File", MenuHandler)
-PluginsMenuConverterMenu.Add("About", MenuHandler)
-PluginsMenuNppExportMenu := Menu()
-PluginsMenuNppExportMenu.Add("&Export to RTF", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Export to HTML", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy RTF to A_Clipboard", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy HTML to A_Clipboard", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy all formats to A_Clipboard", MenuHandler)
-PluginsMenuJSONViewerMenu := Menu()
-PluginsMenuJSONViewerMenu.Add("Show &JSON Viewer`tCtrl+Alt+Shift+J", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&Format JSON`tCtrl+Alt+Shift+M", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&Compress JSON`tCtrl+Alt+Shift+C", MenuHandler)
-PluginsMenuJSONViewerMenu.Add()
-PluginsMenuJSONViewerMenu.Add("&Setting", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&About", MenuHandler)
-PluginsMenuPyNPPMenu := Menu()
-PluginsMenuPyNPPMenu.Add("Run file in Python`tCtrl+Alt+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Run file in Python Interactive`tAlt+Shift+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Run file in PythonW`tCtrl+Alt+Shift+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Debug the file (PDB)", MenuHandler)
-PluginsMenuPyNPPMenu.Add()
-PluginsMenuPyNPPMenu.Add("Options", MenuHandler)
-PluginsMenuPyNPPMenu.Add("About PyNPP", MenuHandler)
-PluginsMenuPythonIndentMenu := Menu()
-PluginsMenuPythonIndentMenu.Add("Enable", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu := Menu()
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("BracketHighlighter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("ColumnLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("CTags Based Autocompletion", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Disable Virtual Space", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Enable Virtual Space", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("EnhancedPythonLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Event Handler Demo", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Formatter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("GotoLineCol", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("GotoLineCol_Barebones", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("HideLines", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("InsertRuler", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("LogfileLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("MultiEdit", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Multiples_SR", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Python Regex Replacements", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("RegexTester", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Remove and Modify selected lines", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("ReplaceDefaultReplaceDialog", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Sorter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("StartWithLocalPython", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Swap2Words", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenu := Menu()
-PluginsMenuPythonScriptMenuScriptsMenu.Add("Samples", PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu)
-PluginsMenuPythonScriptMenuScriptsMenu.Add("startup", MenuHandler)
-PluginsMenuPythonScriptMenu := Menu()
-PluginsMenuPythonScriptMenu.Add("New Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("Show Console", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Stop Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Run Previous Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("Scripts", PluginsMenuPythonScriptMenuScriptsMenu)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Configuration...", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Context-Help", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("About", MenuHandler)
-PluginsMenu := Menu()
-PluginsMenu.Add("Dark Theme", PluginsMenuDarkThemeMenu)
-PluginsMenu.Add("JsonTools", PluginsMenuJsonToolsMenu)
-PluginsMenu.Add("MIME Tools", PluginsMenuMIMEToolsMenu)
-PluginsMenu.Add("Converter", PluginsMenuConverterMenu)
-PluginsMenu.Add("NppExport", PluginsMenuNppExportMenu)
-PluginsMenu.Add("JSON Viewer", PluginsMenuJSONViewerMenu)
-PluginsMenu.Add("PyNPP", PluginsMenuPyNPPMenu)
-PluginsMenu.Add("Python Indent", PluginsMenuPythonIndentMenu)
-PluginsMenu.Add("Python Script", PluginsMenuPythonScriptMenu)
-PluginsMenu.Add()
-PluginsMenu.Add("Plugins Admin...", MenuHandler)
-PluginsMenu.Add()
-PluginsMenu.Add("Open Plugins Folder...", MenuHandler)
-WindowMenuSortByMenu := Menu()
-WindowMenuSortByMenu.Add("Name A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Name Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Path A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Path Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Type A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Type Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Size Smaller to Larger", MenuHandler)
-WindowMenuSortByMenu.Add("Size Larger to Smaller", MenuHandler)
-WindowMenu := Menu()
-WindowMenu.Add("Sort By", WindowMenuSortByMenu)
-WindowMenu.Add("&Windows...", MenuHandler)
-WindowMenu.Add()
-WindowMenu.Add("Recent Window", MenuHandler)
-Men := Menu()
-Men.Add("Command Line Arguments...", MenuHandler)
-Men.Add()
-Men.Add("Notepad++ Home", MenuHandler)
-Men.Add("Notepad++ Project Page", MenuHandler)
-Men.Add("Notepad++ Online User Manual", MenuHandler)
-Men.Add("Notepad++ Community (Forum)", MenuHandler)
-Men.Add()
-Men.Add("Update Notepad++", MenuHandler)
-Men.Add("Set Updater Proxy...", MenuHandler)
-Men.Add()
-Men.Add("Debug Info...", MenuHandler)
-Men.Add("About Notepad++`tF1", MenuHandler)
-Men.Add("Recent Window", MenuHandler)
-MenBars := MenuBar()
-MenBars.Add("&File", FileMenu)
-MenBars.Add("&Edit", EditMenu)
-MenBars.Add("&Search", SearchMenu)
-MenBars.Add("&View", ViewMenu)
-MenBars.Add("E&ncoding", EncodingMenu)
-MenBars.Add("&Language", LanguageMenu)
-MenBars.Add("Se&ttings", SettingsMenu)
-MenBars.Add("T&ools", ToolsMenu)
-MenBars.Add("&Macro", MacroMenu)
-MenBars.Add("&Run", RunMenu)
-MenBars.Add("&Plugins", PluginsMenu)
-MenBars.Add("&Window", WindowMenu)
-MenBars.Add("&?", Menu)
-MenBars.Add("▼", Menu)
-myGui.MenuBar := MenBars
-myGui.Add("Edit", "x2 y51 w1163 h750", "C:\Users\dower\OneDrive\MagicBox-1.0.4 - 1\AutoGUI_ahkv2\Auto-GUI-v2_local\complete_application\returnstatus.txt")
-myGui.Add("UpDown", "x1133 y30 w17 h17 -16")
-SB := myGui.Add("StatusBar", , "Normal text file")
-ogcButton := myGui.Add("Button", "x3 y808 w24 h23", "✕")
-myGui.Add("Text", "x27 y813 w69 h20 +Right", "Find:")
-myGui.Add("Edit", "x98 y810 w263 h20")
-ogcButton := myGui.Add("Button", "x365 y808 w24 h23", "<")
-ogcButton := myGui.Add("Button", "x395 y808 w24 h23", ">")
-myGui.Add("CheckBox", "x435 y811 w150 h20", "Match &case")
-myGui.Add("CheckBox", "x600 y811 w150 h20", "&Highlight all")
-myGui.Add("Text", "x780 y813 w270 h20")
-Tab := myGui.Add("Tab3", "x780 y813 w270 h20", ["Tabindex-ecobeef - Copy (2).html", "TASystemSettings.ini", "PyNuitkaExe.ahk", "setres.py", "TASystemSettings - Copy.ini", "pywebview.py", "hello.py", "index.html", "hello.html", "products.html", "index-ecobeef.html", "index.html", "temp_index.html", "bookclub__.txt", "index.html", "hello.html", "index.html", "python.py", "index.html", "index.html", "py.py", "readlines.py", "readlines.py", "index.html", "ecobeef.css", "dxvk.conf", "dxvk.conf", "Assassin4.ini", "GFXSettings.AC4BFSP.xml", "AC4BFSP_d3d11.log", "d3dx (2022_06_29 21_43_16 UTC).ini", "AcroRd32.exe.cfg", "AllSettings.ini", "apps.json", "output.json", "Untitled (4).ahk", "log_updater_ahk.json", "github.ahk", "AhkHelpMenu.xml", "Demo_Button_Func_Calls.py", "temp.txt", "er.txt", "er.txt", "log_old.txt", "dlsstweaks.ini", "dlsstweaks.log", "Readme.txt", "Hillard Dane - Publishing Python Packages - 2023.txt", "V2GuiCreator.ini", "log_out.txt", "selenium_ahk.py", "button_functions.py", "PySimpleG-venv-Menu.py", "qUINT_rtgi.fx", "openai Chatbot chatgpt 3 template python.txt", "faster_airtable.py", "1.txt", "new_pyscript.html", "output.txt", "key.txt", "dictionary.json", "ERRORS.txt", "ERRORS.txt", "THINGS FOR AN INTERVIEW.txt", "er.txt", "openai Chatbot chatgpt 3 template python - Copy (3).txt", "debug.txt", "openai Chatbot chatgpt 3 template python - Copy (2).txt", "dl.py", "data.txt", "openai Chatbot chatgpt 3 template python - Copy (2) - Copy.txt", "key - Copy (2).txt", "new 1", "key - Copy.txt", "get.txt", "venvMENU_python.ahk", "scons-report.txt", "openai Chatbot chatgpt 3 template python - Copy (2).txt", "setup.py", "main.cpp", "ag_settings.json", "openai Chatbot chatgpt 3 template python - Copy (3) - Copy.txt", "ConsoleApp4.deps.json", "AHK_load.ahk", "file.json", "openai Chatbot chatgpt 3 template python - Copy (3).txt", "Program.cs", "license.txt", "config.json", "UnitySubsystemsManifest.json", "Flask_Web_Development_vtoroe_izdanie_2018.txt", "shutdown_pc.py", "config.json", "kant_prolegomeda_spark-notes.txt", "bookclub.txt", "QuickConvertorV2.ini", "log.txt", "codeHandler.ahk", "log.txt", "bookclub_kant_prolegomeda.txt", "my_commands.bat", "website stuff todo.txt", "response.json", "v2converter.ahk", "ConvertFuncs.ahk", "AutoGUI.ahk", "AutoGUI.ini", "v2converter.ahk", "ConvertFuncs.ahk", "Counter-Strike Global Offensive 2.ahk", "runtime.txt", "temp.txt"])
-Tab.UseTab()
-myGui.Title := "C:\Users\dower\OneDrive\MagicBox-1.0.4 - 1\AutoGUI_ahkv2\Auto-GUI-v2_local\complete_application\temp.txt - Notepad++ (Clone)"
-myGui.Show("w1167 h826")
-Return
-MenuHandler(*) {
-	ToolTip "Click!", 100, 150
-}
-GuiEscape(*){ ; V1toV2: Added bracket
-GuiClose:
-    ExitApp()
-} ; Added bracket in the end
+    ExitApp
