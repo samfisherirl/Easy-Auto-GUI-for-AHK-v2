@@ -1,1 +1,1 @@
-C:\Users\dower\OneDrive\MagicBox-1.0.4 - 1\AutoGUI_ahkv2\Auto-GUI-v2_local\complete_application\returnstatus.txt
+C:\Users\dower\Documents\Auto-GUI-v2\complete_application\returnstatus.txt

@@ -8,7 +8,6 @@
     ; && for loops
     newoutscript := ""
     intxt := FileRead(FNOut)
-    FileMove(FNOut, "temp.txt", 1)
     Loop Parse, intxt, "`n", "`r" {
         if (menuhandle == 0) && InStr(A_LoopField, "MenuHandler"){
             menuhandle := 1
