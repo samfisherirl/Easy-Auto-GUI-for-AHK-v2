@@ -16,7 +16,6 @@ I did very little work, just weaving the two solutions together. All the work wa
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
 
-I did very little work, only merging the two behemouth solutions. 
 
 Update: Live in IDE v2 code works. Example, cloning notepad++ to ahkv2. 
 
