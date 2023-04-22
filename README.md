@@ -1,5 +1,18 @@
 # AutoGUI GUI-Designer GUI-Builder for ahk-v2
-Auto-GUI-v2 credit to Alguimist and his team who built the entire app - https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901 
+
+I'll be adding more details here soon.
+
+Auto-GUI-v2 credit to Alguimist - https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901
+AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
+
+I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
+
+- this runs Easy AutoGUI on ahkv1
+- [now updates in IDE not post-save] Conversion happens when selecting "Save" or "Save as..."
+- function-call converts to v2 with ahkv2converter
+- custom menuhandler, and menubarhandler reduces output error for post-save initial script run
+- autogui has custom code posted in the github
+- works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
 AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 
