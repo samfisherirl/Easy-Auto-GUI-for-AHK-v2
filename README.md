@@ -8,19 +8,16 @@ AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
 
 - this runs Easy AutoGUI on ahkv1
-- [now updates in IDE not post-save] Conversion happens when selecting "Save" or "Save as..."
+- Conversion happens when selecting "Save" or "Save as..." [now updates in IDE not post-save] 
 - function-call converts to v2 with ahkv2converter
 - custom menuhandler, and menubarhandler reduces output error for post-save initial script run
 - autogui has custom code posted in the github
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
-AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
-
-I'll be adding more details here soon. Example, cloning notepad++ to ahkv2. 
 
 I did very little work, only merging the two behemouth solutions. 
 
-Update: Live in IDE v2 code works. 
+Update: Live in IDE v2 code works. Example, cloning notepad++ to ahkv2. 
 
 ![giphy](https://user-images.githubusercontent.com/98753696/233808870-8ae299a7-1c44-48a4-bf4d-7c3fd820c4e4.gif)
 
