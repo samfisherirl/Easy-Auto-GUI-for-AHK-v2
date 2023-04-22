@@ -22,7 +22,8 @@ I did very little work, only merging the two behemouth solutions.
 
 Update: Live in IDE v2 code works. 
 
-![image](https://user-images.githubusercontent.com/98753696/232308834-5af87bbe-f920-4751-9019-44f834910c0b.jpg)
+![giphy](https://user-images.githubusercontent.com/98753696/233808870-8ae299a7-1c44-48a4-bf4d-7c3fd820c4e4.gif)
+
 
 
 - Instructions: Launch from Launch_AutoGUI
