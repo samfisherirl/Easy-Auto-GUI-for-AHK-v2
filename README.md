@@ -8,6 +8,7 @@ AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 
 I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
 
+# How it works 
 - this runs Easy AutoGUI on ahkv1
 - Conversion happens when selecting "Save" or "Save as..." [now updates in IDE not post-save] 
 - function-call converts to v2 with ahkv2converter
