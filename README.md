@@ -1,4 +1,4 @@
-# AutoGUI GUI-Designer GUI-Builder for ahk-v2
+# modified version of 'Easy AutoGUI' GUI-Designer GUI-Builder for ahk-v2
 
 I'll be adding more details here soon.
 
