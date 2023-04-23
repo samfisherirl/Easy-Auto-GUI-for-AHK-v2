@@ -11,9 +11,8 @@ I did very little work, just weaving the two solutions together. All the work wa
 # How it works 
 - this runs Easy AutoGUI on ahkv1
 - Conversion happens when selecting "Save" or "Save as..." [now updates in IDE not post-save] 
-- function-call converts to v2 with ahkv2converter
-- custom menuhandler, and menubarhandler reduces output error for post-save initial script run
-- autogui has custom code posted in the github
+- function-call converts to v2 with ahkv2converter 
+- autogui has custom code posted in the changes_of_note folder
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
 
