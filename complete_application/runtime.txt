@@ -1,16 +1,23 @@
-; Define the PowerShell script as a string variable
-ps_script := 
-(
-"Start-Sleep -Second 10
-$progressPreference = 'silentlyContinue'
-$latestWingetMsixBundleUri = $(Invoke-RestMethod https://api.github.com/repos/microsoft/winget-cli/releases/latest).assets.browser_download_url | Where-Object {$_.EndsWith(`".msixbundle`")}
-$latestWingetMsixBundle = $latestWingetMsixBundleUri.Split(`"/`")[-1]
-Write-Information `"Downloading winget to artifacts directory...`"
-Invoke-WebRequest -Uri $latestWingetMsixBundleUri -OutFile `"./$latestWingetMsixBundle`"
-Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
-Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
-Add-AppxPackage $latestWingetMsixBundle"
-)
 
-; Use the Run command to execute the PowerShell script
-Run '("powershell.exe" ps_script)'
+;AutoGUI 2.5.8 
+;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
+;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
+
+FileMenu := Menu()
+FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
+FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
+FileMenu.Icon("&Open...`tCtrl+O", "shell32.dll", "4")
+MenuBar_Storage := MenuBar()
+MenuBar_Storage.Add("&File", FileMenu)
+myGui := Gui()
+myGui.MenuBar := MenuBar_Storage
+myGui.Title := "Window"
+myGui.Show("w620 h400")
+Return
+MenuHandler(*) {
+	ToolTip "Click!", 100, 150
+}
+GuiEscape(*){ ; V1toV2: Added bracket
+GuiClose:
+    ExitApp()
+} ; Added bracket in the end

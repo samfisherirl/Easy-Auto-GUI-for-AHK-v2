@@ -21,17 +21,3 @@ GuiEscape(*){ ; V1toV2: Added bracket
 GuiClose:
     ExitApp()
 } ; Added bracket in the end
-Menu FileMenu, Add, &Open...`tCtrl+O, MenuHandler
-Menu FileMenu, Icon, &Open...`tCtrl+O, shell32.dll, 4
-Menu MenuBar, Add, &File, :FileMenu
-Gui Menu, MenuBar
-
-Gui Show, w620 h400, Window
-Return
-
-MenuHandler:
-Return
-
-GuiEscape:
-GuiClose:
-    ExitApp
