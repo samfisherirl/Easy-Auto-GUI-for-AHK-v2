@@ -1,20 +1,20 @@
-﻿add_menuhandler(FNOut) ;outscript_path
+﻿add_menuHandler(FNOut) ;outscript_path
 {
-    menuhandle := 0 ; => these denote true[1]/false[0]
+    menuHandle := 0 ; => these denote true[1]/false[0]
     GuiEsc := 0 ; => for various bad output code, such as
     FindMenu := 0 ; => once MenuBar := Menubar() is found FindMenu:= 1;
-    FindMenuBar := 0 ; => Remove Function and continue loop until `}` is found
-    MenuHanldeCount := 0
+    FindMenuBar := 0 ; => 
+    MenuHandleCount := 0
     brackets := 0
-    RemoveFunction := 0
-    ; this will all get removed with methods
-    ; && for loops
-    newoutscript := ""
+    RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
+    new_outscript := ""
+    
     intxt := FileRead(FNOut)
     FileMove(FNOut, A_ScriptDir "\complete_application\temp.txt", 1)
+    
     Loop Parse, intxt, "`n", "`r" {
         if (A_Index == 1) {
-            newoutscript := "`n" ";AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
+            new_outscript := "`n" ";AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
         if (RemoveFunction == 1) {
             if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "{") {
@@ -36,19 +36,19 @@
                 continue
             }
         }
-        if (menuhandle == 0) && MenuHanldeCount < 1 && InStr(A_LoopField, "MenuHandler") {
-            menuhandle := 1
-            newoutscript .= A_LoopField . "`n"
+        if (menuHandle == 0) && MenuHandleCount < 1 && InStr(A_LoopField, "MenuHandler") {
+            menuHandle := 1
+            new_outscript .= A_LoopField . "`n"
         }
         if InStr(A_LoopField, "MenuHandler(") {
-            MenuHanldeCount += 1
+            MenuHandleCount += 1
             RemoveFunction := 1
         }
-        else if (menuhandle == 1) && MenuHanldeCount < 2 && InStr(A_LoopField, "GuiEscape(*)") {
-            newoutscript .= "MenuHandler(*) {`n`tToolTip `"Click!`", 100, 150`n}`n" A_LoopField
+        else if (menuHandle == 1) && MenuHandleCount < 2 && InStr(A_LoopField, "GuiEscape(*)") {
+            new_outscript .= "MenuHandler(*) {`n`tToolTip `"Click!`", 100, 150`n}`n" A_LoopField
             GuiEsc := 1
         }
-        else if (menuhandle == 1) && (MenuHanldeCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
+        else if (menuHandle == 1) && (MenuHandleCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
             RemoveFunction := 1
             continue
         }
@@ -57,39 +57,39 @@
         }
         ; else if InStr(LTrim(A_LoopField), "MenuBar.Add(") && a == 1 {
         ;     if StrSplit(LTrim(A_LoopField), "(")[1] == "MenuBar.Add" {
-        ;         newoutscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenBar.Add(")
-        ;         newoutscript .= "`n"
+        ;         new_outscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenBar.Add(")
+        ;         new_outscript .= "`n"
         ;     }
         ; ; }
         else if (LTrim(A_LoopField) == "Menu := Menu()") {
-            newoutscript .= StrReplace(A_LoopField, "Menu := Menu()", "Menu_Storage := Menu()")
-            newoutscript .= "`n"
+            new_outscript .= StrReplace(A_LoopField, "Menu := Menu()", "Menu_Storage := Menu()")
+            new_outscript .= "`n"
             FindMenu := 1
         }
         else if (FindMenu == 1 && InStr(LTrim(A_LoopField), "Menu.Add(")) {
             if (StrSplit(LTrim(A_LoopField), "(")[1] == "Menu.Add") {
-                newoutscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(")
-                newoutscript .= "`n"
+                new_outscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(")
+                new_outscript .= "`n"
             }
         }
         else if (LTrim(A_LoopField) == "MenuBar := Menu()") {
-            newoutscript .= StrReplace(A_LoopField, "MenuBar := Menu()", "MenuBar_Storage := MenuBar()")
-            newoutscript .= "`n"
+            new_outscript .= StrReplace(A_LoopField, "MenuBar := Menu()", "MenuBar_Storage := MenuBar()")
+            new_outscript .= "`n"
             FindMenuBar := 1
         }
         else if (FindMenuBar == 1) && InStr(LTrim(A_LoopField), "MenuBar.Add(") {
             if (StrSplit(LTrim(A_LoopField), "(")[1] == "MenuBar.Add") {
-                newoutscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenuBar_Storage.Add(")
-                newoutscript .= "`n"
+                new_outscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenuBar_Storage.Add(")
+                new_outscript .= "`n"
             }
         }
         else if InStr(A_LoopField, ".MenuToolbar := MenuBar") {
-            newoutscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
-            newoutscript .= "`n"
+            new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
+            new_outscript .= "`n"
         }
         else {
-            newoutscript .= A_LoopField . "`n"
+            new_outscript .= A_LoopField . "`n"
         }
     }
-    FileAppend(newoutscript, FNOut)
+    FileAppend(new_outscript, FNOut)
 }
