@@ -14,7 +14,7 @@
     
     Loop Parse, intxt, "`n", "`r" {
         if (A_Index == 1) {
-            new_outscript := "`n" ";AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
+            new_outscript := "`n" ";AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
         if (RemoveFunction == 1) {
             if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "{") {

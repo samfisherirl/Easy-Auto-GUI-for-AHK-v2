@@ -1,23 +1,19 @@
 
 ;AutoGUI 2.5.8 
-;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
+;Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
-FileMenu := Menu()
-FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
-FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
-FileMenu.Icon("&Open...`tCtrl+O", "shell32.dll", "4")
-MenuBar_Storage := MenuBar()
-MenuBar_Storage.Add("&File", FileMenu)
 myGui := Gui()
-myGui.MenuBar := MenuBar_Storage
+myGui.Add("ComboBox", "x457 y73 w120", ["ComboBox"])
+myGui.Add("DropDownList", "x99 y130 w120", ["DropDownList", "", ""])
+myGui.Add("UpDown", "x59 y169 w28 h1  -16", "1")
+Tab := myGui.Add("Tab3", "x266 y183 w225 h160", ["Tab 1", "Tab 2"])
+Tab.UseTab()
 myGui.Title := "Window"
-myGui.Show("w620 h400")
+myGui.Show("w620 h420")
 Return
-MenuHandler(*) {
-	ToolTip "Click!", 100, 150
-}
-GuiEscape(*){ ; V1toV2: Added bracket
+GuiEscape(*)
+{ ; V1toV2: Added bracket
 GuiClose:
     ExitApp()
 } ; Added bracket in the end

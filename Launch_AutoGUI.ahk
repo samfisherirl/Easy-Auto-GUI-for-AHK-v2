@@ -35,11 +35,16 @@ While ProcessExist(PID) {
                 inscript := tryRead(path_to_convert)
                 if (inscript != "") {
                     FileMove(logs, temps, 1)
+                    try {
                     outscript := Convert(inscript)
                     outfile := FileOpen(path_to_convert, "w", "utf-8")
                     outfile.Write(outscript)
                     outfile.Close()
                     add_menuhandler(path_to_convert)
+                    }
+                    catch {
+                        sleep(200)
+                    }
                     FileAppend(retstat, retstat)
                 }
             }
