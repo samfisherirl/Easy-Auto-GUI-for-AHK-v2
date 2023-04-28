@@ -2,7 +2,7 @@
 
 
 
-/*Certainly! Here's an updated regular expression that will match any string that starts with "Main.New(" followed by any number of characters (including letters, numbers, spaces, and special characters) enclosed in double quotes, and ending with a closing parenthesis:
+/*an updated regular expression that will match any string that starts with "Main.New(" followed by any number of characters (including letters, numbers, spaces, and special characters) enclosed in double quotes, and ending with a closing parenthesis:
 css
 Copy code
 Main\.New\("[^"]*"\)
