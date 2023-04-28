@@ -1,7 +1,7 @@
 ; line 1545
 run_listener(SelectedFile)
 ; line 2834
-; Launch_AutoGUI listens for [Logs := A_ScriptDir "\log.txt"] to exist
+; Launch_AutoGUI listens for [Logs := A_ScriptDir "\log.txt"] to exist, [A_ScriptDir "\complete_application\log.txt"] in Launch_AutoGUI. 
 run_listener(SelectedFile){
     /*
     
