@@ -27,8 +27,7 @@ if FileExist(logs) {
 }
 
 While ProcessExist(PID) {
-    if FileExist(logs)
-    {
+    if FileExist(logs) {
         path_to_convert := tryRead(logs)
         if path_to_convert {
             if FileExist(path_to_convert) {
@@ -36,26 +35,24 @@ While ProcessExist(PID) {
                 if (inscript != "") {
                     FileMove(logs, temps, 1)
                     try {
-                    outscript := Convert(inscript)
-                    outfile := FileOpen(path_to_convert, "w", "utf-8")
-                    outfile.Write(outscript)
-                    outfile.Close()
-                    add_menuhandler(path_to_convert)
+                        outscript := Convert(inscript)
+                        outfile := FileOpen(path_to_convert, "w", "utf-8")
+                        outfile.Write(outscript)
+                        outfile.Close()
+                        add_menuhandler(path_to_convert)
                     }
                     catch {
                         sleep(200)
                     }
                     FileAppend(retstat, retstat)
-                }
-            }
-    }}
+                } } } }
     else {
         Sleep(50)
     }
 }
 ExitApp
 
-tryRead(path){
+tryRead(path) {
     try {
         out := FileRead(path)
         return out
