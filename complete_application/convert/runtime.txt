@@ -4,10 +4,8 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-myGui.Add("Link", "x322 y94 w120 h23", "<a href=`"https://autohotkey.com`">autohotkey.com</a>")
-myGui.Add("Text", "x273 y200 w198 h2 +0x10")
 myGui.Title := "Window"
-myGui.Show("w620 h403")
+myGui.Show("w548 h490")
 Return
 GuiEscape(*)
 { ; V1toV2: Added bracket

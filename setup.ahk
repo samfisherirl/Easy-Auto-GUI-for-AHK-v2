@@ -1,4 +1,5 @@
-﻿FileCopy(A_ScriptDir "\Launch_AutoGUI.ahk", A_ScriptDir "\changes_of_note\__Launch_AutoGUI.ahk", 1)
+﻿#Requires Autohotkey v2.0
+FileCopy(A_ScriptDir "\Launch_AutoGUI.ahk", A_ScriptDir "\changes_of_note\__Launch_AutoGUI.ahk", 1)
 
 FileCopy(A_ScriptDir "\complete_application\AutoGUI.ahk", A_ScriptDir "\changes_of_note\__AutoGUI.ahk", 1)
 

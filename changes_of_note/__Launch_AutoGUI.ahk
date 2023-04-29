@@ -42,7 +42,7 @@ While ProcessExist(PID) {
                         add_menuhandler(path_to_convert)
                     }
                     catch {
-                        sleep(200)
+                        sleep(50)
                     }
                     FileAppend(retstat, retstat)
                 } } } }

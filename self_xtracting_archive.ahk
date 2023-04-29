@@ -1,4 +1,5 @@
-﻿a := A_ScriptDir
+﻿#Requires Autohotkey v2.0
+a := A_ScriptDir
 T := "`""
 SZpath := addQuotes("7za.exe")
 archive := addQuotes("Auto-GUI-v2.7z")
