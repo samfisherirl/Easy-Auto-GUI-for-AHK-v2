@@ -10,7 +10,7 @@
     new_outscript := ""
     
     intxt := FileRead(FNOut)
-    FileMove(FNOut, A_ScriptDir "\complete_application\temp.txt", 1)
+    FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
     
     Loop Parse, intxt, "`n", "`r" {
         if (A_Index == 1) {

@@ -1,4 +1,4 @@
-#Requires Autohotkey v2.0
+﻿#Requires Autohotkey v2.0
 #SingleInstance Force
 #Include complete_application\convert\ConvertFuncs.ahk
 #Include complete_application\convert\_menu_handler_mod.ahk
@@ -19,9 +19,9 @@ Loop 10 {
     }
 }
 
-logs := A_ScriptDir "\complete_application\log.txt"
-temps := A_ScriptDir "\complete_application\temp.txt"
-retstat := A_ScriptDir "\complete_application\returnstatus.txt"
+logs := A_ScriptDir "\complete_application\convert\log.txt"
+temps := A_ScriptDir "\complete_application\convert\temp.txt"
+retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"
 if FileExist(logs) {
     FileMove(logs, temps, 1)
 }
@@ -47,7 +47,7 @@ While ProcessExist(PID) {
                     FileAppend(retstat, retstat)
                 } } } }
     else {
-        Sleep(50)
+        Sleep(25)
     }
 }
 ExitApp

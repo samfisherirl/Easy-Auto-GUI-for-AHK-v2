@@ -1,16 +1,13 @@
-﻿
+
 ;AutoGUI 2.5.8 
 ;Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-myGui.Add("ComboBox", "x457 y73 w120", ["ComboBox"])
-myGui.Add("DropDownList", "x99 y130 w120", ["DropDownList", "", ""])
-myGui.Add("UpDown", "x59 y169 w28 h1  -16", "1")
-Tab := myGui.Add("Tab3", "x266 y183 w225 h160", ["Tab 1", "Tab 2"])
-Tab.UseTab()
+myGui.Add("Link", "x322 y94 w120 h23", "<a href=`"https://autohotkey.com`">autohotkey.com</a>")
+myGui.Add("Text", "x273 y200 w198 h2 +0x10")
 myGui.Title := "Window"
-myGui.Show("w620 h420")
+myGui.Show("w620 h403")
 Return
 GuiEscape(*)
 { ; V1toV2: Added bracket

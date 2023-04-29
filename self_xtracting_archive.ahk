@@ -1,42 +1,21 @@
 ﻿a := A_ScriptDir
 T := "`""
-SZpath := T . a . "\7za.exe" . T 
-archive := T . a . "\Auto-GUI-v2.7z" . T 
-out := T . a . "\AutoGUIv2" . T
+SZpath := addQuotes("7za.exe")
+archive := addQuotes("Auto-GUI-v2.7z")
+out := addQuotes("AutoGUIv2")
 comline := SZpath . " x " . archive . " -y " . " -o" . out
 Run(comline)
 
 Sleep(5000)
-try {
-    Run(out "\Launch_AutoGUI.exe")
-}
-catch {
-    msgbox("timeout, find exe in folder")
-}
-
-class files 
+loop 50
 {
-    __New() {
-        this.path := ""
-        this.size := 0
-        this.total_files := 0
+    try {
+        Run(out "\Launch_AutoGUI.exe")
     }
-    
-    process(){
-        this.looper()
-        if this.total_files {
-
-        }
+    catch {
+        Sleep(150)
     }
-    looper() {
-        Loop Files A_ScriptDir . "\out"
-        {
-            if A_LoopFileExt == ".exe" {
-                if this.path == "" {
-                    this.path := A_LoopFilePath
-                    this.size := A_LoopFileSize
-                }
-        } 
-        
-        this.total_files += 1
-} } }   
+}
+addQuotes(string) {
+    return T . a . "\" . string . T
+}

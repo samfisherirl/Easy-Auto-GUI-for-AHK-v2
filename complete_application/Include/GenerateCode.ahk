@@ -395,11 +395,11 @@
     CurrentCode := ""
     Last_Code := ""
     if (Code != ""){
-        Runtime := A_ScriptDir "\runtime.txt"
-        ReturnStatus := A_ScriptDir "\returnstatus.txt"
-        lastCode := A_ScriptDir "\lastCode.txt"
-        Temp := A_ScriptDir "\temp.txt"
-        Logs := A_ScriptDir "\log.txt"
+        Runtime := A_ScriptDir "\convert\runtime.txt"
+        ReturnStatus := A_ScriptDir "\convert\returnstatus.txt"
+        lastCode := A_ScriptDir "\convert\lastCode.txt"
+        Temp := A_ScriptDir "\convert\temp.txt"
+        Logs := A_ScriptDir "\convert\log.txt"
         if FileExist(lastCode){
             FileRead, Code_to_Test, %lastCode%
             if (Code_to_Test == Code){
