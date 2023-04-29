@@ -1,4 +1,4 @@
-﻿#Requires Autohotkey v2.0
+#Requires Autohotkey v2.0
 #SingleInstance Force
 #Include complete_application\convert\ConvertFuncs.ahk
 #Include complete_application\convert\_menu_handler_mod.ahk
@@ -41,12 +41,11 @@ While ProcessExist(PID) {
                         outfile := FileOpen(path_to_convert, "w", "utf-8")
                         outfile.Write(final_code)
                         outfile.Close()
+                        FileAppend(retstat, retstat)
                     }
                     catch {
                         sleep(50)
-                    }
-                    FileAppend(retstat, retstat)
-                } } } }
+                    } } } } }
     else {
         Sleep(25)
     }
