@@ -4,1565 +4,19 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-myGui.Opt("+Resize")
-FileMenuOpenContainingFolderMenu := Menu()
-FileMenuOpenContainingFolderMenu.Add("Explorer", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add("Explorer", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add("cmd", MenuHandler)
-FileMenuOpenContainingFolderMenu.Add()
-FileMenuOpenContainingFolderMenu.Add("Folder as Workspace", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu := Menu()
-FileMenuCloseMultipleDocumentsMenu.Add("Close All but Active Document", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All to the Left", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All to the Right", MenuHandler)
-FileMenuCloseMultipleDocumentsMenu.Add("Close All Unchanged", MenuHandler)
-FileMenu := Menu()
-FileMenu.Add("&New`tCtrl+N", MenuHandler)
-FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
-FileMenu.Add("Open Containing &Folder", FileMenuOpenContainingFolderMenu)
-FileMenu.Add("Open in &Default Viewer", MenuHandler)
-FileMenu.Add("Open Folder as &Workspace...", MenuHandler)
-FileMenu.Add("Re&load from Disk`tCtrl+R", MenuHandler)
-FileMenu.Add("&Save`tCtrl+S", MenuHandler)
-FileMenu.Add("Save &As...`tCtrl+Alt+S", MenuHandler)
-FileMenu.Add("Save a Cop&y As...", MenuHandler)
-FileMenu.Add("Sa&ve All`tCtrl+Shift+S", MenuHandler)
-FileMenu.Add("&Rename...", MenuHandler)
-FileMenu.Add("&Close`tCtrl+W", MenuHandler)
-FileMenu.Add("Clos&e All`tCtrl+Shift+W", MenuHandler)
-FileMenu.Add("Close &Multiple Documents", FileMenuCloseMultipleDocumentsMenu)
-FileMenu.Add("Move to Recycle &Bin", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("Load Sess&ion...", MenuHandler)
-FileMenu.Add("Save Sess&ion...", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("&Print...`tCtrl+P", MenuHandler)
-FileMenu.Add("Print No&w", MenuHandler)
-FileMenu.Add()
-FileMenu.Add("&1: C:\Program Files\Oculus\CoreData\Manifests\G_Barbaria_Barbaria_assets.json", MenuHandler)
-FileMenu.Add("&2: C:\Program Files\Oculus\CoreData\Manifests\G_Barbaria_Barbaria.json", MenuHandler)
-FileMenu.Add("&3: C:\Users\dower\Documents\Auto-GUI-v2\complete_application\License.txt", MenuHandler)
-FileMenu.Add("&4: C:\Users\dower\OneDrive\rawaccel\ahk\communication___layer__python_autohotkey_ahk__\AHK.ahk", MenuHandler)
-FileMenu.Add("&5: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com (1).json", MenuHandler)
-FileMenu.Add("&6: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com.json", MenuHandler)
-FileMenu.Add("&7: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\d3dx.ini", MenuHandler)
-FileMenu.Add("&8: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\doorstop_config.ini", MenuHandler)
-FileMenu.Add("&9: C:\Users\dower\OneDrive\RESOLUTION\KATANGA_LAUNCHER\pywebview_jinja2\JINJA2\examples\js_api.py", MenuHandler)
-FileMenu.Add("1&0: C:\Users\dower\OneDrive\STEAM_VDF_2023\build\exe.win-amd64-3.11\export_command.py", MenuHandler)
-FileMenu.Add("ERROR", MenuHandler)
-FileMenu.Add("Restore Recent Closed File`tCtrl+Shift+T", MenuHandler)
-FileMenu.Add("Open All Recent Files", MenuHandler)
-FileMenu.Add("Empty Recent Files List", MenuHandler)
-FileMenu.Add("ERROR", MenuHandler)
-FileMenu.Add("E&xit`tAlt+F4", MenuHandler)
-EditMenuInsertMenu := Menu()
-EditMenuInsertMenu.Add("Date Time (short)", MenuHandler)
-EditMenuInsertMenu.Add("Date Time (long)", MenuHandler)
-EditMenuInsertMenu.Add("Date Time (customized)", MenuHandler)
-EditMenuCopytoClipboardMenu := Menu()
-EditMenuCopytoClipboardMenu.Add("Copy Current Full File path", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy Current Filename", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy Current Dir. Path", MenuHandler)
-EditMenuCopytoClipboardMenu.Add()
-EditMenuCopytoClipboardMenu.Add("Copy All Filenames", MenuHandler)
-EditMenuCopytoClipboardMenu.Add("Copy All File Paths", MenuHandler)
-EditMenuIndentMenu := Menu()
-EditMenuIndentMenu.Add("Increase Line Indent", MenuHandler)
-EditMenuIndentMenu.Add("Decrease Line Indent", MenuHandler)
-EditMenuConvertCasetoMenu := Menu()
-EditMenuConvertCasetoMenu.Add("&UPPERCASE`tCtrl+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&lowercase`tCtrl+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&Proper Case`tAlt+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("Proper Case (blend)`tAlt+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&Sentence case`tCtrl+Alt+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("Sentence case (blend)`tCtrl+Alt+Shift+U", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&iNVERT cASE", MenuHandler)
-EditMenuConvertCasetoMenu.Add("&ranDOm CasE", MenuHandler)
-EditMenuLineOperationsMenu := Menu()
-EditMenuLineOperationsMenu.Add("Duplicate Current Line`tCtrl+D", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Duplicate Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Consecutive Duplicate Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Split Lines`tCtrl+I", MenuHandler)
-EditMenuLineOperationsMenu.Add("Join Lines`tCtrl+J", MenuHandler)
-EditMenuLineOperationsMenu.Add("Move Up Current Line`tCtrl+Shift+Up", MenuHandler)
-EditMenuLineOperationsMenu.Add("Move Down Current Line`tCtrl+Shift+Down", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Empty Lines", MenuHandler)
-EditMenuLineOperationsMenu.Add("Remove Empty Lines (Containing Blank characters)", MenuHandler)
-EditMenuLineOperationsMenu.Add("Insert Blank Line Above Current`tCtrl+Alt+Enter", MenuHandler)
-EditMenuLineOperationsMenu.Add("Insert Blank Line Below Current`tCtrl+Alt+Shift+Enter", MenuHandler)
-EditMenuLineOperationsMenu.Add("Reverse Line Order", MenuHandler)
-EditMenuLineOperationsMenu.Add("Randomize Line Order", MenuHandler)
-EditMenuLineOperationsMenu.Add()
-EditMenuLineOperationsMenu.Add("Sort Lines Lexicographically Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines Lex. Ascending Ignoring Case", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Integers Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Comma) Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Dot) Ascending", MenuHandler)
-EditMenuLineOperationsMenu.Add()
-EditMenuLineOperationsMenu.Add("Sort Lines Lexicographically Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines Lex. Descending Ignoring Case", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Integers Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Comma) Descending", MenuHandler)
-EditMenuLineOperationsMenu.Add("Sort Lines As Decimals (Dot) Descending", MenuHandler)
-EditMenuCommentUncommentMenu := Menu()
-EditMenuCommentUncommentMenu.Add("Toggle Single Line Comment`tCtrl+Q", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Single Line Comment`tCtrl+K", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Single Line Uncomment`tCtrl+Shift+K", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Block Comment`tCtrl+Shift+Q", MenuHandler)
-EditMenuCommentUncommentMenu.Add("Block Uncomment", MenuHandler)
-EditMenuAutoCompletionMenu := Menu()
-EditMenuAutoCompletionMenu.Add("Function Completion`tCtrl+Spacebar", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Word Completion`tCtrl+Enter", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Hint`tCtrl+Shift+Spacebar", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Previous Hint`tAlt+Up", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Function Parameters Next Hint`tAlt+Down", MenuHandler)
-EditMenuAutoCompletionMenu.Add("Path Completion`tCtrl+Alt+Spacebar", MenuHandler)
-EditMenuEOLConversionMenu := Menu()
-EditMenuEOLConversionMenu.Add("Windows (CR LF)", MenuHandler)
-EditMenuEOLConversionMenu.Add("Unix (LF)", MenuHandler)
-EditMenuEOLConversionMenu.Add("Macintosh (CR)", MenuHandler)
-EditMenuBlankOperationsMenu := Menu()
-EditMenuBlankOperationsMenu.Add("Trim Trailing Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim Leading Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim Leading and Trailing Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("EOL to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Trim both and EOL to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add()
-EditMenuBlankOperationsMenu.Add("TAB to Space", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Space to TAB (All)", MenuHandler)
-EditMenuBlankOperationsMenu.Add("Space to TAB (Leading)", MenuHandler)
-EditMenuPasteSpecialMenu := Menu()
-EditMenuPasteSpecialMenu.Add("Paste HTML Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Paste RTF Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add()
-EditMenuPasteSpecialMenu.Add("Copy Binary Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Cut Binary Content", MenuHandler)
-EditMenuPasteSpecialMenu.Add("Paste Binary Content", MenuHandler)
-EditMenuOnSelectionMenu := Menu()
-EditMenuOnSelectionMenu.Add("Open File", MenuHandler)
-EditMenuOnSelectionMenu.Add("Open Containing Folder in Explorer", MenuHandler)
-EditMenuOnSelectionMenu.Add()
-EditMenuOnSelectionMenu.Add("Search on Internet", MenuHandler)
-EditMenuOnSelectionMenu.Add("Change Search Engine...", MenuHandler)
-EditMenu := Menu()
-EditMenu.Add("&Undo`tCtrl+Z or Alt+Backspace", MenuHandler)
-EditMenu.Add("&Redo`tCtrl+Y or Ctrl+Shift+Z", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("Cu&t`tCtrl+X or Shift+DEL", MenuHandler)
-EditMenu.Add("&Copy`tCtrl+C or Ctrl+INS", MenuHandler)
-EditMenu.Add("&Paste`tCtrl+V or Shift+INS", MenuHandler)
-EditMenu.Add("&Delete`tDEL", MenuHandler)
-EditMenu.Add("&Select All`tCtrl+A", MenuHandler)
-EditMenu.Add("Begin/End &Select`tCtrl+Shift+B", MenuHandler)
-EditMenu.Add("Begin/End Select in Column Mode`tAlt+Shift+B", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("Insert", EditMenuInsertMenu)
-EditMenu.Add("Cop&y to A_Clipboard", EditMenuCopytoClipboardMenu)
-EditMenu.Add("&Indent", EditMenuIndentMenu)
-EditMenu.Add("Con&vert Case to", EditMenuConvertCasetoMenu)
-EditMenu.Add("&Line Operations", EditMenuLineOperationsMenu)
-EditMenu.Add("Co&mment/Uncomment", EditMenuCommentUncommentMenu)
-EditMenu.Add("&Auto-Completion", EditMenuAutoCompletionMenu)
-EditMenu.Add("&EOL Conversion", EditMenuEOLConversionMenu)
-EditMenu.Add("&Blank Operations", EditMenuBlankOperationsMenu)
-EditMenu.Add("&Paste Special", EditMenuPasteSpecialMenu)
-EditMenu.Add("&On Selection", EditMenuOnSelectionMenu)
-EditMenu.Add()
-EditMenu.Add("Column Mode...", MenuHandler)
-EditMenu.Add("Colum&n Editor...`tAlt+C", MenuHandler)
-EditMenu.Add("Character &Panel", MenuHandler)
-EditMenu.Add("A_Clipboard &History", MenuHandler)
-EditMenu.Add()
-EditMenu.Add("&Set Read-Only", MenuHandler)
-EditMenu.Add("Clear Read-Only Flag", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu := Menu()
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 1st Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 2nd Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 3rd Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 4th Style", MenuHandler)
-SearchMenuStyleAllOccurrencesofTokenMenu.Add("Using 5th Style", MenuHandler)
-SearchMenuStyleOneTokenMenu := Menu()
-SearchMenuStyleOneTokenMenu.Add("Using 1st Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 2nd Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 3rd Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 4th Style", MenuHandler)
-SearchMenuStyleOneTokenMenu.Add("Using 5th Style", MenuHandler)
-SearchMenuClearStyleMenu := Menu()
-SearchMenuClearStyleMenu.Add("Clear 1st Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 2nd Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 3rd Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 4th Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear 5th Style", MenuHandler)
-SearchMenuClearStyleMenu.Add("Clear all Styles", MenuHandler)
-SearchMenuJumpUpMenu := Menu()
-SearchMenuJumpUpMenu.Add("1st Style`tCtrl+Shift+1", MenuHandler)
-SearchMenuJumpUpMenu.Add("2nd Style`tCtrl+Shift+2", MenuHandler)
-SearchMenuJumpUpMenu.Add("3rd Style`tCtrl+Shift+3", MenuHandler)
-SearchMenuJumpUpMenu.Add("4th Style`tCtrl+Shift+4", MenuHandler)
-SearchMenuJumpUpMenu.Add("5th Style`tCtrl+Shift+5", MenuHandler)
-SearchMenuJumpUpMenu.Add("Find Mark Style`tCtrl+Shift+0", MenuHandler)
-SearchMenuJumpDownMenu := Menu()
-SearchMenuJumpDownMenu.Add("1st Style`tCtrl+1", MenuHandler)
-SearchMenuJumpDownMenu.Add("2nd Style`tCtrl+2", MenuHandler)
-SearchMenuJumpDownMenu.Add("3rd Style`tCtrl+3", MenuHandler)
-SearchMenuJumpDownMenu.Add("4th Style`tCtrl+4", MenuHandler)
-SearchMenuJumpDownMenu.Add("5th Style`tCtrl+5", MenuHandler)
-SearchMenuJumpDownMenu.Add("Find Mark Style`tCtrl+0", MenuHandler)
-SearchMenuCopyStyledTextMenu := Menu()
-SearchMenuCopyStyledTextMenu.Add("1st Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("2nd Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("3rd Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("4th Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("5th Style", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("All Styles", MenuHandler)
-SearchMenuCopyStyledTextMenu.Add("Find Mark Style", MenuHandler)
-SearchMenuBookmarkMenu := Menu()
-SearchMenuBookmarkMenu.Add("Toggle Bookmark`tCtrl+F2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Next Bookmark`tF2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Previous Bookmark`tShift+F2", MenuHandler)
-SearchMenuBookmarkMenu.Add("Clear All Bookmarks", MenuHandler)
-SearchMenuBookmarkMenu.Add("Cut Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Copy Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Paste to (Replace) Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Remove Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Remove Non-Bookmarked Lines", MenuHandler)
-SearchMenuBookmarkMenu.Add("Inverse Bookmark", MenuHandler)
-SearchMenu := Menu()
-SearchMenu.Add("&Find...`tCtrl+F", MenuHandler)
-SearchMenu.Add("Find in Fi&les...`tCtrl+Shift+F", MenuHandler)
-SearchMenu.Add("Find &Next`tF3", MenuHandler)
-SearchMenu.Add("Find &Previous`tShift+F3", MenuHandler)
-SearchMenu.Add("&Select and Find Next`tCtrl+F3", MenuHandler)
-SearchMenu.Add("&Select and Find Previous`tCtrl+Shift+F3", MenuHandler)
-SearchMenu.Add("Find (&Volatile) Next`tCtrl+Alt+F3", MenuHandler)
-SearchMenu.Add("Find (&Volatile) Previous`tCtrl+Alt+Shift+F3", MenuHandler)
-SearchMenu.Add("&Replace...`tCtrl+H", MenuHandler)
-SearchMenu.Add("&Incremental Search`tCtrl+Alt+I", MenuHandler)
-SearchMenu.Add("Search Results &Window`tF7", MenuHandler)
-SearchMenu.Add("Next Search Resul&t`tF4", MenuHandler)
-SearchMenu.Add("Previous Search Resul&t`tShift+F4", MenuHandler)
-SearchMenu.Add("&Go to...`tCtrl+G", MenuHandler)
-SearchMenu.Add("Go to &Matching Brace`tCtrl+B", MenuHandler)
-SearchMenu.Add("Select All Between &Matching Braces`tCtrl+Alt+B", MenuHandler)
-SearchMenu.Add("Mar&k...`tCtrl+M", MenuHandler)
-SearchMenu.Add()
-SearchMenu.Add("Style &All Occurrences of Token", SearchMenuStyleAllOccurrencesofTokenMenu)
-SearchMenu.Add("Style &One Token", SearchMenuStyleOneTokenMenu)
-SearchMenu.Add("Clear Style", SearchMenuClearStyleMenu)
-SearchMenu.Add("&Jump Up", SearchMenuJumpUpMenu)
-SearchMenu.Add("Jump &Down", SearchMenuJumpDownMenu)
-SearchMenu.Add("&Copy Styled Text", SearchMenuCopyStyledTextMenu)
-SearchMenu.Add()
-SearchMenu.Add("&Bookmark", SearchMenuBookmarkMenu)
-SearchMenu.Add()
-SearchMenu.Add("Find characters in rang&e...", MenuHandler)
-ViewMenuViewCurrentFileinMenu := Menu()
-ViewMenuViewCurrentFileinMenu.Add("Firefox", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("Chrome", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("Edge", MenuHandler)
-ViewMenuViewCurrentFileinMenu.Add("IE", MenuHandler)
-ViewMenuShowSymbolMenu := Menu()
-ViewMenuShowSymbolMenu.Add("Show Space and Tab", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show End of Line", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show Non-Printing Characters", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show All Characters", MenuHandler)
-ViewMenuShowSymbolMenu.Add()
-ViewMenuShowSymbolMenu.Add("Show Indent Guide", MenuHandler)
-ViewMenuShowSymbolMenu.Add("Show Wrap Symbol", MenuHandler)
-ViewMenuZoomMenu := Menu()
-ViewMenuZoomMenu.Add("Zoom &In (Ctrl+Mouse Wheel Up)`tCtrl+Num +", MenuHandler)
-ViewMenuZoomMenu.Add("Zoom &Out (Ctrl+Mouse Wheel Down)`tCtrl+Num -", MenuHandler)
-ViewMenuZoomMenu.Add("Restore Default Zoom`tCtrl+Num /", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu := Menu()
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Move to Other View", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Clone to Other View", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Move to New Instance", MenuHandler)
-ViewMenuMoveCloneCurrentDocumentMenu.Add("Open in New Instance", MenuHandler)
-ViewMenuTabMenu := Menu()
-ViewMenuTabMenu.Add("1st Tab`tCtrl+Numpad 1", MenuHandler)
-ViewMenuTabMenu.Add("2nd Tab`tCtrl+Numpad 2", MenuHandler)
-ViewMenuTabMenu.Add("3rd Tab`tCtrl+Numpad 3", MenuHandler)
-ViewMenuTabMenu.Add("4th Tab`tCtrl+Numpad 4", MenuHandler)
-ViewMenuTabMenu.Add("5th Tab`tCtrl+Numpad 5", MenuHandler)
-ViewMenuTabMenu.Add("6th Tab`tCtrl+Numpad 6", MenuHandler)
-ViewMenuTabMenu.Add("7th Tab`tCtrl+Numpad 7", MenuHandler)
-ViewMenuTabMenu.Add("8th Tab`tCtrl+Numpad 8", MenuHandler)
-ViewMenuTabMenu.Add("9th Tab`tCtrl+Numpad 9", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Next Tab`tCtrl+Page down", MenuHandler)
-ViewMenuTabMenu.Add("Previous Tab`tCtrl+Page up", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Move Tab Forward`tCtrl+Shift+Page down", MenuHandler)
-ViewMenuTabMenu.Add("Move Tab Backward`tCtrl+Shift+Page up", MenuHandler)
-ViewMenuTabMenu.Add()
-ViewMenuTabMenu.Add("Apply Color 1", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 2", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 3", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 4", MenuHandler)
-ViewMenuTabMenu.Add("Apply Color 5", MenuHandler)
-ViewMenuTabMenu.Add("Remove Color", MenuHandler)
-ViewMenuFoldLevelMenu := Menu()
-ViewMenuFoldLevelMenu.Add("1`tAlt+1", MenuHandler)
-ViewMenuFoldLevelMenu.Add("2`tAlt+2", MenuHandler)
-ViewMenuFoldLevelMenu.Add("3`tAlt+3", MenuHandler)
-ViewMenuFoldLevelMenu.Add("4`tAlt+4", MenuHandler)
-ViewMenuFoldLevelMenu.Add("5`tAlt+5", MenuHandler)
-ViewMenuFoldLevelMenu.Add("6`tAlt+6", MenuHandler)
-ViewMenuFoldLevelMenu.Add("7`tAlt+7", MenuHandler)
-ViewMenuFoldLevelMenu.Add("8`tAlt+8", MenuHandler)
-ViewMenuUnfoldLevelMenu := Menu()
-ViewMenuUnfoldLevelMenu.Add("1`tAlt+Shift+1", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("2`tAlt+Shift+2", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("3`tAlt+Shift+3", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("4`tAlt+Shift+4", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("5`tAlt+Shift+5", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("6`tAlt+Shift+6", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("7`tAlt+Shift+7", MenuHandler)
-ViewMenuUnfoldLevelMenu.Add("8`tAlt+Shift+8", MenuHandler)
-ViewMenuProjectPanelsMenu := Menu()
-ViewMenuProjectPanelsMenu.Add("Project Panel 1", MenuHandler)
-ViewMenuProjectPanelsMenu.Add("Project Panel 2", MenuHandler)
-ViewMenuProjectPanelsMenu.Add("Project Panel 3", MenuHandler)
-ViewMenu := Menu()
-ViewMenu.Add("Always on Top", MenuHandler)
-ViewMenu.Add("Toggle Full Screen Mode`tF11", MenuHandler)
-ViewMenu.Add("Post-It`tF12", MenuHandler)
-ViewMenu.Add("Distraction Free Mode", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("View Current File in", ViewMenuViewCurrentFileinMenu)
-ViewMenu.Add()
-ViewMenu.Add("Show Symbol", ViewMenuShowSymbolMenu)
-ViewMenu.Add("Zoom", ViewMenuZoomMenu)
-ViewMenu.Add("Move/Clone Current Document", ViewMenuMoveCloneCurrentDocumentMenu)
-ViewMenu.Add("Tab", ViewMenuTabMenu)
-ViewMenu.Add("Word wrap", MenuHandler)
-ViewMenu.Add("Focus on Another View`tF8", MenuHandler)
-ViewMenu.Add("Hide Lines`tAlt+H", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Fold All`tAlt+0", MenuHandler)
-ViewMenu.Add("Unfold All`tAlt+Shift+0", MenuHandler)
-ViewMenu.Add("Fold Current Level`tCtrl+Alt+F", MenuHandler)
-ViewMenu.Add("Unfold Current Level`tCtrl+Alt+Shift+F", MenuHandler)
-ViewMenu.Add("Fold Level", ViewMenuFoldLevelMenu)
-ViewMenu.Add("Unfold Level", ViewMenuUnfoldLevelMenu)
-ViewMenu.Add()
-ViewMenu.Add("Summary...", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Project Panels", ViewMenuProjectPanelsMenu)
-ViewMenu.Add("Folder as Workspace", MenuHandler)
-ViewMenu.Add("Document Map", MenuHandler)
-ViewMenu.Add("Document List", MenuHandler)
-ViewMenu.Add("Function List", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Synchronize Vertical Scrolling", MenuHandler)
-ViewMenu.Add("Synchronize Horizontal Scrolling", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Text Direction RTL`tCtrl+Alt+R", MenuHandler)
-ViewMenu.Add("Text Direction LTR`tCtrl+Alt+L", MenuHandler)
-ViewMenu.Add()
-ViewMenu.Add("Monitoring (tail -f)", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu := Menu()
-EncodingMenuCharactersetsMenuArabicMenu.Add("ISO 8859-6", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu.Add("OEM 720", MenuHandler)
-EncodingMenuCharactersetsMenuArabicMenu.Add("Windows-1256", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu := Menu()
-EncodingMenuCharactersetsMenuBalticMenu.Add("ISO 8859-4", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("ISO 8859-13", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("OEM 775", MenuHandler)
-EncodingMenuCharactersetsMenuBalticMenu.Add("Windows-1257", MenuHandler)
-EncodingMenuCharactersetsMenuCelticMenu := Menu()
-EncodingMenuCharactersetsMenuCelticMenu.Add("ISO 8859-14", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu := Menu()
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("ISO 8859-5", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("KOI8-R", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("KOI8-U", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("Macintosh", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("OEM 855", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("OEM 866", MenuHandler)
-EncodingMenuCharactersetsMenuCyrillicMenu.Add("Windows-1251", MenuHandler)
-EncodingMenuCharactersetsMenuCentralEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuCentralEuropeanMenu.Add("OEM 852", MenuHandler)
-EncodingMenuCharactersetsMenuCentralEuropeanMenu.Add("Windows-1250", MenuHandler)
-EncodingMenuCharactersetsMenuChineseMenu := Menu()
-EncodingMenuCharactersetsMenuChineseMenu.Add("Big5 (Traditional)", MenuHandler)
-EncodingMenuCharactersetsMenuChineseMenu.Add("GB2312 (Simplified)", MenuHandler)
-EncodingMenuCharactersetsMenuEasternEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuEasternEuropeanMenu.Add("ISO 8859-2", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu := Menu()
-EncodingMenuCharactersetsMenuGreekMenu.Add("ISO 8859-7", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("OEM 737", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("OEM 869", MenuHandler)
-EncodingMenuCharactersetsMenuGreekMenu.Add("Windows-1253", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu := Menu()
-EncodingMenuCharactersetsMenuHebrewMenu.Add("ISO 8859-8", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu.Add("OEM 862", MenuHandler)
-EncodingMenuCharactersetsMenuHebrewMenu.Add("Windows-1255", MenuHandler)
-EncodingMenuCharactersetsMenuJapaneseMenu := Menu()
-EncodingMenuCharactersetsMenuJapaneseMenu.Add("Shift-JIS", MenuHandler)
-EncodingMenuCharactersetsMenuKoreanMenu := Menu()
-EncodingMenuCharactersetsMenuKoreanMenu.Add("Windows 949", MenuHandler)
-EncodingMenuCharactersetsMenuKoreanMenu.Add("EUC-KR", MenuHandler)
-EncodingMenuCharactersetsMenuNorthEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuNorthEuropeanMenu.Add("OEM 861 : Icelandic", MenuHandler)
-EncodingMenuCharactersetsMenuNorthEuropeanMenu.Add("OEM 865 : Nordic", MenuHandler)
-EncodingMenuCharactersetsMenuThaiMenu := Menu()
-EncodingMenuCharactersetsMenuThaiMenu.Add("TIS-620", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu := Menu()
-EncodingMenuCharactersetsMenuTurkishMenu.Add("ISO 8859-3", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("ISO 8859-9", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("OEM 857", MenuHandler)
-EncodingMenuCharactersetsMenuTurkishMenu.Add("Windows-1254", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu := Menu()
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("ISO 8859-1", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("ISO 8859-15", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 850", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 858", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 860 : Portuguese", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM 863 : French", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("OEM-US", MenuHandler)
-EncodingMenuCharactersetsMenuWesternEuropeanMenu.Add("Windows-1252", MenuHandler)
-EncodingMenuCharactersetsMenuVietnameseMenu := Menu()
-EncodingMenuCharactersetsMenuVietnameseMenu.Add("Windows-1258", MenuHandler)
-EncodingMenuCharactersetsMenu := Menu()
-EncodingMenuCharactersetsMenu.Add("Arabic", EncodingMenuCharactersetsMenuArabicMenu)
-EncodingMenuCharactersetsMenu.Add("Baltic", EncodingMenuCharactersetsMenuBalticMenu)
-EncodingMenuCharactersetsMenu.Add("Celtic", EncodingMenuCharactersetsMenuCelticMenu)
-EncodingMenuCharactersetsMenu.Add("Cyrillic", EncodingMenuCharactersetsMenuCyrillicMenu)
-EncodingMenuCharactersetsMenu.Add("Central European", EncodingMenuCharactersetsMenuCentralEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Chinese", EncodingMenuCharactersetsMenuChineseMenu)
-EncodingMenuCharactersetsMenu.Add("Eastern European", EncodingMenuCharactersetsMenuEasternEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Greek", EncodingMenuCharactersetsMenuGreekMenu)
-EncodingMenuCharactersetsMenu.Add("Hebrew", EncodingMenuCharactersetsMenuHebrewMenu)
-EncodingMenuCharactersetsMenu.Add("Japanese", EncodingMenuCharactersetsMenuJapaneseMenu)
-EncodingMenuCharactersetsMenu.Add("Korean", EncodingMenuCharactersetsMenuKoreanMenu)
-EncodingMenuCharactersetsMenu.Add("North European", EncodingMenuCharactersetsMenuNorthEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Thai", EncodingMenuCharactersetsMenuThaiMenu)
-EncodingMenuCharactersetsMenu.Add("Turkish", EncodingMenuCharactersetsMenuTurkishMenu)
-EncodingMenuCharactersetsMenu.Add("Western European", EncodingMenuCharactersetsMenuWesternEuropeanMenu)
-EncodingMenuCharactersetsMenu.Add("Vietnamese", EncodingMenuCharactersetsMenuVietnameseMenu)
-EncodingMenu := Menu()
-EncodingMenu.Add("ANSI", MenuHandler)
-EncodingMenu.Add("UTF-8", MenuHandler)
-EncodingMenu.Add("UTF-8-BOM", MenuHandler)
-EncodingMenu.Add("UTF-16 BE BOM", MenuHandler)
-EncodingMenu.Add("UTF-16 LE BOM", MenuHandler)
-EncodingMenu.Add("Character sets", EncodingMenuCharactersetsMenu)
-EncodingMenu.Add()
-EncodingMenu.Add("Convert to ANSI", MenuHandler)
-EncodingMenu.Add("Convert to UTF-8", MenuHandler)
-EncodingMenu.Add("Convert to UTF-8-BOM", MenuHandler)
-EncodingMenu.Add("Convert to UTF-16 BE BOM", MenuHandler)
-EncodingMenu.Add("Convert to UTF-16 LE BOM", MenuHandler)
-LanguageMenuAMenu := Menu()
-LanguageMenuAMenu.Add("ActionScript", MenuHandler)
-LanguageMenuAMenu.Add("Ada", MenuHandler)
-LanguageMenuAMenu.Add("ASN.1", MenuHandler)
-LanguageMenuAMenu.Add("ASP", MenuHandler)
-LanguageMenuAMenu.Add("Assembly", MenuHandler)
-LanguageMenuAMenu.Add("AutoIt", MenuHandler)
-LanguageMenuAMenu.Add("AviSynth", MenuHandler)
-LanguageMenuBMenu := Menu()
-LanguageMenuBMenu.Add("BaanC", MenuHandler)
-LanguageMenuBMenu.Add("Batch", MenuHandler)
-LanguageMenuBMenu.Add("Blitzbasic", MenuHandler)
-LanguageMenuCMenu := Menu()
-LanguageMenuCMenu.Add("C", MenuHandler)
-LanguageMenuCMenu.Add("C#", MenuHandler)
-LanguageMenuCMenu.Add("C++", MenuHandler)
-LanguageMenuCMenu.Add("Caml", MenuHandler)
-LanguageMenuCMenu.Add("CMake", MenuHandler)
-LanguageMenuCMenu.Add("COBOL", MenuHandler)
-LanguageMenuCMenu.Add("CSound", MenuHandler)
-LanguageMenuCMenu.Add("CoffeeScript", MenuHandler)
-LanguageMenuCMenu.Add("CSS", MenuHandler)
-LanguageMenuDMenu := Menu()
-LanguageMenuDMenu.Add("D", MenuHandler)
-LanguageMenuDMenu.Add("Diff", MenuHandler)
-LanguageMenuEMenu := Menu()
-LanguageMenuEMenu.Add("Erlang", MenuHandler)
-LanguageMenuEMenu.Add("ESCRIPT", MenuHandler)
-LanguageMenuFMenu := Menu()
-LanguageMenuFMenu.Add("Forth", MenuHandler)
-LanguageMenuFMenu.Add("Fortran (free form)", MenuHandler)
-LanguageMenuFMenu.Add("Fortran (fixed form)", MenuHandler)
-LanguageMenuFMenu.Add("Freebasic", MenuHandler)
-LanguageMenuGMenu := Menu()
-LanguageMenuGMenu.Add("GDScript", MenuHandler)
-LanguageMenuGMenu.Add("Gui4Cli", MenuHandler)
-LanguageMenuHMenu := Menu()
-LanguageMenuHMenu.Add("Haskell", MenuHandler)
-LanguageMenuHMenu.Add("Hollywood", MenuHandler)
-LanguageMenuHMenu.Add("HTML", MenuHandler)
-LanguageMenuIMenu := Menu()
-LanguageMenuIMenu.Add("INI file", MenuHandler)
-LanguageMenuIMenu.Add("Inno Setup", MenuHandler)
-LanguageMenuIMenu.Add("Intel HEX", MenuHandler)
-LanguageMenuJMenu := Menu()
-LanguageMenuJMenu.Add("Java", MenuHandler)
-LanguageMenuJMenu.Add("JavaScript", MenuHandler)
-LanguageMenuJMenu.Add("JSON", MenuHandler)
-LanguageMenuJMenu.Add("JSON5", MenuHandler)
-LanguageMenuJMenu.Add("JSP", MenuHandler)
-LanguageMenuLMenu := Menu()
-LanguageMenuLMenu.Add("LaTeX", MenuHandler)
-LanguageMenuLMenu.Add("LISP", MenuHandler)
-LanguageMenuLMenu.Add("Lua", MenuHandler)
-LanguageMenuMMenu := Menu()
-LanguageMenuMMenu.Add("Makefile", MenuHandler)
-LanguageMenuMMenu.Add("Matlab", MenuHandler)
-LanguageMenuMMenu.Add("Microsoft Transact-SQL", MenuHandler)
-LanguageMenuMMenu.Add("MMIXAL", MenuHandler)
-LanguageMenuMMenu.Add("MS-DOS Style", MenuHandler)
-LanguageMenuNMenu := Menu()
-LanguageMenuNMenu.Add("Nim", MenuHandler)
-LanguageMenuNMenu.Add("Nncrontab", MenuHandler)
-LanguageMenuNMenu.Add("NSIS", MenuHandler)
-LanguageMenuOMenu := Menu()
-LanguageMenuOMenu.Add("Objective-C", MenuHandler)
-LanguageMenuOMenu.Add("OScript", MenuHandler)
-LanguageMenuPMenu := Menu()
-LanguageMenuPMenu.Add("Pascal", MenuHandler)
-LanguageMenuPMenu.Add("Perl", MenuHandler)
-LanguageMenuPMenu.Add("PHP", MenuHandler)
-LanguageMenuPMenu.Add("PostScript", MenuHandler)
-LanguageMenuPMenu.Add("PowerShell", MenuHandler)
-LanguageMenuPMenu.Add("Properties", MenuHandler)
-LanguageMenuPMenu.Add("Purebasic", MenuHandler)
-LanguageMenuPMenu.Add("Python", MenuHandler)
-LanguageMenuRMenu := Menu()
-LanguageMenuRMenu.Add("R", MenuHandler)
-LanguageMenuRMenu.Add("REBOL", MenuHandler)
-LanguageMenuRMenu.Add("Registry", MenuHandler)
-LanguageMenuRMenu.Add("Resource file", MenuHandler)
-LanguageMenuRMenu.Add("Ruby", MenuHandler)
-LanguageMenuRMenu.Add("Rust", MenuHandler)
-LanguageMenuSMenu := Menu()
-LanguageMenuSMenu.Add("Shell", MenuHandler)
-LanguageMenuSMenu.Add("Scheme", MenuHandler)
-LanguageMenuSMenu.Add("Smalltalk", MenuHandler)
-LanguageMenuSMenu.Add("Spice", MenuHandler)
-LanguageMenuSMenu.Add("SQL", MenuHandler)
-LanguageMenuSMenu.Add("Swift", MenuHandler)
-LanguageMenuSMenu.Add("S-Record", MenuHandler)
-LanguageMenuTMenu := Menu()
-LanguageMenuTMenu.Add("TCL", MenuHandler)
-LanguageMenuTMenu.Add("Tektronix extended HEX", MenuHandler)
-LanguageMenuTMenu.Add("TeX", MenuHandler)
-LanguageMenuTMenu.Add("txt2tags", MenuHandler)
-LanguageMenuTMenu.Add("TypeScript", MenuHandler)
-LanguageMenuVMenu := Menu()
-LanguageMenuVMenu.Add("Visual Basic", MenuHandler)
-LanguageMenuVMenu.Add("Visual Prolog", MenuHandler)
-LanguageMenuVMenu.Add("VHDL", MenuHandler)
-LanguageMenuVMenu.Add("Verilog", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu := Menu()
-LanguageMenuUserDefinedLanguageMenu.Add("Define your language...", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu.Add("Open User Defined Language folder...", MenuHandler)
-LanguageMenuUserDefinedLanguageMenu.Add("Notepad++ User Defined Languages Collection", MenuHandler)
-LanguageMenu := Menu()
-LanguageMenu.Add("None (Normal Text)", MenuHandler)
-LanguageMenu.Add()
-LanguageMenu.Add("A", LanguageMenuAMenu)
-LanguageMenu.Add("B", LanguageMenuBMenu)
-LanguageMenu.Add("C", LanguageMenuCMenu)
-LanguageMenu.Add("D", LanguageMenuDMenu)
-LanguageMenu.Add("E", LanguageMenuEMenu)
-LanguageMenu.Add("F", LanguageMenuFMenu)
-LanguageMenu.Add("G", LanguageMenuGMenu)
-LanguageMenu.Add("H", LanguageMenuHMenu)
-LanguageMenu.Add("I", LanguageMenuIMenu)
-LanguageMenu.Add("J", LanguageMenuJMenu)
-LanguageMenu.Add("KIXtart", MenuHandler)
-LanguageMenu.Add("L", LanguageMenuLMenu)
-LanguageMenu.Add("M", LanguageMenuMMenu)
-LanguageMenu.Add("N", LanguageMenuNMenu)
-LanguageMenu.Add("O", LanguageMenuOMenu)
-LanguageMenu.Add("P", LanguageMenuPMenu)
-LanguageMenu.Add("R", LanguageMenuRMenu)
-LanguageMenu.Add("S", LanguageMenuSMenu)
-LanguageMenu.Add("T", LanguageMenuTMenu)
-LanguageMenu.Add("V", LanguageMenuVMenu)
-LanguageMenu.Add("XML", MenuHandler)
-LanguageMenu.Add("YAML", MenuHandler)
-LanguageMenu.Add()
-LanguageMenu.Add("User Defined Language", LanguageMenuUserDefinedLanguageMenu)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("Autohotkey", MenuHandler)
-LanguageMenu.Add("a", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("AutoHotkey", MenuHandler)
-LanguageMenu.Add("Markdown (preinstalled)", MenuHandler)
-LanguageMenu.Add("Markdown (preinstalled dark mode)", MenuHandler)
-LanguageMenu.Add("User-Defined", MenuHandler)
-SettingsMenuImportMenu := Menu()
-SettingsMenuImportMenu.Add("Import plugin(s)...", MenuHandler)
-SettingsMenuImportMenu.Add("Import style theme(s)...", MenuHandler)
-SettingsMenu := Menu()
-SettingsMenu.Add("Preferences...", MenuHandler)
-SettingsMenu.Add("Style Configurator...", MenuHandler)
-SettingsMenu.Add("Shortcut Mapper...", MenuHandler)
-SettingsMenu.Add()
-SettingsMenu.Add("Import", SettingsMenuImportMenu)
-SettingsMenu.Add()
-SettingsMenu.Add("Edit Popup ContextMenu", MenuHandler)
-ToolsMenuMD5Menu := Menu()
-ToolsMenuMD5Menu.Add("Generate...", MenuHandler)
-ToolsMenuMD5Menu.Add("Generate from files...", MenuHandler)
-ToolsMenuMD5Menu.Add("Generate from selection into A_Clipboard", MenuHandler)
-ToolsMenuSHA256Menu := Menu()
-ToolsMenuSHA256Menu.Add("Generate...", MenuHandler)
-ToolsMenuSHA256Menu.Add("Generate from files...", MenuHandler)
-ToolsMenuSHA256Menu.Add("Generate from selection into A_Clipboard", MenuHandler)
-ToolsMenu := Menu()
-ToolsMenu.Add("MD5", ToolsMenuMD5Menu)
-ToolsMenu.Add("SHA-256", ToolsMenuSHA256Menu)
-MacroMenu := Menu()
-MacroMenu.Add("Start Re&cording", MenuHandler)
-MacroMenu.Add("S&top Recording", MenuHandler)
-MacroMenu.Add("&Playback`tCtrl+Shift+P", MenuHandler)
-MacroMenu.Add("&Save Current Recorded Macro...", MenuHandler)
-MacroMenu.Add("&Run a Macro Multiple Times...", MenuHandler)
-MacroMenu.Add("ERROR", MenuHandler)
-MacroMenu.Add("Trim Trailing Space and Save`tAlt+Shift+S", MenuHandler)
-MacroMenu.Add()
-MacroMenu.Add("Modify Shortcut/Delete Macro...", MenuHandler)
-RunMenu := Menu()
-RunMenu.Add("&Run...`tF5", MenuHandler)
-RunMenu.Add("ERROR", MenuHandler)
-RunMenu.Add("Get PHP help`tAlt+F1", MenuHandler)
-RunMenu.Add("Wikipedia Search`tAlt+F3", MenuHandler)
-RunMenu.Add("Open selected file path in new instance`tAlt+F6", MenuHandler)
-RunMenu.Add()
-RunMenu.Add("Modify Shortcut/Delete Command...", MenuHandler)
-PluginsMenuDarkThemeMenu := Menu()
-PluginsMenuDarkThemeMenu.Add("Enable", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Block ClearType", MenuHandler)
-PluginsMenuDarkThemeMenu.Add()
-PluginsMenuDarkThemeMenu.Add("Type: InverseRGB", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: InverseY", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: Grayscale", MenuHandler)
-PluginsMenuDarkThemeMenu.Add("Type: HSV Ramp*", MenuHandler)
-PluginsMenuDarkThemeMenu.Add()
-PluginsMenuDarkThemeMenu.Add("About", MenuHandler)
-PluginsMenuJsonToolsMenu := Menu()
-PluginsMenuJsonToolsMenu.Add("&Documentation", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Pretty-print current JSON file`tCtrl+Alt+Shift+P", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Compress current JSON file`tCtrl+Alt+Shift+C", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Path to current &line`tCtrl+Alt+Shift+L", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("Open &JSON tree viewer`tCtrl+Alt+Shift+J", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Get JSON from files and APIs`tCtrl+Alt+Shift+G", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Settings`tCtrl+Alt+Shift+S", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("Parse JSON Li&nes document", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("&Array to JSON Lines", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("&Validate JSON against JSON schema", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Generate sc&hema from JSON", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Generate &random JSON from schema", MenuHandler)
-PluginsMenuJsonToolsMenu.Add()
-PluginsMenuJsonToolsMenu.Add("JSON to &YAML", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("Run &tests", MenuHandler)
-PluginsMenuJsonToolsMenu.Add("A&bout", MenuHandler)
-PluginsMenuMIMEToolsMenu := Menu()
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode with padding", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode with Unix EOL", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Encode by line", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode strict", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Base64 Decode by line", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("Quoted-printable Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Quoted-printable Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("URL Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("Full URL Encode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add("URL Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("SAML Decode", MenuHandler)
-PluginsMenuMIMEToolsMenu.Add()
-PluginsMenuMIMEToolsMenu.Add("About", MenuHandler)
-PluginsMenuConverterMenu := Menu()
-PluginsMenuConverterMenu.Add("ASCII -> HEX", MenuHandler)
-PluginsMenuConverterMenu.Add("HEX -> ASCII", MenuHandler)
-PluginsMenuConverterMenu.Add()
-PluginsMenuConverterMenu.Add("Conversion Panel", MenuHandler)
-PluginsMenuConverterMenu.Add()
-PluginsMenuConverterMenu.Add("Edit Configuration File", MenuHandler)
-PluginsMenuConverterMenu.Add("About", MenuHandler)
-PluginsMenuNppExportMenu := Menu()
-PluginsMenuNppExportMenu.Add("&Export to RTF", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Export to HTML", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy RTF to A_Clipboard", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy HTML to A_Clipboard", MenuHandler)
-PluginsMenuNppExportMenu.Add("&Copy all formats to A_Clipboard", MenuHandler)
-PluginsMenuJSONViewerMenu := Menu()
-PluginsMenuJSONViewerMenu.Add("Show &JSON Viewer`tCtrl+Alt+Shift+J", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&Format JSON`tCtrl+Alt+Shift+M", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&Compress JSON`tCtrl+Alt+Shift+C", MenuHandler)
-PluginsMenuJSONViewerMenu.Add()
-PluginsMenuJSONViewerMenu.Add("&Setting", MenuHandler)
-PluginsMenuJSONViewerMenu.Add("&About", MenuHandler)
-PluginsMenuPyNPPMenu := Menu()
-PluginsMenuPyNPPMenu.Add("Run file in Python`tCtrl+Alt+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Run file in Python Interactive`tAlt+Shift+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Run file in PythonW`tCtrl+Alt+Shift+F5", MenuHandler)
-PluginsMenuPyNPPMenu.Add("Debug the file (PDB)", MenuHandler)
-PluginsMenuPyNPPMenu.Add()
-PluginsMenuPyNPPMenu.Add("Options", MenuHandler)
-PluginsMenuPyNPPMenu.Add("About PyNPP", MenuHandler)
-PluginsMenuPythonIndentMenu := Menu()
-PluginsMenuPythonIndentMenu.Add("Enable", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu := Menu()
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("BracketHighlighter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("ColumnLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("CTags Based Autocompletion", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Disable Virtual Space", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Enable Virtual Space", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("EnhancedPythonLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Event Handler Demo", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Formatter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("GotoLineCol", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("GotoLineCol_Barebones", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("HideLines", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("InsertRuler", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("LogfileLexer", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("MultiEdit", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Multiples_SR", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Python Regex Replacements", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("RegexTester", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Remove and Modify selected lines", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("ReplaceDefaultReplaceDialog", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Sorter", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("StartWithLocalPython", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu.Add("Swap2Words", MenuHandler)
-PluginsMenuPythonScriptMenuScriptsMenu := Menu()
-PluginsMenuPythonScriptMenuScriptsMenu.Add("Samples", PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu)
-PluginsMenuPythonScriptMenuScriptsMenu.Add("startup", MenuHandler)
-PluginsMenuPythonScriptMenu := Menu()
-PluginsMenuPythonScriptMenu.Add("New Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("Show Console", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Stop Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Run Previous Script", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("Scripts", PluginsMenuPythonScriptMenuScriptsMenu)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Configuration...", MenuHandler)
-PluginsMenuPythonScriptMenu.Add()
-PluginsMenuPythonScriptMenu.Add("Context-Help", MenuHandler)
-PluginsMenuPythonScriptMenu.Add("About", MenuHandler)
-PluginsMenu := Menu()
-PluginsMenu.Add("Dark Theme", PluginsMenuDarkThemeMenu)
-PluginsMenu.Add("JsonTools", PluginsMenuJsonToolsMenu)
-PluginsMenu.Add("MIME Tools", PluginsMenuMIMEToolsMenu)
-PluginsMenu.Add("Converter", PluginsMenuConverterMenu)
-PluginsMenu.Add("NppExport", PluginsMenuNppExportMenu)
-PluginsMenu.Add("JSON Viewer", PluginsMenuJSONViewerMenu)
-PluginsMenu.Add("PyNPP", PluginsMenuPyNPPMenu)
-PluginsMenu.Add("Python Indent", PluginsMenuPythonIndentMenu)
-PluginsMenu.Add("Python Script", PluginsMenuPythonScriptMenu)
-PluginsMenu.Add()
-PluginsMenu.Add("Plugins Admin...", MenuHandler)
-PluginsMenu.Add()
-PluginsMenu.Add("Open Plugins Folder...", MenuHandler)
-WindowMenuSortByMenu := Menu()
-WindowMenuSortByMenu.Add("Name A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Name Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Path A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Path Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Type A to Z", MenuHandler)
-WindowMenuSortByMenu.Add("Type Z to A", MenuHandler)
-WindowMenuSortByMenu.Add("Size Smaller to Larger", MenuHandler)
-WindowMenuSortByMenu.Add("Size Larger to Smaller", MenuHandler)
-WindowMenu := Menu()
-WindowMenu.Add("Sort By", WindowMenuSortByMenu)
-WindowMenu.Add("&Windows...", MenuHandler)
-WindowMenu.Add()
-WindowMenu.Add("Recent Window", MenuHandler)
-Menu_Storage := Menu()
-Menu_Storage.Add("Command Line Arguments...", MenuHandler)
-Menu_Storage.Add()
-Menu_Storage.Add("Notepad++ Home", MenuHandler)
-Menu_Storage.Add("Notepad++ Project Page", MenuHandler)
-Menu_Storage.Add("Notepad++ Online User Manual", MenuHandler)
-Menu_Storage.Add("Notepad++ Community (Forum)", MenuHandler)
-Menu_Storage.Add()
-Menu_Storage.Add("Update Notepad++", MenuHandler)
-Menu_Storage.Add("Set Updater Proxy...", MenuHandler)
-Menu_Storage.Add()
-Menu_Storage.Add("Debug Info...", MenuHandler)
-Menu_Storage.Add("About Notepad++`tF1", MenuHandler)
-Menu_Storage.Add("Recent Window", MenuHandler)
-MenuBar_Storage := MenuBar()
-MenuBar_Storage.Add("&File", FileMenu)
-MenuBar_Storage.Add("&Edit", EditMenu)
-MenuBar_Storage.Add("&Search", SearchMenu)
-MenuBar_Storage.Add("&View", ViewMenu)
-MenuBar_Storage.Add("E&ncoding", EncodingMenu)
-MenuBar_Storage.Add("&Language", LanguageMenu)
-MenuBar_Storage.Add("Se&ttings", SettingsMenu)
-MenuBar_Storage.Add("T&ools", ToolsMenu)
-MenuBar_Storage.Add("&Macro", MacroMenu)
-MenuBar_Storage.Add("&Run", RunMenu)
-MenuBar_Storage.Add("&Plugins", PluginsMenu)
-MenuBar_Storage.Add("&Window", WindowMenu)
-MenuBar_Storage.Add("&?", Menu)
-MenuBar_Storage.Add("▼", Menu)
-myGui.MenuBar := MenuBar_Storage
-myGui.Add("UpDown", "x1133 y30 w17 h17 -16")
-SB := myGui.Add("StatusBar", , "Hyper Text Markup Language file")
-ogcButton := myGui.Add("Button", "x3 y808 w24 h23", "✕")
-myGui.Add("Text", "x27 y813 w69 h20 +Right", "Find:")
-myGui.Add("Edit", "x98 y810 w263 h20")
-ogcButton := myGui.Add("Button", "x365 y808 w24 h23", "<")
-ogcButton := myGui.Add("Button", "x395 y808 w24 h23", ">")
-myGui.Add("CheckBox", "x435 y811 w150 h20", "Match &case")
-myGui.Add("CheckBox", "x600 y811 w150 h20", "&Highlight all")
-myGui.Add("Text", "x780 y813 w270 h20")
-Tab := myGui.Add("Tab3", "x0 y25 w1167 h778", ["Tabindex-ecobeef - Copy (2).html", "TASystemSettings.ini", "PyNuitkaExe.ahk", "setres.py", "TASystemSettings - Copy.ini", "pywebview.py", "hello.py", "index.html", "hello.html", "products.html", "index-ecobeef.html", "index.html", "temp_index.html", "bookclub__.txt", "index.html", "hello.html", "index.html", "python.py", "index.html", "index.html", "py.py", "readlines.py", "readlines.py", "index.html", "ecobeef.css", "dxvk.conf", "dxvk.conf", "Assassin4.ini", "GFXSettings.AC4BFSP.xml", "AC4BFSP_d3d11.log", "d3dx (2022_06_29 21_43_16 UTC).ini", "AcroRd32.exe.cfg", "AllSettings.ini", "apps.json", "output.json", "Untitled (4).ahk", "log_updater_ahk.json", "github.ahk", "AhkHelpMenu.xml", "Demo_Button_Func_Calls.py", "temp.txt", "er.txt", "er.txt", "log_old.txt", "dlsstweaks.ini", "dlsstweaks.log", "Readme.txt", "Hillard Dane - Publishing Python Packages - 2023.txt", "V2GuiCreator.ini", "log_out.txt", "selenium_ahk.py", "button_functions.py", "PySimpleG-venv-Menu.py", "qUINT_rtgi.fx", "openai Chatbot chatgpt 3 template python.txt", "faster_airtable.py", "1.txt", "new_pyscript.html", "output.txt", "key.txt", "dictionary.json", "ERRORS.txt", "ERRORS.txt", "THINGS FOR AN INTERVIEW.txt", "er.txt", "openai Chatbot chatgpt 3 template python - Copy (3).txt", "debug.txt", "openai Chatbot chatgpt 3 template python - Copy (2).txt", "dl.py", "data.txt", "openai Chatbot chatgpt 3 template python - Copy (2) - Copy.txt", "key - Copy (2).txt", "new 1", "key - Copy.txt", "get.txt", "venvMENU_python.ahk", "scons-report.txt", "openai Chatbot chatgpt 3 template python - Copy (2).txt", "setup.py", "main.cpp", "ag_settings.json", "openai Chatbot chatgpt 3 template python - Copy (3) - Copy.txt", "ConsoleApp4.deps.json", "AHK_load.ahk", "file.json", "openai Chatbot chatgpt 3 template python - Copy (3).txt", "Program.cs", "license.txt", "config.json", "UnitySubsystemsManifest.json", "Flask_Web_Development_vtoroe_izdanie_2018.txt", "shutdown_pc.py", "config.json", "kant_prolegomeda_spark-notes.txt", "bookclub.txt", "QuickConvertorV2.ini", "log.txt", "codeHandler.ahk", "log.txt", "bookclub_kant_prolegomeda.txt", "my_commands.bat", "website stuff todo.txt", "response.json", "v2converter.ahk", "ConvertFuncs.ahk", "AutoGUI.ahk", "AutoGUI.ini", "v2converter.ahk", "ConvertFuncs.ahk", "Counter-Strike Global Offensive 2.ahk", "temp.txt", "steam_appid.txt", "openvrsettings.xml", "oculussettings.xml", "graphicsconfigoculusdx11.xml", "graphicsconfigdx11.xml", "OVRLibraryService.log", "lastCode.txt"])
-Tab.UseTab()
-myGui.Title := "C:\Users\dower\OneDrive\____TE Meats____\index-ecobeef - Copy (2).html - Notepad++ (Clone)"
-myGui.Show("w1167 h627")
+ogcListViewListView := myGui.Add("ListView", "x18 y2 w200 h150 +LV0x4000", ["ListView"])
+myGui.Title := "Window"
+myGui.Show("w620 h420")
 Return
-MenuHandler(*) {
-	ToolTip "Click!", 100, 150
-}
-GuiEscape(*){ ; V1toV2: Added bracket
+GuiEscape(*)
+{ ; V1toV2: Added bracket
 GuiClose:
     ExitApp()
 } ; Added bracket in the end
-Gui +Resize
-Menu FileMenuOpenContainingFolderMenu, Add, Explorer, MenuHandler
-Menu FileMenuOpenContainingFolderMenu, Add, cmd, MenuHandler
-Menu FileMenuOpenContainingFolderMenu, Add
-Menu FileMenuOpenContainingFolderMenu, Add, Folder as Workspace, MenuHandler
-Menu FileMenuCloseMultipleDocumentsMenu, Add, Close All but Active Document, MenuHandler
-Menu FileMenuCloseMultipleDocumentsMenu, Add, Close All to the Left, MenuHandler
-Menu FileMenuCloseMultipleDocumentsMenu, Add, Close All to the Right, MenuHandler
-Menu FileMenuCloseMultipleDocumentsMenu, Add, Close All Unchanged, MenuHandler
-Menu FileMenu, Add, &New`tCtrl+N, MenuHandler
-Menu FileMenu, Add, &Open...`tCtrl+O, MenuHandler
-Menu FileMenu, Add, Open Containing &Folder, :FileMenuOpenContainingFolderMenu
-Menu FileMenu, Add, Open in &Default Viewer, MenuHandler
-Menu FileMenu, Add, Open Folder as &Workspace..., MenuHandler
-Menu FileMenu, Add, Re&load from Disk`tCtrl+R, MenuHandler
-Menu FileMenu, Add, &Save`tCtrl+S, MenuHandler
-Menu FileMenu, Add, Save &As...`tCtrl+Alt+S, MenuHandler
-Menu FileMenu, Add, Save a Cop&y As..., MenuHandler
-Menu FileMenu, Add, Sa&ve All`tCtrl+Shift+S, MenuHandler
-Menu FileMenu, Add, &Rename..., MenuHandler
-Menu FileMenu, Add, &Close`tCtrl+W, MenuHandler
-Menu FileMenu, Add, Clos&e All`tCtrl+Shift+W, MenuHandler
-Menu FileMenu, Add, Close &Multiple Documents, :FileMenuCloseMultipleDocumentsMenu
-Menu FileMenu, Add, Move to Recycle &Bin, MenuHandler
-Menu FileMenu, Add
-Menu FileMenu, Add, Load Sess&ion..., MenuHandler
-Menu FileMenu, Add, Save Sess&ion..., MenuHandler
-Menu FileMenu, Add
-Menu FileMenu, Add, &Print...`tCtrl+P, MenuHandler
-Menu FileMenu, Add, Print No&w, MenuHandler
-Menu FileMenu, Add
-Menu FileMenu, Add, &1: C:\Program Files\Oculus\CoreData\Manifests\G_Barbaria_Barbaria_assets.json, MenuHandler
-Menu FileMenu, Add, &2: C:\Program Files\Oculus\CoreData\Manifests\G_Barbaria_Barbaria.json, MenuHandler
-Menu FileMenu, Add, &3: C:\Users\dower\Documents\Auto-GUI-v2\complete_application\License.txt, MenuHandler
-Menu FileMenu, Add, &4: C:\Users\dower\OneDrive\rawaccel\ahk\communication___layer__python_autohotkey_ahk__\AHK.ahk, MenuHandler
-Menu FileMenu, Add, &5: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com (1).json, MenuHandler
-Menu FileMenu, Add, &6: C:\Users\dower\Downloads\client_secret_899713568554-bi4ad5g2178hcifm9ag4tlm0iliip0ca.apps.googleusercontent.com.json, MenuHandler
-Menu FileMenu, Add, &7: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\d3dx.ini, MenuHandler
-Menu FileMenu, Add, &8: C:\Users\dower\Desktop\Death.in.the.Water.2.v1.0.7b\doorstop_config.ini, MenuHandler
-Menu FileMenu, Add, &9: C:\Users\dower\OneDrive\RESOLUTION\KATANGA_LAUNCHER\pywebview_jinja2\JINJA2\examples\js_api.py, MenuHandler
-Menu FileMenu, Add, 1&0: C:\Users\dower\OneDrive\STEAM_VDF_2023\build\exe.win-amd64-3.11\export_command.py, MenuHandler
-Menu FileMenu, Add, ERROR, MenuHandler
-Menu FileMenu, Add, Restore Recent Closed File`tCtrl+Shift+T, MenuHandler
-Menu FileMenu, Add, Open All Recent Files, MenuHandler
-Menu FileMenu, Add, Empty Recent Files List, MenuHandler
-Menu FileMenu, Add, ERROR, MenuHandler
-Menu FileMenu, Add, E&xit`tAlt+F4, MenuHandler
-Menu EditMenuInsertMenu, Add, Date Time (short), MenuHandler
-Menu EditMenuInsertMenu, Add, Date Time (long), MenuHandler
-Menu EditMenuInsertMenu, Add, Date Time (customized), MenuHandler
-Menu EditMenuCopytoClipboardMenu, Add, Copy Current Full File path, MenuHandler
-Menu EditMenuCopytoClipboardMenu, Add, Copy Current Filename, MenuHandler
-Menu EditMenuCopytoClipboardMenu, Add, Copy Current Dir. Path, MenuHandler
-Menu EditMenuCopytoClipboardMenu, Add
-Menu EditMenuCopytoClipboardMenu, Add, Copy All Filenames, MenuHandler
-Menu EditMenuCopytoClipboardMenu, Add, Copy All File Paths, MenuHandler
-Menu EditMenuIndentMenu, Add, Increase Line Indent, MenuHandler
-Menu EditMenuIndentMenu, Add, Decrease Line Indent, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, &UPPERCASE`tCtrl+Shift+U, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, &lowercase`tCtrl+U, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, &Proper Case`tAlt+U, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, Proper Case (blend)`tAlt+Shift+U, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, &Sentence case`tCtrl+Alt+U, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, Sentence case (blend)`tCtrl+Alt+Shift+U, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, &iNVERT cASE, MenuHandler
-Menu EditMenuConvertCasetoMenu, Add, &ranDOm CasE, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Duplicate Current Line`tCtrl+D, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Remove Duplicate Lines, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Remove Consecutive Duplicate Lines, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Split Lines`tCtrl+I, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Join Lines`tCtrl+J, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Move Up Current Line`tCtrl+Shift+Up, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Move Down Current Line`tCtrl+Shift+Down, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Remove Empty Lines, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Remove Empty Lines (Containing Blank characters), MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Insert Blank Line Above Current`tCtrl+Alt+Enter, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Insert Blank Line Below Current`tCtrl+Alt+Shift+Enter, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Reverse Line Order, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Randomize Line Order, MenuHandler
-Menu EditMenuLineOperationsMenu, Add
-Menu EditMenuLineOperationsMenu, Add, Sort Lines Lexicographically Ascending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines Lex. Ascending Ignoring Case, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines As Integers Ascending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines As Decimals (Comma) Ascending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines As Decimals (Dot) Ascending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add
-Menu EditMenuLineOperationsMenu, Add, Sort Lines Lexicographically Descending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines Lex. Descending Ignoring Case, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines As Integers Descending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines As Decimals (Comma) Descending, MenuHandler
-Menu EditMenuLineOperationsMenu, Add, Sort Lines As Decimals (Dot) Descending, MenuHandler
-Menu EditMenuCommentUncommentMenu, Add, Toggle Single Line Comment`tCtrl+Q, MenuHandler
-Menu EditMenuCommentUncommentMenu, Add, Single Line Comment`tCtrl+K, MenuHandler
-Menu EditMenuCommentUncommentMenu, Add, Single Line Uncomment`tCtrl+Shift+K, MenuHandler
-Menu EditMenuCommentUncommentMenu, Add, Block Comment`tCtrl+Shift+Q, MenuHandler
-Menu EditMenuCommentUncommentMenu, Add, Block Uncomment, MenuHandler
-Menu EditMenuAutoCompletionMenu, Add, Function Completion`tCtrl+Spacebar, MenuHandler
-Menu EditMenuAutoCompletionMenu, Add, Word Completion`tCtrl+Enter, MenuHandler
-Menu EditMenuAutoCompletionMenu, Add, Function Parameters Hint`tCtrl+Shift+Spacebar, MenuHandler
-Menu EditMenuAutoCompletionMenu, Add, Function Parameters Previous Hint`tAlt+Up, MenuHandler
-Menu EditMenuAutoCompletionMenu, Add, Function Parameters Next Hint`tAlt+Down, MenuHandler
-Menu EditMenuAutoCompletionMenu, Add, Path Completion`tCtrl+Alt+Spacebar, MenuHandler
-Menu EditMenuEOLConversionMenu, Add, Windows (CR LF), MenuHandler
-Menu EditMenuEOLConversionMenu, Add, Unix (LF), MenuHandler
-Menu EditMenuEOLConversionMenu, Add, Macintosh (CR), MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, Trim Trailing Space, MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, Trim Leading Space, MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, Trim Leading and Trailing Space, MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, EOL to Space, MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, Trim both and EOL to Space, MenuHandler
-Menu EditMenuBlankOperationsMenu, Add
-Menu EditMenuBlankOperationsMenu, Add, TAB to Space, MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, Space to TAB (All), MenuHandler
-Menu EditMenuBlankOperationsMenu, Add, Space to TAB (Leading), MenuHandler
-Menu EditMenuPasteSpecialMenu, Add, Paste HTML Content, MenuHandler
-Menu EditMenuPasteSpecialMenu, Add, Paste RTF Content, MenuHandler
-Menu EditMenuPasteSpecialMenu, Add
-Menu EditMenuPasteSpecialMenu, Add, Copy Binary Content, MenuHandler
-Menu EditMenuPasteSpecialMenu, Add, Cut Binary Content, MenuHandler
-Menu EditMenuPasteSpecialMenu, Add, Paste Binary Content, MenuHandler
-Menu EditMenuOnSelectionMenu, Add, Open File, MenuHandler
-Menu EditMenuOnSelectionMenu, Add, Open Containing Folder in Explorer, MenuHandler
-Menu EditMenuOnSelectionMenu, Add
-Menu EditMenuOnSelectionMenu, Add, Search on Internet, MenuHandler
-Menu EditMenuOnSelectionMenu, Add, Change Search Engine..., MenuHandler
-Menu EditMenu, Add, &Undo`tCtrl+Z or Alt+Backspace, MenuHandler
-Menu EditMenu, Add, &Redo`tCtrl+Y or Ctrl+Shift+Z, MenuHandler
-Menu EditMenu, Add
-Menu EditMenu, Add, Cu&t`tCtrl+X or Shift+DEL, MenuHandler
-Menu EditMenu, Add, &Copy`tCtrl+C or Ctrl+INS, MenuHandler
-Menu EditMenu, Add, &Paste`tCtrl+V or Shift+INS, MenuHandler
-Menu EditMenu, Add, &Delete`tDEL, MenuHandler
-Menu EditMenu, Add, &Select All`tCtrl+A, MenuHandler
-Menu EditMenu, Add, Begin/End &Select`tCtrl+Shift+B, MenuHandler
-Menu EditMenu, Add, Begin/End Select in Column Mode`tAlt+Shift+B, MenuHandler
-Menu EditMenu, Add
-Menu EditMenu, Add, Insert, :EditMenuInsertMenu
-Menu EditMenu, Add, Cop&y to Clipboard, :EditMenuCopytoClipboardMenu
-Menu EditMenu, Add, &Indent, :EditMenuIndentMenu
-Menu EditMenu, Add, Con&vert Case to, :EditMenuConvertCasetoMenu
-Menu EditMenu, Add, &Line Operations, :EditMenuLineOperationsMenu
-Menu EditMenu, Add, Co&mment/Uncomment, :EditMenuCommentUncommentMenu
-Menu EditMenu, Add, &Auto-Completion, :EditMenuAutoCompletionMenu
-Menu EditMenu, Add, &EOL Conversion, :EditMenuEOLConversionMenu
-Menu EditMenu, Add, &Blank Operations, :EditMenuBlankOperationsMenu
-Menu EditMenu, Add, &Paste Special, :EditMenuPasteSpecialMenu
-Menu EditMenu, Add, &On Selection, :EditMenuOnSelectionMenu
-Menu EditMenu, Add
-Menu EditMenu, Add, Column Mode..., MenuHandler
-Menu EditMenu, Add, Colum&n Editor...`tAlt+C, MenuHandler
-Menu EditMenu, Add, Character &Panel, MenuHandler
-Menu EditMenu, Add, Clipboard &History, MenuHandler
-Menu EditMenu, Add
-Menu EditMenu, Add, &Set Read-Only, MenuHandler
-Menu EditMenu, Add, Clear Read-Only Flag, MenuHandler
-Menu SearchMenuStyleAllOccurrencesofTokenMenu, Add, Using 1st Style, MenuHandler
-Menu SearchMenuStyleAllOccurrencesofTokenMenu, Add, Using 2nd Style, MenuHandler
-Menu SearchMenuStyleAllOccurrencesofTokenMenu, Add, Using 3rd Style, MenuHandler
-Menu SearchMenuStyleAllOccurrencesofTokenMenu, Add, Using 4th Style, MenuHandler
-Menu SearchMenuStyleAllOccurrencesofTokenMenu, Add, Using 5th Style, MenuHandler
-Menu SearchMenuStyleOneTokenMenu, Add, Using 1st Style, MenuHandler
-Menu SearchMenuStyleOneTokenMenu, Add, Using 2nd Style, MenuHandler
-Menu SearchMenuStyleOneTokenMenu, Add, Using 3rd Style, MenuHandler
-Menu SearchMenuStyleOneTokenMenu, Add, Using 4th Style, MenuHandler
-Menu SearchMenuStyleOneTokenMenu, Add, Using 5th Style, MenuHandler
-Menu SearchMenuClearStyleMenu, Add, Clear 1st Style, MenuHandler
-Menu SearchMenuClearStyleMenu, Add, Clear 2nd Style, MenuHandler
-Menu SearchMenuClearStyleMenu, Add, Clear 3rd Style, MenuHandler
-Menu SearchMenuClearStyleMenu, Add, Clear 4th Style, MenuHandler
-Menu SearchMenuClearStyleMenu, Add, Clear 5th Style, MenuHandler
-Menu SearchMenuClearStyleMenu, Add, Clear all Styles, MenuHandler
-Menu SearchMenuJumpUpMenu, Add, 1st Style`tCtrl+Shift+1, MenuHandler
-Menu SearchMenuJumpUpMenu, Add, 2nd Style`tCtrl+Shift+2, MenuHandler
-Menu SearchMenuJumpUpMenu, Add, 3rd Style`tCtrl+Shift+3, MenuHandler
-Menu SearchMenuJumpUpMenu, Add, 4th Style`tCtrl+Shift+4, MenuHandler
-Menu SearchMenuJumpUpMenu, Add, 5th Style`tCtrl+Shift+5, MenuHandler
-Menu SearchMenuJumpUpMenu, Add, Find Mark Style`tCtrl+Shift+0, MenuHandler
-Menu SearchMenuJumpDownMenu, Add, 1st Style`tCtrl+1, MenuHandler
-Menu SearchMenuJumpDownMenu, Add, 2nd Style`tCtrl+2, MenuHandler
-Menu SearchMenuJumpDownMenu, Add, 3rd Style`tCtrl+3, MenuHandler
-Menu SearchMenuJumpDownMenu, Add, 4th Style`tCtrl+4, MenuHandler
-Menu SearchMenuJumpDownMenu, Add, 5th Style`tCtrl+5, MenuHandler
-Menu SearchMenuJumpDownMenu, Add, Find Mark Style`tCtrl+0, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, 1st Style, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, 2nd Style, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, 3rd Style, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, 4th Style, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, 5th Style, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, All Styles, MenuHandler
-Menu SearchMenuCopyStyledTextMenu, Add, Find Mark Style, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Toggle Bookmark`tCtrl+F2, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Next Bookmark`tF2, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Previous Bookmark`tShift+F2, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Clear All Bookmarks, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Cut Bookmarked Lines, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Copy Bookmarked Lines, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Paste to (Replace) Bookmarked Lines, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Remove Bookmarked Lines, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Remove Non-Bookmarked Lines, MenuHandler
-Menu SearchMenuBookmarkMenu, Add, Inverse Bookmark, MenuHandler
-Menu SearchMenu, Add, &Find...`tCtrl+F, MenuHandler
-Menu SearchMenu, Add, Find in Fi&les...`tCtrl+Shift+F, MenuHandler
-Menu SearchMenu, Add, Find &Next`tF3, MenuHandler
-Menu SearchMenu, Add, Find &Previous`tShift+F3, MenuHandler
-Menu SearchMenu, Add, &Select and Find Next`tCtrl+F3, MenuHandler
-Menu SearchMenu, Add, &Select and Find Previous`tCtrl+Shift+F3, MenuHandler
-Menu SearchMenu, Add, Find (&Volatile) Next`tCtrl+Alt+F3, MenuHandler
-Menu SearchMenu, Add, Find (&Volatile) Previous`tCtrl+Alt+Shift+F3, MenuHandler
-Menu SearchMenu, Add, &Replace...`tCtrl+H, MenuHandler
-Menu SearchMenu, Add, &Incremental Search`tCtrl+Alt+I, MenuHandler
-Menu SearchMenu, Add, Search Results &Window`tF7, MenuHandler
-Menu SearchMenu, Add, Next Search Resul&t`tF4, MenuHandler
-Menu SearchMenu, Add, Previous Search Resul&t`tShift+F4, MenuHandler
-Menu SearchMenu, Add, &Go to...`tCtrl+G, MenuHandler
-Menu SearchMenu, Add, Go to &Matching Brace`tCtrl+B, MenuHandler
-Menu SearchMenu, Add, Select All Between &Matching Braces`tCtrl+Alt+B, MenuHandler
-Menu SearchMenu, Add, Mar&k...`tCtrl+M, MenuHandler
-Menu SearchMenu, Add
-Menu SearchMenu, Add, Style &All Occurrences of Token, :SearchMenuStyleAllOccurrencesofTokenMenu
-Menu SearchMenu, Add, Style &One Token, :SearchMenuStyleOneTokenMenu
-Menu SearchMenu, Add, Clear Style, :SearchMenuClearStyleMenu
-Menu SearchMenu, Add, &Jump Up, :SearchMenuJumpUpMenu
-Menu SearchMenu, Add, Jump &Down, :SearchMenuJumpDownMenu
-Menu SearchMenu, Add, &Copy Styled Text, :SearchMenuCopyStyledTextMenu
-Menu SearchMenu, Add
-Menu SearchMenu, Add, &Bookmark, :SearchMenuBookmarkMenu
-Menu SearchMenu, Add
-Menu SearchMenu, Add, Find characters in rang&e..., MenuHandler
-Menu ViewMenuViewCurrentFileinMenu, Add, Firefox, MenuHandler
-Menu ViewMenuViewCurrentFileinMenu, Add, Chrome, MenuHandler
-Menu ViewMenuViewCurrentFileinMenu, Add, Edge, MenuHandler
-Menu ViewMenuViewCurrentFileinMenu, Add, IE, MenuHandler
-Menu ViewMenuShowSymbolMenu, Add, Show Space and Tab, MenuHandler
-Menu ViewMenuShowSymbolMenu, Add, Show End of Line, MenuHandler
-Menu ViewMenuShowSymbolMenu, Add, Show Non-Printing Characters, MenuHandler
-Menu ViewMenuShowSymbolMenu, Add, Show All Characters, MenuHandler
-Menu ViewMenuShowSymbolMenu, Add
-Menu ViewMenuShowSymbolMenu, Add, Show Indent Guide, MenuHandler
-Menu ViewMenuShowSymbolMenu, Add, Show Wrap Symbol, MenuHandler
-Menu ViewMenuZoomMenu, Add, Zoom &In (Ctrl+Mouse Wheel Up)`tCtrl+Num +, MenuHandler
-Menu ViewMenuZoomMenu, Add, Zoom &Out (Ctrl+Mouse Wheel Down)`tCtrl+Num -, MenuHandler
-Menu ViewMenuZoomMenu, Add, Restore Default Zoom`tCtrl+Num /, MenuHandler
-Menu ViewMenuMoveCloneCurrentDocumentMenu, Add, Move to Other View, MenuHandler
-Menu ViewMenuMoveCloneCurrentDocumentMenu, Add, Clone to Other View, MenuHandler
-Menu ViewMenuMoveCloneCurrentDocumentMenu, Add, Move to New Instance, MenuHandler
-Menu ViewMenuMoveCloneCurrentDocumentMenu, Add, Open in New Instance, MenuHandler
-Menu ViewMenuTabMenu, Add, 1st Tab`tCtrl+Numpad 1, MenuHandler
-Menu ViewMenuTabMenu, Add, 2nd Tab`tCtrl+Numpad 2, MenuHandler
-Menu ViewMenuTabMenu, Add, 3rd Tab`tCtrl+Numpad 3, MenuHandler
-Menu ViewMenuTabMenu, Add, 4th Tab`tCtrl+Numpad 4, MenuHandler
-Menu ViewMenuTabMenu, Add, 5th Tab`tCtrl+Numpad 5, MenuHandler
-Menu ViewMenuTabMenu, Add, 6th Tab`tCtrl+Numpad 6, MenuHandler
-Menu ViewMenuTabMenu, Add, 7th Tab`tCtrl+Numpad 7, MenuHandler
-Menu ViewMenuTabMenu, Add, 8th Tab`tCtrl+Numpad 8, MenuHandler
-Menu ViewMenuTabMenu, Add, 9th Tab`tCtrl+Numpad 9, MenuHandler
-Menu ViewMenuTabMenu, Add
-Menu ViewMenuTabMenu, Add, Next Tab`tCtrl+Page down, MenuHandler
-Menu ViewMenuTabMenu, Add, Previous Tab`tCtrl+Page up, MenuHandler
-Menu ViewMenuTabMenu, Add
-Menu ViewMenuTabMenu, Add, Move Tab Forward`tCtrl+Shift+Page down, MenuHandler
-Menu ViewMenuTabMenu, Add, Move Tab Backward`tCtrl+Shift+Page up, MenuHandler
-Menu ViewMenuTabMenu, Add
-Menu ViewMenuTabMenu, Add, Apply Color 1, MenuHandler
-Menu ViewMenuTabMenu, Add, Apply Color 2, MenuHandler
-Menu ViewMenuTabMenu, Add, Apply Color 3, MenuHandler
-Menu ViewMenuTabMenu, Add, Apply Color 4, MenuHandler
-Menu ViewMenuTabMenu, Add, Apply Color 5, MenuHandler
-Menu ViewMenuTabMenu, Add, Remove Color, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 1`tAlt+1, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 2`tAlt+2, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 3`tAlt+3, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 4`tAlt+4, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 5`tAlt+5, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 6`tAlt+6, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 7`tAlt+7, MenuHandler
-Menu ViewMenuFoldLevelMenu, Add, 8`tAlt+8, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 1`tAlt+Shift+1, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 2`tAlt+Shift+2, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 3`tAlt+Shift+3, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 4`tAlt+Shift+4, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 5`tAlt+Shift+5, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 6`tAlt+Shift+6, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 7`tAlt+Shift+7, MenuHandler
-Menu ViewMenuUnfoldLevelMenu, Add, 8`tAlt+Shift+8, MenuHandler
-Menu ViewMenuProjectPanelsMenu, Add, Project Panel 1, MenuHandler
-Menu ViewMenuProjectPanelsMenu, Add, Project Panel 2, MenuHandler
-Menu ViewMenuProjectPanelsMenu, Add, Project Panel 3, MenuHandler
-Menu ViewMenu, Add, Always on Top, MenuHandler
-Menu ViewMenu, Add, Toggle Full Screen Mode`tF11, MenuHandler
-Menu ViewMenu, Add, Post-It`tF12, MenuHandler
-Menu ViewMenu, Add, Distraction Free Mode, MenuHandler
-Menu ViewMenu, Add
-Menu ViewMenu, Add, View Current File in, :ViewMenuViewCurrentFileinMenu
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Show Symbol, :ViewMenuShowSymbolMenu
-Menu ViewMenu, Add, Zoom, :ViewMenuZoomMenu
-Menu ViewMenu, Add, Move/Clone Current Document, :ViewMenuMoveCloneCurrentDocumentMenu
-Menu ViewMenu, Add, Tab, :ViewMenuTabMenu
-Menu ViewMenu, Add, Word wrap, MenuHandler
-Menu ViewMenu, Add, Focus on Another View`tF8, MenuHandler
-Menu ViewMenu, Add, Hide Lines`tAlt+H, MenuHandler
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Fold All`tAlt+0, MenuHandler
-Menu ViewMenu, Add, Unfold All`tAlt+Shift+0, MenuHandler
-Menu ViewMenu, Add, Fold Current Level`tCtrl+Alt+F, MenuHandler
-Menu ViewMenu, Add, Unfold Current Level`tCtrl+Alt+Shift+F, MenuHandler
-Menu ViewMenu, Add, Fold Level, :ViewMenuFoldLevelMenu
-Menu ViewMenu, Add, Unfold Level, :ViewMenuUnfoldLevelMenu
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Summary..., MenuHandler
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Project Panels, :ViewMenuProjectPanelsMenu
-Menu ViewMenu, Add, Folder as Workspace, MenuHandler
-Menu ViewMenu, Add, Document Map, MenuHandler
-Menu ViewMenu, Add, Document List, MenuHandler
-Menu ViewMenu, Add, Function List, MenuHandler
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Synchronize Vertical Scrolling, MenuHandler
-Menu ViewMenu, Add, Synchronize Horizontal Scrolling, MenuHandler
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Text Direction RTL`tCtrl+Alt+R, MenuHandler
-Menu ViewMenu, Add, Text Direction LTR`tCtrl+Alt+L, MenuHandler
-Menu ViewMenu, Add
-Menu ViewMenu, Add, Monitoring (tail -f), MenuHandler
-Menu EncodingMenuCharactersetsMenuArabicMenu, Add, ISO 8859-6, MenuHandler
-Menu EncodingMenuCharactersetsMenuArabicMenu, Add, OEM 720, MenuHandler
-Menu EncodingMenuCharactersetsMenuArabicMenu, Add, Windows-1256, MenuHandler
-Menu EncodingMenuCharactersetsMenuBalticMenu, Add, ISO 8859-4, MenuHandler
-Menu EncodingMenuCharactersetsMenuBalticMenu, Add, ISO 8859-13, MenuHandler
-Menu EncodingMenuCharactersetsMenuBalticMenu, Add, OEM 775, MenuHandler
-Menu EncodingMenuCharactersetsMenuBalticMenu, Add, Windows-1257, MenuHandler
-Menu EncodingMenuCharactersetsMenuCelticMenu, Add, ISO 8859-14, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, ISO 8859-5, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, KOI8-R, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, KOI8-U, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, Macintosh, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, OEM 855, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, OEM 866, MenuHandler
-Menu EncodingMenuCharactersetsMenuCyrillicMenu, Add, Windows-1251, MenuHandler
-Menu EncodingMenuCharactersetsMenuCentralEuropeanMenu, Add, OEM 852, MenuHandler
-Menu EncodingMenuCharactersetsMenuCentralEuropeanMenu, Add, Windows-1250, MenuHandler
-Menu EncodingMenuCharactersetsMenuChineseMenu, Add, Big5 (Traditional), MenuHandler
-Menu EncodingMenuCharactersetsMenuChineseMenu, Add, GB2312 (Simplified), MenuHandler
-Menu EncodingMenuCharactersetsMenuEasternEuropeanMenu, Add, ISO 8859-2, MenuHandler
-Menu EncodingMenuCharactersetsMenuGreekMenu, Add, ISO 8859-7, MenuHandler
-Menu EncodingMenuCharactersetsMenuGreekMenu, Add, OEM 737, MenuHandler
-Menu EncodingMenuCharactersetsMenuGreekMenu, Add, OEM 869, MenuHandler
-Menu EncodingMenuCharactersetsMenuGreekMenu, Add, Windows-1253, MenuHandler
-Menu EncodingMenuCharactersetsMenuHebrewMenu, Add, ISO 8859-8, MenuHandler
-Menu EncodingMenuCharactersetsMenuHebrewMenu, Add, OEM 862, MenuHandler
-Menu EncodingMenuCharactersetsMenuHebrewMenu, Add, Windows-1255, MenuHandler
-Menu EncodingMenuCharactersetsMenuJapaneseMenu, Add, Shift-JIS, MenuHandler
-Menu EncodingMenuCharactersetsMenuKoreanMenu, Add, Windows 949, MenuHandler
-Menu EncodingMenuCharactersetsMenuKoreanMenu, Add, EUC-KR, MenuHandler
-Menu EncodingMenuCharactersetsMenuNorthEuropeanMenu, Add, OEM 861 : Icelandic, MenuHandler
-Menu EncodingMenuCharactersetsMenuNorthEuropeanMenu, Add, OEM 865 : Nordic, MenuHandler
-Menu EncodingMenuCharactersetsMenuThaiMenu, Add, TIS-620, MenuHandler
-Menu EncodingMenuCharactersetsMenuTurkishMenu, Add, ISO 8859-3, MenuHandler
-Menu EncodingMenuCharactersetsMenuTurkishMenu, Add, ISO 8859-9, MenuHandler
-Menu EncodingMenuCharactersetsMenuTurkishMenu, Add, OEM 857, MenuHandler
-Menu EncodingMenuCharactersetsMenuTurkishMenu, Add, Windows-1254, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, ISO 8859-1, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, ISO 8859-15, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, OEM 850, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, OEM 858, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, OEM 860 : Portuguese, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, OEM 863 : French, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, OEM-US, MenuHandler
-Menu EncodingMenuCharactersetsMenuWesternEuropeanMenu, Add, Windows-1252, MenuHandler
-Menu EncodingMenuCharactersetsMenuVietnameseMenu, Add, Windows-1258, MenuHandler
-Menu EncodingMenuCharactersetsMenu, Add, Arabic, :EncodingMenuCharactersetsMenuArabicMenu
-Menu EncodingMenuCharactersetsMenu, Add, Baltic, :EncodingMenuCharactersetsMenuBalticMenu
-Menu EncodingMenuCharactersetsMenu, Add, Celtic, :EncodingMenuCharactersetsMenuCelticMenu
-Menu EncodingMenuCharactersetsMenu, Add, Cyrillic, :EncodingMenuCharactersetsMenuCyrillicMenu
-Menu EncodingMenuCharactersetsMenu, Add, Central European, :EncodingMenuCharactersetsMenuCentralEuropeanMenu
-Menu EncodingMenuCharactersetsMenu, Add, Chinese, :EncodingMenuCharactersetsMenuChineseMenu
-Menu EncodingMenuCharactersetsMenu, Add, Eastern European, :EncodingMenuCharactersetsMenuEasternEuropeanMenu
-Menu EncodingMenuCharactersetsMenu, Add, Greek, :EncodingMenuCharactersetsMenuGreekMenu
-Menu EncodingMenuCharactersetsMenu, Add, Hebrew, :EncodingMenuCharactersetsMenuHebrewMenu
-Menu EncodingMenuCharactersetsMenu, Add, Japanese, :EncodingMenuCharactersetsMenuJapaneseMenu
-Menu EncodingMenuCharactersetsMenu, Add, Korean, :EncodingMenuCharactersetsMenuKoreanMenu
-Menu EncodingMenuCharactersetsMenu, Add, North European, :EncodingMenuCharactersetsMenuNorthEuropeanMenu
-Menu EncodingMenuCharactersetsMenu, Add, Thai, :EncodingMenuCharactersetsMenuThaiMenu
-Menu EncodingMenuCharactersetsMenu, Add, Turkish, :EncodingMenuCharactersetsMenuTurkishMenu
-Menu EncodingMenuCharactersetsMenu, Add, Western European, :EncodingMenuCharactersetsMenuWesternEuropeanMenu
-Menu EncodingMenuCharactersetsMenu, Add, Vietnamese, :EncodingMenuCharactersetsMenuVietnameseMenu
-Menu EncodingMenu, Add, ANSI, MenuHandler
-Menu EncodingMenu, Add, UTF-8, MenuHandler
-Menu EncodingMenu, Add, UTF-8-BOM, MenuHandler
-Menu EncodingMenu, Add, UTF-16 BE BOM, MenuHandler
-Menu EncodingMenu, Add, UTF-16 LE BOM, MenuHandler
-Menu EncodingMenu, Add, Character sets, :EncodingMenuCharactersetsMenu
-Menu EncodingMenu, Add
-Menu EncodingMenu, Add, Convert to ANSI, MenuHandler
-Menu EncodingMenu, Add, Convert to UTF-8, MenuHandler
-Menu EncodingMenu, Add, Convert to UTF-8-BOM, MenuHandler
-Menu EncodingMenu, Add, Convert to UTF-16 BE BOM, MenuHandler
-Menu EncodingMenu, Add, Convert to UTF-16 LE BOM, MenuHandler
-Menu LanguageMenuAMenu, Add, ActionScript, MenuHandler
-Menu LanguageMenuAMenu, Add, Ada, MenuHandler
-Menu LanguageMenuAMenu, Add, ASN.1, MenuHandler
-Menu LanguageMenuAMenu, Add, ASP, MenuHandler
-Menu LanguageMenuAMenu, Add, Assembly, MenuHandler
-Menu LanguageMenuAMenu, Add, AutoIt, MenuHandler
-Menu LanguageMenuAMenu, Add, AviSynth, MenuHandler
-Menu LanguageMenuBMenu, Add, BaanC, MenuHandler
-Menu LanguageMenuBMenu, Add, Batch, MenuHandler
-Menu LanguageMenuBMenu, Add, Blitzbasic, MenuHandler
-Menu LanguageMenuCMenu, Add, C, MenuHandler
-Menu LanguageMenuCMenu, Add, C#, MenuHandler
-Menu LanguageMenuCMenu, Add, C++, MenuHandler
-Menu LanguageMenuCMenu, Add, Caml, MenuHandler
-Menu LanguageMenuCMenu, Add, CMake, MenuHandler
-Menu LanguageMenuCMenu, Add, COBOL, MenuHandler
-Menu LanguageMenuCMenu, Add, CSound, MenuHandler
-Menu LanguageMenuCMenu, Add, CoffeeScript, MenuHandler
-Menu LanguageMenuCMenu, Add, CSS, MenuHandler
-Menu LanguageMenuDMenu, Add, D, MenuHandler
-Menu LanguageMenuDMenu, Add, Diff, MenuHandler
-Menu LanguageMenuEMenu, Add, Erlang, MenuHandler
-Menu LanguageMenuEMenu, Add, ESCRIPT, MenuHandler
-Menu LanguageMenuFMenu, Add, Forth, MenuHandler
-Menu LanguageMenuFMenu, Add, Fortran (free form), MenuHandler
-Menu LanguageMenuFMenu, Add, Fortran (fixed form), MenuHandler
-Menu LanguageMenuFMenu, Add, Freebasic, MenuHandler
-Menu LanguageMenuGMenu, Add, GDScript, MenuHandler
-Menu LanguageMenuGMenu, Add, Gui4Cli, MenuHandler
-Menu LanguageMenuHMenu, Add, Haskell, MenuHandler
-Menu LanguageMenuHMenu, Add, Hollywood, MenuHandler
-Menu LanguageMenuHMenu, Add, HTML, MenuHandler
-Menu LanguageMenuIMenu, Add, INI file, MenuHandler
-Menu LanguageMenuIMenu, Add, Inno Setup, MenuHandler
-Menu LanguageMenuIMenu, Add, Intel HEX, MenuHandler
-Menu LanguageMenuJMenu, Add, Java, MenuHandler
-Menu LanguageMenuJMenu, Add, JavaScript, MenuHandler
-Menu LanguageMenuJMenu, Add, JSON, MenuHandler
-Menu LanguageMenuJMenu, Add, JSON5, MenuHandler
-Menu LanguageMenuJMenu, Add, JSP, MenuHandler
-Menu LanguageMenuLMenu, Add, LaTeX, MenuHandler
-Menu LanguageMenuLMenu, Add, LISP, MenuHandler
-Menu LanguageMenuLMenu, Add, Lua, MenuHandler
-Menu LanguageMenuMMenu, Add, Makefile, MenuHandler
-Menu LanguageMenuMMenu, Add, Matlab, MenuHandler
-Menu LanguageMenuMMenu, Add, Microsoft Transact-SQL, MenuHandler
-Menu LanguageMenuMMenu, Add, MMIXAL, MenuHandler
-Menu LanguageMenuMMenu, Add, MS-DOS Style, MenuHandler
-Menu LanguageMenuNMenu, Add, Nim, MenuHandler
-Menu LanguageMenuNMenu, Add, Nncrontab, MenuHandler
-Menu LanguageMenuNMenu, Add, NSIS, MenuHandler
-Menu LanguageMenuOMenu, Add, Objective-C, MenuHandler
-Menu LanguageMenuOMenu, Add, OScript, MenuHandler
-Menu LanguageMenuPMenu, Add, Pascal, MenuHandler
-Menu LanguageMenuPMenu, Add, Perl, MenuHandler
-Menu LanguageMenuPMenu, Add, PHP, MenuHandler
-Menu LanguageMenuPMenu, Add, PostScript, MenuHandler
-Menu LanguageMenuPMenu, Add, PowerShell, MenuHandler
-Menu LanguageMenuPMenu, Add, Properties, MenuHandler
-Menu LanguageMenuPMenu, Add, Purebasic, MenuHandler
-Menu LanguageMenuPMenu, Add, Python, MenuHandler
-Menu LanguageMenuRMenu, Add, R, MenuHandler
-Menu LanguageMenuRMenu, Add, REBOL, MenuHandler
-Menu LanguageMenuRMenu, Add, Registry, MenuHandler
-Menu LanguageMenuRMenu, Add, Resource file, MenuHandler
-Menu LanguageMenuRMenu, Add, Ruby, MenuHandler
-Menu LanguageMenuRMenu, Add, Rust, MenuHandler
-Menu LanguageMenuSMenu, Add, Shell, MenuHandler
-Menu LanguageMenuSMenu, Add, Scheme, MenuHandler
-Menu LanguageMenuSMenu, Add, Smalltalk, MenuHandler
-Menu LanguageMenuSMenu, Add, Spice, MenuHandler
-Menu LanguageMenuSMenu, Add, SQL, MenuHandler
-Menu LanguageMenuSMenu, Add, Swift, MenuHandler
-Menu LanguageMenuSMenu, Add, S-Record, MenuHandler
-Menu LanguageMenuTMenu, Add, TCL, MenuHandler
-Menu LanguageMenuTMenu, Add, Tektronix extended HEX, MenuHandler
-Menu LanguageMenuTMenu, Add, TeX, MenuHandler
-Menu LanguageMenuTMenu, Add, txt2tags, MenuHandler
-Menu LanguageMenuTMenu, Add, TypeScript, MenuHandler
-Menu LanguageMenuVMenu, Add, Visual Basic, MenuHandler
-Menu LanguageMenuVMenu, Add, Visual Prolog, MenuHandler
-Menu LanguageMenuVMenu, Add, VHDL, MenuHandler
-Menu LanguageMenuVMenu, Add, Verilog, MenuHandler
-Menu LanguageMenuUserDefinedLanguageMenu, Add, Define your language..., MenuHandler
-Menu LanguageMenuUserDefinedLanguageMenu, Add, Open User Defined Language folder..., MenuHandler
-Menu LanguageMenuUserDefinedLanguageMenu, Add, Notepad++ User Defined Languages Collection, MenuHandler
-Menu LanguageMenu, Add, None (Normal Text), MenuHandler
-Menu LanguageMenu, Add
-Menu LanguageMenu, Add, A, :LanguageMenuAMenu
-Menu LanguageMenu, Add, B, :LanguageMenuBMenu
-Menu LanguageMenu, Add, C, :LanguageMenuCMenu
-Menu LanguageMenu, Add, D, :LanguageMenuDMenu
-Menu LanguageMenu, Add, E, :LanguageMenuEMenu
-Menu LanguageMenu, Add, F, :LanguageMenuFMenu
-Menu LanguageMenu, Add, G, :LanguageMenuGMenu
-Menu LanguageMenu, Add, H, :LanguageMenuHMenu
-Menu LanguageMenu, Add, I, :LanguageMenuIMenu
-Menu LanguageMenu, Add, J, :LanguageMenuJMenu
-Menu LanguageMenu, Add, KIXtart, MenuHandler
-Menu LanguageMenu, Add, L, :LanguageMenuLMenu
-Menu LanguageMenu, Add, M, :LanguageMenuMMenu
-Menu LanguageMenu, Add, N, :LanguageMenuNMenu
-Menu LanguageMenu, Add, O, :LanguageMenuOMenu
-Menu LanguageMenu, Add, P, :LanguageMenuPMenu
-Menu LanguageMenu, Add, R, :LanguageMenuRMenu
-Menu LanguageMenu, Add, S, :LanguageMenuSMenu
-Menu LanguageMenu, Add, T, :LanguageMenuTMenu
-Menu LanguageMenu, Add, V, :LanguageMenuVMenu
-Menu LanguageMenu, Add, XML, MenuHandler
-Menu LanguageMenu, Add, YAML, MenuHandler
-Menu LanguageMenu, Add
-Menu LanguageMenu, Add, User Defined Language, :LanguageMenuUserDefinedLanguageMenu
-Menu LanguageMenu, Add, AutoHotkey, MenuHandler
-Menu LanguageMenu, Add, AutoHotkey, MenuHandler
-Menu LanguageMenu, Add, Autohotkey, MenuHandler
-Menu LanguageMenu, Add, a, MenuHandler
-Menu LanguageMenu, Add, AutoHotkey, MenuHandler
-Menu LanguageMenu, Add, AutoHotkey, MenuHandler
-Menu LanguageMenu, Add, Markdown (preinstalled), MenuHandler
-Menu LanguageMenu, Add, Markdown (preinstalled dark mode), MenuHandler
-Menu LanguageMenu, Add, User-Defined, MenuHandler
-Menu SettingsMenuImportMenu, Add, Import plugin(s)..., MenuHandler
-Menu SettingsMenuImportMenu, Add, Import style theme(s)..., MenuHandler
-Menu SettingsMenu, Add, Preferences..., MenuHandler
-Menu SettingsMenu, Add, Style Configurator..., MenuHandler
-Menu SettingsMenu, Add, Shortcut Mapper..., MenuHandler
-Menu SettingsMenu, Add
-Menu SettingsMenu, Add, Import, :SettingsMenuImportMenu
-Menu SettingsMenu, Add
-Menu SettingsMenu, Add, Edit Popup ContextMenu, MenuHandler
-Menu ToolsMenuMD5Menu, Add, Generate..., MenuHandler
-Menu ToolsMenuMD5Menu, Add, Generate from files..., MenuHandler
-Menu ToolsMenuMD5Menu, Add, Generate from selection into clipboard, MenuHandler
-Menu ToolsMenuSHA256Menu, Add, Generate..., MenuHandler
-Menu ToolsMenuSHA256Menu, Add, Generate from files..., MenuHandler
-Menu ToolsMenuSHA256Menu, Add, Generate from selection into clipboard, MenuHandler
-Menu ToolsMenu, Add, MD5, :ToolsMenuMD5Menu
-Menu ToolsMenu, Add, SHA-256, :ToolsMenuSHA256Menu
-Menu MacroMenu, Add, Start Re&cording, MenuHandler
-Menu MacroMenu, Add, S&top Recording, MenuHandler
-Menu MacroMenu, Add, &Playback`tCtrl+Shift+P, MenuHandler
-Menu MacroMenu, Add, &Save Current Recorded Macro..., MenuHandler
-Menu MacroMenu, Add, &Run a Macro Multiple Times..., MenuHandler
-Menu MacroMenu, Add, ERROR, MenuHandler
-Menu MacroMenu, Add, Trim Trailing Space and Save`tAlt+Shift+S, MenuHandler
-Menu MacroMenu, Add
-Menu MacroMenu, Add, Modify Shortcut/Delete Macro..., MenuHandler
-Menu RunMenu, Add, &Run...`tF5, MenuHandler
-Menu RunMenu, Add, ERROR, MenuHandler
-Menu RunMenu, Add, Get PHP help`tAlt+F1, MenuHandler
-Menu RunMenu, Add, Wikipedia Search`tAlt+F3, MenuHandler
-Menu RunMenu, Add, Open selected file path in new instance`tAlt+F6, MenuHandler
-Menu RunMenu, Add
-Menu RunMenu, Add, Modify Shortcut/Delete Command..., MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add, Enable, MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add, Block ClearType, MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add
-Menu PluginsMenuDarkThemeMenu, Add, Type: InverseRGB, MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add, Type: InverseY, MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add, Type: Grayscale, MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add, Type: HSV Ramp*, MenuHandler
-Menu PluginsMenuDarkThemeMenu, Add
-Menu PluginsMenuDarkThemeMenu, Add, About, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, &Documentation, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, &Pretty-print current JSON file`tCtrl+Alt+Shift+P, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, &Compress current JSON file`tCtrl+Alt+Shift+C, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, Path to current &line`tCtrl+Alt+Shift+L, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add
-Menu PluginsMenuJsonToolsMenu, Add, Open &JSON tree viewer`tCtrl+Alt+Shift+J, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, &Get JSON from files and APIs`tCtrl+Alt+Shift+G, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, &Settings`tCtrl+Alt+Shift+S, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add
-Menu PluginsMenuJsonToolsMenu, Add, Parse JSON Li&nes document, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, &Array to JSON Lines, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add
-Menu PluginsMenuJsonToolsMenu, Add, &Validate JSON against JSON schema, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, Generate sc&hema from JSON, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, Generate &random JSON from schema, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add
-Menu PluginsMenuJsonToolsMenu, Add, JSON to &YAML, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, Run &tests, MenuHandler
-Menu PluginsMenuJsonToolsMenu, Add, A&bout, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Encode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Encode with padding, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Encode with Unix EOL, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Encode by line, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Decode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Decode strict, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Base64 Decode by line, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add
-Menu PluginsMenuMIMEToolsMenu, Add, Quoted-printable Encode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Quoted-printable Decode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add
-Menu PluginsMenuMIMEToolsMenu, Add, URL Encode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, Full URL Encode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add, URL Decode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add
-Menu PluginsMenuMIMEToolsMenu, Add, SAML Decode, MenuHandler
-Menu PluginsMenuMIMEToolsMenu, Add
-Menu PluginsMenuMIMEToolsMenu, Add, About, MenuHandler
-Menu PluginsMenuConverterMenu, Add, ASCII -> HEX, MenuHandler
-Menu PluginsMenuConverterMenu, Add, HEX -> ASCII, MenuHandler
-Menu PluginsMenuConverterMenu, Add
-Menu PluginsMenuConverterMenu, Add, Conversion Panel, MenuHandler
-Menu PluginsMenuConverterMenu, Add
-Menu PluginsMenuConverterMenu, Add, Edit Configuration File, MenuHandler
-Menu PluginsMenuConverterMenu, Add, About, MenuHandler
-Menu PluginsMenuNppExportMenu, Add, &Export to RTF, MenuHandler
-Menu PluginsMenuNppExportMenu, Add, &Export to HTML, MenuHandler
-Menu PluginsMenuNppExportMenu, Add, &Copy RTF to clipboard, MenuHandler
-Menu PluginsMenuNppExportMenu, Add, &Copy HTML to clipboard, MenuHandler
-Menu PluginsMenuNppExportMenu, Add, &Copy all formats to clipboard, MenuHandler
-Menu PluginsMenuJSONViewerMenu, Add, Show &JSON Viewer`tCtrl+Alt+Shift+J, MenuHandler
-Menu PluginsMenuJSONViewerMenu, Add, &Format JSON`tCtrl+Alt+Shift+M, MenuHandler
-Menu PluginsMenuJSONViewerMenu, Add, &Compress JSON`tCtrl+Alt+Shift+C, MenuHandler
-Menu PluginsMenuJSONViewerMenu, Add
-Menu PluginsMenuJSONViewerMenu, Add, &Setting, MenuHandler
-Menu PluginsMenuJSONViewerMenu, Add, &About, MenuHandler
-Menu PluginsMenuPyNPPMenu, Add, Run file in Python`tCtrl+Alt+F5, MenuHandler
-Menu PluginsMenuPyNPPMenu, Add, Run file in Python Interactive`tAlt+Shift+F5, MenuHandler
-Menu PluginsMenuPyNPPMenu, Add, Run file in PythonW`tCtrl+Alt+Shift+F5, MenuHandler
-Menu PluginsMenuPyNPPMenu, Add, Debug the file (PDB), MenuHandler
-Menu PluginsMenuPyNPPMenu, Add
-Menu PluginsMenuPyNPPMenu, Add, Options, MenuHandler
-Menu PluginsMenuPyNPPMenu, Add, About PyNPP, MenuHandler
-Menu PluginsMenuPythonIndentMenu, Add, Enable, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, BracketHighlighter, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, ColumnLexer, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, CTags Based Autocompletion, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Disable Virtual Space, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Enable Virtual Space, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, EnhancedPythonLexer, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Event Handler Demo, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Formatter, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, GotoLineCol, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, GotoLineCol_Barebones, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, HideLines, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, InsertRuler, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, LogfileLexer, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, MultiEdit, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Multiples_SR, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Python Regex Replacements, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, RegexTester, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Remove and Modify selected lines, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, ReplaceDefaultReplaceDialog, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Sorter, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, StartWithLocalPython, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu, Add, Swap2Words, MenuHandler
-Menu PluginsMenuPythonScriptMenuScriptsMenu, Add, Samples, :PluginsMenuPythonScriptMenuScriptsMenuSamplesMenu
-Menu PluginsMenuPythonScriptMenuScriptsMenu, Add, startup, MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add, New Script, MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add, Show Console, MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add
-Menu PluginsMenuPythonScriptMenu, Add, Stop Script, MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add
-Menu PluginsMenuPythonScriptMenu, Add, Run Previous Script, MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add, Scripts, :PluginsMenuPythonScriptMenuScriptsMenu
-Menu PluginsMenuPythonScriptMenu, Add
-Menu PluginsMenuPythonScriptMenu, Add, Configuration..., MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add
-Menu PluginsMenuPythonScriptMenu, Add, Context-Help, MenuHandler
-Menu PluginsMenuPythonScriptMenu, Add, About, MenuHandler
-Menu PluginsMenu, Add, Dark Theme, :PluginsMenuDarkThemeMenu
-Menu PluginsMenu, Add, JsonTools, :PluginsMenuJsonToolsMenu
-Menu PluginsMenu, Add, MIME Tools, :PluginsMenuMIMEToolsMenu
-Menu PluginsMenu, Add, Converter, :PluginsMenuConverterMenu
-Menu PluginsMenu, Add, NppExport, :PluginsMenuNppExportMenu
-Menu PluginsMenu, Add, JSON Viewer, :PluginsMenuJSONViewerMenu
-Menu PluginsMenu, Add, PyNPP, :PluginsMenuPyNPPMenu
-Menu PluginsMenu, Add, Python Indent, :PluginsMenuPythonIndentMenu
-Menu PluginsMenu, Add, Python Script, :PluginsMenuPythonScriptMenu
-Menu PluginsMenu, Add
-Menu PluginsMenu, Add, Plugins Admin..., MenuHandler
-Menu PluginsMenu, Add
-Menu PluginsMenu, Add, Open Plugins Folder..., MenuHandler
-Menu WindowMenuSortByMenu, Add, Name A to Z, MenuHandler
-Menu WindowMenuSortByMenu, Add, Name Z to A, MenuHandler
-Menu WindowMenuSortByMenu, Add, Path A to Z, MenuHandler
-Menu WindowMenuSortByMenu, Add, Path Z to A, MenuHandler
-Menu WindowMenuSortByMenu, Add, Type A to Z, MenuHandler
-Menu WindowMenuSortByMenu, Add, Type Z to A, MenuHandler
-Menu WindowMenuSortByMenu, Add, Size Smaller to Larger, MenuHandler
-Menu WindowMenuSortByMenu, Add, Size Larger to Smaller, MenuHandler
-Menu WindowMenu, Add, Sort By, :WindowMenuSortByMenu
-Menu WindowMenu, Add, &Windows..., MenuHandler
-Menu WindowMenu, Add
-Menu WindowMenu, Add, Recent Window, MenuHandler
-Menu Menu, Add, Command Line Arguments..., MenuHandler
-Menu Menu, Add
-Menu Menu, Add, Notepad++ Home, MenuHandler
-Menu Menu, Add, Notepad++ Project Page, MenuHandler
-Menu Menu, Add, Notepad++ Online User Manual, MenuHandler
-Menu Menu, Add, Notepad++ Community (Forum), MenuHandler
-Menu Menu, Add
-Menu Menu, Add, Update Notepad++, MenuHandler
-Menu Menu, Add, Set Updater Proxy..., MenuHandler
-Menu Menu, Add
-Menu Menu, Add, Debug Info..., MenuHandler
-Menu Menu, Add, About Notepad++`tF1, MenuHandler
-Menu Menu, Add, Recent Window, MenuHandler
-Menu MenuBar, Add, &File, :FileMenu
-Menu MenuBar, Add, &Edit, :EditMenu
-Menu MenuBar, Add, &Search, :SearchMenu
-Menu MenuBar, Add, &View, :ViewMenu
-Menu MenuBar, Add, E&ncoding, :EncodingMenu
-Menu MenuBar, Add, &Language, :LanguageMenu
-Menu MenuBar, Add, Se&ttings, :SettingsMenu
-Menu MenuBar, Add, T&ools, :ToolsMenu
-Menu MenuBar, Add, &Macro, :MacroMenu
-Menu MenuBar, Add, &Run, :RunMenu
-Menu MenuBar, Add, &Plugins, :PluginsMenu
-Menu MenuBar, Add, &Window, :WindowMenu
-Menu MenuBar, Add, &?, :Menu
-Menu MenuBar, Add, ▼, :Menu
-Gui Menu, MenuBar
+Gui Add, ListView, x18 y2 w200 h150 +LV0x4000, ListView
+Gui Add, Hotkey, x144 y239 w120 h21
 
-Gui Add, Edit, x2 y51 w1163 h750, <!DOCTYPE html>`n<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 "> <![endif]-->`n<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->`n<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9"> <![endif]-->`n<!--[if IE 9]><html class="no-js lt-ie10"> <![endif]-->`n<!--[if gt IE 8]><!-->`n<html class="no-js">`n<!--<![endif]-->`n`n<head>`n`n    <!-- Basic Page Needs -->`n    <meta charset="utf-8">`n    <title>Be</title>`n    <meta name="description" content="">`n    <meta name="author" content="">`n`n    <!-- Mobile Specific Metas -->`n    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">`n`n    <!-- Favicons -->`n    <link rel="shortcut icon" href="content/ecobeef/images/favicon.ico">`n`n    <!-- FONTS -->`n    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700'>`n    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Patua+One:100,300,400,400italic,700'>`n    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900'>`n    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Poppins:100,300,400,400italic,500,700,700italic,800'>`n    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Playfair+Display:100,300,400,400italic,500,700,700italic,800'>`n`n    <!-- CSS -->`n    <link rel='stylesheet' href='css/global.css'>`n    <link rel='stylesheet' href='content/ecobeef/css/structure.css'>`n    <link rel='stylesheet' href='content/ecobeef/css/ecobeef.css'>`n    <link rel='stylesheet' href='content/ecobeef/css/custom.css'>`n`n    <!-- Revolution Slider -->`n    <link rel="stylesheet" href="plugins/rs-plugin/css/settings.css">`n`n</head>`n`n<body class="color-custom style-simple button-flat layout-full-width if-zoom if-border-hide no-shadows header-split minimalist-header-no sticky-header sticky-tb-color ab-hide subheader-both-center menu-link-color menuo-no-borders logo-overflow footer-copy-center mobile-tb-center mobile-side-slide mobile-mini-mr-ll mobile-tr-header tr-header tr-menu be-reg-2084">`n    <div id="Wrapper">`n        <div id="Header_wrapper">`n            <header id="Header">`n                <div class="header_placeholder"></div>`n                <div id="Top_bar">`n                    <div class="container">`n                        <div class="column one">`n                            <div class="top_bar_left clearfix">`n                                <div class="logo">`n                                    <a id="logo" href="index.html" title="BeEcoBeef - BeTheme" data-height="112" data-padding="0"><img class="logo-main scale-with-grid" src="content/ecobeef/images/ecobeef-logo.png" data-retina="content/ecobeef/images/ecobeef-logo-retina.png" data-height="114" alt="ecobeef-logo"><img class="logo-sticky scale-with-grid" src="content/ecobeef/images/ecobeef-logo.png" data-retina="content/ecobeef/images/ecobeef-logo-retina.png" data-height="114" alt="ecobeef-logo"><img class="logo-mobile scale-with-grid" src="content/ecobeef/images/ecobeef-logo.png" data-retina="content/ecobeef/images/ecobeef-logo-retina.png" data-height="114" alt="ecobeef-logo"><img class="logo-mobile-sticky scale-with-grid" src="content/ecobeef/images/ecobeef-logo.png" data-retina="content/ecobeef/images/ecobeef-logo-retina.png" data-height="114" alt="ecobeef-logo"></a>`n                                </div>`n                                <div class="menu_wrapper">`n                                    <nav id="menu">`n                                        <ul id="menu-menu-left" class="menu menu-main menu_left">`n                                            <li class="current-menu-item">`n                                                <a href="index.html"><span>Home</span></a>`n                                            </li>`n                                            <li>`n                                                <a href="content/ecobeef/the-farm.html"><span>The farm</span></a>`n                                            </li>`n                                            <li>`n                                                <a href="content/ecobeef/products.html"><span>Products</span></a>`n                                            </li>`n                                        </ul>`n                                        <ul id="menu-menu-right" class="menu menu-main menu_right">`n                                            <li>`n                                                <a href="content/ecobeef/our-blog.html"><span>Our blog</span></a>`n                                            </li>`n                                            <li>`n                                                <a href="content/ecobeef/contact.html"><span>Contact</span></a>`n                                            </li>`n                                            <li>`n                                                <a target="_blank" href="http://bit.ly/1M6lijQ"><span><span style="color:#76787a">Buy now</span></span></a>`n                                            </li>`n                                        </ul>`n                                    </nav>`n                                    <a class="responsive-menu-toggle" href="#"><i class="icon-menu-fine"></i></a>`n                                </div>`n                            </div>`n                        </div>`n                    </div>`n                </div>`n                <div class="mfn-main-slider" id="mfn-rev-slider">`n                    <div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-source="gallery" style="background:transparent;padding:0px">`n                        <div id="rev_slider_1_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.6.3.1">`n                            <ul>`n                                <li data-index="rs-1" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="800" data-rotate="0" data-saveperformance="off" data-title="Slide"`n                                    data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">`n                                    <img src="content/ecobeef/images/ecobeef-home-slider-1.jpg" title="ecobeef-home-slider-1" width="1920" height="1080" data-bgposition="center center" data-kenburns="on" data-duration="20000" data-ease="Power4.easeOut" data-scalestart="110" data-scaleend="100"`n                                        data-rotatestart="0" data-rotateend="0" data-blurstart="0" data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="4" class="rev-slidebg" data-no-retina>`n                                </li>`n                                <li data-index="rs-2" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="800" data-rotate="0" data-saveperformance="off" data-title="Slide"`n                                    data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">`n                                    <img src="content/ecobeef/images/ecobeef-home-slider-2.jpg" title="ecobeef-home-slider-2" width="1920" height="1080" data-bgposition="center center" data-kenburns="on" data-duration="20000" data-ease="Power4.easeOut" data-scalestart="110" data-scaleend="100"`n                                        data-rotatestart="0" data-rotateend="0" data-blurstart="0" data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="4" class="rev-slidebg" data-no-retina>`n                                </li>`n                            </ul>`n                        </div>`n`n                    </div>`n                </div>`n            </header>`n        </div>`n        <div id="Content">`n            <div class="content_wrapper clearfix">`n                <div class="sections_group">`n                    <div class="entry-content">`n                        <div class="section mcb-section" style="padding-top:75px; padding-bottom:125px">`n                            <div class="section_wrapper mcb-section-inner">`n                                <div class="wrap mcb-wrap one valign-top clearfix">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_image">`n                                            <div class="image_frame image_item no_link scale-with-grid aligncenter no_border" style="margin-bottom:20px">`n                                                <div class="image_wrapper">`n                                                    <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-divider.png">`n                                                </div>`n                                            </div>`n                                        </div>`n                                        <div class="column mcb-column one column_column">`n                                            <div class="column_attr clearfix align_center mobile_align_center">`n                                                <h2>Breeding cattle has been a part of our family history for over 65 years. This is why we can offer the best meat which is 100`% grass fed ad eco-friendly.</h2>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                                <div class="wrap mcb-wrap one valign-top clearfix" style="padding:50px 0 0 0 ">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one-third column_column">`n                                            <div class="column_attr clearfix" style="padding:30px 20`% 0 0">`n                                                <h3>Meet our farmers</h3>`n                                                <hr class="no_line" style="margin:0 auto 30px">`n                                                <p>`n                                                    Lorem ipsum dolor sit amet, consectetur ad minim veniam, quis nostrud exercitation ullamco laboris`n                                                </p>`n                                            </div>`n                                        </div>`n                                        <div class="column mcb-column one-third column_column">`n                                            <div class="column_attr clearfix" style="padding:0 12`% 0 0">`n                                                <div class="image_frame image_item no_link scale-with-grid no_border">`n                                                    <div class="image_wrapper">`n                                                        <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-farmer-1.png">`n                                                    </div>`n                                                </div>`n                                                <h4>Josh O'hara</h4>`n                                                <hr class="no_line" style="margin:0 auto 10px">`n                                                <p>`n                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolonostrud exercitation ullamco.`n                                                </p>`n                                                <hr class="no_line" style="margin:0 auto 20px">`n                                                <a href="content/ecobeef/the-farm.html">View more details</a>`n                                            </div>`n                                        </div>`n                                        <div class="column mcb-column one-third column_column">`n                                            <div class="column_attr clearfix" style="padding:0 12`% 0 0">`n                                                <div class="image_frame image_item no_link scale-with-grid no_border">`n                                                    <div class="image_wrapper">`n                                                        <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-farmer-2.png">`n                                                    </div>`n                                                </div>`n                                                <h4>Sam Berney</h4>`n                                                <hr class="no_line" style="margin:0 auto 10px">`n                                                <p>`n                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolonostrud exercitation ullamco.`n                                                </p>`n                                                <hr class="no_line" style="margin:0 auto 20px">`n                                                <a href="content/ecobeef/the-farm.html">View more details</a>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                            </div>`n                        </div>`n                        <div class="section mcb-section dark bg-cover" style="padding-top:0px; padding-bottom:125px; background-image:url(content/ecobeef/images/ecobeef-home-dark-bg-1.jpg); background-repeat:no-repeat; background-position:center">`n                            <div class="section_wrapper mcb-section-inner">`n                                <div class="wrap mcb-wrap one valign-top move-up clearfix" style="margin-top:-90px" data-tablet="no-up" data-mobile="no-up">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_image">`n                                            <div class="image_frame image_item no_link scale-with-grid aligncenter no_border">`n                                                <div class="image_wrapper">`n                                                    <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-rosesemary.png">`n                                                </div>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                                <div class="wrap mcb-wrap one valign-top clearfix">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_column">`n                                            <div class="column_attr clearfix align_center">`n                                                <h2>We offer the best`n                                                    <br> dry aged beef in the country</h2>`n                                                <div class="image_frame image_item no_link scale-with-grid no_border">`n                                                    <div class="image_wrapper">`n                                                        <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-divider-white.png">`n                                                    </div>`n                                                </div>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                                <div class="wrap mcb-wrap one valign-top clearfix" style="padding:30px 0 0 0 ">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_slider">`n                                            <div class="content_slider carousel hide-dots">`n                                                <ul class="content_slider_ul">`n                                                    <li>`n                                                        <a href="content/ecobeef/products.html">`n                                                            `t<img src="content/ecobeef/images/ecobeef-home-slider-steak1.png" class="scale-with-grid wp-post-image">`n                                                                <p class="title">`n                                                                    Tenderloin`n                                                                </p>`n                                                            </a>`n                                                    </li>`n                                                    <li>`n                                                        <img src="content/ecobeef/images/ecobeef-home-slider-steak3.png" class="scale-with-grid wp-post-image">`n                                                        <p class="title">`n                                                            Rib Eye`n                                                        </p>`n                                                    </li>`n                                                    <li>`n                                                        <img src="content/ecobeef/images/ecobeef-home-slider-steak2.png" class="scale-with-grid wp-post-image">`n                                                        <p class="title">`n                                                            Chunk`n                                                        </p>`n                                                    </li>`n                                                    <li>`n                                                        <a href="content/ecobeef/products.html">`n                                                                <img src="content/ecobeef/images/ecobeef-home-slider-steak1.png" class="scale-with-grid wp-post-image">`n                                                                <p class="title">`n                                                                    T-Bone`n                                                                </p>`n                                                            </a>`n                                                    </li>`n                                                </ul>`n                                                <div class="slider_pager slider_pagination"></div>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                            </div>`n                        </div>`n                        <div class="section mcb-section dark" style="padding-top:0px; padding-bottom:0px">`n                            <div class="section_wrapper mcb-section-inner">`n                                <div class="wrap mcb-wrap one-sixth  valign-top clearfix">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_placeholder">`n                                            <div class="placeholder">`n                                                &nbsp;`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                                <div class="wrap mcb-wrap two-third valign-top move-up clearfix" style="padding:34px 0 30px; margin-top:-50px; background-image:url(content/ecobeef/images/ecobeef-home-greenbg2.png); background-repeat:no-repeat; background-position:left top;" data-tablet="no-up"`n                                    data-mobile="no-up">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_column">`n                                            <div class="column_attr clearfix align_center mobile_align_center">`n                                                <h3><a href="content/ecobeef/products.html">See all of our products</a></h3>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                            </div>`n                        </div>`n                        <div class="section mcb-section" style="padding-top:100px; padding-bottom:50px">`n                            <div class="section_wrapper mcb-section-inner">`n                                <div class="wrap mcb-wrap one-third valign-top clearfix">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_image">`n                                            <div class="image_frame image_item no_link scale-with-grid no_border">`n                                                <div class="image_wrapper">`n                                                    <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-qulity.png">`n                                                </div>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                                <div class="wrap mcb-wrap two-third valign-top clearfix" style="padding:0 0 0 3`%">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column three-fourth column_column column-margin-20px">`n                                            <div class="column_attr clearfix">`n                                                <h2>Premium quality`n                                                    <br> 100`% safe beef source</h2>`n                                            </div>`n                                        </div>`n                                        <div class="column mcb-column one column_column column-margin-20px">`n                                            <div class="column_attr clearfix">`n                                                <p class="big">`n                                                    Nam lacinia suscipit accumsan. Donec sodales, neque vitae rutrum convallis, nulla tortor pharetra odio, in varius ante ante sed nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.`n                                                </p>`n                                            </div>`n                                        </div>`n                                        <div class="column mcb-column one-second column_column">`n                                            <div class="column_attr clearfix" style="padding:0 10`% 0 0">`n                                                <p>`n                                                    Aliquam fringilla aliquam ex sit amet elementum. Proin bibendum sollicitudin feugiat.`n                                                </p>`n                                            </div>`n                                        </div>`n                                        <div class="column mcb-column one-second column_column">`n                                            <div class="column_attr clearfix" style="padding:0 10`% 0 0">`n                                                <p>`n                                                    Aliquam fringilla aliquam ex sit amet elementum. Proin bibendum sollicitudin feugiat.`n                                                </p>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                                <div class="wrap mcb-wrap one valign-top clearfix">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_image">`n                                            <div class="image_frame image_item no_link scale-with-grid no_border">`n                                                <div class="image_wrapper">`n                                                    <img class="scale-with-grid" src="content/ecobeef/images/ecobeef-home-packaged-meat.jpg">`n                                                </div>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                            </div>`n                        </div>`n                        <div class="section mcb-section dark" style="padding-top:225px; padding-bottom:175px" data-parallax="3d">`n                            <img class="mfn-parallax" src="content/ecobeef/images/ecobeef-home-bottom-parallax.jpg" style="opacity:0">`n                            <div class="section_wrapper mcb-section-inner">`n                                <div class="wrap mcb-wrap one valign-top clearfix">`n                                    <div class="mcb-wrap-inner">`n                                        <div class="column mcb-column one column_column">`n                                            <div class="column_attr clearfix align_center">`n                                                <h2 style="background:#342111;display:inline-block">Our cows are breed in the country,</h2>`n                                                <br>`n                                                <h2 style="background:#342111;display:inline">away from the city and pollution</h2>`n                                            </div>`n                                        </div>`n                                    </div>`n                                </div>`n                            </div>`n                        </div>`n                        <div class="section mcb-section" style="padding-top:100px; padding-bottom:0px">`n                            <div class="section_wrapper mcb-section-inner"></div>`n                        </div>`n`n                    </div>`n                </div>`n            </div>`n        </div>`n        <footer id="Footer" class="clearfix">`n            <div class="widgets_wrapper" style="padding:100px 0 50px">`n                <div class="container">`n                    <div class="column one-fourth">`n                        <aside class="widget_text widget widget_custom_html">`n                            <div class="textwidget custom-html-widget">`n                                <h4>Lorem ipsum dolor`n                                    <br> mit sametus etomnia ques at omnia</h4>`n                                <hr class="no_line" style="margin:0 auto 40px">`n                                <hr style="width:150px; float:left">`n                                <hr class="no_line" style="margin:0 auto 10px">`n                                <p>`n                                    <a href="#"><i class="icon-facebook"></i></a><a href="#"><i class="icon-gplus"></i></a><a href="#"><i class="icon-twitter"></i></a><a href="#"><i class="icon-linkedin"></i></a>`n                                </p>`n                            </div>`n                        </aside>`n                    </div>`n                    <div class="column one-fourth">`n                        <aside class="widget_text widget widget_custom_html">`n                            <h4>Useful links</h4>`n                            <div class="textwidget custom-html-widget">`n                                <hr class="no_line" style="margin:0 auto 20px">`n                                <ul style="line-height:36px">`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i><b>P-3400</b> ipsum`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i><b>AD Conser</b> poretel venture`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i><b>Elisted-34</b> eiusmod`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i><b>Atlabore-33</b>`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i><b>Tempor-Z</b> incididunt`n                                        </li>`n                                    </a>`n                                </ul>`n                            </div>`n                        </aside>`n                    </div>`n                    <div class="column one-fourth">`n                        <aside class="widget_text widget widget_custom_html">`n                            <h4> </h4>`n                            <div class="textwidget custom-html-widget">`n                                <hr class="no_line" style="margin:0 auto 20px">`n                                <ul style="line-height:36px">`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i> Lorem ipsum`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i> Consectetur adipisicing`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i> Elitsed do eiusmund`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i> Tempor incididunt`n                                        </li>`n                                    </a>`n                                    <a href="#">`n                                        <li>`n                                            <i class="themecolor icon-right-open-mini"></i> Altabore`n                                        </li>`n                                    </a>`n                                </ul>`n                            </div>`n                        </aside>`n                    </div>`n                    <div class="column one-fourth">`n                        <aside class="widget_text widget widget_custom_html">`n                            <h4>Our mission</h4>`n                            <div class="textwidget custom-html-widget">`n                                <hr class="no_line" style="margin:0 auto 20px">`n                                <p>`n                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`n                                </p>`n                                <hr class="no_line" style="margin: 0 auto 38px">`n                                <a href="content/ecobeef/our-blog.html">Read more</a>`n                            </div>`n                        </aside>`n                    </div>`n                </div>`n            </div>`n            <div class="footer_copy">`n                <div class="container">`n                    <div class="column one">`n                        <div class="copyright">`n                            &copy; 2018 BeEcoBeef - BeTheme. Muffin group - HTML by <a target="_blank" rel="nofollow" href="http://bit.ly/1M6lijQ">BeantownThemes</a>`n                        </div>`n                    </div>`n                </div>`n            </div>`n        </footer>`n    </div>`n`n    <!-- side menu -->`n    <div id="Side_slide" class="right dark" data-width="250">`n        <div class="close-wrapper">`n            <a href="#" class="close"><i class="icon-cancel-fine"></i></a>`n        </div>`n        <div class="menu_wrapper"></div>`n    </div>`n    <div id="body_overlay"></div>`n`n`n    <!-- JS -->`n    <script src="js/jquery-2.1.4.min.js"></script>`n`n    <script src="js/mfn.menu.js"></script>`n    <script src="js/jquery.plugins.js"></script>`n    <script src="js/jquery.jplayer.min.js"></script>`n    <script src="js/animations/animations.js"></script>`n    <script src="js/translate3d.js"></script>`n    <script src="js/scripts.js"></script>`n`n`n    <script src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>`n    <script src="plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>`n`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>`n    <script src="plugins/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>`n`n    <script>`n        var revapi1, tpj = jQuery;`n`t`t  tpj(document).ready(function() {`n`t`t`t  if (tpj("#rev_slider_1_1").revolution == undefined) {`n`t`t`t`t  revslider_showDoubleJqueryError("#rev_slider_1_1");`n`t`t`t  } else {`n`t`t`t`t  revapi1 = tpj("#rev_slider_1_1").show().revolution({`n`t`t`t`t`t  sliderType : "standard",`n`t`t`t`t`t  sliderLayout : "fullscreen",`n`t`t`t`t`t  dottedOverlay : "none",`n`t`t`t`t`t  delay : 3000,`n`t`t`t`t`t  navigation : {`n`t`t`t`t`t`t  onHoverStop : "off",`n`t`t`t`t`t  },`n`t`t`t`t`t  visibilityLevels : [1240, 1024, 778, 480],`n`t`t`t`t`t  gridwidth : 1240,`n`t`t`t`t`t  gridheight : 768,`n`t`t`t`t`t  lazyType : "none",`n`t`t`t`t`t  parallax : {`n`t`t`t`t`t`t  type : "scroll",`n`t`t`t`t`t`t  origo : "slidercenter",`n`t`t`t`t`t`t  speed : 400,`n`t`t`t`t`t`t  speedbg : 0,`n`t`t`t`t`t`t  speedls : 0,`n`t`t`t`t`t`t  levels : [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 51, 55],`n`t`t`t`t`t  },`n`t`t`t`t`t  shadow : 0,`n`t`t`t`t`t  spinner : "spinner2",`n`t`t`t`t`t  stopLoop : "off",`n`t`t`t`t`t  stopAfterLoops : -1,`n`t`t`t`t`t  stopAtSlide : -1,`n`t`t`t`t`t  shuffle : "off",`n`t`t`t`t`t  autoHeight : "off",`n`t`t`t`t`t  fullScreenAutoWidth : "off",`n`t`t`t`t`t  fullScreenAlignForce : "off",`n`t`t`t`t`t  fullScreenOffsetContainer : "",`n`t`t`t`t`t  fullScreenOffset : "",`n`t`t`t`t`t  disableProgressBar : "on",`n`t`t`t`t`t  hideThumbsOnMobile : "off",`n`t`t`t`t`t  hideSliderAtLimit : 0,`n`t`t`t`t`t  hideCaptionAtLimit : 0,`n`t`t`t`t`t  hideAllCaptionAtLilmit : 0,`n`t`t`t`t`t  debugMode : false,`n`t`t`t`t`t  fallbacks : {`n`t`t`t`t`t`t  simplifyAll : "off",`n`t`t`t`t`t`t  nextSlideOnWindowFocus : "off",`n`t`t`t`t`t`t  disableFocusListener : false,`n`t`t`t`t`t  }`n`t`t`t`t  });`n`t`t`t  }`n`t`t  });`n    </script>`n`n</body>`n`n</html>
-Gui Add, UpDown, x1133 y30 w17 h17 -16
-Gui Add, StatusBar,, Hyper Text Markup Language file
-Gui Add, Button, x3 y808 w24 h23, ✕
-Gui Add, Text, x27 y813 w69 h20 +Right, Find:
-Gui Add, Edit, x98 y810 w263 h20
-Gui Add, Button, x365 y808 w24 h23, <
-Gui Add, Button, x395 y808 w24 h23, >
-Gui Add, CheckBox, x435 y811 w150 h20, Match &case
-Gui Add, CheckBox, x600 y811 w150 h20, &Highlight all
-Gui Add, Text, x780 y813 w270 h20
-Gui Add, Tab3, x0 y25 w1167 h778, Tabindex-ecobeef - Copy (2).html|TASystemSettings.ini|PyNuitkaExe.ahk|setres.py|TASystemSettings - Copy.ini|pywebview.py|hello.py|index.html|hello.html|products.html|index-ecobeef.html|index.html|temp_index.html|bookclub__.txt|index.html|hello.html|index.html|python.py|index.html|index.html|py.py|readlines.py|readlines.py|index.html|ecobeef.css|dxvk.conf|dxvk.conf|Assassin4.ini|GFXSettings.AC4BFSP.xml|AC4BFSP_d3d11.log|d3dx (2022_06_29 21_43_16 UTC).ini|AcroRd32.exe.cfg|AllSettings.ini|apps.json|output.json|Untitled (4).ahk|log_updater_ahk.json|github.ahk|AhkHelpMenu.xml|Demo_Button_Func_Calls.py|temp.txt|er.txt|er.txt|log_old.txt|dlsstweaks.ini|dlsstweaks.log|Readme.txt|Hillard Dane - Publishing Python Packages - 2023.txt|V2GuiCreator.ini|log_out.txt|selenium_ahk.py|button_functions.py|PySimpleG-venv-Menu.py|qUINT_rtgi.fx|openai Chatbot chatgpt 3 template python.txt|faster_airtable.py|1.txt|new_pyscript.html|output.txt|key.txt|dictionary.json|ERRORS.txt|ERRORS.txt|THINGS FOR AN INTERVIEW.txt|er.txt|openai Chatbot chatgpt 3 template python - Copy (3).txt|debug.txt|openai Chatbot chatgpt 3 template python - Copy (2).txt|dl.py|data.txt|openai Chatbot chatgpt 3 template python - Copy (2) - Copy.txt|key - Copy (2).txt|new 1|key - Copy.txt|get.txt|venvMENU_python.ahk|scons-report.txt|openai Chatbot chatgpt 3 template python - Copy (2).txt|setup.py|main.cpp|ag_settings.json|openai Chatbot chatgpt 3 template python - Copy (3) - Copy.txt|ConsoleApp4.deps.json|AHK_load.ahk|file.json|openai Chatbot chatgpt 3 template python - Copy (3).txt|Program.cs|license.txt|config.json|UnitySubsystemsManifest.json|Flask_Web_Development_vtoroe_izdanie_2018.txt|shutdown_pc.py|config.json|kant_prolegomeda_spark-notes.txt|bookclub.txt|QuickConvertorV2.ini|log.txt|codeHandler.ahk|log.txt|bookclub_kant_prolegomeda.txt|my_commands.bat|website stuff todo.txt|response.json|v2converter.ahk|ConvertFuncs.ahk|AutoGUI.ahk|AutoGUI.ini|v2converter.ahk|ConvertFuncs.ahk|Counter-Strike Global Offensive 2.ahk|temp.txt|steam_appid.txt|openvrsettings.xml|oculussettings.xml|graphicsconfigoculusdx11.xml|graphicsconfigdx11.xml|OVRLibraryService.log|lastCode.txt
-Gui Tab
-
-Gui Show, w1167 h890, C:\Users\dower\OneDrive\____TE Meats____\index-ecobeef - Copy (2).html - Notepad++ (Clone)
+Gui Show, w620 h420, Window
 Return
 
 GuiEscape:

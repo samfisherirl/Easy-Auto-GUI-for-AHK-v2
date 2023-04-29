@@ -1,4 +1,4 @@
-﻿add_menuHandler(FNOut) ;outscript_path
+﻿add_menuHandler(FNOut:="path", script:="code") ;outscript_path
 {
     menuHandle := 0 ; => these denote true[1]/false[0]
     GuiEsc := 0 ; => for various bad output code, such as
@@ -8,11 +8,10 @@
     brackets := 0
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
-    
-    intxt := FileRead(FNOut)
-    FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
-    
-    Loop Parse, intxt, "`n", "`r" {
+    if FileExist(FNOut){
+        FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
+    }
+    Loop Parse, script, "`n", "`r" {
         if (A_Index == 1) {
             new_outscript := "`n" ";AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
@@ -91,5 +90,5 @@
             new_outscript .= A_LoopField . "`n"
         }
     }
-    FileAppend(new_outscript, FNOut)
+    return new_outscript
 }
