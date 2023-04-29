@@ -4,8 +4,10 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
+myGui.Add("ListBox", "x189 y119 w120 h160", ["ListBox"])
+myGui.Add("Progress", "x307 y-84 w120 h44 -Smooth", "33")
 myGui.Title := "Window"
-myGui.Show("w548 h490")
+myGui.Show("w620 h420")
 Return
 GuiEscape(*)
 { ; V1toV2: Added bracket

@@ -1403,22 +1403,33 @@ Open(Files := "", Flag := 0) {
             Runtime := A_ScriptDir "\convert\runtime.txt"
             Temp := A_ScriptDir "\convert\temp.txt"
             Logs := A_ScriptDir "\convert\log.txt"
+            empty := A_ScriptDir "\convert\empty.txt"
+
             if FileExist(Runtime){
-                FileMove, %Runtime%, %Temp%, 1
+                FileMove,  %Runtime%, %Temp%, 1
             }
+            FileAppend, %Runtime%, %Logs%, %Encoding%
             if FileExist(Logs){
-                FileMove, %Logs%, %Temp%, 1
+                FileMove, %Logs%, %temp%, 1
             }
-            FileAppend,  %fRead%, %Runtime%, %Encoding%
-            FileAppend %Runtime%, %Logs%, %Encoding%
             Loop 50 
             {
                 if FileExist(Runtime)
                 {
                     FileRead, fRead, %Runtime%
+                    if (fRead == "") 
+                    {
+                        sleep, 50
+                        continue
+                    }
+                    else 
+                    {
+                        break
+                    }
                 }
                 else {
                     Sleep, 50
+                    continue
                 }
 
             }

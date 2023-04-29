@@ -400,6 +400,7 @@
         lastCode := A_ScriptDir "\convert\lastCode.txt"
         Temp := A_ScriptDir "\convert\temp.txt"
         Logs := A_ScriptDir "\convert\log.txt"
+        empty := A_ScriptDir "\convert\empty.txt"
         if FileExist(lastCode){
             FileRead, Code_to_Test, %lastCode%
             if (Code_to_Test == Code){
