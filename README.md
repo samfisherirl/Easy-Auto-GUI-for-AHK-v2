@@ -6,7 +6,7 @@ I'll be adding more details here soon.
 
 - AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
 
-I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
+I did very little work in comparison to the behemoth solutions I weaved together. All the work was done by the creators just mentioned.
 
 # How it works 
 - this runs Easy AutoGUI on ahkv1
