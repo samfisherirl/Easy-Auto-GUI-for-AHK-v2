@@ -19,7 +19,6 @@ I did very little work, just weaving the two solutions together. All the work wa
 
 Update: Live in IDE v2 code works. Example, cloning notepad++ to ahkv2. 
 
-![giphy](https://user-images.githubusercontent.com/98753696/233808870-8ae299a7-1c44-48a4-bf4d-7c3fd820c4e4.gif)
 ![Produce_13](https://user-images.githubusercontent.com/98753696/235309043-9dcac7d8-d0d5-4311-8a25-93cff5e63533.GIF)
 
 
