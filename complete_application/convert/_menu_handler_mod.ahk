@@ -44,8 +44,8 @@
             RemoveFunction := 1
         }
         else if (menuHandle == 1) && MenuHandleCount < 2 && InStr(A_LoopField, "GuiEscape(*)") {
-            new_outscript .= "MenuHandler(*) {`n`tToolTip `"Click!`", 100, 150`n}`n" A_LoopField
-            GuiEsc := 1
+            new_outscript .= "`nMenuHandler(*)`n{`n`tToolTip `"Click! This is a sample action! You have clicked on a menu item.`", 20, 20`n}`n"
+            GuiEsc := 1 
         }
         else if (menuHandle == 1) && (MenuHandleCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
             RemoveFunction := 1

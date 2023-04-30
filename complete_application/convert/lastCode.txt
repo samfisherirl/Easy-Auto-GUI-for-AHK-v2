@@ -4,8 +4,8 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-ogcListViewListView := myGui.Add("ListView", "x18 y2 w200 h150 +LV0x4000", ["ListView"])
-myGui.Add("Hotkey", "x144 y239 w120 h21")
+myGui.Add("DateTime", "x59 y44 w100 h24")
+myGui.Add("ComboBox", "x43 y118 w120", ["ComboBox"])
 myGui.Title := "Window"
 myGui.Show("w620 h420")
 Return
