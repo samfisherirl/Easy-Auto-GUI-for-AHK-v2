@@ -5,54 +5,61 @@
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "
-autogui := "`"" A_ScriptDir "\complete_application\AutoGUI.ahk`""
-com := exe autogui
-Run(com, , , &PID)
-Sleep(1000)
-Loop 10 {
-    if ProcessExist(PID) {
-        break
+exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "     ; specify the path to the AutoHotkey V1 executable
+autogui := "`"" A_ScriptDir "\complete_application\AutoGUI.ahk`""   ; specify the path to the AutoGUI script
+com := exe autogui     ; concatenate the two paths
+Run(com, , , &PID)     ; run the concatenated command, which launches AutoGUI
+
+Sleep(1000)    ; wait for 1 second
+
+Loop 10 {     ; loop up to 10 times
+    if ProcessExist(PID) {     ; check if the AutoGUI process exists
+        break     ; if it does, break out of the loop
     }
     else {
-        Sleep(1000)
+        Sleep(1000)     ; if it doesn't, wait for 1 second and check again
     }
 }
 
-logs := A_ScriptDir "\complete_application\convert\log.txt"
-empty := A_ScriptDir "\complete_application\convert\empty.txt"
-temps := A_ScriptDir "\complete_application\convert\temp.txt"
-retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"
-if FileExist(logs) {
-    FileMove(logs, temps, 1)
-}
+logs := A_ScriptDir "\complete_application\convert\log.txt"    ; set the path to the log file
+empty := A_ScriptDir "\complete_application\convert\empty.txt"    ; set the path to an empty file
+temps := A_ScriptDir "\complete_application\convert\temp.txt"    ; set the path to a temporary file
+retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"    ; set the path to the return status file
 
-While ProcessExist(PID) {
-    if FileExist(logs) {
-        path_to_convert := tryRead(logs)
-        if path_to_convert {
-            if FileExist(path_to_convert) {
-                inscript := tryRead(path_to_convert)
-                if (inscript != "") {
-                    FileMove(logs, temps, 1)
-                    try {
-                        outscript := Convert(inscript)
-                        outfile := FileOpen(path_to_convert, "w", "utf-8")
-                        outfile.Write(outscript)
-                        outfile.Close()
-                        add_menuhandler(path_to_convert)
-                    }
-                    catch {
-                        sleep(50)
-                    }
-                    FileAppend(retstat, retstat)
+
+While ProcessExist(PID)    ; while the AutoGUI process exists
+; wait for %logs% to exist, that means AutoGui is trying to generate code.
+; this loop will convert to v2 and notify AutoGUI via %retstat%
+{
+    if FileExist(logs)    ; check if the log file exists
+    {
+        path_to_convert := tryRead(logs)    ; read the contents of the log file into a variable
+        if path_to_convert && FileExist(path_to_convert)    ; check if the path to the file exists
+        {
+            inscript := tryRead(path_to_convert)    ; read the contents of the file into a variable
+            if (inscript != "")    ; if the variable is not empty
+            {
+                FileMove(logs, temps, 1)    ; move the log file to the temporary file
+                try 
+                {
+                    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
+                    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
+                    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
+                    outfile.Write(final_code)    ; write the final code to the file
+                    outfile.Close()    ; close the file
+                    FileAppend(retstat, retstat)    ; append the return status to the return status file
+                }
+                catch {
+                    sleep(10)
                 } } } }
     else {
-        Sleep(25)
+        Sleep(15)
+        continue
     }
 }
 ExitApp
 
+;try {out := FileRead(path)}
 tryRead(path) {
     try {
         out := FileRead(path)
