@@ -55,11 +55,11 @@
         else if InStr(A_LoopField, "GuiEscape(*)") {
             ;if END OF SCRIPT found, attempt to append functions
             if (menuHandle == 1) && (MenuHandleCount < 2) {
-                new_outscript .= "`nMenuHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked a menu item.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+                new_outscript .= "`nMenuHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked ==> a menu item.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
                 GuiEsc := 1
             }
             if (buttonFound == 1) {
-                new_outscript.= "`nButtonHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked a button.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+                new_outscript.= "`nButtonHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
             }
             new_outscript .= A_LoopField "`n"
             ;if ()    GuiEsc := 1
@@ -109,3 +109,5 @@
     }
     return new_outscript
 }
+
+

@@ -1,14 +1,27 @@
-
+﻿
 ;AutoGUI 2.5.8 
 ;Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-myGui.Add("ListBox", "x189 y119 w120 h160", ["ListBox"])
-myGui.Add("Progress", "x307 y-84 w120 h44 -Smooth", "33")
+myGui.Add("CheckBox", "x17 y16 w120 h23", "CheckBox")
+ogcButtonOK := myGui.Add("Button", "x17 y47 w80 h23", "&OK")
+ogcButtonOK.OnEvent("Click", ButtonHandler)
+ogcButtonOK := myGui.Add("Button", "x97 y187 w80 h23", "&OK")
+ogcButtonOK.OnEvent("Click", ButtonHandler)
+ogcButtonOK := myGui.Add("Button", "x428 y119 w80 h23", "&OK")
+ogcButtonOK.OnEvent("Click", ButtonHandler)
+ogcButtonafdsfasf := myGui.Add("Button", "x118 y273 w80 h23", "afdsfasf")
+ogcButtonafdsfasf.OnEvent("Click", ButtonHandler)
 myGui.Title := "Window"
 myGui.Show("w620 h420")
 Return
+
+ButtonHandler(*)
+{
+	ToolTip "Click! This is a sample action, you clicked  ==> a button.", 20, 20
+	SetTimer () => ToolTip(), -2000 ; timer expires in 2 seconds and tooltip disappears
+}
 GuiEscape(*)
 { ; V1toV2: Added bracket
 GuiClose:

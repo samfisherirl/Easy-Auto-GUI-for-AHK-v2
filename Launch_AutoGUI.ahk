@@ -7,29 +7,19 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "     ; specify the path to the AutoHotkey V1 executable
 autogui := "`"" A_ScriptDir "\complete_application\AutoGUI.ahk`""   ; specify the path to the AutoGUI script
-com := exe autogui     ; concatenate the two paths
-Run(com, , , &PID)     ; run the concatenated command, which launches AutoGUI
-
-Sleep(1000)    ; wait for 1 second
-
-Loop 10 {     ; loop up to 10 times
-    if ProcessExist(PID) {     ; check if the AutoGUI process exists
-        break     ; if it does, break out of the loop
-    }
-    else {
-        Sleep(1000)     ; if it doesn't, wait for 1 second and check again
-    }
-}
-
 logs := A_ScriptDir "\complete_application\convert\log.txt"    ; set the path to the log file
 empty := A_ScriptDir "\complete_application\convert\empty.txt"    ; set the path to an empty file
 temps := A_ScriptDir "\complete_application\convert\temp.txt"    ; set the path to a temporary file
 retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"    ; set the path to the return status file
 
+com := exe autogui     ; concatenate the two paths
+Run(com, , , &PID)     ; run the concatenated command, which launches AutoGUI
+Sleep(1000)    ; wait for 1 second
+findProcess(PID)
 
 While ProcessExist(PID)    ; while the AutoGUI process exists
-; wait for %logs% to exist, that means AutoGui is trying to generate code.
-; this loop will convert to v2 and notify AutoGUI via %retstat%
+    ; wait for %logs% to exist, that means AutoGui is trying to generate code.
+    ; this loop will convert to v2 and notify AutoGUI via %retstat%
 {
     if FileExist(logs)    ; check if the log file exists
     {
@@ -40,14 +30,8 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
             if (inscript != "")    ; if the variable is not empty
             {
                 FileMove(logs, temps, 1)    ; move the log file to the temporary file
-                try 
-                {
-                    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
-                    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
-                    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
-                    outfile.Write(final_code)    ; write the final code to the file
-                    outfile.Close()    ; close the file
-                    FileAppend(retstat, retstat)    ; append the return status to the return status file
+                try {
+                    Converter(inscript, path_to_convert)
                 }
                 catch {
                     sleep(10)
@@ -59,6 +43,16 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
 }
 ExitApp
 
+findProcess(PID) {
+    Loop 10 {     ; loop up to 10 times
+        if ProcessExist(PID) {     ; check if the AutoGUI process exists
+            break     ; if it does, break out of the loop
+        }
+        else {
+            Sleep(1000)     ; if it doesn't, wait for 1 second and check again
+        }
+    }
+}
 ;try {out := FileRead(path)}
 tryRead(path) {
     try {
@@ -69,4 +63,14 @@ tryRead(path) {
         Sleep(10)
         return ""
     }
+}
+
+Converter(inscript, path_to_convert) {
+    global retstat
+    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
+    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
+    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
+    outfile.Write(final_code)    ; write the final code to the file
+    outfile.Close()    ; close the file
+    FileAppend(retstat, retstat)    ; append the return status to the return status file
 }

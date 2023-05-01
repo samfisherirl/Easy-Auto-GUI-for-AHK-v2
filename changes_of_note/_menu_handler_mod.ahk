@@ -8,6 +8,7 @@
     brackets := 0
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
+    buttonFound := 0
     if FileExist(FNOut){
         FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
     }
@@ -35,7 +36,7 @@
                 continue
             }
         }
-        if (menuHandle == 0) && MenuHandleCount < 1 && InStr(A_LoopField, "MenuHandler") {
+        if (menuHandle == 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
             menuHandle := 1
             new_outscript .= A_LoopField . "`n"
         }
@@ -43,9 +44,25 @@
             MenuHandleCount += 1
             RemoveFunction := 1
         }
-        else if (menuHandle == 1) && MenuHandleCount < 2 && InStr(A_LoopField, "GuiEscape(*)") {
-            new_outscript .= "MenuHandler(*) {`n`tToolTip `"Click!`", 100, 150`n}`n" A_LoopField
-            GuiEsc := 1
+        if InStr(A_LoopField, "Add(`"Button`"") {
+            buttonFound := 1
+            new_outscript .= A_LoopField "`n"
+            variableName := Trim(StrSplit(A_LoopField, ":=")[1])
+            ;ogcButtonOK.OnEvent("Click", GuiClose)
+            val := variableName ".OnEvent(`"Click`", ButtonHandler)`n"
+            new_outscript .= val
+        }
+        else if InStr(A_LoopField, "GuiEscape(*)") {
+            ;if END OF SCRIPT found, attempt to append functions
+            if (menuHandle == 1) && (MenuHandleCount < 2) {
+                new_outscript .= "`nMenuHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked ==> a menu item.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+                GuiEsc := 1
+            }
+            if (buttonFound == 1) {
+                new_outscript.= "`nButtonHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+            }
+            new_outscript .= A_LoopField "`n"
+            ;if ()    GuiEsc := 1
         }
         else if (menuHandle == 1) && (MenuHandleCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
             RemoveFunction := 1
@@ -65,7 +82,7 @@
             new_outscript .= "`n"
             FindMenu := 1
         }
-        else if (FindMenu == 1 && InStr(Trim(A_LoopField), "Menu.Add(")) {
+        else if (FindMenu == 1) && (InStr(Trim(A_LoopField), "Menu.Add(")) {
             if (StrSplit(Trim(A_LoopField), "(")[1] == "Menu.Add") {
                 new_outscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(")
                 new_outscript .= "`n"
@@ -92,3 +109,5 @@
     }
     return new_outscript
 }
+
+
