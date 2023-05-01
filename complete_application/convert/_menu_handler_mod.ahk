@@ -45,14 +45,14 @@
             MenuHandleCount += 1
             RemoveFunction := 1
         }
-        if InStr(A_LoopField, "Add(`"Button`"") {
-            buttonFound := 1
-            new_outscript .= A_LoopField "`n"
-            variableName := Trim(StrSplit(A_LoopField, ":=")[1])
-            ;ogcButtonOK.OnEvent("Click", GuiClose)
-            val := variableName ".OnEvent(`"Click`", ButtonHandler)`n"
-            new_outscript .= val
-        }
+        ; if InStr(A_LoopField, "Add(`"Button`"") {
+        ;     buttonFound := 1
+        ;     new_outscript .= A_LoopField "`n"
+        ;     variableName := Trim(StrSplit(A_LoopField, ":=")[1])
+        ;     ;ogcButtonOK.OnEvent("Click", GuiClose)
+        ;     val := variableName ".OnEvent(`"Click`", ButtonHandler)`n"
+        ;     new_outscript .= val
+        ; }
         if InStr(A_LoopField, "Add(`"Edit`"") {
             editFound := 1
             new_outscript .= A_LoopField "`n"
