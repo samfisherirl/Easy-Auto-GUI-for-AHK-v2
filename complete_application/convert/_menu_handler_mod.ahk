@@ -9,6 +9,7 @@
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
     buttonFound := 0
+    editFound := 0
     if FileExist(FNOut){
         FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
     }
@@ -52,6 +53,14 @@
             val := variableName ".OnEvent(`"Click`", ButtonHandler)`n"
             new_outscript .= val
         }
+        if InStr(A_LoopField, "Add(`"Edit`"") {
+            editFound := 1
+            new_outscript .= A_LoopField "`n"
+            variableName := Trim(StrSplit(A_LoopField, ":=")[1])
+            ;ogcButtonOK.OnEvent("Click", GuiClose)
+            val := variableName ".OnEvent(`"Click`", ButtonHandler)`n"
+            new_outscript .= val
+        }
         else if InStr(A_LoopField, "GuiEscape(*)") {
             ;if END OF SCRIPT found, attempt to append functions
             if (menuHandle == 1) && (MenuHandleCount < 2) {
@@ -61,6 +70,7 @@
             if (buttonFound == 1) {
                 new_outscript.= "`nButtonHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
             }
+            
             new_outscript .= A_LoopField "`n"
             ;if ()    GuiEsc := 1
         }
