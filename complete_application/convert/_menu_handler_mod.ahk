@@ -10,6 +10,8 @@
     new_outscript := ""
     buttonFound := 0
     editFound := 0
+    editCount := 0
+    Edit_Storage := []
     if FileExist(FNOut){
         FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
     }
@@ -45,16 +47,16 @@
             MenuHandleCount += 1
             RemoveFunction := 1
         }
-        if InStr(A_LoopField, "Add(`"Button`"") {
-            buttonFound := 1
-            new_outscript .= A_LoopField "`n"
+        else if InStr(A_LoopField, ".Add(`"Edit`"") {
+            editFound := 1
+            editCount += 1
+            Edit_Storage.Push("Edit_Storage" . editCount)
+            new_outscript .= "Edit_Storage" editCount " := " A_LoopField "`n"
             variableName := Trim(StrSplit(A_LoopField, ":=")[1])
             ;ogcButtonOK.OnEvent("Click", GuiClose)
-            val := variableName ".OnEvent(`"Click`", ButtonHandler)`n"
-            new_outscript .= val
         }
-        if InStr(A_LoopField, "Add(`"Edit`"") {
-            editFound := 1
+        else if InStr(A_LoopField, ".Add(`"Button`"") {
+            buttonFound := 1
             new_outscript .= A_LoopField "`n"
             variableName := Trim(StrSplit(A_LoopField, ":=")[1])
             ;ogcButtonOK.OnEvent("Click", GuiClose)
@@ -64,11 +66,26 @@
         else if InStr(A_LoopField, "GuiEscape(*)") {
             ;if END OF SCRIPT found, attempt to append functions
             if (menuHandle == 1) && (MenuHandleCount < 2) {
-                new_outscript .= "`nMenuHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked ==> a menu item.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+                new_outscript .= "`nMenuHandler(*)`n" tooltip_withoutVar()
                 GuiEsc := 1
             }
-            if (buttonFound == 1) {
-                new_outscript.= "`nButtonHandler(*)`n{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -2000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+            if (buttonFound == 1) && (editFound==0) {
+                new_outscript.= "`nButtonHandler(*)`n" tooltip_withoutVar()
+            }
+            else if (buttonFound == 0) && (editFound==1){
+                string := ""
+                for i in Edit_Storage {
+                    string .= " `"``n //Value " A_Index "// `" " i ""
+                }
+                new_outscript.= "`nEditHandler(*)`n" tooltip_withVar(string)
+                
+            }
+            else if (buttonFound == 1) && (editFound==1) {
+                string := ""
+                for i in Edit_Storage {
+                    string .= " `"``n //Value " A_Index "// `" " i ".Value"
+                }
+                new_outscript.= "`nButtonHandler(*)`n" tooltip_withVar(string)
             }
             
             new_outscript .= A_LoopField "`n"
@@ -113,6 +130,13 @@
             new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
             new_outscript .= "`n"
         }
+        else if InStr(A_LoopField, ".Show(`"") && (buttonFound == 0) && (editFound == 1){
+            for i in Edit_Storage {
+            new_outscript .=  i ".OnEvent(`"Change`", EditHandler)`n"
+            }
+            new_outscript .= A_LoopField . "`n"
+            
+        }
         else {
             new_outscript .= A_LoopField . "`n"
         }
@@ -120,4 +144,9 @@
     return new_outscript
 }
 
-
+tooltip_withoutVar(){
+    return "{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+}
+tooltip_withVar(string){
+    return "{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button. ``nThe edit values include:`"" string ", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+}

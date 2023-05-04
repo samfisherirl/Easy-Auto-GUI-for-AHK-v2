@@ -3,23 +3,31 @@
 ;Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
+FileMenu := Menu()
+FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
+FileMenu.Add("&Open...`tCtrl+O", MenuHandler)
+FileMenu.Icon("&Open...`tCtrl+O", "shell32.dll", "4")
+MenuBar_Storage := MenuBar()
+MenuBar_Storage.Add("&File", FileMenu)
 myGui := Gui()
-myGui.Add("CheckBox", "x17 y16 w120 h23", "CheckBox")
-ogcButtonOK := myGui.Add("Button", "x17 y47 w80 h23", "&OK")
+myGui.MenuBar := MenuBar_Storage
+ogcButtonOK := myGui.Add("Button", "x33 y37 w80 h23", "&OK")
 ogcButtonOK.OnEvent("Click", ButtonHandler)
-ogcButtonOK := myGui.Add("Button", "x97 y187 w80 h23", "&OK")
-ogcButtonOK.OnEvent("Click", ButtonHandler)
-ogcButtonOK := myGui.Add("Button", "x428 y119 w80 h23", "&OK")
-ogcButtonOK.OnEvent("Click", ButtonHandler)
-ogcButtonafdsfasf := myGui.Add("Button", "x118 y273 w80 h23", "afdsfasf")
-ogcButtonafdsfasf.OnEvent("Click", ButtonHandler)
+Edit_Storage1 := myGui.Add("Edit", "x214 y140 w120 h21")
+Edit_Storage2 := myGui.Add("Edit", "x130 y104 w120 h21")
 myGui.Title := "Window"
-myGui.Show("w620 h420")
+myGui.Show("w620 h400")
 Return
+
+MenuHandler(*)
+{
+	ToolTip "Click! This is a sample action, you clicked  ==> a button.", 20, 20
+	SetTimer () => ToolTip(), -2000 ; timer expires in 2 seconds and tooltip disappears
+}
 
 ButtonHandler(*)
 {
-	ToolTip "Click! This is a sample action, you clicked  ==> a button.", 20, 20
+	ToolTip "Click! This is a sample action, you clicked  ==> a button. `nThe edit values include:" "`n //Value 1// " Edit_Storage1.Value "`n //Value 2// " Edit_Storage2.Value, 20, 20
 	SetTimer () => ToolTip(), -2000 ; timer expires in 2 seconds and tooltip disappears
 }
 GuiEscape(*)
