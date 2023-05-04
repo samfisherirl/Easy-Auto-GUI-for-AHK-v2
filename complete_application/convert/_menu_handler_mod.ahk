@@ -11,7 +11,7 @@
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
     buttonFound := 0
-    editFound := 0
+    itemFound := 0
     editCount := 0
     global GuiItem_Storage := []
     Edit_Storage := []
@@ -50,17 +50,20 @@
             MenuHandleCount += 1
             RemoveFunction := 1
         }
-        ; checkforGuiItems(A_LoopField)
-        if InStr(A_LoopField, ".Add(`"Edit`"") {
-            editFound := 1
+        ; =================== latest =======================
+        ret := checkforGuiItems(A_LoopField)
+        if (ret != 0) {
+            new_outscript .= ret " := " A_LoopField "`n"
+            itemFound := 1
+        }
+        ; =================== latest =======================
+        else if InStr(A_LoopField, ".Add(`"Edit`"") {
+            itemFound := 1
             editCount += 1
             Edit_Storage.Push("Edit_Storage" . editCount)
             new_outscript .= "Edit_Storage" editCount " := " A_LoopField "`n"
             ;ogcButtonOK.OnEvent("Click", GuiClose)
         }
-        ; else if InStr(A_LoopField, ".Add(`"Radio") {
-
-        ; }
         else if InStr(A_LoopField, ".Add(`"Button`"") {
             buttonFound := 1
             new_outscript .= A_LoopField "`n"
@@ -75,11 +78,11 @@
                 new_outscript .= "`nMenuHandler(*)`n" tooltip_()
                 GuiEsc := 1
             }
-            if (buttonFound == 1) && (editFound == 0) {
+            if (buttonFound == 1) && (itemFound == 0) {
                 new_outscript .= "`nValueHandler(*)`n" tooltip_()
             }
-            else if (editFound == 1) {
-                if (buttonFound == 0) && (editFound == 1) {
+            else if (itemFound == 1) {
+                if (buttonFound == 0) && (itemFound == 1) {
                     func := "`nValueHandler(*)`n"
                     string := ""
                     ; for i in Edit_Storage {
@@ -87,11 +90,11 @@
                     ;     ;string .= " `"``n //%i% " A_Index "// `" " i ".Value"
                     ; }
                 }
-                else if (buttonFound == 1) && (editFound == 1) {
-                    func .= "`nValueHandler(*)`n"
+                else if (buttonFound == 1) && (itemFound == 1) {
+                    func := "`nValueHandler(*)`n"
                 }
                 string := ""
-                for i in Edit_Storage {
+                for i in GuiItem_Storage {
                     string .= Format(" `n`t. `"``n // {1}.Value ==> `" {1}.Value", i)
                 }
                 new_outscript .= func . tooltip_(string)
@@ -140,7 +143,7 @@
             new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
             new_outscript .= "`n"
         }
-        else if InStr(A_LoopField, ".Show(`"") && (buttonFound == 0) && (editFound == 1) {
+        else if InStr(A_LoopField, ".Show(`"") && (buttonFound == 0) && (itemFound == 1) {
             for i in Edit_Storage {
                 new_outscript .= i ".OnEvent(`"Change`", EditHandler)`n"
             }
@@ -154,20 +157,24 @@
     return new_outscript
 }
 
-; checkforGuiItems(LoopField) {
-;     global GuiItemVars, GuiItem_Storage, GuiItemCounter
-;     for i in GuiItemVars {
-;         if InStr(LoopField, Format(".Add(`"{1}`"", i)) {
-;             var := i "_Storage" GuiItemCounter[A_Index]
-;             GuiItem_Storage.Push(var)
-;             GuiItemCounter[A_Index] += 1
-;         }
-;     }
-; }
+checkforGuiItems(LoopField) {
+    global GuiItemVars, GuiItem_Storage, GuiItemCounter
+    for i in GuiItemVars 
+    {
+        if InStr(LoopField, Format(".Add(`"{1}`"", i)) 
+        {
+            var := i "_Storage" GuiItemCounter[A_Index]
+            GuiItem_Storage.Push(var)
+            GuiItemCounter[A_Index] += 1
+            return var
+        }
+    }
+    return 0
+}
 
 tooltip_(string := "") {
     if (string != "") {
-        string := "`n`t. `"The edit values include:`" " . string
+        string := "`n`t. `"The values include:`" " . string
     }
     return "{`n`tToolTip `"Click! This is a sample action. ``n`"" string ", 77, 277`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
 }
