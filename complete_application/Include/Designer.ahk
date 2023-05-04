@@ -1739,24 +1739,24 @@ GetControlType(DisplayName) {
 }
 
 AskToDisconnect() {
-    RetVal := g_NT6orLater ? ConfirmDisconnect() : ConfirmDisconnectXP()
+    ; RetVal := g_NT6orLater ? ConfirmDisconnect() : ConfirmDisconnectXP()
 
-    If (RetVal == 101) { ; Disconnect
-        SetReadOnly(g_GuiTab, False)
-        n := g_GuiTab
-        g_GuiTab := 0
-        g_GuiVis := 0
-        SetTabIcon(n)
+    ; If (RetVal == 101) { ; Disconnect
+    ;     SetReadOnly(g_GuiTab, False)
+    ;     n := g_GuiTab
+    ;     g_GuiTab := 0
+    ;     g_GuiVis := 0
+    ;     SetTabIcon(n)
 
-        Gui %Child%: Destroy
-        DestroyProperties()
-        If (g_DesignMode) {
-            GoSub SwitchToEditorMode
-        }
+    ;     Gui %Child%: Destroy
+    ;     DestroyProperties()
+    ;     If (g_DesignMode) {
+    ;         GoSub SwitchToEditorMode
+    ;     }
 
-    } Else If (RetVal == 102) {
-        SetDocumentStatus(DuplicateTab(TabEx.GetSel())) ; ?
-    }
+    ; } Else If (RetVal == 102) {
+    SetDocumentStatus(DuplicateTab(TabEx.GetSel())) ; ?
+    ;}
 }
 
 ConfirmDisconnect() {
@@ -1803,6 +1803,7 @@ ConfirmDisconnectXP() {
     Buttons := [[1, "Disconnect"], [3, "Duplicate"], [2, "Cancel"]]
 
     Result := SoftModalMessageBox(Text, "AutoGUI", Buttons, 3)
+    x := {1: 101, 3: 102}[Result]
     Return {1: 101, 3: 102}[Result]
 }
 

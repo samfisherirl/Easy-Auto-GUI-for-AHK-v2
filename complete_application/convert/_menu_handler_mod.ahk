@@ -95,7 +95,7 @@
                 }
                 string := ""
                 for i in GuiItem_Storage {
-                    string .= Format(" `n`t. `"``n // {1}.Value ==> `" {1}.Value", i)
+                    string .= Format(" `n`t. `"``n {1} == `" {1}.Value", i)
                 }
                 new_outscript .= func . tooltip_(string)
 
@@ -174,7 +174,7 @@ checkforGuiItems(LoopField) {
 
 tooltip_(string := "") {
     if (string != "") {
-        string := "`n`t. `"The values include:`" " . string
+        string := "`n`t. `"Active GUI element values include:`" " . string
     }
-    return "{`n`tToolTip `"Click! This is a sample action. ``n`"" string ", 77, 277`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+    return "{`n`tToolTip `"Click! This is a sample action. ``n`"" string ", 77, 277`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 3 seconds and tooltip disappears`n}`n"
 }

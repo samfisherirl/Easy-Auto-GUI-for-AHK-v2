@@ -2,18 +2,17 @@
 ; Tested on AHK v1.1.28.00 Unicode 32/64-bit, Windows XP/7/10
 
 ; Script options
-#SingleInstance Off
+#SingleInstance, Force
 #NoEnv
 #MaxMem 640
-#SingleInstance On
 #NoTrayIcon
 #KeyHistory 0
 SetBatchLines -1
-DetectHiddenWindows On
-SetWinDelay -1
-SetControlDelay -1
-SetWorkingDir %A_ScriptDir%
-FileEncoding UTF-8
+DetectHiddenWindows, On
+SetWinDelay, -1
+SetControlDelay, -1
+SetWorkingDir, %A_ScriptDir%
+FileEncoding, UTF-8
 ListLines Off
 
 Files := [] ; Store filenames passed as parameters
