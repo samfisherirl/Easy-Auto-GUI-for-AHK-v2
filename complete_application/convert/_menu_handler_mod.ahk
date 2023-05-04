@@ -1,9 +1,9 @@
-﻿add_menuHandler(FNOut:="path", script:="code") ;outscript_path
+﻿add_menuHandler(FNOut := "path", script := "code") ;outscript_path
 {
     menuHandle := 0 ; => these denote true[1]/false[0]
     GuiEsc := 0 ; => for various bad output code, such as
     FindMenu := 0 ; => once MenuBar := Menubar() is found FindMenu:= 1;
-    FindMenuBar := 0 ; => 
+    FindMenuBar := 0 ; =>
     MenuHandleCount := 0
     brackets := 0
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
@@ -12,7 +12,7 @@
     editFound := 0
     editCount := 0
     Edit_Storage := []
-    if FileExist(FNOut){
+    if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
     }
     Loop Parse, script, "`n", "`r" {
@@ -52,7 +52,6 @@
             editCount += 1
             Edit_Storage.Push("Edit_Storage" . editCount)
             new_outscript .= "Edit_Storage" editCount " := " A_LoopField "`n"
-            variableName := Trim(StrSplit(A_LoopField, ":=")[1])
             ;ogcButtonOK.OnEvent("Click", GuiClose)
         }
         else if InStr(A_LoopField, ".Add(`"Button`"") {
@@ -69,25 +68,28 @@
                 new_outscript .= "`nMenuHandler(*)`n" tooltip_withoutVar()
                 GuiEsc := 1
             }
-            if (buttonFound == 1) && (editFound==0) {
-                new_outscript.= "`nButtonHandler(*)`n" tooltip_withoutVar()
+            if (buttonFound == 1) && (editFound == 0) {
+                new_outscript .= "`nButtonHandler(*)`n" tooltip_withoutVar()
             }
-            else if (buttonFound == 0) && (editFound==1){
-                string := ""
-                for i in Edit_Storage {
-                    string .= " `"``n //Value " A_Index "// `" " i ""
+            else if (editFound == 1) {
+                if (buttonFound == 0) && (editFound == 1) {
+                    func := "`nEditHandler(*)`n"
+                    string := ""
+                    for i in Edit_Storage {
+                        string .= " `"``n //Value " A_Index "// `" " i ""
+                    }
                 }
-                new_outscript.= "`nEditHandler(*)`n" tooltip_withVar(string)
-                
-            }
-            else if (buttonFound == 1) && (editFound==1) {
-                string := ""
-                for i in Edit_Storage {
-                    string .= " `"``n //Value " A_Index "// `" " i ".Value"
+                else if (buttonFound == 1) && (editFound == 1) {
+                    func .= "`nButtonHandler(*)`n"
+                    string := ""
+                    for i in Edit_Storage {
+                        string .= " `"``n //Value " A_Index "// `" " i ".Value"
+                    }
                 }
-                new_outscript.= "`nButtonHandler(*)`n" tooltip_withVar(string)
+                new_outscript .= func . tooltip_withVar(string)
+
             }
-            
+
             new_outscript .= A_LoopField "`n"
             ;if ()    GuiEsc := 1
         }
@@ -130,12 +132,12 @@
             new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
             new_outscript .= "`n"
         }
-        else if InStr(A_LoopField, ".Show(`"") && (buttonFound == 0) && (editFound == 1){
+        else if InStr(A_LoopField, ".Show(`"") && (buttonFound == 0) && (editFound == 1) {
             for i in Edit_Storage {
-            new_outscript .=  i ".OnEvent(`"Change`", EditHandler)`n"
+                new_outscript .= i ".OnEvent(`"Change`", EditHandler)`n"
             }
             new_outscript .= A_LoopField . "`n"
-            
+
         }
         else {
             new_outscript .= A_LoopField . "`n"
@@ -144,9 +146,9 @@
     return new_outscript
 }
 
-tooltip_withoutVar(){
+tooltip_withoutVar() {
     return "{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
 }
-tooltip_withVar(string){
+tooltip_withVar(string) {
     return "{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button. ``nThe edit values include:`"" string ", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
 }
