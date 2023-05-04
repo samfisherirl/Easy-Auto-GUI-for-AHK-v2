@@ -65,28 +65,29 @@
         else if InStr(A_LoopField, "GuiEscape(*)") {
             ;if END OF SCRIPT found, attempt to append functions
             if (menuHandle == 1) && (MenuHandleCount < 2) {
-                new_outscript .= "`nMenuHandler(*)`n" tooltip_withoutVar()
+                new_outscript .= "`nMenuHandler(*)`n" tooltip_()
                 GuiEsc := 1
             }
             if (buttonFound == 1) && (editFound == 0) {
-                new_outscript .= "`nButtonHandler(*)`n" tooltip_withoutVar()
+                new_outscript .= "`nButtonHandler(*)`n" tooltip_()
             }
             else if (editFound == 1) {
                 if (buttonFound == 0) && (editFound == 1) {
                     func := "`nEditHandler(*)`n"
                     string := ""
-                    for i in Edit_Storage {
-                        string .= " `"``n //Value " A_Index "// `" " i ""
-                    }
+                    ; for i in Edit_Storage {
+                    ;     string .= Format(" `"``n // {1}.Value ==> `" {1}.Value", i)
+                    ;     ;string .= " `"``n //%i% " A_Index "// `" " i ".Value"
+                    ; }
                 }
                 else if (buttonFound == 1) && (editFound == 1) {
                     func .= "`nButtonHandler(*)`n"
-                    string := ""
-                    for i in Edit_Storage {
-                        string .= " `"``n //Value " A_Index "// `" " i ".Value"
-                    }
                 }
-                new_outscript .= func . tooltip_withVar(string)
+                string := ""
+                for i in Edit_Storage {
+                    string .= Format(" `"``n // {1}.Value ==> `" {1}.Value", i)
+                }
+                new_outscript .= func . tooltip_(string)
 
             }
 
@@ -146,9 +147,9 @@
     return new_outscript
 }
 
-tooltip_withoutVar() {
-    return "{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button.`", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
-}
-tooltip_withVar(string) {
-    return "{`n`tToolTip `"Click! This is a sample action, you clicked  ==> a button. ``nThe edit values include:`"" string ", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
+tooltip_(string := "") {
+    if (string != "") {
+        string := "The edit values include:`" " . string
+    }
+    return "{`n`tToolTip `"Click! This is a sample action. ``n" string ", 20, 20`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 2 seconds and tooltip disappears`n}`n"
 }
