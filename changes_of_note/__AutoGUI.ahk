@@ -2,9 +2,8 @@
 
 
 ;=====================================
-;starting line number: 1392
+;starting line number: 1392            TabEx.SetText(n, FileName)
 ;=====================================
-            TabEx.SetText(n, FileName)
 
             If (FileExt = "ahk") {
                 TabEx.SetIcon(n, 2)
@@ -72,3 +71,4 @@
 }
 
 SaveAs:
+    SaveAs(TabEx.GetSel())

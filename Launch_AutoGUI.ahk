@@ -11,6 +11,10 @@ logs := A_ScriptDir "\complete_application\convert\log.txt"    ; set the path to
 empty := A_ScriptDir "\complete_application\convert\empty.txt"    ; set the path to an empty file
 temps := A_ScriptDir "\complete_application\convert\temp.txt"    ; set the path to a temporary file
 retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"    ; set the path to the return status file
+sets := A_ScriptDir "\complete_application\AutoGUI.ini"
+
+ini := FileRead(sets)
+setDesignMode(ini)
 
 com := exe autogui     ; concatenate the two paths
 Run(com, , , &PID)     ; run the concatenated command, which launches AutoGUI
@@ -42,6 +46,22 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
     }
 }
 ExitApp
+
+setDesignMode(ini) {
+    replaceSettings := ""
+    x := 0
+    Loop Parse, ini, "`n", "`r" {
+        if (x == 0) && InStr(A_LoopField, "DesignMode") {
+            replaceSettings .= "DesignMode=1`n"
+        }
+        else {
+            replaceSettings .= A_LoopField "`n"
+        }
+    }
+    f := FileOpen(sets, "w", "utf-8")
+    f.Write(replaceSettings)
+    f.Close()
+}
 
 findProcess(PID) {
     Loop 10 {     ; loop up to 10 times

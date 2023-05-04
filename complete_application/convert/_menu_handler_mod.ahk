@@ -57,19 +57,12 @@
             itemFound := 1
         }
         ; =================== latest =======================
-        else if InStr(A_LoopField, ".Add(`"Edit`"") {
-            itemFound := 1
-            editCount += 1
-            Edit_Storage.Push("Edit_Storage" . editCount)
-            new_outscript .= "Edit_Storage" editCount " := " A_LoopField "`n"
-            ;ogcButtonOK.OnEvent("Click", GuiClose)
-        }
         else if InStr(A_LoopField, ".Add(`"Button`"") {
             buttonFound := 1
             new_outscript .= A_LoopField "`n"
             variableName := Trim(StrSplit(A_LoopField, ":=")[1])
             ;ogcButtonOK.OnEvent("Click", GuiClose)
-            val := variableName ".OnEvent(`"Click`", ValueHandler)`n"
+            val := variableName ".OnEvent(`"Click`", OnEventHandler)`n"
             new_outscript .= val
         }
         else if InStr(A_LoopField, "GuiEscape(*)") {
@@ -79,11 +72,11 @@
                 GuiEsc := 1
             }
             if (buttonFound == 1) && (itemFound == 0) {
-                new_outscript .= "`nValueHandler(*)`n" tooltip_()
+                new_outscript .= "`nOnEventHandler(*)`n" tooltip_()
             }
             else if (itemFound == 1) {
                 if (buttonFound == 0) && (itemFound == 1) {
-                    func := "`nValueHandler(*)`n"
+                    func := "`nOnEventHandler(*)`n"
                     string := ""
                     ; for i in Edit_Storage {
                     ;     string .= Format(" `"``n // {1}.Value ==> `" {1}.Value", i)
@@ -91,11 +84,11 @@
                     ; }
                 }
                 else if (buttonFound == 1) && (itemFound == 1) {
-                    func := "`nValueHandler(*)`n"
+                    func := "`nOnEventHandler(*)`n"
                 }
                 string := ""
                 for i in GuiItem_Storage {
-                    string .= Format(" `n`t. `"``n {1} == `" {1}.Value", i)
+                    string .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", i)
                 }
                 new_outscript .= func . tooltip_(string)
 
@@ -143,12 +136,14 @@
             new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
             new_outscript .= "`n"
         }
-        else if InStr(A_LoopField, ".Show(`"") && (buttonFound == 0) && (itemFound == 1) {
-            for i in Edit_Storage {
-                new_outscript .= i ".OnEvent(`"Change`", EditHandler)`n"
+        else if InStr(A_LoopField, ".Show(`"") {
+            if ((buttonFound == 0) && (itemFound == 1))
+            {
+                for i in GuiItem_Storage {
+                    new_outscript .= i ".OnEvent(`"Click`", OnEventHandler)`n"
+                }
+                new_outscript .= A_LoopField . "`n"
             }
-            new_outscript .= A_LoopField . "`n"
-
         }
         else {
             new_outscript .= A_LoopField . "`n"
@@ -159,9 +154,9 @@
 
 checkforGuiItems(LoopField) {
     global GuiItemVars, GuiItem_Storage, GuiItemCounter
-    for i in GuiItemVars 
+    for i in GuiItemVars
     {
-        if InStr(LoopField, Format(".Add(`"{1}`"", i)) 
+        if InStr(LoopField, Format(".Add(`"{1}`"", i))
         {
             var := i "_Storage" GuiItemCounter[A_Index]
             GuiItem_Storage.Push(var)
@@ -174,7 +169,7 @@ checkforGuiItems(LoopField) {
 
 tooltip_(string := "") {
     if (string != "") {
-        string := "`n`t. `"Active GUI element values include:`" " . string
+        string := "`n`t. `"Active GUI element values include:``n`" " . string
     }
-    return "{`n`tToolTip `"Click! This is a sample action. ``n`"" string ", 77, 277`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 3 seconds and tooltip disappears`n}`n"
+    return "{`n`tToolTip(`n`t`"Click! This is a sample action.``n`"" string ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 3 seconds and tooltip disappears`n}`n"
 }
