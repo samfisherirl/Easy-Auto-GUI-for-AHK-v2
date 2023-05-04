@@ -1,6 +1,6 @@
 # A modified version of 'Easy AutoGUI' for ahk-v2
 
-I'll be adding more details here soon.
+I'll be adding more details here soon. First and formost, this project worked off the back of many years of hard work by the individuals below. 
 
 - Auto-GUI-v2 credit to Alguimist - https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901
 
