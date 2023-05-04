@@ -2,8 +2,8 @@
 {
     menuHandle := 0 ; => these denote true[1]/false[0]
     GuiEsc := 0 ; => for various bad output code, such as
-    FindMenu := 0 ; => once MenuBar := Menubar() is found FindMenu:= 1;
-    FindMenuBar := 0 ; =>
+    FindMenu := 0 ; => once Menu := Menubar() is found, replace with Menu_Storage;
+    FindMenuBar := 0 ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
     MenuHandleCount := 0
     brackets := 0
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
