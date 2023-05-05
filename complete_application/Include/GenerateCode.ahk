@@ -406,6 +406,9 @@
             if (Code_to_Test == Code){
                 Goto, Nvm
             }
+            else {
+                FileMove, %lastCode%, %temp%, 1
+            }
         }
         if FileExist(Runtime){
             FileMove, %Runtime%, %Temp%, 1

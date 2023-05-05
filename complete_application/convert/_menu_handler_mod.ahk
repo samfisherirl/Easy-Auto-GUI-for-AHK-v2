@@ -5,14 +5,15 @@
     FindMenu := 0 ; => once Menu := Menubar() is found, replace with Menu_Storage;
     FindMenuBar := 0 ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
     MenuHandleCount := 0
-    global GuiItemVars := ["Edit", "Radio", "CheckBox", "DropDownList", "ComboBox"]
-    global GuiItemCounter := [1, 1, 1, 1, 1]
+    global GuiItemVars := ["Edit", "Radio", "CheckBox", "ComboBox"]
+    global GuiItemCounter := [1, 1, 1, 1]
     brackets := 0
     RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
     buttonFound := 0
     itemFound := 0
     editCount := 0
+    menuHandler:=0
     global GuiItem_Storage := []
     Edit_Storage := []
     if FileExist(FNOut) {
@@ -69,7 +70,8 @@
         }
         ; =================== latest =======================
         ; =================== latest =======================
-        else if InStr(A_LoopField, "GuiEscape(*)") {
+        else if InStr(A_LoopField, "GuiEscape(*)") && (menuHandler==0) {
+            menuHandler:=1
             ;if END OF SCRIPT found, attempt to append functions
             ;Function MenuHandler or OnEventHandler 
             ;provide tooltips when buttons are clicked or values are entered
