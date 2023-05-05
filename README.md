@@ -1,18 +1,19 @@
 # A modified version of 'Easy AutoGUI' for ahk-v2
 
-I'll be adding more details here soon. First and formost, this project worked off the back of many years of hard work by the individuals below. 
+AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The project is built upon the years of hard work by various individuals, and the code has been updated to use the latest version of AutoHotkey.
 
-- Auto-GUI-v2 credit to Alguimist - https://www.autohotkey.com/boards/viewtopic.php?f=64&t=89901
-
-- AHKv2converter credit to https://github.com/mmikeww/AHK-v2-script-converter
-
-I did very little work weaving these two solutions together when looking at the years it took to curate the solutions by the creators just mentioned. 
-
+# Credits:
+- Easy AutoGUI was created by Alguimist, the founder of the Adventure IDE here https://sourceforge.net/projects/autogui/
+- AHKv2converter was developed by https://github.com/mmikeww and https://github.com/dmtr99 among others.
+Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
+  
 # How it works 
-- this runs Easy AutoGUI on ahkv1
-- Conversion happens when selecting "Save" or "Save as..." [now updates in IDE] 
-- function-call converts to v2 with ahkv2converter 
-- autogui has custom code posted in the changes_of_note folder
+- This runs Easy AutoGUI on ahkv1 (bill tin)
+- Conversion happens when selecting "Save" or "Save as..." [now updates in IDE]
+- Custom contingency changes ensure no or limited output errors, improving ahkv2converter output for this specific use case.
+- function-call converts to v2 with ahkv2converter
+- custom menuhandler, and menubarhandler reduces output error for post-save initial script run
+- autogui has custom code posted in the github
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
 
