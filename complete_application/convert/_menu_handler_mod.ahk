@@ -171,5 +171,5 @@ tooltip_(string := "") {
     if (string != "") {
         string := "`n`t. `"Active GUI element values include:``n`" " . string
     }
-    return "{`n`tToolTip(`n`t`"Click! This is a sample action.``n`"" string ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 3 seconds and tooltip disappears`n}`n"
+    return "{`n`tToolTip(`"Click! This is a sample action.``n`"" string ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 3 seconds and tooltip disappears`n}`n"
 }
