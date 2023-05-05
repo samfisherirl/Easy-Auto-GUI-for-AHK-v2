@@ -107,13 +107,7 @@
         else if InStr(A_LoopField, "myGui.OnEvent(`"Close`", GuiEscape)") || InStr(A_LoopField, "myGui.OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField == "") {
             ;remove all if cases
             continue
-        }
-        ; else if InStr(LTrim(A_LoopField), "MenuBar.Add(") && a == 1 {
-        ;     if StrSplit(LTrim(A_LoopField), "(")[1] == "MenuBar.Add" {
-        ;         new_outscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenBar.Add(")
-        ;         new_outscript .= "`n"
-        ;     }
-        ; ; }
+        } 
         else if (Trim(A_LoopField) == "Menu := Menu()") {
             ;fix naming convension of Menu
             new_outscript .= StrReplace(A_LoopField, "Menu := Menu()", "Menu_Storage := Menu()")

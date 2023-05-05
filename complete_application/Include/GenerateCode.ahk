@@ -472,6 +472,9 @@
     Sci[g_GuiTab].EndUndoAction()
     sci[g_GuiTab].SetReadOnly(1)
 
+    If (!g_DesignMode) {
+        GoSub SwitchToDesignMode
+    }
     If (TabEx.GetSel() != g_GuiTab) {
         TabEx.SetSel(g_GuiTab)
     }
