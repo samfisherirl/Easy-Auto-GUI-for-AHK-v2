@@ -12,7 +12,6 @@ Their work served as the foundation for this project, I did very little work, ju
 - Conversion happens when selecting "Save" or "Save as..." [now updates in IDE]
 - Custom contingency changes ensure no or limited output errors, improving ahkv2converter output for this specific use case.
 - function-call converts to v2 with ahkv2converter
-- custom menuhandler, and menubarhandler reduces output error for post-save initial script run
 - autogui has custom code posted in the github
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
