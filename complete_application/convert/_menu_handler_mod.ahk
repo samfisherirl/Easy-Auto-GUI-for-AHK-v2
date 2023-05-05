@@ -43,6 +43,7 @@
             }
         }
         if (menuHandle == 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
+            ; if MenuHandler is found, add a function at the bottom of the app to handle
             menuHandle := 1
             new_outscript .= A_LoopField . "`n"
         }
@@ -66,8 +67,12 @@
             val := variableName ".OnEvent(`"Click`", OnEventHandler)`n"
             new_outscript .= val
         }
+        ; =================== latest =======================
+        ; =================== latest =======================
         else if InStr(A_LoopField, "GuiEscape(*)") {
             ;if END OF SCRIPT found, attempt to append functions
+            ;Function MenuHandler or OnEventHandler 
+            ;provide tooltips when buttons are clicked or values are entered
             if (menuHandle == 1) && (MenuHandleCount < 2) {
                 new_outscript .= "`nMenuHandler(*)`n" tooltip_()
                 GuiEsc := 1
@@ -79,10 +84,6 @@
                 if (buttonFound == 0) && (itemFound == 1) {
                     func := "`nOnEventHandler(*)`n"
                     string := ""
-                    ; for i in Edit_Storage {
-                    ;     string .= Format(" `"``n // {1}.Value ==> `" {1}.Value", i)
-                    ;     ;string .= " `"``n //%i% " A_Index "// `" " i ".Value"
-                    ; }
                 }
                 else if (buttonFound == 1) && (itemFound == 1) {
                     func := "`nOnEventHandler(*)`n"
@@ -99,10 +100,12 @@
             ;if ()    GuiEsc := 1
         }
         else if (menuHandle == 1) && (MenuHandleCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
+            ;remove default menuhandler function
             RemoveFunction := 1
             continue
         }
         else if InStr(A_LoopField, "myGui.OnEvent(`"Close`", GuiEscape)") || InStr(A_LoopField, "myGui.OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField == "") {
+            ;remove all if cases
             continue
         }
         ; else if InStr(LTrim(A_LoopField), "MenuBar.Add(") && a == 1 {
@@ -112,17 +115,20 @@
         ;     }
         ; ; }
         else if (Trim(A_LoopField) == "Menu := Menu()") {
+            ;fix naming convension of Menu
             new_outscript .= StrReplace(A_LoopField, "Menu := Menu()", "Menu_Storage := Menu()")
             new_outscript .= "`n"
             FindMenu := 1
         }
         else if (FindMenu == 1) && (InStr(Trim(A_LoopField), "Menu.Add(")) {
+            ;fix naming convension of Menu
             if (StrSplit(Trim(A_LoopField), "(")[1] == "Menu.Add") {
                 new_outscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(")
                 new_outscript .= "`n"
             }
         }
         else if (Trim(A_LoopField) == "MenuBar := Menu()") {
+            ;fix naming convension of MenuBar
             new_outscript .= StrReplace(A_LoopField, "MenuBar := Menu()", "MenuBar_Storage := MenuBar()")
             new_outscript .= "`n"
             FindMenuBar := 1
@@ -134,11 +140,15 @@
             }
         }
         else if InStr(A_LoopField, ".MenuToolbar := MenuBar") {
+            ;fix naming convension of MenuToolbar
             new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
             new_outscript .= "`n"
         }
         else if InStr(A_LoopField, ".Show(`"") {
-            ;look for line before `return` GuiShow 
+            ;look for line before `return` (GuiShow) 
+            ;if found, and NO [submit] button is used
+            ;user will get tooltips on value changes
+            ;instead of submittion
             if ((buttonFound == 0) && (itemFound == 1))
             {
                 for i in GuiItem_Storage {
