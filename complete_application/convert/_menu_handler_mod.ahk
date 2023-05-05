@@ -52,6 +52,7 @@
         }
         ; =================== latest =======================
         ret := checkforGuiItems(A_LoopField)
+        ; loop through and look for GuiItemVars[]
         if (ret != 0) {
             new_outscript .= ret " := " A_LoopField "`n"
             itemFound := 1
@@ -137,6 +138,7 @@
             new_outscript .= "`n"
         }
         else if InStr(A_LoopField, ".Show(`"") {
+            ;look for line before `return` GuiShow 
             if ((buttonFound == 0) && (itemFound == 1))
             {
                 for i in GuiItem_Storage {
