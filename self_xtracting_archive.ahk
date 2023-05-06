@@ -1,7 +1,6 @@
 ﻿#Requires Autohotkey v2.0
 a := A_ScriptDir
 S := "7za.exe"
-T  := "7z.exe"
 FileInstall "7z.exe", "7za.exe", 1 
 T := "`""
 SZpath := addQuotes("7za.exe")
