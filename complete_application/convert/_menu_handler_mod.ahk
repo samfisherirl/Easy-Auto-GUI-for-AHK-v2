@@ -14,13 +14,14 @@
     itemFound := 0
     editCount := 0
     menuHandler:=0
+    guiShow:=0
     global GuiItem_Storage := []
     Edit_Storage := []
     if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\complete_application\convert\temp.txt", 1)
     }
     Loop Parse, script, "`n", "`r" {
-        if (A_Index == 1) {
+        if (A_Index == 1) && not InStr(A_LoopField, "#Requires Autohotkey v2.0") {
             new_outscript := "`n" "#Requires Autohotkey v2.0`n;AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
         if (RemoveFunction == 1) {
@@ -140,7 +141,8 @@
             new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
             new_outscript .= "`n"
         }
-        else if InStr(A_LoopField, ".Show(`"") {
+        else if InStr(A_LoopField, ".Show(`"") && (guiShow==0) {
+            guiShow:=1
             ;look for line before `return` (GuiShow) 
             ;if found, and NO [submit] button is used
             ;user will get tooltips on value changes
@@ -150,9 +152,6 @@
                 for i in GuiItem_Storage {
                     new_outscript .= i ".OnEvent(`"Click`", OnEventHandler)`n"
                 }
-                new_outscript .= A_LoopField . "`n"
-            }
-            else {
                 new_outscript .= A_LoopField . "`n"
             }
         }

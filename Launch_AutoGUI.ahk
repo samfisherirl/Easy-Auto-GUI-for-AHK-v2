@@ -43,12 +43,6 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
                     sleep(10)
                 } } }
     }
-    else if (FileExist(runscript)) {
-        out := tryRead(runscript)
-        com := exe2 "`"" runscript "`""
-        Run(com)
-        FileMove(runscript, temps, 1)
-    }
     else {
         Sleep(15)
         continue

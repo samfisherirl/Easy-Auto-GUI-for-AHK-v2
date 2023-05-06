@@ -397,17 +397,19 @@
     if (Code != ""){
         Runtime := A_ScriptDir "\convert\runtime.txt"
         ReturnStatus := A_ScriptDir "\convert\returnstatus.txt"
-        lastCode := A_ScriptDir "\convert\lastCode.txt"
+        last1 := A_ScriptDir "\convert\lastv1.txt"
+        last2 := A_ScriptDir "\convert\lastv2.txt"
         Temp := A_ScriptDir "\convert\temp.txt"
         Logs := A_ScriptDir "\convert\log.txt"
         empty := A_ScriptDir "\convert\empty.txt"
-        if FileExist(lastCode){
-            FileRead, Code_to_Test, %lastCode%
+        if FileExist(last1){
+            FileRead, Code_to_Test, %last1%
             if (Code_to_Test == Code){
+                
                 Goto, Nvm
             }
             else {
-                FileMove, %lastCode%, %temp%, 1
+                FileMove, %last1%, %temp%, 1
             }
         }
         if FileExist(Runtime){
@@ -422,7 +424,7 @@
 
         ;FileMove, %Runtime%, %Temp%, 1
         FileAppend, %Code%, %Runtime%
-        FileAppend, %Code%, %lastCode%
+        FileAppend, %Code%, %last1%
         FileAppend, %Runtime%, %Logs%
         Loop 50
         {
@@ -433,10 +435,10 @@
                     Sleep, 100
                     continue
                 }
-                if FileExist(lastCode){
-                    FileRead, ToBeTested, %lastCode%
+                if FileExist(last2){
+                    FileRead, ToBeTested, %last2%
                 }
-                if (ToBeTested == Code){
+                if (ToBeTested == CodeBack){
                     Goto, Nvm
                 }
                 if FileExist(Logs){
@@ -462,10 +464,10 @@
         Code := CodeBack
     }
     Last_Code := Code
-    if FileExist(lastCode){
-        FileMove, %lastCode%, %Temp%, 1
+    if FileExist(last2){
+        FileMove, %last2%, %Temp%, 1
     }
-    FileAppend, %Last_Code%, %lastCode%
+    FileAppend, %CodeBack%, %last2%
     Header := Code
     g_Signature := Code
     sci[g_GuiTab].SetReadOnly(0)

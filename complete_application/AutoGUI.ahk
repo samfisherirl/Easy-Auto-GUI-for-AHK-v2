@@ -1460,35 +1460,21 @@ Open(Files := "", Flag := 0) {
     Return
 
     SaveAs(n) {
-        TabEx.SetSel(n)
+        ; Show a file selection dialog box and return the selected file path
+        FileSelectFile, SelectedFile, 3, , Select a file to write code to
 
-        StartPath := (Sci[n].FileName != "") ? Sci[n].FullName : g_SaveDir
-        Gui Auto: +OwnDialogs
-        FileSelectFile SelectedFile, S16, %StartPath%, Save, AutoHotkey Scripts (*.ahk)
-        If (ErrorLevel) {
-            Return
+
+        ; Check if a file was selected
+        if (SelectedFile != "") {
+            ; Open the selected file for writing
+            OutputFile := FileOpen(SelectedFile, "w")
+            FileRead, Code, %A_ScriptDir%\convert\lastv2.txt
+            ; Write some sample code to the file
+            OutputFile.Write(Code)
+            
+            ; Close the file
+            OutputFile.Close()
         }
-
-        SplitPath SelectedFile, FileName,, Extension
-        If (Extension == "" && !FileExist(SelectedFile . ".ahk")) {
-            FileName .= ".ahk"
-            SelectedFile .= ".ahk"
-            Extension := "ahk"
-        }
-
-        Sci[n].FullName := SelectedFile
-        Sci[n].FileName := FileName
-
-        If (Extension != "ahk") {
-            Sci[n].SetLexer(0)
-            DisableSyntaxHighlighting(n)
-        } Else If (Sci[n].GetLexer() != 200) {
-            Sci_Config(n)
-        }
-
-        SetWindowTitle(SelectedFile)
-
-        Return Save(n)
     }
 
     Save:
