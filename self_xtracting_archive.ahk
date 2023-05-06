@@ -15,6 +15,7 @@ loop 50
 {
     try {
         Run(out "\Launch_AutoGUI.exe")
+        break
     }
     catch {
         Sleep(150)
