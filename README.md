@@ -17,8 +17,8 @@ Their work served as the foundation for this project, I did very little work, ju
 
 # Goals
 On my todo list is adding a swath of templates. Like 100 templates would be cool. Right now theres just the 10 coming from the ahk docs. I you'd like to submit a template GUI, just fork and add the templates folder. 
-
-Update: Live in IDE v2 code works. Example, cloning notepad++ to ahkv2. 
+#
+Example, cloning notepad++ to ahkv2. 
 
 ![Produce_13](https://user-images.githubusercontent.com/98753696/235309043-9dcac7d8-d0d5-4311-8a25-93cff5e63533.GIF)
 
