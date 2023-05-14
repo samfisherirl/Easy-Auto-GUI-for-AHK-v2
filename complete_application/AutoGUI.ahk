@@ -1461,12 +1461,16 @@ Open(Files := "", Flag := 0) {
 
     SaveAs(n) {
         ; Show a file selection dialog box and return the selected file path
-        FileSelectFile, SelectedFile, 3, , Select a file to write code to
+        FileSelectFile, SelectedFile, S, , Select a file to write code to, AutoHotKey (*.ahk)
 
 
         ; Check if a file was selected
         if (SelectedFile != "") {
             ; Open the selected file for writing
+            SplitPath, SelectedFile, FileName
+            if !InStr(FileName, ".ahk") {
+                SelectedFile := SelectedFile . ".ahk"
+            }
             OutputFile := FileOpen(SelectedFile, "w")
             FileRead, Code, %A_ScriptDir%\convert\lastv2.txt
             ; Write some sample code to the file
