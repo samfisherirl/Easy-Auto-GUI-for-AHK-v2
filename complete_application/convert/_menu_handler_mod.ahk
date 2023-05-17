@@ -25,7 +25,7 @@
             new_outscript := "`n" "#Requires Autohotkey v2.0`n;AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
         if (RemoveFunction == 1) {
-            if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "{") {
+            if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "}") {
                 brackets += 1 ; for every opening bracket, remove until equal number of closed brackets found
                 continue
             }
