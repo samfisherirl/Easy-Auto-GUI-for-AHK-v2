@@ -50,6 +50,18 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
 }
 ExitApp
 
+
+Converter(inscript, path_to_convert) {
+    global retstat
+    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
+    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
+    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
+    outfile.Write(final_code)    ; write the final code to the file
+    outfile.Close()    ; close the file
+    FileAppend(retstat, retstat)    ; append the return status to the return status file
+}
+
+
 setDesignMode(ini) {
     replaceSettings := ""
     x := 0
@@ -86,14 +98,4 @@ tryRead(path) {
         Sleep(10)
         return ""
     }
-}
-
-Converter(inscript, path_to_convert) {
-    global retstat
-    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
-    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
-    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
-    outfile.Write(final_code)    ; write the final code to the file
-    outfile.Close()    ; close the file
-    FileAppend(retstat, retstat)    ; append the return status to the return status file
 }
