@@ -1,5 +1,5 @@
 # A modified version of 'Easy AutoGUI' for ahk-v2. 
-### A GUI-Designer for basic and advanced creation.  
+A GUI-Designer for basic and advanced creation.  
 
 
 # Credits:
