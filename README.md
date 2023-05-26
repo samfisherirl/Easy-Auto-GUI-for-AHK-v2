@@ -1,4 +1,5 @@
-# A modified version of 'Easy AutoGUI' for ahk-v2. A GUI-Designer for basic and advanced creation.  
+# A modified version of 'Easy AutoGUI' for ahk-v2. 
+## A GUI-Designer for basic and advanced creation.  
 
 AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The project is built upon the years of hard work by various individuals, and the code has been updated to use the latest version of AutoHotkey.
 
