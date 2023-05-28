@@ -154,6 +154,9 @@
                 }
                 new_outscript .= A_LoopField . "`n"
             }
+            else {
+                new_outscript .= A_LoopField . "`n"
+            }
         }
         else {
             new_outscript .= A_LoopField . "`n"
