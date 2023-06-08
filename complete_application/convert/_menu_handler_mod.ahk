@@ -1,20 +1,17 @@
 ﻿add_menuHandler(FNOut := "path", script := "code") ;outscript_path
 {
-    menuHandle := 0 ; => these denote true[1]/false[0]
-    GuiEsc := 0 ; => for various bad output code, such as
-    FindMenu := 0 ; => once Menu := Menubar() is found, replace with Menu_Storage;
-    FindMenuBar := 0 ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
-    MenuHandleCount := 0
+    ; => these denote true[1]/false[0]
+     ; => for various bad output code, such as
+     ; => once Menu := Menubar() is found, replace with Menu_Storage;
+     ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
+    
     global GuiItemVars := ["Edit", "Radio", "CheckBox", "ComboBox"]
     global GuiItemCounter := [1, 1, 1, 1]
     brackets := 0
-    RemoveFunction := 0 ; RemoveFunction==1 loops to find `}` while `{` not found in line
+     ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
-    buttonFound := 0
-    itemFound := 0
-    editCount := 0
-    menuHandler:=0
-    guiShow:=0
+    buttonFound := 0, itemFound := 0, editCount := 0, menuHandler:=0, guiShow:=0, RemoveFunction := 0, menuHandle := 0, GuiEsc := 0, FindMenu := 0, FindMenuBar := 0, MenuHandleCount := 0
+    guiname := ""
     global GuiItem_Storage := []
     Edit_Storage := []
     if FileExist(FNOut) {
@@ -71,6 +68,10 @@
         }
         ; =================== latest =======================
         ; =================== latest =======================
+        else if (guiname = "") && InStr(A_LoopField, " := Gui()") {
+            guiname := StrSplit(A_LoopField, " := Gui()")[1]
+            new_outscript .= A_LoopField "`n"
+        }
         else if InStr(A_LoopField, "GuiEscape(*)") && (menuHandler==0) {
             menuHandler:=1
             ;if END OF SCRIPT found, attempt to append functions
@@ -99,7 +100,7 @@
 
             }
 
-            new_outscript .= A_LoopField "`n"
+            break
             ;if ()    GuiEsc := 1
         }
         else if (menuHandle == 1) && (MenuHandleCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
@@ -107,7 +108,7 @@
             RemoveFunction := 1
             continue
         }
-        else if InStr(A_LoopField, "myGui.OnEvent(`"Close`", GuiEscape)") || InStr(A_LoopField, "myGui.OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField == "") {
+        else if InStr(A_LoopField, "OnEvent(`"Close`", GuiEscape)") || InStr(A_LoopField, "OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField == "") {
             ;remove all if cases
             continue
         } 
@@ -151,12 +152,11 @@
             {
                 for i in GuiItem_Storage {
                     new_outscript .= i ".OnEvent(`"Click`", OnEventHandler)`n"
-                }
-                new_outscript .= A_LoopField . "`n"
-            }
-            else {
-                new_outscript .= A_LoopField . "`n"
-            }
+                } 
+            } 
+            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
+            new_outscript .= A_LoopField . "`n" 
+            
         }
         else {
             new_outscript .= A_LoopField . "`n"
@@ -164,7 +164,7 @@
     }
     return new_outscript
 }
-
+;.OnEvent('Close', (*) => ExitApp())
 checkforGuiItems(LoopField) {
     global GuiItemVars, GuiItem_Storage, GuiItemCounter
     for i in GuiItemVars
