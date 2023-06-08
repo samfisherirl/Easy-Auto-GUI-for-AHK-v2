@@ -5,15 +5,16 @@
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" " 
-exe2 := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV2.exe`" "     ; specify the path to the AutoHotkey V1 executable
-autogui := "`"" A_ScriptDir "\complete_application\AutoGUI.ahk`""   ; specify the path to the AutoGUI script
-logs := A_ScriptDir "\complete_application\convert\log.txt"    ; set the path to the log file
-empty := A_ScriptDir "\complete_application\convert\empty.txt"    ; set the path to an empty file
-temps := A_ScriptDir "\complete_application\convert\temp.txt"    ; set the path to a temporary file
-retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"    ; set the path to the return status file
-sets := A_ScriptDir "\complete_application\AutoGUI.ini"
-runscript := A_ScriptDir "\complete_application\runscript.ahk"
+cwd := A_ScriptDir "\complete_application"
+exe := "`"" cwd "\AutoHotKey Exe\AutoHotkeyV1.exe`" " 
+exe2 := "`"" cwd "\AutoHotKey Exe\AutoHotkeyV2.exe`" "     ; specify the path to the AutoHotkey V1 executable
+autogui := "`"" cwd "\AutoGUI.ahk`""   ; specify the path to the AutoGUI script
+logs := cwd "\convert\log.txt"    ; set the path to the log file
+empty := cwd "\convert\empty.txt"    ; set the path to an empty file
+temps := cwd "\convert\temp.txt"    ; set the path to a temporary file
+retstat := cwd "\convert\returnstatus.txt"    ; set the path to the return status file
+sets := cwd "\AutoGUI.ini"
+runscript := cwd "\runscript.ahk"
 
 ini := FileRead(sets)
 setDesignMode(ini)
