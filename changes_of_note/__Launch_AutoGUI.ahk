@@ -5,13 +5,15 @@
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" "     ; specify the path to the AutoHotkey V1 executable
+exe := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV1.exe`" " 
+exe2 := "`"" A_ScriptDir "\complete_application\AutoHotKey Exe\AutoHotkeyV2.exe`" "     ; specify the path to the AutoHotkey V1 executable
 autogui := "`"" A_ScriptDir "\complete_application\AutoGUI.ahk`""   ; specify the path to the AutoGUI script
 logs := A_ScriptDir "\complete_application\convert\log.txt"    ; set the path to the log file
 empty := A_ScriptDir "\complete_application\convert\empty.txt"    ; set the path to an empty file
 temps := A_ScriptDir "\complete_application\convert\temp.txt"    ; set the path to a temporary file
 retstat := A_ScriptDir "\complete_application\convert\returnstatus.txt"    ; set the path to the return status file
 sets := A_ScriptDir "\complete_application\AutoGUI.ini"
+runscript := A_ScriptDir "\complete_application\runscript.ahk"
 
 ini := FileRead(sets)
 setDesignMode(ini)
@@ -39,7 +41,8 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
                 }
                 catch {
                     sleep(10)
-                } } } }
+                } } }
+    }
     else {
         Sleep(15)
         continue
@@ -47,12 +50,33 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
 }
 ExitApp
 
+
+Converter(inscript, path_to_convert) {
+    global retstat
+    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
+    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
+    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
+    outfile.Write(final_code)    ; write the final code to the file
+    outfile.Close()    ; close the file
+    FileAppend(retstat, retstat)    ; append the return status to the return status file
+}
+
+
 setDesignMode(ini) {
     replaceSettings := ""
     x := 0
     Loop Parse, ini, "`n", "`r" {
         if (x == 0) && InStr(A_LoopField, "DesignMode") {
             replaceSettings .= "DesignMode=1`n"
+        }
+        else if (x == 0) && InStr(A_LoopField, "SnapToGrid") {
+            replaceSettings .= "SnapToGrid=1`n"
+        }
+        else if (x == 0) && InStr(A_LoopField, "DarkTheme") {
+            replaceSettings .= "DarkTheme=1`n"
+        }
+        else if (x == 0) && InStr(A_LoopField, "AutoLoadLast") {
+            replaceSettings .= "AutoLoadLast=0`n"
         }
         else {
             replaceSettings .= A_LoopField "`n"
@@ -83,14 +107,4 @@ tryRead(path) {
         Sleep(10)
         return ""
     }
-}
-
-Converter(inscript, path_to_convert) {
-    global retstat
-    script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
-    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
-    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
-    outfile.Write(final_code)    ; write the final code to the file
-    outfile.Close()    ; close the file
-    FileAppend(retstat, retstat)    ; append the return status to the return status file
 }
