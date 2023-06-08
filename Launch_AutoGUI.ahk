@@ -69,6 +69,15 @@ setDesignMode(ini) {
         if (x == 0) && InStr(A_LoopField, "DesignMode") {
             replaceSettings .= "DesignMode=1`n"
         }
+        if (x == 0) && InStr(A_LoopField, "SnapToGrid") {
+            replaceSettings .= "SnapToGrid=1`n"
+        }
+        if (x == 0) && InStr(A_LoopField, "DarkTheme") {
+            replaceSettings .= "DarkTheme=1`n"
+        }
+        if (x == 0) && InStr(A_LoopField, "AutoLoadLast") {
+            replaceSettings .= "AutoLoadLast=0`n"
+        }
         else {
             replaceSettings .= A_LoopField "`n"
         }
