@@ -16,8 +16,8 @@ Their work served as the foundation for this project, I did very little work, ju
 - autogui has custom code posted in the github
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
-# Goals
-On my todo list is adding a swath of templates. Like 100 templates would be cool. Right now theres just the 10 coming from the ahk docs. I you'd like to submit a template GUI, just fork and add the templates folder. 
+# Contribution
+If you find a problem or an idea, fork or create issue. Thanks!
 #
 Example, cloning notepad++ to ahkv2. 
 
