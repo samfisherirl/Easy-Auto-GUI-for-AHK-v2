@@ -1,8 +1,8 @@
 ﻿#Requires Autohotkey v2.0
 #SingleInstance Force
-#Include complete_application\convert\ConvertFuncs.ahk
-#Include complete_application\convert\_vars.ahk
-#Include complete_application\convert\_menu_handler_mod.ahk
+#Include %A_ScriptDir%\complete_application\convert\ConvertFuncs.ahk
+#Include %A_ScriptDir%\complete_application\convert\_vars.ahk
+#Include %A_ScriptDir%\complete_application\convert\_menu_handler_mod.ahk
 #Include %A_ScriptDir%\complete_application\lib\github.ahk
 #Include %A_ScriptDir%\complete_application\lib\WinHttpRequest.ahk
 #Include %A_ScriptDir%\complete_application\lib\JXON.ahk
