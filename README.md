@@ -9,7 +9,7 @@ AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The
 - Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
   
 # How it works 
-- This runs Easy AutoGUI on ahkv1
+- Runs Easy AutoGUI on ahkv1 (doesn't need to be installed, relies on built in exe's)
 - Conversion happens in realtime in the IDE, and when selecting SaveAs/Save. Cloning windows with over 1,000 lines happens in under 1 second. 
 - Custom contingency changes ensure no or limited output errors, improving ahkv2converter output for this specific use case.
 - function-call converts to v2 with ahkv2converter
