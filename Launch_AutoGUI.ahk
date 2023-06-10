@@ -65,23 +65,34 @@ Converter(inscript, path_to_convert) {
 
 setDesignMode(ini) {
     replaceSettings := ""
-    x := 0
+    enable := Map("DesignMode", 0, "SnapToGrid", 0, "DarkTheme", 0)
+    disable := Map("AutoLoadLast", 0)
     Loop Parse, ini, "`n", "`r" {
-        if (x == 0) && InStr(A_LoopField, "DesignMode") {
-            replaceSettings .= "DesignMode=1`n"
+        for searchItem, statusFound in enable {
+            if InStr(A_LoopField, searchItem) {
+                if (statusFound = 0) {
+                    replaceSettings .= searchItem "=1`n"
+                    enable.Set(searchItem, 1)
+                    continue
+                }
+                else {
+                    continue
+                }
+            }
         }
-        else if (x == 0) && InStr(A_LoopField, "SnapToGrid") {
-            replaceSettings .= "SnapToGrid=1`n"
+        for searchItem, statusFound in disable {
+            if InStr(A_LoopField, searchItem) {
+                if (statusFound = 0) {
+                    replaceSettings .= searchItem "=0`n"
+                    disable.Set(searchItem, 1)
+                    continue
+                }
+                else {
+                    continue
+                }
+            }
         }
-        else if (x == 0) && InStr(A_LoopField, "DarkTheme") {
-            replaceSettings .= "DarkTheme=1`n"
-        }
-        else if (x == 0) && InStr(A_LoopField, "AutoLoadLast") {
-            replaceSettings .= "AutoLoadLast=0`n"
-        }
-        else {
-            replaceSettings .= A_LoopField "`n"
-        }
+        replaceSettings .= A_LoopField "`n"
     }
     f := FileOpen(sets, "w", "utf-8")
     f.Write(replaceSettings)
