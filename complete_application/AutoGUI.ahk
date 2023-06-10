@@ -196,7 +196,7 @@ LoadHelpMenu()
 LoadAutoComplete(A_ScriptDir . "\Include\AutoHotkey.xml")
 
 DeleteOldBackups()
-
+GoSub NewGUI
 If (!A_IsUnicode) {
     MsgBox 0x10, Error, %g_AppName% is incompatible with the ANSI build of AutoHotkey.
     ExitApp
@@ -277,8 +277,8 @@ CreateEditorToolbar() {
         Save
         Save All
         -
-        Design Mode
-        New GUI
+        Design Mode,,, SHOWTEXT
+        New GUI,,, SHOWTEXT
         -
         Cut
         Copy
@@ -406,7 +406,7 @@ CreateDesignToolbar() {
     IL_Add(TbarIL, IconLib, 125) ; Save All
     IL_Add(TbarIL, IconLib, 126) ; Design Mode
     IL_Add(TbarIL, IconLib, 6) ; New GUI
-    IL_Add(TbarIL, IconLib, 38) ; Show/Hide Preview Window
+    IL_Add(TbarIL, IconLib, 38) ; Show/Hide Preview
     IL_Add(TbarIL, IconLib, 72) ; Show Grid
     IL_Add(TbarIL, IconLib, 73) ; Snap to Grid
     IL_Add(TbarIL, IconLib, 26) ; Align Lefts
@@ -423,7 +423,7 @@ CreateDesignToolbar() {
     IL_Add(TbarIL, "Icons\WCT.ico") ; Window Cloning Tool
     IL_Add(TbarIL, IconLib, 12) ; Execute
     IL_Add(TbarIL, IconLib, 25) ; Properties
-
+ 
     TbarButtons =
     (LTrim
         -
@@ -432,9 +432,9 @@ CreateDesignToolbar() {
         Save
         Save All
         -
-        Design Mode,,,, 1060
-        New GUI
-        Show/Hide Preview Window,,,, 1070
+        Design Mode,,, SHOWTEXT, 1060
+        New GUI,,, SHOWTEXT
+        Show/Hide Preview,,, SHOWTEXT, 1070
         -
         Show Grid,,,, 1080
         Snap to Grid,,,, 1090
@@ -494,7 +494,7 @@ OnGUIToolbar(hWnd, Event, Text, Pos, Id) {
 
     } Else If (Text == "Design Mode") {
         GoSub SwitchToEditorMode
-    } Else If (Text == "Show/Hide Preview Window") {
+    } Else If (Text == "Show/Hide Preview") {
         ShowChildWindow()
 
     } Else If (Text == "Show Grid") {
