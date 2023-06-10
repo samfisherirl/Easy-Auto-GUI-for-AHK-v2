@@ -21,7 +21,8 @@ If you have an idea or find a problem, click the Issues tab and create issue or 
 #
 Example, cloning notepad++ to ahkv2. 
 
-![Produce_13](https://user-images.githubusercontent.com/98753696/235309043-9dcac7d8-d0d5-4311-8a25-93cff5e63533.GIF)
+
+![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
 
 
 
