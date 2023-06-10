@@ -1,0 +1,18 @@
+﻿myGui := Gui()
+myGui.OnEvent("Close", GuiEscape)
+myGui.OnEvent("Escape", GuiEscape)
+myGui.Add("Edit", "x238 y80 w120 h21")
+myGui.Add("Progress", "x355 y242 w120 h20 -Smooth", "33")
+myGui.Add("Text", "x195 y158 w120 h23 +0x200", "Text")
+
+myGui.Title := "Window"
+myGui.Show("w620 h420")
+Return
+
+GuiEscape(*)
+{ ; V1toV2: Added bracket
+GuiClose:
+    ExitApp()
+
+
+} ; Added bracket in the end

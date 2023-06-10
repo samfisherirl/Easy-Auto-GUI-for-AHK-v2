@@ -1,0 +1,29 @@
+﻿Gui Add, DateTime, x414 y150 w100 h24
+Gui Add, GroupBox, x232 y222 w120 h80, GroupBox
+Gui Add, StatusBar,, Status Bar
+Gui Add, CheckBox, x253 y28 w120 h23, CheckBox
+Gui Add, Progress, x127 y34 w120 h20 -Smooth, 33
+Gui Add, Button, x57 y118 w80 h23, &OK
+Gui Add, Edit, x160 y142 w120 h21
+Gui Add, Hotkey, x140 y253 w120 h21
+Gui Add, Link, x103 y205 w120 h23, <a href="https://autohotkey.com">autohotkey.com</a>
+Gui Add, Edit, x376 y107 w120 h21
+Gui Add, Hotkey, x303 y72 w120 h21
+Gui Add, UpDown, x218 y692 w193 h0  -16, 1
+Gui Add, DateTime, x288 y183 w100 h24
+Gui Add, CheckBox, x147 y164 w120 h21, CheckBox
+Gui Add, ComboBox, x255 y280 w120, ComboBox
+Gui Add, GroupBox, x50 y6 w120 h80, GroupBox
+Gui Add, MonthCal, x71 y2 w225 h160
+Gui Add, Button, x198 y335 w80 h23, &OK
+Gui Add, ListView, x192 y324 w200 h150 +LV0x4000, ListView
+Gui Add, Hotkey, x445 y75 w120 h21
+Gui Add, Tab3, x46 y3 w225 h160, Tab 1|Tab 2
+Gui Tab
+
+Gui Show, w620 h420, Window
+Return
+
+GuiEscape:
+GuiClose:
+    ExitApp
