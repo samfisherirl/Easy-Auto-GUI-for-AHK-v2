@@ -9,7 +9,7 @@ AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The
 - Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
   
 # How it works 
-- This runs Easy AutoGUI on ahkv1 (bill tin)
+- This runs Easy AutoGUI on ahkv1
 - Conversion happens when selecting "Save" or "Save as..." [now updates in IDE]
 - Custom contingency changes ensure no or limited output errors, improving ahkv2converter output for this specific use case.
 - function-call converts to v2 with ahkv2converter
