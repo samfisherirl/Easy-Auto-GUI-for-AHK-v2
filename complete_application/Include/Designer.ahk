@@ -281,9 +281,13 @@ AddControl(DisplayName) {
     } Else If (Type == "Text" || Type == "Picture") {
         _Options := " +0x100" ; SS_NOTIFY (for WM_SETCURSOR)
     }
-
-    Gui %Child%: Default
-    Gui Add, %Type%, % "hWndhWnd " . Options . Size . Position . _Options, %Text%
+    try {
+        Gui %Child%: Default
+        Gui Add, %Type%, % "hWndhWnd " . Options . Size . Position . _Options, %Text%
+    }
+    catch {
+        Sleep, 1
+    }
 
     If (TabPos[1] || Type == "Tab2") {
         Gui %Child%: Tab
