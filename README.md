@@ -17,7 +17,7 @@ AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The
 - works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
 
 # Contribution
-If you find a problem or an idea, fork or create issue. Thanks!
+If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
 #
 Example, cloning notepad++ to ahkv2. 
 
