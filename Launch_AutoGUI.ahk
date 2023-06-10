@@ -1,13 +1,15 @@
 ﻿#Requires Autohotkey v2.0
 #SingleInstance Force
-#Include %A_ScriptDir%\complete_application\convert\ConvertFuncs.ahk
-#Include %A_ScriptDir%\complete_application\convert\_vars.ahk
-#Include %A_ScriptDir%\complete_application\convert\_menu_handler_mod.ahk
-#Include %A_ScriptDir%\complete_application\lib\github.ahk
-#Include %A_ScriptDir%\complete_application\lib\WinHttpRequest.ahk
-#Include %A_ScriptDir%\complete_application\lib\JXON.ahk
-#Include %A_ScriptDir%\complete_application\versionCheck.ahk 
+#Include required\convert\ConvertFuncs.ahk
+#Include required\convert\_menu_handler_mod.ahk
+#Include %A_ScriptDir%\required\lib\github.ahk
+#Include %A_ScriptDir%\required\lib\WinHttpRequest.ahk
+#Include %A_ScriptDir%\required\lib\JXON.ahk
 
+cwd := A_ScriptDir "\required"
+
+#Include required\convert\_vars.ahk
+#Include %A_ScriptDir%\required\versionCheck.ahk 
 UpdateCheck()
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
@@ -16,8 +18,8 @@ UpdateCheck()
 ini := FileRead(sets) ; settings file, find and modify
 setDesignMode(ini)
 
-com := exe autogui     ; concatenate the two paths; for ahkv1.exe and autogui.ahk
-Run(com, , , &PID)     ; run the concatenated command, which launches AutoGUI
+launch_autogui_command_line_param := ahkv1_exe autogui_path     ; concatenate the two paths; for ahkv1.exe and autogui.ahk
+Run(launch_autogui_command_line_param, , , &PID)     ; run the concatenated command, which launches AutoGUI
 Sleep(1000)    ; wait for 1 second
 findProcess(PID)    ;Loop 10 seconds, break when PID exists
 
