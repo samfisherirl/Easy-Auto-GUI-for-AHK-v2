@@ -244,6 +244,7 @@ CreateEditorToolbar() {
     IL_Add(EditorTBIL, IconLib, 125) ; Save All
     IL_Add(EditorTBIL, IconLib, 126) ; Design Mode
     IL_Add(EditorTBIL, IconLib, 6) ; New GUI
+    IL_Add(EditorTBIL, IconLib, 12) ; Execute
     IL_Add(EditorTBIL, IconLib, 15) ; Cut
     IL_Add(EditorTBIL, IconLib, 16) ; Copy
     IL_Add(EditorTBIL, IconLib, 17) ; Paste
@@ -266,7 +267,6 @@ CreateEditorToolbar() {
     IL_Add(EditorTBIL, IconLib, 110) ; Step Over
     IL_Add(EditorTBIL, IconLib, 111) ; Step Out
     IL_Add(EditorTBIL, IconLib, 115) ; Inspect Variables
-    IL_Add(EditorTBIL, IconLib, 12) ; Execute
     IL_Add(EditorTBIL, IconLib, 78) ; Help
 
     EditorTBBtns =
@@ -279,6 +279,8 @@ CreateEditorToolbar() {
         -
         Design Mode,,, SHOWTEXT
         New GUI,,, SHOWTEXT
+        -
+        Execute,,, SHOWTEXT
         -
         Cut
         Copy
@@ -307,8 +309,6 @@ CreateEditorToolbar() {
         Step Over,, HIDDEN,, 2503
         Step Out,, HIDDEN,, 2504
         Inspect Variables,, HIDDEN,, 2505
-        -
-        Execute,,, SHOWTEXT
         -
         Help
     )
@@ -343,6 +343,9 @@ OnMainToolbar(hWnd, Event, Text, Pos, Id) {
         GoSub SwitchToDesignMode
     } Else If (Text == "New GUI") {
         GoSub NewGUI
+
+    } Else If (Text == "Execute") {
+        RunScript()
 
     } Else If (Text == "Cut") {
         Cut()
@@ -389,9 +392,6 @@ OnMainToolbar(hWnd, Event, Text, Pos, Id) {
     } Else If (Text == "Inspect Variables") {
         GoSub ShowVarList
 
-    } Else If (Text == "Execute") {
-        RunScript()
-
     } Else If (Text == "Help") {
         OpenHelpFile(GetSelectedText())
     }
@@ -407,6 +407,7 @@ CreateDesignToolbar() {
     IL_Add(TbarIL, IconLib, 126) ; Design Mode
     IL_Add(TbarIL, IconLib, 6) ; New GUI
     IL_Add(TbarIL, IconLib, 38) ; Show/Hide Preview
+    IL_Add(TbarIL, IconLib, 12) ; Execute
     IL_Add(TbarIL, IconLib, 72) ; Show Grid
     IL_Add(TbarIL, IconLib, 73) ; Snap to Grid
     IL_Add(TbarIL, IconLib, 26) ; Align Lefts
@@ -421,7 +422,6 @@ CreateDesignToolbar() {
     IL_Add(TbarIL, IconLib, 35) ; Make Same Height
     IL_Add(TbarIL, IconLib, 36) ; Make Same Size
     IL_Add(TbarIL, "Icons\WCT.ico") ; Window Cloning Tool
-    IL_Add(TbarIL, IconLib, 12) ; Execute
     IL_Add(TbarIL, IconLib, 25) ; Properties
  
     TbarButtons =
@@ -435,6 +435,8 @@ CreateDesignToolbar() {
         Design Mode,,, SHOWTEXT, 1060
         New GUI,,, SHOWTEXT
         Show/Hide Preview,,, SHOWTEXT, 1070
+        -
+        Execute,,, SHOWTEXT
         -
         Show Grid,,,, 1080
         Snap to Grid,,,, 1090
@@ -455,8 +457,6 @@ CreateDesignToolbar() {
         Make Same Size
         -
         Window Cloning Tool
-        -
-        Execute,,, SHOWTEXT
         -
         Properties
     )
@@ -497,6 +497,8 @@ OnGUIToolbar(hWnd, Event, Text, Pos, Id) {
     } Else If (Text == "Show/Hide Preview") {
         ShowChildWindow()
 
+    } Else If (Text == "Execute") {
+        RunScript()
     } Else If (Text == "Show Grid") {
         GoSub ToggleGrid
     } Else If (Text == "Snap to Grid") {
@@ -531,8 +533,6 @@ OnGUIToolbar(hWnd, Event, Text, Pos, Id) {
     } Else If (Text == "Window Cloning Tool") {
         GoSub ShowCloneDialog
 
-    } Else If (Text == "Execute") {
-        RunScript()
 
     } Else If (Text == "Properties") {
         GoSub ShowProperties
