@@ -5,18 +5,18 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-Edit_1 := myGui.Add("Edit", "x262 y89 w120 h21")
-myGui.Add("Edit", "x262 y89 w120 h21")
+DateTime_1 := myGui.Add("DateTime", "x398 y63 w100 h24")
+myGui.Add("DateTime", "x398 y63 w100 h24")
 myGui.Title := "Window"
-Edit_1.OnEvent("Change", OnEventHandler)
+DateTime_1.OnEvent("Change", OnEventHandler)
 myGui.OnEvent('Close', (*) => ExitApp())
-myGui.Show("w620 h416")
+myGui.Show("w620 h420")
 Return
 
 OnEventHandler(*)
 {
 	ToolTip("Click! This is a sample action.`n"
 	. "Active GUI element values include:`n"  
-	. "Edit_1 => " Edit_1.Value "`n", 77, 277)
+	. "DateTime_1 => " DateTime_1.Value "`n", 77, 277)
 	SetTimer () => ToolTip(), -3000 ; tooltip timer
 }

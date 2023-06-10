@@ -6,7 +6,7 @@
     IniRead g_TabBarStyle, %IniFile%, Options, TabBarStyle, 2
     IniRead g_SciFontName, %IniFile%, Editor, FontName, Lucida Console
     IniRead g_SciFontSize, %IniFile%, Editor, FontSize, 14
-    IniRead g_DarkTheme, %IniFile%, Editor, DarkTheme, 0
+    IniRead g_DarkTheme, %IniFile%, Editor, DarkTheme, 1
     IniRead g_TabSize, %IniFile%, Editor, TabSize, 4
     IniRead g_LineNumbers, %IniFile%, Editor, LineNumbers, 0
     IniRead g_SymbolMargin, %IniFile%, Editor, SymbolMargin, 1
@@ -21,9 +21,9 @@
     IniRead g_IndentGuides, %IniFile%, Editor, IndentGuides, 0
     IniRead g_CheckTimestamp, %IniFile%, Editor, CheckTimestamp, 1
 
-    IniRead g_DesignMode, %IniFile%, Options, DesignMode, 0
+    IniRead g_DesignMode, %IniFile%, Options, DesignMode, 1
     IniRead g_ShowGrid, %IniFile%, Options, ShowGrid, 1
-    IniRead g_SnapToGrid, %IniFile%, Options, SnapToGrid, 0
+    IniRead g_SnapToGrid, %IniFile%, Options, SnapToGrid, 1
     IniRead g_GridSize, %IniFile%, Options, GridSize, 8
 
     IniRead g_CaptureStdErr, %IniFile%, Run, CaptureStdErr, 1
