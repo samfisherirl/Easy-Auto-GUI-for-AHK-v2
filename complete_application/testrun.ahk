@@ -1,0 +1,1 @@
+﻿Run, %A_ScriptDir%\AutoHotKey Exe\AutoHotkeyV2.exe %A_ScriptDir%\autogui.ahk 
