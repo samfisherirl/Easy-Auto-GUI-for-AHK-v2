@@ -1,30 +1,28 @@
 ﻿#Requires Autohotkey v2.0
 #SingleInstance Force
 #Include complete_application\convert\ConvertFuncs.ahk
+#Include complete_application\convert\_vars.ahk
 #Include complete_application\convert\_menu_handler_mod.ahk
+#Include %A_ScriptDir%\complete_application\lib\github.ahk
+#Include %A_ScriptDir%\complete_application\lib\WinHttpRequest.ahk
+#Include %A_ScriptDir%\complete_application\lib\JXON.ahk
+#Include %A_ScriptDir%\complete_application\versionCheck.ahk 
+
+UpdateCheck()
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-cwd := A_ScriptDir "\complete_application"
-exe := "`"" cwd "\AutoHotKey Exe\AutoHotkeyV1.exe`" " 
-exe2 := "`"" cwd "\AutoHotKey Exe\AutoHotkeyV2.exe`" "     ; specify the path to the AutoHotkey V1 executable
-autogui := "`"" cwd "\AutoGUI.ahk`""   ; specify the path to the AutoGUI script
-logs := cwd "\convert\log.txt"    ; set the path to the log file
-empty := cwd "\convert\empty.txt"    ; set the path to an empty file
-temps := cwd "\convert\temp.txt"    ; set the path to a temporary file
-retstat := cwd "\convert\returnstatus.txt"    ; set the path to the return status file
-sets := cwd "\AutoGUI.ini"
-runscript := cwd "\runscript.ahk"
 
-ini := FileRead(sets)
+ini := FileRead(sets) ; settings file, find and modify
 setDesignMode(ini)
 
-com := exe autogui     ; concatenate the two paths
+com := exe autogui     ; concatenate the two paths; for ahkv1.exe and autogui.ahk
 Run(com, , , &PID)     ; run the concatenated command, which launches AutoGUI
 Sleep(1000)    ; wait for 1 second
-findProcess(PID)
+findProcess(PID)    ;Loop 10 seconds, break when PID exists
 
-While ProcessExist(PID)    ; while the AutoGUI process exists
+While ProcessExist(PID)
+    ; while the AutoGUI process exists
     ; wait for %logs% to exist, that means AutoGui is trying to generate code.
     ; this loop will convert to v2 and notify AutoGUI via %retstat%
 {
@@ -36,20 +34,22 @@ While ProcessExist(PID)    ; while the AutoGUI process exists
             inscript := tryRead(path_to_convert)    ; read the contents of the file into a variable
             if (inscript != "")    ; if the variable is not empty
             {
-                FileMove(logs, temps, 1)    ; move the log file to the temporary file
+                tryRemove(logs)
                 try {
                     Converter(inscript, path_to_convert)
                 }
                 catch {
                     sleep(10)
+                    continue
                 } } }
     }
-    else {
+    else 
+    {
         Sleep(15)
         continue
     }
 }
-ExitApp
+ExitApp()
 
 
 Converter(inscript, path_to_convert) {
@@ -118,5 +118,16 @@ tryRead(path) {
     catch {
         Sleep(10)
         return ""
+    }
+}
+tryRemove(path){
+    Loop 5 {
+        Try {
+            FileMove(path, temps, 1)
+            break
+        }
+        catch {
+            Sleep(2)
+        }
     }
 }
