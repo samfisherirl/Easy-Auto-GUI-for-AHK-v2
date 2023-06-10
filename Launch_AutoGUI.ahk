@@ -68,14 +68,17 @@ setDesignMode(ini) {
     enable := Map("DesignMode", 0, "SnapToGrid", 0, "DarkTheme", 0)
     disable := Map("AutoLoadLast", 0)
     Loop Parse, ini, "`n", "`r" {
+        continueStatus:=0
         for searchItem, statusFound in enable {
             if InStr(A_LoopField, searchItem) {
                 if (statusFound = 0) {
                     replaceSettings .= searchItem "=1`n"
                     enable.Set(searchItem, 1)
+                    continueStatus := 1
                     continue
                 }
                 else {
+                    continueStatus:=1
                     continue
                 }
             }
@@ -85,14 +88,18 @@ setDesignMode(ini) {
                 if (statusFound = 0) {
                     replaceSettings .= searchItem "=0`n"
                     disable.Set(searchItem, 1)
+                    continueStatus:=1
                     continue
                 }
                 else {
+                    continueStatus:=1
                     continue
                 }
             }
         }
-        replaceSettings .= A_LoopField "`n"
+        if (continueStatus = 0) {
+            replaceSettings .= A_LoopField "`n"
+        }
     }
     f := FileOpen(sets, "w", "utf-8")
     f.Write(replaceSettings)
