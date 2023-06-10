@@ -5,9 +5,10 @@
      ; => once Menu := Menubar() is found, replace with Menu_Storage;
      ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
     
-    global GuiItemVars := ["Edit", "Radio", "CheckBox", "ComboBox"]
-    global GuiItemCounter := [1, 1, 1, 1]
-    brackets := 0
+     global GuiItemVars := Map("Edit", "Change", "DateTime", "Change", "MonthCal", "Change", "Radio", "Click", "CheckBox", "Click", "ComboBox", "Change")
+     global eventList := []
+     global GuiItemCounter := [1, 1, 1, 1, 1, 1]
+     brackets := 0
      ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
     buttonFound := 0, itemFound := 0, editCount := 0, menuHandler:=0, guiShow:=0, RemoveFunction := 0, menuHandle := 0, GuiEsc := 0, FindMenu := 0, FindMenuBar := 0, MenuHandleCount := 0
@@ -41,22 +42,27 @@
                 continue
             }
         }
-        if (menuHandle == 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
-            ; if MenuHandler is found, add a function at the bottom of the app to handle
-            menuHandle := 1
-            new_outscript .= A_LoopField . "`n"
+        if (guiname = "") && InStr(A_LoopField, " := Gui()") {
+            guiname := StrSplit(A_LoopField, " := Gui()")[1]
+            new_outscript .= A_LoopField "`n"
+            continue
         }
-        if InStr(A_LoopField, "MenuHandler(") {
-            MenuHandleCount += 1
-            RemoveFunction := 1
-        }
-        ; =================== latest =======================
         ret := checkforGuiItems(A_LoopField)
         ; loop through and look for GuiItemVars[]
         if (ret != 0) {
             new_outscript .= ret " := " A_LoopField "`n"
             itemFound := 1
         }
+        if (menuHandle == 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
+            ; if MenuHandler is found, add a function at the bottom of the app to handle
+            menuHandle := 1
+            new_outscript .= A_LoopField . "`n"
+        }
+        else if InStr(A_LoopField, "MenuHandler(") {
+            MenuHandleCount += 1
+            RemoveFunction := 1
+        }
+        ; =================== latest =======================
         ; =================== latest =======================
         else if InStr(A_LoopField, ".Add(`"Button`"") {
             buttonFound := 1
@@ -68,10 +74,6 @@
         }
         ; =================== latest =======================
         ; =================== latest =======================
-        else if (guiname = "") && InStr(A_LoopField, " := Gui()") {
-            guiname := StrSplit(A_LoopField, " := Gui()")[1]
-            new_outscript .= A_LoopField "`n"
-        }
         else if InStr(A_LoopField, "GuiEscape(*)") && (menuHandler==0) {
             menuHandler:=1
             ;if END OF SCRIPT found, attempt to append functions
@@ -148,10 +150,11 @@
             ;if found, and NO [submit] button is used
             ;user will get tooltips on value changes
             ;instead of submittion
-            if ((buttonFound == 0) && (itemFound == 1))
+            if (itemFound == 1)
             {
                 for i in GuiItem_Storage {
-                    new_outscript .= i ".OnEvent(`"Click`", OnEventHandler)`n"
+                    event := eventList[A_Index]
+                    new_outscript .= i ".OnEvent(`"" event "`", OnEventHandler)`n"
                 } 
             } 
             new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
@@ -166,13 +169,14 @@
 }
 ;.OnEvent('Close', (*) => ExitApp())
 checkforGuiItems(LoopField) {
-    global GuiItemVars, GuiItem_Storage, GuiItemCounter
-    for i in GuiItemVars
+    global GuiItemVars, GuiItem_Storage, GuiItemCounter, eventList
+    for guicontrol, event in GuiItemVars
     {
-        if InStr(LoopField, Format(".Add(`"{1}`"", i))
+        if InStr(LoopField, Format(".Add(`"{1}`"", guicontrol))
         {
-            var := i "_Storage" GuiItemCounter[A_Index]
-            GuiItem_Storage.Push(var)
+            var := guicontrol "_" GuiItemCounter[A_Index]
+            GuiItem_Storage.Push(Trim(var))
+            eventList.Push(event)
             GuiItemCounter[A_Index] += 1
             return var
         }
@@ -184,5 +188,5 @@ tooltip_(string := "") {
     if (string != "") {
         string := "`n`t. `"Active GUI element values include:``n`" " . string
     }
-    return "{`n`tToolTip(`"Click! This is a sample action.``n`"" string ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; timer expires in 3 seconds and tooltip disappears`n}`n"
+    return "{`n`tToolTip(`"Click! This is a sample action.``n`"" string ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; tooltip timer`n}`n"
 }
