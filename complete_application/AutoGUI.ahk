@@ -1605,66 +1605,16 @@ Open(Files := "", Flag := 0) {
     Return
 
     RunScript(Mode := 1) {
-        n := TabEx.GetSel()
-        Size := Sci[n].GetLength()
-        If (Size == 0) {
-            Return
+        SciText := GetText(TabEx.GetSel())
+        FullPath := A_ScriptDir . "\Sessions\temp.ahk"
+        If FileExist(FullPath) {
+            FileMove, %FullPath%, %A_ScriptDir%\Sessions\temp2.ahk, 1
         }
-
-        AhkPath := (GetKeyState("Shift", "P") || Mode == 2) ? g_AhkPath3264 : A_AhkPath
-
-        SciText := GetText(n)
-
-        ; Run Selected Text (Ctrl+F9)
-        If (Mode == 5) {
-            Text := GetSelectedText()
-            If (Text == "") {
-                Text := SciText
-            }
-            if (FileExist(A_ScriptDir . "\runscript.ahk")) {
-                FileMove, A_ScriptDir . "\runscript.ahk", A_ScriptDir . "\trash.txt", 1
-            }
-            FileAppend, %SciText%, %A_ScriptDir% . "\runscript.ahk"
-            Return
-        }
-
-        ; Alternative run (Alt+F9)
-        If (Mode == 4) {
-            if (FileExist(A_ScriptDir . "\runscript.ahk")) {
-                FileMove, A_ScriptDir . "\runscript.ahk", A_ScriptDir . "\trash.txt", 1
-            }
-            FileAppend, %SciText%, %A_ScriptDir% . "\runscript.ahk"
-
-        }
-
-        If (Sci[n].Filename != "") {
-            If (Sci[n].GetModify()) {
-                If (!Save(n)) {
-                    Return
-                }
-            }
-            FullPath := Sci[n].FullName
-            SplitPath FullPath,, WorkingDir
-        } Else {
-            ; Unsaved scripts run from the Temp folder
-            if (FileExist(A_ScriptDir . "\runscript.ahk")) {
-                FileMove, A_ScriptDir . "\runscript.ahk", A_ScriptDir . "\trash.txt", 1
-            }
-            FileAppend, %SciText%, %A_ScriptDir% . "\runscript.ahk"
-
-        }
-
-        If (g_CaptureStdErr) {
-            AhkRunGetStdErr(n, AhkPath, FullPath, g_parameters, WorkingDir)
-        } Else {
-            if (FileExist(A_ScriptDir . "\runscript.ahk")) {
-                FileMove, A_ScriptDir . "\runscript.ahk", A_ScriptDir . "\trash.txt", 1
-            }
-            FileAppend, %SciText%, %A_ScriptDir% . "\runscript.ahk"
-
-        }
+        ; Backup a copy of the file before saving
+        FileAppend %SciText%, %FullPath%
+        Run, %A_ScriptDir%\AutoHotKey Exe\AutoHotkeyV2.exe %A_ScriptDir%\Sessions\temp.ahk, %A_ScriptDir%
     }
-
+    
     RunSelectedText:
         RunScript(5)
     Return
