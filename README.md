@@ -18,8 +18,7 @@ AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The
 
 # Contribution
 If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
-#
-Example
+# Example
 
 
 ![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
