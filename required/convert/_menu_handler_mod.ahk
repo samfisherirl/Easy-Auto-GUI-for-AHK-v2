@@ -53,7 +53,7 @@
             new_outscript .= ret " := " A_LoopField "`n"
             itemFound := 1
         }
-        if (menuHandle == 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
+        else if (menuHandle == 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
             ; if MenuHandler is found, add a function at the bottom of the app to handle
             menuHandle := 1
             new_outscript .= A_LoopField . "`n"

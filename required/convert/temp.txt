@@ -5,15 +5,17 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-ogcButtonOK := myGui.Add("Button", "x265 y78 w80 h23", "&OK")
-ogcButtonOK.OnEvent("Click", OnEventHandler)
+ComboBox_1 := myGui.Add("ComboBox", "x35 y43 w118", ["ComboBox"])
 myGui.Title := "Window"
+ComboBox_1.OnEvent("Change", OnEventHandler)
 myGui.OnEvent('Close', (*) => ExitApp())
-myGui.Show("w620 h411")
+myGui.Show("w620 h420")
 Return
 
 OnEventHandler(*)
 {
-	ToolTip("Click! This is a sample action.`n", 77, 277)
+	ToolTip("Click! This is a sample action.`n"
+	. "Active GUI element values include:`n"  
+	. "ComboBox_1 => " ComboBox_1.Value "`n", 77, 277)
 	SetTimer () => ToolTip(), -3000 ; tooltip timer
 }
