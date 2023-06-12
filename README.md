@@ -6,6 +6,7 @@ A GUI-Designer for basic and advanced creation.
 AutoGUIv2 is a modified version of Easy AutoGUI designed for use with AHKv2. The project is built upon the years of hard work by various individuals, and the code has been updated to use the latest version of AutoHotkey.
 - Easy AutoGUI was created by Alguimist, the founder of the Adventure IDE here https://sourceforge.net/projects/autogui/
 - AHKv2converter was developed by https://github.com/mmikeww and https://github.com/dmtr99 among others.
+- Boiler from the autohotkey.com forum, provided MessageBox Creator within the tools menu.
 - Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
   
 # How it works 
