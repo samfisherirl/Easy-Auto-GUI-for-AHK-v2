@@ -19,7 +19,7 @@
         count := version_info["disable_notifications"]
         count := Integer(count)
         count := count + 1
-        if count < 4 {
+        if count < 3 {
             answer := MsgBox("There's an update available. This will bring fixes and additions that will improve the current version you have. Would you like to update? (Automatic)", "Update Available", "68")
             if answer = "Yes" {
                 count := 0

@@ -229,7 +229,6 @@ Menu AutoToolsMenu, Add
 
 ; Help Menu
 ;AddMenu("AutoHelpMenu", "AutoHotkey &Help File`tF1", "HelpMenuHandler", IconLib, 78)
-AddMenu("AutoHelpMenu", "AutoGUI Keyboard Shortcuts", "ShowKeyboardShortcuts", A_ScriptDir . "\Icons\Keyboard.ico")
 Menu AutoHelpMenu, Add
 AddMenu("AutoHelpMenu", "&About", "ShowAbout", IconLib, 80)
 
@@ -298,42 +297,6 @@ AddMenu("TabContextMenu", "Open in a New Window", "OpenNewInstance", IconLib, 1)
 Menu TabContextMenu, Add
 AddMenu("TabContextMenu", "File Properties", "ShowFileProperties", IconLib, 25)
 
-LoadHelpMenu() {
-    g_HelpMenuXMLObj := LoadXML(A_ScriptDir . "\Include\HelpMenu.xml")
-    Nodes := g_HelpMenuXMLObj.selectSingleNode("HelpMenu").childNodes
-
-    StartPos := 3
-    For Node in Nodes {
-        Index := StartPos + A_Index
-
-        If (Node.hasChildNodes()) {
-            SubMenu := True
-            MenuName := "AutoHelpMenu" . Index
-
-            ChildNodes := Node.childNodes
-            For ChildNode in ChildNodes {
-                MenuItemText := ChildNode.getAttribute("name")
-                Icon := GetHelpMenuItemIcon(ChildNode)
-                AddMenu(MenuName, MenuItemText, "HelpMenuHandler", Icon[1], Icon[2])
-            }
-        } Else {
-            SubMenu := False
-        }
-
-        MenuItemText := Node.getAttribute("name")
-        Menu AutoHelpMenu, Insert, %Index%&, %MenuItemText%, % (SubMenu) ? ":" . MenuName : "HelpMenuHandler"
-
-        If (SubMenu) {
-            Menu AutoHelpMenu, Icon, %MenuItemText%, %IconLib%, 9
-        } Else {
-            Icon := GetHelpMenuItemIcon(Node)
-            Menu AutoHelpMenu, Icon, %MenuItemText%, % Icon[1], % Icon[2]
-        }
-    }
-
-    Index++
-    Menu AutoHelpMenu, Insert, %Index%&
-}
 
 GetHelpMenuItemIcon(Node) {
     URL := Node.getAttribute("url")

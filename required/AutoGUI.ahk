@@ -191,7 +191,7 @@ Global g_ThemeFix := DllCall("UxTheme.dll\IsThemeActive") ? "" : "-Theme" ; Temp
 StartAutoSave()
 
 LoadToolsMenu()
-LoadHelpMenu()
+;LoadHelpMenu()
 
 LoadAutoComplete(A_ScriptDir . "\Include\AutoHotkey.xml")
 

@@ -1,16 +1,19 @@
 ﻿#Requires Autohotkey v2.0
 #SingleInstance Force
-#Include required\convert\ConvertFuncs.ahk
-#Include required\convert\_menu_handler_mod.ahk
+#Include %A_ScriptDir%\required\convert\ConvertFuncs.ahk
+#Include %A_ScriptDir%\required\convert\_menu_handler_mod.ahk
 #Include %A_ScriptDir%\required\lib\github.ahk
 #Include %A_ScriptDir%\required\lib\WinHttpRequest.ahk
 #Include %A_ScriptDir%\required\lib\JXON.ahk
+#Include %A_ScriptDir%\required\Include\splash.ahk
 
 cwd := A_ScriptDir "\required"
 
-#Include required\convert\_vars.ahk
+#Include %A_ScriptDir%\required\convert\_vars.ahk
 #Include %A_ScriptDir%\required\versionCheck.ahk 
 UpdateCheck()
+showSplashScreen()
+
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
