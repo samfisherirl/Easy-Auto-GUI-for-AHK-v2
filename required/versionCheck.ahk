@@ -23,15 +23,15 @@
             answer := MsgBox("There's an update available. This will bring fixes and additions that will improve the current version you have. Would you like to update? (Automatic)", "Update Available", "68")
             if answer = "Yes" {
                 count := 0
+                FileMove(A_ScriptDir "\required\updater.exe", A_ScriptDir "\updater.exe", 1)
+                RunWait(A_ScriptDir "\updater.exe")
+                FileMove(A_ScriptDir "\updater.exe", A_ScriptDir "\required\updater.exe", 1)
+                FileMove(A_ScriptDir "\release.zip", A_Temp "\release.temp", 1)
                 settings := Map("version", git.Version, "disable_notifications", count)
                 serialized := Jxon_Dump(settings)
                 F := FileOpen(settings_path, "w")
                 F.Write(serialized)
                 F.Close()
-                FileMove(A_ScriptDir "\required\updater.exe", A_ScriptDir "\updater.exe", 1)
-                RunWait(A_ScriptDir "\updater.exe")
-                FileMove(A_ScriptDir "\updater.exe", A_ScriptDir "\required\updater.exe", 1)
-                FileMove(A_ScriptDir "\release.zip", A_Temp "\release.temp", 1)
             }
             else {
                 version_info["disable_notifications"] := count
