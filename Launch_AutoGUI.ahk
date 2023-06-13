@@ -11,7 +11,12 @@ cwd := A_ScriptDir "\required"
 
 #Include %A_ScriptDir%\required\convert\_vars.ahk
 #Include %A_ScriptDir%\required\versionCheck.ahk 
-UpdateCheck()
+Try {
+    UpdateCheck()
+}
+Catch {
+    Sleep(2)
+}
 showSplashScreen()
 
 ;AutoGUI 2.5.8
