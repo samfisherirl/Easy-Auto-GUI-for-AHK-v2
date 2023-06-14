@@ -5,20 +5,19 @@
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
 myGui := Gui()
-ogcButtonOK := myGui.Add("Button", "x47 y44 w80 h23", "&OK")
-CheckBox_1 := myGui.Add("CheckBox", "x37 y89 w120 h23", "CheckBox")
-myGui.Title := "Window"
+ogcButtonOK := myGui.Add("Button", "x8 y8 w80 h23", "&OK")
+CheckBox_1 := myGui.Add("CheckBox", "x106 y8 w120 h23", "CheckBox")
 ogcButtonOK.OnEvent("Click", OnEventHandler)
 CheckBox_1.OnEvent("Click", OnEventHandler)
 myGui.OnEvent('Close', (*) => ExitApp())
-myGui.Show("w620 h415")
+myGui.Title := "Window"
+myGui.Show("w620 h420")
 Return
 
 OnEventHandler(*)
 {
 	ToolTip("Click! This is a sample action.`n"
 	. "Active GUI element values include:`n"  
-	. "ogcButtonOK => " ogcButtonOK.Value "`n" 
 	. "CheckBox_1 => " CheckBox_1.Value "`n", 77, 277)
 	SetTimer () => ToolTip(), -3000 ; tooltip timer
 }

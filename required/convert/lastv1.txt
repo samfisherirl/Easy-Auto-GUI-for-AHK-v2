@@ -1,8 +1,7 @@
-﻿Gui Add, Button, x47 y44 w80 h23, &OK
-Gui Add, CheckBox, x37 y89 w120 h23, CheckBox
-Gui Add, ComboBox, x229 y37 w120, ComboBox
+﻿Gui Add, Button, x8 y8 w80 h23, &OK
+Gui Add, CheckBox, x104 y8 w120 h23, CheckBox
 
-Gui Show, w620 h415, Window
+Gui Show, w620 h420, Window
 Return
 
 GuiEscape:

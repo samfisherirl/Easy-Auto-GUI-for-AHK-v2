@@ -407,6 +407,7 @@ CreateDesignToolbar() {
     IL_Add(TbarIL, IconLib, 126) ; Design Mode
     IL_Add(TbarIL, IconLib, 6) ; New GUI
     IL_Add(TbarIL, IconLib, 38) ; Show/Hide Preview
+    IL_Add(TbarIL, "Icons\WCT.ico") ; Window Cloning Tool
     IL_Add(TbarIL, IconLib, 12) ; Execute
     IL_Add(TbarIL, IconLib, 72) ; Show Grid
     IL_Add(TbarIL, IconLib, 73) ; Snap to Grid
@@ -421,7 +422,6 @@ CreateDesignToolbar() {
     IL_Add(TbarIL, IconLib, 34) ; Make Same Width
     IL_Add(TbarIL, IconLib, 35) ; Make Same Height
     IL_Add(TbarIL, IconLib, 36) ; Make Same Size
-    IL_Add(TbarIL, "Icons\WCT.ico") ; Window Cloning Tool
     IL_Add(TbarIL, IconLib, 25) ; Properties
  
     TbarButtons =
@@ -436,6 +436,7 @@ CreateDesignToolbar() {
         New GUI,,, SHOWTEXT
         Show/Hide Preview,,, SHOWTEXT, 1070
         -
+        Window Cloning Tool,,, SHOWTEXT
         Execute,,, SHOWTEXT
         -
         Show Grid,,,, 1080
@@ -455,8 +456,6 @@ CreateDesignToolbar() {
         Make Same Width
         Make Same Height
         Make Same Size
-        -
-        Window Cloning Tool
         -
         Properties
     )
@@ -2070,12 +2069,19 @@ Open(Files := "", Flag := 0) {
 
     RunTool() {
         IniRead File, %g_IniTools%, %A_ThisMenuItem%, File, %A_Space%
+        if InStr(File, "Message")
+        {
+            prelude := """" . A_ScriptDir . "\AutoHotKey Exe\AutoHotkeyV2.exe" . """" . " "
+        }
+        else
+        {
+            prelude := """" . A_ScriptDir . "\AutoHotKey Exe\AutoHotkeyV1.exe" . """" . " "
+        }
         If (!FileExist(File)) {
             If (FileExist(A_ScriptDir . "\Tools\" . File)) {
                 File = %A_ScriptDir%\Tools\%File%
             }
         }
-
         IniRead WorkingDir, %g_IniTools%, %A_ThisMenuItem%, WorkingDir, %A_Space%
         If (WorkingDir == "") {
             SplitPath File,, WorkingDir
@@ -2104,7 +2110,8 @@ Open(Files := "", Flag := 0) {
         }
 
         Try {
-            Run "%File%" %Params%, %WorkingDir%
+            File := prelude . """" . File . """"
+            Run %File%, %WorkingDir%
         } Catch {
             ErrorMsgBox("Error executing """ . File . """.", "Auto", g_AppName)
             GoSub ShowToolsDialog

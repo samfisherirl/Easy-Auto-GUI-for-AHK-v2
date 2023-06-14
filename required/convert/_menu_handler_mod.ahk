@@ -1,18 +1,16 @@
 ﻿add_menuHandler(FNOut := "path", script := "code") ;outscript_path
 {
-    ; => these denote true[1]/false[0]
-     ; => for various bad output code, such as
-     ; => once Menu := Menubar() is found, replace with Menu_Storage;
-     ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
-    
-     global GuiItemVars := Map("Button", "Click", "DropDownList", "Change", "Edit", "Change", "DateTime", "Change", "MonthCal", "Change", "Radio", "Click", "CheckBox", "Click", "ComboBox", "Change")
-     global eventList := []
-     global GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
-     brackets := 0
-     ; RemoveFunction==1 loops to find `}` while `{` not found in line
+    global GuiItemVars := Map("Button", "Click", "DropDownList", "Change", 
+                            "Edit", "Change", "DateTime", "Change", 
+                            "MonthCal", "Change", "Radio", "Click", 
+                            "CheckBox", "Click", "ComboBox", "Change")
+    global eventList := []
+    global GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
+    brackets := 0
+    ; RemoveFunction==1 loops to find `}` while `{` not found in line
     new_outscript := ""
     buttonFound := 0, itemFound := 0, editCount := 0, menuHandler:=0, guiShow:=0, RemoveFunction := 0, menuHandle := 0, GuiEsc := 0, FindMenu := 0, FindMenuBar := 0, MenuHandleCount := 0
-    guiname := ""
+    guiname := "", title := ""
     global GuiItem_Storage := []
     Edit_Storage := []
     if FileExist(FNOut) {
@@ -60,6 +58,10 @@
                 itemFound := 1
             }
         }
+        else if InStr(A_LoopField, ".Title :="){
+            title := A_LoopField 
+            continue
+        }
         ; =================== check for gui items =======================
         else if (menuHandle = 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
             ; if MenuHandler is found, add a function at the bottom of the app to handle
@@ -90,10 +92,18 @@
             else if (itemFound = 1) {
                 func := "`nOnEventHandler(*)`n"
                 string := ""
-                for i in GuiItem_Storage {
-                    event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", i)
+                event_control_tooltips := ""
+                for variable_name in GuiItem_Storage {
+                    if not InStr(variable_name, "Button") {
+                        event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", variable_name)
+                    }
                 }
-                new_outscript .= func . tooltip_(event_control_tooltips)
+                if (event_control_tooltips != "") {
+                    new_outscript .= func . tooltip_(event_control_tooltips)
+                }
+                else {
+                    new_outscript .= func . tooltip_()
+                }
             }
 
             break
@@ -139,21 +149,21 @@
             new_outscript .= "`n"
         }
         else if InStr(A_LoopField, ".Show(`"") && (guiShow = 0) {
-            guiShow:=1
+            guiShow := 1
             ;look for line before `return` (GuiShow) 
             ;if found, and NO [submit] button is used
             ;user will get tooltips on value changes
             ;instead of submittion
             if (itemFound = 1)
             {
-                for i in GuiItem_Storage {
+                for variable_name in GuiItem_Storage {
                     event := eventList[A_Index]
-                    new_outscript .= i ".OnEvent(`"" event "`", OnEventHandler)`n"
-                } 
+                    new_outscript .= variable_name ".OnEvent(`"" event "`", OnEventHandler)`n"
+                }
             } 
             new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
-            new_outscript .= A_LoopField . "`n" 
-            
+            new_outscript .= title . "`n"
+            new_outscript .= A_LoopField . "`n"
         }
         else {
             new_outscript .= A_LoopField . "`n"

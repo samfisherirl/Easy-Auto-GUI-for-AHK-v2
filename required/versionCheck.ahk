@@ -1,11 +1,14 @@
 ﻿UpdateCheck() {
-
+    
+    
     zipperPath := A_ScriptDir "\required\7za.exe"
     settings_path := A_ScriptDir "\required\settings.json"
     updater := A_ScriptDir "\required\updater.exe"
+    command := "`"" zipperPath "`" x `"" A_ScriptDir "\required\req\required.7z" "`" -y -o`"" A_ScriptDir "\required\req`""
 
+    
     if !FileExist(settings_path) {
-        settings := Map("version", "v1.51", "disable_notifications", "0")
+        settings := Map("version", "v1.51", "disable_notifications", "0", "extracted_tools", 0)
         serialized := Jxon_Dump(settings)
         F := FileOpen(settings_path, "w")
         F.Write(serialized)

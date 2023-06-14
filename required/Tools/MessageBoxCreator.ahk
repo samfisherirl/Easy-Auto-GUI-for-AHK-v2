@@ -261,10 +261,12 @@ showSplashScreen() {
     splashGUI.Opt("-MinimizeBox -MaximizeBox -SysMenu +AlwaysOnTop +ToolWindow -Caption +Owner")
     splashGUI.SetFont("s11 Italic", "Verdana")
     splashGUI.BackColor := "0x484848"
-    splashGUI.Add("Text", "cWhite x16 y8 w538 h46", "MsgBox creator was designed and implemented by Boiler, a prominent contributor, moderator and helper on the autohotkey.com forum. `n")
-    splashGUI.SetFont()
+    splashGUI.Add("Text", "cWhite x16 y8 w538 h46", "MsgBox creator was implemented on AHKv2 by [^1]Boiler a prominent autohotkey.com contributor, and moderator. [^2]Thalon was the original creator, linked below. `n")
+    splashGUI.SetFont() ; 
     splashGUI.SetFont("s15")
     splashGUI.Add("Link",, "<a href=`"https://www.autohotkey.com/boards/viewtopic.php?f=83&t=78253`">[^1] @Boiler - AHKforum</a>")
+    splashGUI.SetFont("s15")
+    splashGUI.Add("Link",, "<a href=`"https://www.autohotkey.com/board/topic/10623-messagebox-creator/`">[^2] @Thalon - AHKforum</a>")
     splashGUI.Title := "Window"
     splashGUI.OnEvent('Close', (*) => ExitApp())
     splashGUI.Show("")
