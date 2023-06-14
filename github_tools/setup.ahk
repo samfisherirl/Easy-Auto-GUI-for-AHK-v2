@@ -1,12 +1,12 @@
 ﻿#Requires Autohotkey v2.0
 FileCopy(A_ScriptDir "\Launch_AutoGUI.ahk", A_ScriptDir "\changes_of_note\__Launch_AutoGUI.ahk", 1)
 
-FileCopy(A_ScriptDir "\complete_application\AutoGUI.ahk", A_ScriptDir "\changes_of_note\__AutoGUI.ahk", 1)
+FileCopy(A_ScriptDir "\required\AutoGUI.ahk", A_ScriptDir "\changes_of_note\__AutoGUI.ahk", 1)
 
-FileCopy(A_ScriptDir "\complete_application\convert\_menu_handler_mod.ahk", A_ScriptDir "\changes_of_note\_menu_handler_mod.ahk", 1)
+FileCopy(A_ScriptDir "\required\convert\_menu_handler_mod.ahk", A_ScriptDir "\changes_of_note\_menu_handler_mod.ahk", 1)
 
-convertFuncs := lineExtraction(A_ScriptDir "\complete_application\convert\ConvertFuncs.ahk", 392, 460)
-AGUI := lineExtraction(A_ScriptDir "\complete_application\AutoGUI.ahk", 1392, 1460)
+convertFuncs := lineExtraction(A_ScriptDir "\required\convert\ConvertFuncs.ahk", 392, 460)
+AGUI := lineExtraction(A_ScriptDir "\required\AutoGUI.ahk", 1392, 1460)
 
 try {
     FileMove(A_ScriptDir "\changes_of_note\__ConvertFuncs.ahk", A_ScriptDir "\changes_of_note\__trash.ahk", 1)
@@ -24,7 +24,7 @@ catch {
 FileAppend(convertFuncs, A_ScriptDir "\changes_of_note\__ConvertFuncs.ahk")
 FileAppend(AGUI, A_ScriptDir "\changes_of_note\__AutoGUI.ahk")
 
-FileCopy(A_ScriptDir "\complete_application\convert\ConvertFuncs.ahk", A_ScriptDir "\changes_of_note\__ConvertFuncs.ahk", 1)
+FileCopy(A_ScriptDir "\required\convert\ConvertFuncs.ahk", A_ScriptDir "\changes_of_note\__ConvertFuncs.ahk", 1)
 
 
 lineExtraction(filename, lineNumFROM, lineNumTO) {
