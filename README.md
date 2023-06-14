@@ -1,4 +1,4 @@
-# 'Easy AutoGUI' for AHK-v2. 
+# 'Easy AutoGUI' for AHK-v2
 A modified version of Alguimist's Easy AutoGUI, the GUI-Designer for basic and advanced creation. 
 
 
