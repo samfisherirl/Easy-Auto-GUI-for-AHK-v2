@@ -90,10 +90,15 @@
             else if (itemFound = 1) {
                 func := "`nOnEventHandler(*)`n"
                 string := ""
-                for i in GuiItem_Storage {
-                    event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", i)
+                event_control_tooltips := ""
+                for variable_name in GuiItem_Storage {
+                    if not InStr(variable_name, "Button") {
+                        event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", variable_name)
+                    }
                 }
-                new_outscript .= func . tooltip_(event_control_tooltips)
+                if (event_control_tooltips != "") {
+                    new_outscript .= func . tooltip_(event_control_tooltips)
+                }
             }
 
             break
@@ -146,10 +151,10 @@
             ;instead of submittion
             if (itemFound = 1)
             {
-                for i in GuiItem_Storage {
+                for variable_name in GuiItem_Storage {
                     event := eventList[A_Index]
-                    new_outscript .= i ".OnEvent(`"" event "`", OnEventHandler)`n"
-                } 
+                    new_outscript .= variable_name ".OnEvent(`"" event "`", OnEventHandler)`n"
+                }
             } 
             new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
             new_outscript .= A_LoopField . "`n" 
