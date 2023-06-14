@@ -24,8 +24,8 @@ If you have an idea or find a problem, click the Issues tab and create issue or 
 
 ![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
 
-# Usage
+# Instructions
 
-- Instructions: Launch from Launch_AutoGUI
+- Launch from Launch_AutoGUI
 - Some tangential tools may be non-functional without autohotkey v1 installed
  
