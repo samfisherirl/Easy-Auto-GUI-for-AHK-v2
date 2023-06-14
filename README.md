@@ -28,4 +28,6 @@ If you have an idea or find a problem, click the Issues tab and create issue or 
 
 - Launch from Launch_AutoGUI
 - Some tangential tools may be non-functional without autohotkey v1 installed
+- Code can be accessed by saving or copying in-IDE
+- Report any errors to the issues tab in this repo
  
