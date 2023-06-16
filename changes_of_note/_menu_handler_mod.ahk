@@ -1,9 +1,5 @@
 ﻿add_menuHandler(FNOut := "path", script := "code") ;outscript_path
 {
-    ; => these denote true[1]/false[0]
-     ; => for various bad output code, such as
-     ; => once Menu := Menubar() is found, replace with Menu_Storage;
-     ; => once MenuBar := Menubar() is found, replace with Menubar_Storage;
     
     global GuiItemVars := ["Edit", "Radio", "CheckBox", "ComboBox"]
     global GuiItemCounter := [1, 1, 1, 1]
