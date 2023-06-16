@@ -16,7 +16,6 @@ This project is built upon years of hard work done by the individuals below. I p
 - Custom contingencies are in place to minimize output errors. They modify the output of ahkv2converter to suit this specific use case.
 - The function-call converts to v2 using ahkv2converter.
 - The Changes_of_note folder highlights modification made in the base code.
-- It is compatible with embedded ahk exe files from ahkconverter. You do not need ahkv1 or v2 installed. In theory, this setup should enable portable execution.
 
 
 # Contribution
