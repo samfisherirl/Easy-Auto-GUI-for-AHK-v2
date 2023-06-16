@@ -10,12 +10,14 @@ This project is built upon years of hard work done by the individuals below. I p
 - Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
   
 # How it works 
-- Runs Easy AutoGUI on ahkv1 (doesn't need to be installed, relies on built in exe's)
-- Conversion happens in realtime in the IDE, and when selecting SaveAs/Save. Cloning windows with over 1,000 lines happens in under 1 second. 
-- Custom contingencies provide minimal output errors, modifying ahkv2converter output for this specific use case.
-- function-call converts to v2 with ahkv2converter
-- autogui has custom code posted in the github
-- works with embedded ahk exe's from ahkconverter, you do not need ahkv1 or v2, hypothetically this should run portably
+- Easy AutoGUI runs on ahkv1 and does not require installation; it relies on built-in executables.
+- The conversion process occurs in real-time within the integrated development environment (IDE) and when selecting SaveAs/Save options.
+- Cloning windows with over 1,000 lines takes less than 1 second to complete.
+- Custom contingencies are in place to minimize output errors. They modify the output of ahkv2converter to suit this specific use case.
+- The function-call converts to v2 using ahkv2converter.
+- The GitHub repository includes custom code for autogui.
+- It is compatible with embedded ahk exe files from ahkconverter. You do not need ahkv1 or v2 installed. In theory, this setup should enable portable execution.
+
 
 # Contribution
 If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
