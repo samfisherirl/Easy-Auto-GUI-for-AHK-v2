@@ -18,8 +18,7 @@
     }
     Loop Parse, script, "`n", "`r" {
         if (A_Index = 1) && not InStr(A_LoopField, "#Requires Autohotkey v2") {
-            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist"
-            . " autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
+            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
         if (RemoveFunction = 1) {
             if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "}") {
@@ -48,23 +47,19 @@
         }
         ; =================== check for gui items =======================
         ; =================== check for gui items =======================
+
         ret := checkforGuiItems(A_LoopField)
         ; loop through and look for GuiItemVars[]
-        if (ret != 0) {
-            if (ret = 1) {
-                itemFound := 1
-                new_outscript .= A_LoopField ".OnEvent(`"Click`", OnEventHandler)`n"
-            }
-            else {
-                new_outscript .= ret " := " A_LoopField "`n"
-                itemFound := 1
-            }
+        if (ret[1] = 1) {
+            itemFound := 1
+            new_outscript .= ret[2] ".OnEvent(`"Click`", OnEventHandler)`n"
         }
-        else if InStr(A_LoopField, ".Title :=") {
+        else if (ret[1] = 2){
+            new_outscript .= ret[2] " := " A_LoopField "`n"
+            itemFound := 1
+        }
+        if InStr(A_LoopField, ".Title :=") {
             title := A_LoopField
-            continue
-        }
-        else if InStr(A_LoopField, ".Opt(`"+hWnd") {
             continue
         }
         ; =================== check for gui items =======================
@@ -207,19 +202,19 @@ checkforGuiItems(LoopField) {
                 ; var := Trim(StrSplit(LoopField, ":=")[1])
                 ; GuiItem_Storage.Push(Trim(var))
                 ; eventList.Push(event)
-                GuiItemCounter[A_Index] += 1
-                return 1
+                
+                return [1, StrSplit(LoopField, " := ")[2]]
             }
             else {
                 var := guicontrol "_" GuiItemCounter[A_Index]
                 GuiItem_Storage.Push(Trim(var))
                 eventList.Push(event)
                 GuiItemCounter[A_Index] += 1
-                return var
+                return [2, var]
             }
         }
     }
-    return 0
+    return [0]
 }
 
 tooltip_(string := "") {
