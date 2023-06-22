@@ -53,6 +53,7 @@
         if (ret[1] = 1) {
             itemFound := 1
             new_outscript .= ret[2] ".OnEvent(`"Click`", OnEventHandler)`n"
+            continue
         }
         else if (ret[1] = 2){
             new_outscript .= ret[2] " := " A_LoopField "`n"
