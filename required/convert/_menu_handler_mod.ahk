@@ -57,6 +57,7 @@
         else if (ret[1] = 2){
             new_outscript .= ret[2] " := " A_LoopField "`n"
             itemFound := 1
+            continue
         }
         if InStr(A_LoopField, ".Title :=") {
             title := A_LoopField
