@@ -10,7 +10,8 @@
 cwd := A_ScriptDir "\required"
 
 #Include %A_ScriptDir%\required\convert\_vars.ahk
-/*******************************************************
+/*
+******************************************************
  *  update feature currently under testing
     #Include %A_ScriptDir%\required\versionCheck.ahk 
     Try {
@@ -19,7 +20,8 @@ cwd := A_ScriptDir "\required"
     Catch {
         Sleep(2)
     }
-*******************************************************/
+******************************************************
+*/
 showSplashScreen()
 
 ;AutoGUI 2.5.8
@@ -29,15 +31,17 @@ showSplashScreen()
 ini := FileRead(sets) ; settings file, find and modify
 setDesignMode(ini)
 
-launch_autogui_command_line_param := ahkv1_exe autogui_path     ; concatenate the two paths; for ahkv1.exe and autogui.ahk
-Run(launch_autogui_command_line_param, , , &PID)     ; run the concatenated command, which launches AutoGUI
-Sleep(1000)    ; wait for 1 second
-findProcess(PID)    ;Loop 10 seconds, break when PID exists
+launch_autogui_command_line_param := ahkv1_exe autogui_path     
+; concatenate the two paths; for ahkv1.exe and autogui.ahk
+Run(launch_autogui_command_line_param, , , &PID)     
+; run the concatenated command, which launches AutoGUI
+Sleep(1000)
+findProcess(PID)    ;Loop up to 10 seconds, break when PID exists
 
 While ProcessExist(PID)
-    ; while the AutoGUI process exists
-    ; wait for %logs% to exist, that means AutoGui is trying to generate code.
-    ; this loop will convert to v2 and notify AutoGUI via %retstat%
+; while the AutoGUI process exists
+; wait for %logs% to exist, that means AutoGui is trying to generate code.
+; this loop will convert to v2 and notify AutoGUI via %retstat%
 {
     if FileExist(logs)    ; check if the log file exists
     {
@@ -64,6 +68,39 @@ While ProcessExist(PID)
 }
 ExitApp()
 
+findProcess(PID) {
+    Loop 10 {     ; loop up to 10 times
+        if ProcessExist(PID) {     ; check if the AutoGUI process exists
+            break     ; if it does, break out of the loop
+        }
+        else {
+            Sleep(1000)     ; if it doesn't, wait for 1 second and check again
+        }
+    }
+}
+
+;try {out := FileRead(path)}
+tryRead(path) {
+    try {
+        out := FileRead(path)
+        return out
+    }
+    catch {
+        Sleep(10)
+        return ""
+    }
+}
+tryRemove(path){
+    Loop 5 {
+        Try {
+            FileMove(path, temps, 1)
+            break
+        }
+        catch {
+            Sleep(2)
+        }
+    }
+}
 
 Converter(inscript, path_to_convert) {
     global retstat
@@ -117,37 +154,4 @@ setDesignMode(ini) {
     f := FileOpen(sets, "w", "utf-8")
     f.Write(replaceSettings)
     f.Close()
-}
-
-findProcess(PID) {
-    Loop 10 {     ; loop up to 10 times
-        if ProcessExist(PID) {     ; check if the AutoGUI process exists
-            break     ; if it does, break out of the loop
-        }
-        else {
-            Sleep(1000)     ; if it doesn't, wait for 1 second and check again
-        }
-    }
-}
-;try {out := FileRead(path)}
-tryRead(path) {
-    try {
-        out := FileRead(path)
-        return out
-    }
-    catch {
-        Sleep(10)
-        return ""
-    }
-}
-tryRemove(path){
-    Loop 5 {
-        Try {
-            FileMove(path, temps, 1)
-            break
-        }
-        catch {
-            Sleep(2)
-        }
-    }
 }
