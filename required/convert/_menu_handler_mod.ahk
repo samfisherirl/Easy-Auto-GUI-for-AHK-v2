@@ -1,9 +1,9 @@
 ﻿add_menuHandler(FNOut := "path", script := "code") ;outscript_path
 {
     global GuiItemVars := Map("Button", "Click", "DropDownList", "Change",
-        "Edit", "Change", "DateTime", "Change",
-        "MonthCal", "Change", "Radio", "Click",
-        "CheckBox", "Click", "ComboBox", "Change")
+                            "Edit", "Change", "DateTime", "Change",
+                            "MonthCal", "Change", "Radio", "Click",
+                            "CheckBox", "Click", "ComboBox", "Change")
     global eventList := []
     global GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
@@ -16,7 +16,8 @@
     if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\required\convert\temp.txt", 1)
     }
-    Loop Parse, script, "`n", "`r" {
+    Loop Parse, script, "`n", "`r" 
+    {
         if (A_Index = 1) && not InStr(A_LoopField, "#Requires Autohotkey v2") {
             new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
         }
@@ -92,7 +93,7 @@
                 new_outscript .= "`nMenuHandler(*)`n" tooltip_()
                 GuiEsc := 1
             }
-            else if (itemFound = 1) {
+            if (itemFound = 1) {
                 func := "`nOnEventHandler(*)`n"
                 string := ""
                 event_control_tooltips := ""
@@ -172,6 +173,10 @@
             new_outscript .= A_LoopField . "`n"
         }
     }
+    GuiItemVars := Map()
+    eventList := []
+    GuiItemCounter := []
+    GuiItem_Storage := []
     return new_outscript
 }
 ;.OnEvent('Close', (*) => ExitApp())
