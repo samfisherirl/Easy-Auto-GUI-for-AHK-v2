@@ -2,9 +2,6 @@
 #SingleInstance Force
 #Include %A_ScriptDir%\required\convert\ConvertFuncs.ahk
 #Include %A_ScriptDir%\required\convert\_menu_handler_mod.ahk
-#Include %A_ScriptDir%\required\lib\github.ahk
-#Include %A_ScriptDir%\required\lib\WinHttpRequest.ahk
-#Include %A_ScriptDir%\required\lib\JXON.ahk
 #Include %A_ScriptDir%\required\Include\splash.ahk
 
 cwd := A_ScriptDir "\required"
@@ -14,12 +11,7 @@ cwd := A_ScriptDir "\required"
 ******************************************************
  *  update feature currently under testing
     #Include %A_ScriptDir%\required\versionCheck.ahk 
-    Try {
-        UpdateCheck()
-    }
-    Catch {
-        Sleep(2)
-    }
+    UpdateCheck()
 ******************************************************
 */
 showSplashScreen()
@@ -33,7 +25,7 @@ setDesignMode(ini)
 
 launch_autogui_command_line_param := ahkv1_exe autogui_path     
 ; concatenate the two paths; for ahkv1.exe and autogui.ahk
-Run(launch_autogui_command_line_param, , , &PID)     
+Run(launch_autogui_command_line_param, , , &PID)
 ; run the concatenated command, which launches AutoGUI
 Sleep(1000)
 findProcess(PID)    ;Loop up to 10 seconds, break when PID exists
@@ -68,7 +60,7 @@ While ProcessExist(PID)
 }
 ExitApp()
 
-findProcess(PID) {
+findProcess(PID){
     Loop 10 {     ; loop up to 10 times
         if ProcessExist(PID) {     ; check if the AutoGUI process exists
             break     ; if it does, break out of the loop
@@ -80,7 +72,7 @@ findProcess(PID) {
 }
 
 ;try {out := FileRead(path)}
-tryRead(path) {
+tryRead(path){
     try {
         out := FileRead(path)
         return out
