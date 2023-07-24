@@ -14,7 +14,8 @@ This project is built upon years of hard work done by the individuals below. I p
 - The conversion process occurs in real-time within the integrated development environment (IDE) and when selecting SaveAs/Save options.
 - Cloning windows with over 1,000 lines takes less than 1 second to complete.
 - Custom contingencies are in place to minimize output errors. They modify the output of ahkv2converter to suit this specific use case.
-- The function-call converts to v2 using ahkv2converter.
+- You should never receive an error when executing code after building a GUI for ahkv2. It will happen, and please notify me of those errors, but the goal and expectation is an error-free output. 
+- The function-call converts to v2 using ahkv2converter. 
 - The Changes_of_note folder highlights modification made in the base code.
 
 
