@@ -1615,8 +1615,9 @@ Open(Files := "", Flag := 0) {
             FileMove, %FullPath%, %A_ScriptDir%\Sessions\temp2.ahk, 1
         }
         ; Backup a copy of the file before saving
-        FileAppend %SciText%, %FullPath%
-        Run, %A_ScriptDir%\AutoHotKey Exe\AutoHotkeyV2.exe %A_ScriptDir%\Sessions\temp.ahk, %A_ScriptDir%
+        FileAppend, %SciText%, %FullPath%
+        runcmd := A_ScriptDir "\AutoHotKey Exe\AutoHotkeyV2.exe " FullPath
+        Run, %runcmd%, %A_ScriptDir%
     }
     
     RunSelectedText:
