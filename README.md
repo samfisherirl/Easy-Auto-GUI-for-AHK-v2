@@ -1,6 +1,8 @@
 #  'Easy AutoGUI' for AHK-v2
 Easy AutoGUI for AHK-v2 is a modified version of Alguimist's 'Easy AutoGUI' GUI-Designer for basic and advanced creation.  
 
+If you need help getting started, I put together an installer. [Direct Link](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases/download/v1.6.1/Easy_AutoGUI_v2_Installer.exe)
+
 
 # Credits:
 This project is built upon years of hard work done by the individuals below. I played a very small part in bringing this to AHKv2, these individuals gave dozens and dozens of hours to make these applications possible: 
