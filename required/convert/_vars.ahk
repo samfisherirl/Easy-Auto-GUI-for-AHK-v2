@@ -6,5 +6,9 @@ logs := cwd "\convert\log.txt"    ; set the path to the log file
 empty := cwd "\convert\empty.txt"    ; set the path to an empty file
 temps := cwd "\convert\temp.txt"    ; set the path to a temporary file
 retstat := cwd "\convert\returnstatus.txt"    ; set the path to the return status file
+ahkv2Code := cwd "\convert\returncode.txt"    ; set the path to the return status file
+ahkv1Code := cwd "\convert\runtime.txt"    ; set the path to the return status file
 sets := cwd "\AutoGUI.ini"
 runscript := cwd "\runscript.ahk"
+
+FileList := [logs, empty, temps, retstat, ahkv2Code, ahkv1Code]

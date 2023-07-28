@@ -22,6 +22,7 @@ showSplashScreen()
 
 ini := FileRead(sets) ; settings file, find and modify
 setDesignMode(ini)
+cleanFiles(FileList)
 
 launch_autogui_command_line_param := ahkv1_exe autogui_path     
 ; concatenate the two paths; for ahkv1.exe and autogui.ahk
@@ -29,7 +30,6 @@ Run(launch_autogui_command_line_param, , , &PID)
 ; run the concatenated command, which launches AutoGUI
 Sleep(1000)
 findProcess(PID)    ;Loop up to 10 seconds, break when PID exists
-
 While ProcessExist(PID)
 ; while the AutoGUI process exists
 ; wait for %logs% to exist, that means AutoGui is trying to generate code.
@@ -37,15 +37,15 @@ While ProcessExist(PID)
 {
     if FileExist(logs)    ; check if the log file exists
     {
-        path_to_convert := tryRead(logs)    ; read the contents of the log file into a variable
-        if path_to_convert && FileExist(path_to_convert)    ; check if the path to the file exists
+        status := tryRead(logs)    ; read the contents of the log file into a variable
+        if status != ""    ; check if the path to the file exists
         {
-            inscript := tryRead(path_to_convert)    ; read the contents of the file into a variable
+            inscript := tryRead(ahkv1Code)    ; read the contents of the file into a variable
             if (inscript != "")    ; if the variable is not empty
             {
-                tryRemove(logs)
+                tryWrite("", logs)
                 try {
-                    Converter(inscript, path_to_convert)
+                    Converter(inscript, ahkv2Code)
                 }
                 catch {
                     sleep(10)
@@ -59,7 +59,12 @@ While ProcessExist(PID)
     }
 }
 ExitApp()
-
+cleanFiles(FileList)
+{
+    for f in FileList {
+        tryWrite("", f)
+    }
+}
 findProcess(PID){
     Loop 10 {     ; loop up to 10 times
         if ProcessExist(PID) {     ; check if the AutoGUI process exists
@@ -74,13 +79,21 @@ findProcess(PID){
 ;try {out := FileRead(path)}
 tryRead(path){
     try {
-        out := FileRead(path)
+        F := FileOpen(path, "r", "utf-8")
+        out := F.Read()
+        F.Close()
         return out
     }
     catch {
         Sleep(10)
         return ""
     }
+}
+
+tryWrite(str, path){
+    F := FileOpen(path, "w", "utf-8")
+    F.Write(str)
+    F.Close()
 }
 tryRemove(path){
     Loop 5 {
@@ -94,16 +107,15 @@ tryRemove(path){
     }
 }
 
-Converter(inscript, path_to_convert) {
+Converter(inscript, ahkv2Code) {
     global retstat
     script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
-    final_code := add_menuhandler(path_to_convert, script)    ; add menu handlers to the script
-    outfile := FileOpen(path_to_convert, "w", "utf-8")    ; open the file for writing
+    final_code := add_menuhandler(ahkv1Code, script)    ; add menu handlers to the script
+    outfile := FileOpen(ahkv2Code, "w", "utf-8")    ; open the file for writing
     outfile.Write(final_code)    ; write the final code to the file
     outfile.Close()    ; close the file
-    FileAppend(retstat, retstat)    ; append the return status to the return status file
+    tryWrite(retstat, retstat)    ; append the return status to the return status file
 }
-
 
 setDesignMode(ini) {
     replaceSettings := ""

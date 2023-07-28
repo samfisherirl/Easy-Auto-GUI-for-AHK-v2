@@ -49,7 +49,6 @@
         ; =================== check for gui items =======================
         if InStr(A_LoopField, "Add(") {
             ret := checkforGuiItems(A_LoopField)
-            itemFound := 1
             ; ; loop through and look for GuiItemVars[]
             if (ret[1] = 1) {
                 ;button
@@ -67,7 +66,6 @@
                 continue
             }
             else {
-                itemFound := 1
                 lastGuiControl := StrSplit(A_LoopField, " := ")
             }
         }

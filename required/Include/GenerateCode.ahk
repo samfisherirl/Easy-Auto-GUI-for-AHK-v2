@@ -394,80 +394,68 @@
     */
     CurrentCode := ""
     Last_Code := ""
+    CodeBack := ""
+    if (Code == ""){
+        Goto, Nvm
+    }
     if (Code != ""){
         Runtime := A_ScriptDir "\convert\runtime.txt"
         ReturnStatus := A_ScriptDir "\convert\returnstatus.txt"
+        ahkv2Code := A_ScriptDir "\convert\returncode.txt"
         last1 := A_ScriptDir "\convert\lastv1.txt"
         last2 := A_ScriptDir "\convert\lastv2.txt"
         Temp := A_ScriptDir "\convert\temp.txt"
         Logs := A_ScriptDir "\convert\log.txt"
         empty := A_ScriptDir "\convert\empty.txt"
+        /* 
         if FileExist(last1){
-            FileRead, Code_to_Test, %last1%
-            if (Code_to_Test == Code){
-                
+            Code_to_Test := reader(last1)
+            if (Code_to_Test == Code) && (Code_to_Test != ""){
                 Goto, Nvm
             }
-            else {
-                FileMove, %last1%, %temp%, 1
-            }
-        }
-        if FileExist(Runtime){
-            FileMove, %Runtime%, %Temp%, 1
-        }
-        if FileExist(Logs){
-            FileMove, %Logs%, %Temp%, 1
-        }
-        if FileExist(ReturnStatus){
-            FileMove, %ReturnStatus%, %Temp%, 1
-        }
-
+        } 
+        */
         ;FileMove, %Runtime%, %Temp%, 1
-        FileAppend, %Code%, %Runtime%
-        FileAppend, %Code%, %last1%
-        FileAppend, %Runtime%, %Logs%
-        Loop 50
+        writer(Code, last1)
+        writer("", ReturnStatus)
+        writer(Code, Runtime)
+        writer("", ahkv2Code)
+        writer(Runtime, Logs)
+        Loop 150
         {
-            if FileExist(ReturnStatus)
+            if (reader(ReturnStatus) != "")
             {
-                FileRead, CodeBack, %Runtime%
+                CodeBack := reader(ahkv2Code)
                 if (CodeBack == "") {
-                    Sleep, 100
+                    Sleep, 20
                     continue
                 }
-                if FileExist(last2){
-                    FileRead, ToBeTested, %last2%
+                else {
+                    if FileExist(last2){
+                        ToBeTested := reader(last2)
+                        if (ToBeTested != "") && (ToBeTested == CodeBack) {
+                            Goto, Nvm
+                        }
+                    }
+                    writer("", Runtime)
+                    writer("", ahkv2Code)
+                    break
                 }
-                if (ToBeTested == CodeBack){
-                    Goto, Nvm
-                }
-                if FileExist(Logs){
-                    FileMove, %Logs%, %Temp%, 1
-                }
-                if FileExist(ReturnStatus){
-                    FileMove, %ReturnStatus%, %Temp%, 1
-                }
-                if FileExist(Runtime){
-                    FileRead, RetCode, %Runtime%
-                }
-                break
             }
             else
             {
-                Sleep, 50
+                Sleep, 25
             }
-
         }
-
     }
-    if (CodeBack) {
+    if (CodeBack != "") {
         Code := CodeBack
     }
-    Last_Code := Code
-    if FileExist(last2){
-        FileMove, %last2%, %Temp%, 1
+    else {
+        Goto, Nvm
     }
-    FileAppend, %CodeBack%, %last2%
+    Last_Code := Code
+    writer(Last_Code, last2)
     Header := Code
     g_Signature := Code
     sci[g_GuiTab].SetReadOnly(0)
@@ -487,9 +475,35 @@
     Header := ""
     Code := ""
     SciText := ""
-    Nvm:
-    }
 
-    SetIndent() {
-        Indent := g_IndentWithSpaces ? Format("{1: " . g_TabSize . "}", "") : "`t"
+    Nvm:
+}
+
+reader(path){
+    if FileExist(path) {
+        loop 5
+        {
+            try {
+                F := FileOpen(path, "r", "utf-8")
+                str := F.Read()
+                F.Close()
+                return str
+            }
+            catch {
+                continue
+            }
+        }
     }
+    return ""
+}
+
+
+Writer(str, path){
+    F := FileOpen(path, "w", "utf-8")
+    F.Write(str)
+    F.Close()
+}
+
+SetIndent() {
+    Indent := g_IndentWithSpaces ? Format("{1: " . g_TabSize . "}", "") : "`t"
+}
