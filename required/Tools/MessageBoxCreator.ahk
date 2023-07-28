@@ -270,5 +270,5 @@ showSplashScreen() {
     splashGUI.Title := "Window"
     splashGUI.OnEvent('Close', (*) => ExitApp())
     splashGUI.Show("")
-    Settimer () => splashGUI.Destroy(), -3000)
+    Settimer () => splashGUI.Destroy(), -3000
 }
