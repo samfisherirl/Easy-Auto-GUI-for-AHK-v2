@@ -22,7 +22,7 @@ This project is built upon years of hard work done by the individuals below. I p
 
 
 # Contribution
-If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
+All help big or small is appreciated. If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
 # Example
 
 
