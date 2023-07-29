@@ -105,9 +105,7 @@
                 string := ""
                 event_control_tooltips := ""
                 for variable_name in GuiItem_Storage {
-                    if not InStr(variable_name, "Button") {
                         event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", variable_name)
-                    }
                 }
                 if (event_control_tooltips != "") {
                     new_outscript .= func . tooltip_(event_control_tooltips)
