@@ -1,4 +1,4 @@
-﻿add_menuHandler(FNOut := "path", script := "code") ;outscript_path
+﻿modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
     global GuiItemVars := Map("Button", "Click", "DropDownList", "Change",
         "Edit", "Change", "DateTime", "Change",
@@ -19,7 +19,7 @@
     Loop Parse, script, "`n", "`r"
     {
         if (A_Index = 1) && not InStr(A_LoopField, "#Requires Autohotkey v2") {
-            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 " "`n" ";Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter`n`n"
+            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
         }
         if (RemoveFunction = 1) {
             if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "}") {
