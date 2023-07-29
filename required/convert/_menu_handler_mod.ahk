@@ -1,17 +1,17 @@
 ﻿modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
-    global GuiItemVars := Map("Button", "Click", "DropDownList", "Change",
+    GuiItemVars := Map("Button", "Click", "DropDownList", "Change",
         "Edit", "Change", "DateTime", "Change",
         "MonthCal", "Change", "Radio", "Click",
         "CheckBox", "Click", "ComboBox", "Change")
-    global eventList := []
-    global GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
+    eventList := []
+    GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
     ; RemoveFunction==1 loops to find `{}` while `{}` not found in line
     new_outscript := ""
     buttonFound := 0, itemFound := 0, editCount := 0, menuHandler := 0, guiShow := 0, RemoveFunction := 0, menuHandle := 0, GuiEsc := 0, FindMenu := 0, FindMenuBar := 0, MenuHandleCount := 0, ctrlcolor := 0
     guiname := "", title := ""
-    global GuiItem_Storage := []
+    GuiItem_Storage := []
     Edit_Storage := []
     if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\required\convert\temp.txt", 1)
@@ -48,7 +48,7 @@
         }
         ; =================== check for gui items =======================
         if InStr(A_LoopField, "Add(") {
-            ret := checkforGuiItems(A_LoopField)
+            ret := checkforGuiItems(A_LoopField, &GuiItemVars, &eventList, &GuiItemCounter, &GuiItem_Storage)
             ; ; loop through and look for GuiItemVars[]
             if (ret[1] = 1) {
                 ;button
@@ -230,9 +230,8 @@ removeBrokenFunctions(variable, equals) {
     ; [1:=eraseline, ]
 }
 */
-checkforGuiItems(LoopField) {
-    global GuiItemVars, GuiItem_Storage, GuiItemCounter, eventList
-    for guicontrol, event in GuiItemVars
+checkforGuiItems(LoopField, &GuiItemVars, &eventList, &GuiItemCounter, &GuiItem_Storage) {
+     for guicontrol, event in GuiItemVars
     {
         if InStr(LoopField, Format(".Add(`"{1}`"", guicontrol))
         {
