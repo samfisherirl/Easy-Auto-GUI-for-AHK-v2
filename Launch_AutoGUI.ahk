@@ -23,31 +23,30 @@ showSplashScreen()
 ini := FileRead(sets) ; settings file, find and modify
 setDesignMode(ini)
 cleanFiles(FileList)
-
-launch_autogui_command_line_param := ahkv1_exe autogui_path     
-; concatenate the two paths; for ahkv1.exe and autogui.ahk
-Run(launch_autogui_command_line_param, , , &PID)
-; run the concatenated command, which launches AutoGUI
+launch_autogui_cmd := ahkv1_exe autogui_path
+Run(launch_autogui_cmd, , , &PID)
 Sleep(1000)
-findProcess(PID)    ;Loop up to 10 seconds, break when PID exists
+find_easy_autogui_process(PID)
 While ProcessExist(PID)
-; while the AutoGUI process exists
-; wait for %logs% to exist, that means AutoGui is trying to generate code.
-; this loop will convert to v2 and notify AutoGUI via %retstat%
+; while the AutoGUI process exists & waits for %logsPath% to have contents, 
+; AutoGui write to logspath anything but empty, notifying this process code needs to be converted.
+; this loop will convert to v2 and notify AutoGUI via %returnStatusPath%
 {
-    if FileExist(logs)    ; check if the log file exists
+    if FileExist(logsPath)
+    ; autogui write anything to logfile notified (this)parent process 
     {
-        status := tryRead(logs)    ; read the contents of the log file into a variable
-        if status != ""    ; check if the path to the file exists
+        status := tryRead(logsPath)
+        if (status != "")
         {
-            inscript := tryRead(ahkv1Code)    ; read the contents of the file into a variable
-            if (inscript != "")    ; if the variable is not empty
+            inscript := tryRead(ahkv1CodePath)
+            if (inscript != "")
             {
-                tryWrite("", logs)
+                writer("", logsPath) ; clear 
                 try {
-                    Converter(inscript, ahkv2Code)
+                    Converter(inscript, ahkv2CodePath)
                 }
-                catch {
+                catch as e {
+                    errorLogHandler(e.Message)
                     sleep(10)
                     continue
                 } } }
@@ -59,19 +58,20 @@ While ProcessExist(PID)
     }
 }
 ExitApp()
+
 cleanFiles(FileList)
 {
     for f in FileList {
-        tryWrite("", f)
+        writer("", f)
     }
 }
-findProcess(PID){
-    Loop 10 {     ; loop up to 10 times
-        if ProcessExist(PID) {     ; check if the AutoGUI process exists
-            break     ; if it does, break out of the loop
+find_easy_autogui_process(PID){
+    Loop 10 { 
+        if ProcessExist(PID) { 
+            break 
         }
         else {
-            Sleep(1000)     ; if it doesn't, wait for 1 second and check again
+            Sleep(1000) 
         }
     }
 }
@@ -84,37 +84,23 @@ tryRead(path){
         F.Close()
         return out
     }
-    catch {
-        Sleep(10)
+    catch as e {
+        errorLogHandler(e.Message)
+        Sleep(2)
         return ""
     }
 }
-
-tryWrite(str, path){
+writer(str_to_write := "", path := ""){
     F := FileOpen(path, "w", "utf-8")
-    F.Write(str)
+    F.Write(str_to_write)
     F.Close()
 }
-tryRemove(path){
-    Loop 5 {
-        Try {
-            FileMove(path, temps, 1)
-            break
-        }
-        catch {
-            Sleep(2)
-        }
-    }
-}
 
-Converter(inscript, ahkv2Code) {
-    global retstat
+Converter(inscript, ahkv2CodePath) {
     script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
-    final_code := add_menuhandler(ahkv1Code, script)    ; add menu handlers to the script
-    outfile := FileOpen(ahkv2Code, "w", "utf-8")    ; open the file for writing
-    outfile.Write(final_code)    ; write the final code to the file
-    outfile.Close()    ; close the file
-    tryWrite(retstat, retstat)    ; append the return status to the return status file
+    final_code := modifyAhkv2ConverterOutput(ahkv1CodePath, script)    ; add menu handlers to the script
+    writer(final_code, ahkv2CodePath)
+    writer("1", returnStatusPath)    ; append the return status to the return status file
 }
 
 setDesignMode(ini) {
@@ -123,6 +109,9 @@ setDesignMode(ini) {
     disable := Map("AutoLoadLast", 0)
     Loop Parse, ini, "`n", "`r" {
         continueStatus:=0
+        if (A_LoopField = "") {
+            continue
+        }
         for searchItem, statusFound in enable {
             if InStr(A_LoopField, searchItem) {
                 if (statusFound = 0) {
@@ -158,4 +147,11 @@ setDesignMode(ini) {
     f := FileOpen(sets, "w", "utf-8")
     f.Write(replaceSettings)
     f.Close()
+}
+
+errorLogHandler(errorMsg){
+    Msg :=  "errror occured at: " FormatTime() " => "
+    F := FileOpen(errorLog, "a", "utf-8")
+    F.Write(Msg)
+    F.Close()
 }
