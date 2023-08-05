@@ -1,16 +1,26 @@
 ﻿#Requires Autohotkey v2.0
 #SingleInstance Force
-#Include %A_ScriptDir%\required\convert\ConvertFuncs.ahk
-#Include %A_ScriptDir%\required\convert\_menu_handler_mod.ahk
-#Include %A_ScriptDir%\required\Include\splash.ahk
+#Warn all, off
+cwd := A_ScriptDir "\required\"
 
-cwd := A_ScriptDir "\required"
-
-#Include %A_ScriptDir%\required\convert\_vars.ahk
+#Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
+#Include "*i %A_ScriptDir%\required\convert\_menu_handler_mod.ahk"
+#Include "*i %A_ScriptDir%\required\Include\splash.ahk"
+#Include "*i %A_ScriptDir%\required\github.ahk"
+#Include "*i %A_ScriptDir%\required\convert\_vars.ahk"
+if not DirExist(cwd) {
+    userResponse := MsgBox('The `'/required/`' directory included with this app is missing. Would you like to download the required files?`nOtherwise this app will exit.', 'Missing Files', '52')
+    if (userResponse = "Yes"){
+        Run("https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases")
+        ExitApp()
+    } else if (userResponse = "No"){
+        ExitApp()
+    }
+}
 /*
 ******************************************************
  *  update feature currently under testing
-    #Include %A_ScriptDir%\required\versionCheck.ahk 
+    #Include %A_ScriptDir%\required\versionCheck.ahk
     UpdateCheck()
 ******************************************************
 */
@@ -28,12 +38,12 @@ Run(launch_autogui_cmd, , , &PID)
 Sleep(1000)
 find_easy_autogui_process(PID)
 While ProcessExist(PID)
-; while the AutoGUI process exists & waits for %logsPath% to have contents, 
+; while the AutoGUI process exists & waits for %logsPath% to have contents,
 ; AutoGui write to logspath anything but empty, notifying this process code needs to be converted.
 ; this loop will convert to v2 and notify AutoGUI via %returnStatusPath%
 {
     if FileExist(logsPath)
-    ; autogui write anything to logfile notified (this)parent process 
+    ; autogui write anything to logfile notified (this)parent process
     {
         status := tryRead(logsPath)
         if (status != "")
@@ -41,7 +51,7 @@ While ProcessExist(PID)
             inscript := tryRead(ahkv1CodePath)
             if (inscript != "")
             {
-                writer("", logsPath) ; clear 
+                writer("", logsPath) ; clear
                 try {
                     Converter(inscript, ahkv2CodePath)
                 }
@@ -51,13 +61,17 @@ While ProcessExist(PID)
                     continue
                 } } }
     }
-    else 
+    else
     {
         Sleep(15)
         continue
     }
 }
 ExitApp()
+
+missingFilesPrompt(){
+
+}
 
 cleanFiles(FileList)
 {
@@ -66,12 +80,12 @@ cleanFiles(FileList)
     }
 }
 find_easy_autogui_process(PID){
-    Loop 10 { 
-        if ProcessExist(PID) { 
-            break 
+    Loop 10 {
+        if ProcessExist(PID) {
+            break
         }
         else {
-            Sleep(1000) 
+            Sleep(1000)
         }
     }
 }
@@ -150,7 +164,7 @@ setDesignMode(ini) {
 }
 
 errorLogHandler(errorMsg){
-    Msg :=  "errror occured at: " FormatTime() " => "
+    Msg :=  "error occured at: " FormatTime() " => " Msg
     F := FileOpen(errorLog, "a", "utf-8")
     F.Write(Msg)
     F.Close()
