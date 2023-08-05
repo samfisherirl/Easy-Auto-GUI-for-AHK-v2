@@ -1,4 +1,4 @@
-﻿#Requires Autohotkey v2.0
+#Requires Autohotkey v2.0
 #SingleInstance Force
 #Warn all, off
 cwd := A_ScriptDir "\required\"
@@ -8,13 +8,8 @@ cwd := A_ScriptDir "\required\"
 #Include "*i %A_ScriptDir%\required\Include\splash.ahk"
 #Include "*i %A_ScriptDir%\required\github.ahk"
 #Include "*i %A_ScriptDir%\required\convert\_vars.ahk"
-if not DirExist(cwd) {
-    userResponse := MsgBox('The `'/required/`' directory included with this app is missing. Would you like to download the required files?`nOtherwise this app will exit.', 'Missing Files', '52')
-    if (userResponse = "Yes"){
-        Run("https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases")
-    } 
-    ExitApp()
-}
+
+missingFilesPrompt()
 /*
 ******************************************************
  *  update feature currently under testing
@@ -68,7 +63,13 @@ While ProcessExist(PID)
 ExitApp()
 
 missingFilesPrompt(){
-
+    if not DirExist(cwd) {
+        userResponse := MsgBox('The `'/required/`' directory included with this app is missing. Would you like to download the required files?`nOtherwise this app will exit.', 'Missing Files', '52')
+        if (userResponse = "Yes"){
+            Run("https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases")
+        }
+        ExitApp()
+    }
 }
 
 cleanFiles(FileList)
