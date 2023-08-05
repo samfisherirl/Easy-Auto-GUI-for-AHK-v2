@@ -12,10 +12,8 @@ if not DirExist(cwd) {
     userResponse := MsgBox('The `'/required/`' directory included with this app is missing. Would you like to download the required files?`nOtherwise this app will exit.', 'Missing Files', '52')
     if (userResponse = "Yes"){
         Run("https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases")
-        ExitApp()
-    } else if (userResponse = "No"){
-        ExitApp()
-    }
+    } 
+    ExitApp()
 }
 /*
 ******************************************************
@@ -166,6 +164,6 @@ setDesignMode(ini) {
 errorLogHandler(errorMsg){
     Msg :=  "error occured at: " FormatTime() " => " Msg
     F := FileOpen(errorLog, "a", "utf-8")
-    F.Write(Msg)
+    F.Write(errorMsg)
     F.Close()
 }
