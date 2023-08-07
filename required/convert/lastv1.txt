@@ -1,5 +1,4 @@
-﻿Gui Add, Button, x8 y8 w80 h23, &OK
-Gui Add, CheckBox, x104 y8 w120 h23, CheckBox
+﻿Gui Add, Button, x139 y105 w80 h23, &OK
 
 Gui Show, w620 h420, Window
 Return

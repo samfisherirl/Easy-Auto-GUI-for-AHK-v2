@@ -1,23 +1,8 @@
-﻿
-#Requires Autohotkey v2
-;AutoGUI 2.5.8 
-;Auto-GUI-v2 credit to Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
-;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
+﻿Gui Add, Button, x139 y105 w80 h23, &OK
 
-myGui := Gui()
-ogcButtonOK := myGui.Add("Button", "x8 y8 w80 h23", "&OK")
-CheckBox_1 := myGui.Add("CheckBox", "x106 y8 w120 h23", "CheckBox")
-ogcButtonOK.OnEvent("Click", OnEventHandler)
-CheckBox_1.OnEvent("Click", OnEventHandler)
-myGui.OnEvent('Close', (*) => ExitApp())
-myGui.Title := "Window"
-myGui.Show("w620 h420")
+Gui Show, w620 h420, Window
 Return
 
-OnEventHandler(*)
-{
-	ToolTip("Click! This is a sample action.`n"
-	. "Active GUI element values include:`n"  
-	. "CheckBox_1 => " CheckBox_1.Value "`n", 77, 277)
-	SetTimer () => ToolTip(), -3000 ; tooltip timer
-}
+GuiEscape:
+GuiClose:
+    ExitApp

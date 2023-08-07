@@ -4,10 +4,11 @@
 cwd := A_ScriptDir "\required\"
 
 #Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
-#Include "*i %A_ScriptDir%\required\convert\_menu_handler_mod.ahk"
+#Include "*i %A_ScriptDir%\required\convert\converterMod.ahk"
 #Include "*i %A_ScriptDir%\required\Include\splash.ahk"
 #Include "*i %A_ScriptDir%\required\github.ahk"
 #Include "*i %A_ScriptDir%\required\convert\_vars.ahk"
+#Include "*i %A_ScriptDir%\required\convert\github.ahk"
 
 missingFilesPrompt()
 /*
@@ -23,13 +24,13 @@ showSplashScreen()
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
 
-ini := FileRead(sets) ; settings file, find and modify
-setDesignMode(ini)
+setDesignMode()
 cleanFiles(FileList)
-launch_autogui_cmd := ahkv1_exe autogui_path
+
 Run(launch_autogui_cmd, , , &PID)
 Sleep(1000)
 find_easy_autogui_process(PID)
+
 While ProcessExist(PID)
 ; while the AutoGUI process exists & waits for %logsPath% to have contents,
 ; AutoGui write to logspath anything but empty, notifying this process code needs to be converted.
@@ -91,16 +92,18 @@ find_easy_autogui_process(PID){
 
 ;try {out := FileRead(path)}
 tryRead(path){
-    try {
-        F := FileOpen(path, "r", "utf-8")
-        out := F.Read()
-        F.Close()
-        return out
-    }
-    catch as e {
-        errorLogHandler(e.Message)
-        Sleep(2)
-        return ""
+    loop 2 {
+        try {
+            F := FileOpen(path, "r", "utf-8")
+            out := F.Read()
+            F.Close()
+            return out
+        }
+        catch as e {
+            errorLogHandler(e.Message)
+            Sleep(2)
+            return ""
+        }
     }
 }
 writer(str_to_write := "", path := ""){
@@ -116,7 +119,8 @@ Converter(inscript, ahkv2CodePath) {
     writer("1", returnStatusPath)    ; append the return status to the return status file
 }
 
-setDesignMode(ini) {
+setDesignMode() {
+    ini := FileRead(settings)
     replaceSettings := ""
     enable := Map("DesignMode", 0, "SnapToGrid", 0, "DarkTheme", 0)
     disable := Map("AutoLoadLast", 0)
@@ -157,14 +161,18 @@ setDesignMode(ini) {
             replaceSettings .= A_LoopField "`n"
         }
     }
-    f := FileOpen(sets, "w", "utf-8")
-    f.Write(replaceSettings)
-    f.Close()
+    writer(replaceSettings, settings)
+}
+
+versionCheck(){
+    if not FileExist(versionPath){
+        try {
+            Github.latest("samfisherirl", "Easy-Auto-GUI-for-AHK-v2")
+        }
+    }
 }
 
 errorLogHandler(errorMsg){
-    Msg :=  "error occured at: " FormatTime() " => " Msg
-    F := FileOpen(errorLog, "a", "utf-8")
-    F.Write(errorMsg)
-    F.Close()
+    logMsg :=  "error occured at: " FormatTime() " => " errorMsg "`n`n`n"
+    writer(logMsg, errorLog)
 }
