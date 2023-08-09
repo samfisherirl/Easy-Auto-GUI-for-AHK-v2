@@ -6,7 +6,6 @@ cwd := A_ScriptDir "\required\"
 #Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
 #Include "*i %A_ScriptDir%\required\convert\converterMod.ahk"
 #Include "*i %A_ScriptDir%\required\Include\splash.ahk"
-#Include "*i %A_ScriptDir%\required\github.ahk"
 #Include "*i %A_ScriptDir%\required\convert\_vars.ahk"
 #Include "*i %A_ScriptDir%\required\convert\github.ahk"
 
