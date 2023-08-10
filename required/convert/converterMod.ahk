@@ -1,9 +1,7 @@
 ﻿modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
-    GuiItemVars := Map("Button", "Click", "DropDownList", "Change",
-        "Edit", "Change", "DateTime", "Change",
-        "MonthCal", "Change", "Radio", "Click",
-        "CheckBox", "Click", "ComboBox", "Change")
+    GuiControlVars := [{ item: "Button", event: "Click", function: "Text" }, { item: "DropDownList", event: "Change", function: "Text" }, {
+        item: "Edit", event: "Change", function: "Value" }, { item: "DateTime", event: "Change", function: "Value" }, { item: "MonthCal", event: "Change", function: "Value" }, { item: "Radio", event: "Click", function: "Value" }, { item: "CheckBox", event: "Click", function: "Value" }, { item: "ComboBox", event: "Change", function: "Text" }]
     eventList := []
     GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
@@ -13,6 +11,7 @@
     guiname := "", title := ""
     GuiItem_Storage := []
     Edit_Storage := []
+    GuiCtrlStorage := []
     if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\required\convert\temp.txt", 1)
     }
@@ -48,8 +47,8 @@
         }
         ; =================== check for gui items =======================
         if InStr(A_LoopField, "Add(") {
-            ret := checkforGuiItems(A_LoopField, &GuiItemVars, &eventList, &GuiItemCounter, &GuiItem_Storage)
-            ; ; loop through and look for GuiItemVars[]
+            ret := checkforGuiItems(A_LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage)
+            ; ; loop through and look for GuiControlVars[]
             if (ret[1] = 1) {
                 ;button
                 itemFound := 1
@@ -104,8 +103,8 @@
                 func := "`nOnEventHandler(*)`n"
                 string := ""
                 event_control_tooltips := ""
-                for variable_name in GuiItem_Storage {
-                        event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.Value `"``n`"", variable_name)
+                for ctrl in GuiCtrlStorage {
+                    event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.{2} `"``n`"", ctrl.name, ctrl.function)
                 }
                 if (event_control_tooltips != "") {
                     new_outscript .= func . tooltip_(event_control_tooltips)
@@ -126,15 +125,15 @@
             ;remove all if cases
             continue
         }
-        else if (Trim(A_LoopField = "Return") || Trim(A_LoopField = "return")){
+        else if (Trim(A_LoopField = "Return") || Trim(A_LoopField = "return")) {
             continue
         }
         else if InStr(A_LoopField, "ControlColor(") {
             ctrlcolor := 1
             RegExMatch(A_LoopField, "0x[a-fA-F0-9]{6}", &match)
             if IsObject(match) {
-                hex := match[0] 
-                if InStr(hex, "0x"){
+                hex := match[0]
+                if InStr(hex, "0x") {
                     hex := StrReplace(hex, "0x", "")
                 }
                 new_outscript .= lastGuiControl ".Opt(`"Background" hex "`")"
@@ -180,19 +179,19 @@
             if (itemFound = 1)
             {
                 eventsStringified := []
-                for variable_name in GuiItem_Storage {
+                for ctrl in GuiCtrlStorage {
                     skip := false
-                    event := eventList[A_Index]
+                    ; ctrl.event := eventList[A_Index]
                     if eventsStringified.Length > 0 {
                         for eventstr in eventsStringified {
-                            if variable_name = eventstr {
+                            if ctrl.name = eventstr {
                                 skip := true
                             }
                         }
                     }
                     if skip = false {
-                        eventsStringified.Push(variable_name)
-                        new_outscript .= variable_name ".OnEvent(`"" event "`", OnEventHandler)`n"
+                        eventsStringified.Push(ctrl.name)
+                        new_outscript .= ctrl.name ".OnEvent(`"" ctrl.event "`", OnEventHandler)`n"
                     }
                 }
             }
@@ -204,7 +203,6 @@
             new_outscript .= A_LoopField . "`n"
         }
     }
-    GuiItemVars := Map()
     eventList := []
     GuiItemCounter := []
     GuiItem_Storage := []
@@ -230,33 +228,31 @@ removeBrokenFunctions(variable, equals) {
     ; [1:=eraseline, ]
 }
 */
-checkforGuiItems(LoopField, &GuiItemVars, &eventList, &GuiItemCounter, &GuiItem_Storage) {
-     for guicontrol, event in GuiItemVars
-    {
-        if InStr(LoopField, Format(".Add(`"{1}`"", guicontrol))
-        {
-            ;if button
-            if InStr(LoopField, " := ") {
-                ; var := Trim(StrSplit(LoopField, ":=")[1])
-                ; GuiItem_Storage.Push(Trim(var))
-                ; eventList.Push(event)
-                var := StrSplit(LoopField, " := ")[1]
-                if not IsAlnum(var) {
-                    var := cleanAlpha(var) GuiItemCounter[A_Index]
+checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
+    for ctrl in GuiControlVars
+    { 
+            if InStr(LoopField, Format(".Add(`"{1}`"", ctrl.item))
+            {
+                ;if button
+                if InStr(LoopField, " := ") {
+                    ; var := Trim(StrSplit(LoopField, ":=")[1])
+                    ; GuiItem_Storage.Push(Trim(var))
+                    ; eventList.Push(event)
+                    var := StrSplit(LoopField, " := ")[1]
+                    if not IsAlnum(var) {
+                        var := cleanAlpha(var) GuiItemCounter[A_Index]
+                    }
+                    GuiCtrlStorage.Push({name: var, event: ctrl.event, function: ctrl.function})
+                    return [1, var]
                 }
-                GuiItem_Storage.Push(var)
-                eventList.Push(event)
-                return [1, var]
-            }
-            else {
-                var := guicontrol GuiItemCounter[A_Index]
-                GuiItem_Storage.Push(Trim(var))
-                eventList.Push(event)
-                GuiItemCounter[A_Index] += 1
-                return [2, var]
+                else {
+                    var := ctrl.item GuiItemCounter[A_Index]
+                    GuiCtrlStorage.Push({name: var, event: ctrl.event, function: ctrl.function})
+                    GuiItemCounter[A_Index] += 1
+                    return [2, var]
+                }
             }
         }
-    }
     return [0]
 }
 

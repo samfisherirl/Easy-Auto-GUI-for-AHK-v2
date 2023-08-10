@@ -1614,8 +1614,9 @@ Open(Files := "", Flag := 0) {
         If FileExist(FullPath) {
             FileMove, %FullPath%, %A_ScriptDir%\Sessions\temp2.ahk, 1
         }
+        warn := "#Warn All, Off`n"
         ; Backup a copy of the file before saving
-        FileAppend, %SciText%, %FullPath%
+        FileAppend, %warn%%SciText%, %FullPath%
         runcmd := A_ScriptDir "\AutoHotKey Exe\AutoHotkeyV2.exe " FullPath
         Run, %runcmd%, %A_ScriptDir%
     }

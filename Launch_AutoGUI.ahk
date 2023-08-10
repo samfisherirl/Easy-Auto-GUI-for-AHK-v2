@@ -89,20 +89,17 @@ find_easy_autogui_process(PID){
     }
 }
 
-;try {out := FileRead(path)}
 tryRead(path){
-    loop 2 {
-        try {
-            F := FileOpen(path, "r", "utf-8")
-            out := F.Read()
-            F.Close()
-            return out
-        }
-        catch as e {
-            errorLogHandler(e.Message)
-            Sleep(2)
-            return ""
-        }
+    try {
+        F := FileOpen(path, "r", "utf-8")
+        out := F.Read()
+        F.Close()
+        return out
+    }
+    catch as e {
+        errorLogHandler(e.Message)
+        Sleep(2)
+        return ""
     }
 }
 writer(str_to_write := "", path := ""){
