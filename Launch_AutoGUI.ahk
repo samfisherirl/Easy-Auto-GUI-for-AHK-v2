@@ -1,6 +1,5 @@
 #Requires Autohotkey v2.0
 #SingleInstance Force
-#Warn all, off
 cwd := A_ScriptDir "\required\"
 
 #Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
