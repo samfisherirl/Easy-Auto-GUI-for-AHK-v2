@@ -28,7 +28,7 @@ cleanFiles(FileList)
 
 Run(launch_autogui_cmd, , , &PID)
 Sleep(1000)
-find_easy_autogui_process(PID)
+findEasyAutoGUI(PID)
 
 While ProcessExist(PID)
 ; while the AutoGUI process exists & waits for %logsPath% to have contents,
@@ -78,7 +78,7 @@ cleanFiles(FileList)
         writer("", f)
     }
 }
-find_easy_autogui_process(PID){
+findEasyAutoGUI(PID){
     Loop 10 {
         if ProcessExist(PID) {
             break
