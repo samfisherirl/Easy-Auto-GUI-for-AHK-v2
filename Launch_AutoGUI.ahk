@@ -21,6 +21,7 @@ showSplashScreen()
 ;AutoGUI 2.5.8
 ;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
 ;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
+;AutoGui Ahkv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2
 
 setDesignMode()
 cleanFiles(FileList)
