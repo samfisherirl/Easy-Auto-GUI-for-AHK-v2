@@ -116,48 +116,11 @@ Converter(inscript, ahkv2CodePath) {
 }
 
 setDesignMode() {
-    ini := FileRead(settings)
-    replaceSettings := ""
-    enable := Map("DesignMode", 0, "SnapToGrid", 0, "DarkTheme", 0)
-    disable := Map("AutoLoadLast", 0)
-    Loop Parse, ini, "`n", "`r" {
-        continueStatus:=0
-        if (A_LoopField = "") {
-            continue
-        }
-        for searchItem, statusFound in enable {
-            if InStr(A_LoopField, searchItem) {
-                if (statusFound = 0) {
-                    replaceSettings .= searchItem "=1`n"
-                    enable.Set(searchItem, 1)
-                    continueStatus := 1
-                    continue
-                }
-                else {
-                    continueStatus:=1
-                    continue
-                }
-            }
-        }
-        for searchItem, statusFound in disable {
-            if InStr(A_LoopField, searchItem) {
-                if (statusFound = 0) {
-                    replaceSettings .= searchItem "=0`n"
-                    disable.Set(searchItem, 1)
-                    continueStatus:=1
-                    continue
-                }
-                else {
-                    continueStatus:=1
-                    continue
-                }
-            }
-        }
-        if (continueStatus = 0) {
-            replaceSettings .= A_LoopField "`n"
-        }
-    }
-    writer(replaceSettings, settings)
+    IniWrite "1", settings, "Options", "DesignMode"
+    IniWrite "1", settings, "Options", "SnapToGrid"
+    IniWrite "1", settings, "Editor", "DarkTheme"
+    IniWrite "0", settings, "Sessions", "AutoLoadLast"
+    IniWrite "0", settings, "Sessions", "SaveOnExit"
 }
 
 versionCheck(){
