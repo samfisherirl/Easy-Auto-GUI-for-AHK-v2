@@ -14,7 +14,7 @@ This project is built upon years of hard work done by the individuals below. I p
 # How it works 
 Easy AutoGUI is built on ahkv1 and operates without requiring any installation, leveraging built-in executables.
 
-- **Real-Time Conversion**: The process of conversion takes place in real-time within the integrated development environment (IDE). This happens when you choose the SaveAs or Save options.
+- **Real-Time Conversion**: The process of conversion takes place in real-time within the integrated development environment (IDE).  
 - **Rapid Cloning**: Cloning windows that contain over 1,000 lines is efficient, completing in less than one second.
 - **Custom Contingencies**: Special measures have been implemented to reduce output errors. These adapt the ahkv2converter output to match the specific requirements of this use case.
 - **Error-Free Goal**: After building a GUI for ahkv2, the expectation is that the code execution should be free of errors. While errors might occur, they are unexpected, and users should report them. The design intent is to achieve error-free output.
