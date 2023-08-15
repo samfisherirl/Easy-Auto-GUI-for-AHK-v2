@@ -1,7 +1,15 @@
 ﻿modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
-    GuiControlVars := [{ item: "Button", event: "Click", function: "Text" }, { item: "DropDownList", event: "Change", function: "Text" }, {
-        item: "Edit", event: "Change", function: "Value" }, { item: "DateTime", event: "Change", function: "Value" }, { item: "MonthCal", event: "Change", function: "Value" }, { item: "Radio", event: "Click", function: "Value" }, { item: "CheckBox", event: "Click", function: "Value" }, { item: "ComboBox", event: "Change", function: "Text" }]
+    GuiControlVars := [
+        { item: "Button", event: "Click", function: "Text" }, 
+        { item: "DropDownList", event: "Change", function: "Text" }, 
+        { item: "Edit", event: "Change", function: "Value" }, 
+        { item: "DateTime", event: "Change", function: "Value" }, 
+        { item: "MonthCal", event: "Change", function: "Value" }, 
+        { item: "Radio", event: "Click", function: "Value" }, 
+        { item: "CheckBox", event: "Click", function: "Value" }, 
+        { item: "ComboBox", event: "Change", function: "Text" }
+    ]
     eventList := []
     GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
@@ -50,7 +58,7 @@
             ret := checkforGuiItems(A_LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage)
             ; ; loop through and look for GuiControlVars[]
             if (ret[1] = 1) {
-                ;button
+                ;ret[1] = button, ret[2] := guiControlVarName
                 itemFound := 1
                 lastGuiControl := ret[2]
                 oldvar := StrSplit(A_LoopField, " := ")[1]
@@ -59,6 +67,7 @@
                 continue
             }
             if (ret[1] = 2) {
+                ;ret[1] = nonButton, ret[2] := guiControlVarName
                 new_outscript .= ret[2] " := " A_LoopField "`n"
                 lastGuiControl := ret[2]
                 itemFound := 1
@@ -273,4 +282,47 @@ cleanAlpha(StrIn) {
         }
     }
     return newVar
+}
+
+
+classify(moddedOutput) {
+    newReturnCode := ""
+    needle := ".*:=\s*Gui\(\).*"
+    needleFound := false
+    Loop parse, moddedOutput, "`n" 
+    {
+        if (A_LoopField != "") {
+            if not needleFound {
+                RegExMatch(A_LoopField, needle, &match)
+                if not IsObject(match){
+                    newReturnCode .= A_LoopField "`n"
+                } else {
+                    newReturnCode .= preludeString() "`n" "`t`t" A_LoopField 
+                    needleFound := true
+                }
+            } else {
+                if not InStr(A_LoopField, "(`*)") {
+                    newReturnCode .= "`n" "`t`t" A_LoopField 
+                } else {
+                    newReturnCode .= "`n`n" "`t`t" A_LoopField 
+                }
+            }
+        }
+    }
+    newReturnCode .= Format("`n`t`treturn {1}`n`t}`n}`n", StrSplit(match[0], " := ")[1])
+    return newReturnCode
+}
+
+preludeString(){
+    return prelude := "
+    (
+
+myGuiObj := myClass.UI()
+; myGuiObj.Destroy()
+
+class myClass
+{
+    static UI()
+    {
+)"
 }
