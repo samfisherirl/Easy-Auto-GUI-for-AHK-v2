@@ -1,14 +1,6 @@
 #Requires Autohotkey v2.0
 #SingleInstance Force
-
-;AutoGUI 2.5.8
-;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
-;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
-;AutoGui Ahkv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2
-
 cwd := A_ScriptDir "\required\"
-
-darkMode := "1"
 
 #Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
 #Include "*i %A_ScriptDir%\required\convert\converterMod.ahk"
@@ -17,7 +9,19 @@ darkMode := "1"
 #Include "*i %A_ScriptDir%\required\convert\github.ahk"
 
 missingFilesPrompt()
+/*
+******************************************************
+ *  update feature currently under testing
+    #Include %A_ScriptDir%\required\versionCheck.ahk
+    UpdateCheck()
+******************************************************
+*/
 showSplashScreen()
+
+;AutoGUI 2.5.8
+;Auto-GUI-v2 credit to autohotkey.com/boards/viewtopic.php?f=64&t=89901
+;AHKv2converter credit to github.com/mmikeww/AHK-v2-script-converter
+;AutoGui Ahkv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2
 
 setDesignMode()
 cleanFiles(FileList)
@@ -106,16 +110,15 @@ writer(str_to_write := "", path := ""){
 
 Converter(inscript, ahkv2CodePath) {
     script := Convert(inscript)    ; convert the script from AHK v1 to AHK v2
-    moddedOutput := modifyAhkv2ConverterOutput(ahkv1CodePath, script)    ; add menu handlers to the script
-    finalCode := classify(moddedOutput)
-    writer(finalCode, ahkv2CodePath)
+    final_code := modifyAhkv2ConverterOutput(ahkv1CodePath, script)    ; add menu handlers to the script
+    writer(final_code, ahkv2CodePath)
     writer("1", returnStatusPath)    ; append the return status to the return status file
 }
 
 setDesignMode() {
     IniWrite "1", settings, "Options", "DesignMode"
     IniWrite "1", settings, "Options", "SnapToGrid"
-    IniWrite darkMode, settings, "Editor", "DarkTheme"
+    IniWrite "1", settings, "Editor", "DarkTheme"
     IniWrite "0", settings, "Sessions", "AutoLoadLast"
     IniWrite "0", settings, "Sessions", "SaveOnExit"
 }
