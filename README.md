@@ -41,9 +41,7 @@ Font, buttons, if misaligned.
 
 Right click properties on exe-
 
-![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e5ba25af-e35d-4e2c-b878-6fd56216f114)
-
-![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e2619da9-1c4e-49a6-b3d9-93f6fe6d48a0)
+![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e5ba25af-e35d-4e2c-b878-6fd56216f114)  ![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e2619da9-1c4e-49a6-b3d9-93f6fe6d48a0)
 
 
 
