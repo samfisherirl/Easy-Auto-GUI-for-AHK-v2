@@ -7,6 +7,13 @@
   
 - If you need help, or are having trouble getting started, I put together an installer.  [Direct Link](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases/download/v1.6.1/Easy_AutoGUI_v2_Installer.exe)
 
+#
+
+
+
+![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
+
+
 
 # Credits:
 This project is built upon years of hard work done by the individuals below. I played a very small part in bringing this to AHKv2, these individuals gave dozens and dozens of hours to make these applications possible: 
@@ -41,10 +48,6 @@ Right click properties on exe-
 
 ![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e2619da9-1c4e-49a6-b3d9-93f6fe6d48a0)
 
-
-
-
-![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
 
 
 
