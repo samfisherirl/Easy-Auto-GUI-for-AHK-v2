@@ -29,9 +29,8 @@ Easy AutoGUI is built on ahkv1 and operates without requiring any installation, 
 
 # Contribution
 All help big or small is appreciated. If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
-# Example
-
-
+ 
+ 
 # DPI fix
 
 
