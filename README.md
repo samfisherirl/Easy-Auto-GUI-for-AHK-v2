@@ -32,6 +32,28 @@ All help big or small is appreciated. If you have an idea or find a problem, cli
 # Example
 
 
+# DPI fix
+
+
+Hi! This project looks very interesting!!
+
+The first issue I have is that the actual font size used in the gui... the toolbar and side menu is unreadable without squinting with my poor eyesight. :(
+
+Could you add an option to customize the size of the different gui elements?
+
+I assume you are referring to the GUI for EasyAutoGUI; screenshots help.
+
+here's the fix:
+
+right click properties on exe
+
+![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e5ba25af-e35d-4e2c-b878-6fd56216f114)
+
+![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e2619da9-1c4e-49a6-b3d9-93f6fe6d48a0)
+
+
+
+
 ![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
 
 
