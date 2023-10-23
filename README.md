@@ -39,7 +39,7 @@ All help big or small is appreciated. If you have an idea or find a problem, cli
  
 # DPI fix
 
-Font, buttons, if misaligned. 
+I cannot dig through the code as Im traveling ATM. Here's a quick fix for small display / laptop users who run into small font, ill-fitting windows, etc. 
 
 Right click properties on exe-
 
