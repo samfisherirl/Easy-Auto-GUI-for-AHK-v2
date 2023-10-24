@@ -146,6 +146,12 @@
             new_outscript .= "`n"
             FindMenu := 1
         }
+        else if InStr(Trim(A_LoopField), ".New(") {
+            ;fix naming convension of Menu
+            new_outscript .= StrReplace(A_LoopField, ".New(", ".Opt(")
+            new_outscript .= "`n"
+            Continue
+        }
         else if (FindMenu = 1) && (InStr(Trim(A_LoopField), "Menu.Add(")) {
             ;fix naming convension of Menu
             if (StrSplit(Trim(A_LoopField), "(")[1] = "Menu.Add") {
