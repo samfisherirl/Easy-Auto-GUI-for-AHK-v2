@@ -22,7 +22,7 @@ This project is built upon years of hard work done by the individuals below. I p
 - Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
   
 # How it works 
-Easy AutoGUI is built on ahkv1 and operates without requiring any installation, leveraging built-in executables.
+Easy AutoGUI is built on and operates from ahkv1. Launch_AutoGUI is a v2 wrapper handling conversion and launching (without the need for v1.0 install). 
 
 - **Real-Time Conversion**: The process of conversion takes place in real-time within the integrated development environment (IDE).  
 - **Rapid Cloning**: Cloning windows that contain over 1,000 lines is efficient, completing in less than one second.
