@@ -15,7 +15,7 @@
 
 
 # Credits:
-This project is built upon years of hard work done by the individuals below. I played a very small part in bringing this to AHKv2, these individuals gave dozens and dozens of hours to make these applications possible: 
+This project is built upon years of hard work done by the individuals below. I played a very small part in bringing this to AHKv2, these individuals gave hundreds of hours to make these applications possible: 
 - Easy AutoGUI was created by **Alguimist**, the founder of the **Adventure IDE** here https://sourceforge.net/projects/autogui/. 
 - AHKv2converter was developed by https://github.com/mmikeww and https://github.com/dmtr99 among others.
 - Boiler from the autohotkey.com forum, provided MessageBox Creator within the tools menu. https://www.autohotkey.com/boards/viewtopic.php?f=83&t=78253
