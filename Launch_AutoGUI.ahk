@@ -72,7 +72,6 @@ While ProcessExist(PID)
 ExitApp()
 
 
-
 ; Prompt user about missing files
 missingFilesPrompt() {
     msg := { text: "", title: "Missing Files", show: false }
