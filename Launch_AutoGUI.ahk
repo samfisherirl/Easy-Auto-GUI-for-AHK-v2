@@ -13,7 +13,7 @@ cwd := A_ScriptDir "\required\"
 ; It is built on AHKv1 but handles real-time conversion to AHKv2, making it user-friendly for both beginners and advanced users.
 ; This script acts as a launcher for Easy AutoGUI, handling the conversion process.
 ; Credits:
-; - Easy AutoGUI was created by Alguimist  https://sourceforge.net/projects/autogui/.
+; - Easy AutoGUI was created by Alguimist, creator of the Adventure IDE: https://sourceforge.net/projects/autogui/.
 ; - The AHKv2 converter by contributors like https://github.com/mmikeww and https://github.com/dmtr99.
 ; - The Autohotkey.com forum user "Boiler" provided the MessageBox Creator within the tools menu.
 ; These individuals' hard work laid the foundation for this project. I played a small part in bringing Easy AutoGUI to AHKv2 by weaving these two solutions together.
