@@ -1,6 +1,6 @@
 #Requires Autohotkey v2.0
 #SingleInstance Force
-cwd := A_ScriptDir "\required\"
+cwd := A_ScriptDir "\required"
 
 #Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
 #Include "*i %A_ScriptDir%\required\convert\converterMod.ahk"
@@ -75,13 +75,18 @@ ExitApp()
 ; Prompt user about missing files
 missingFilesPrompt() {
     msg := { text: "", title: "Missing Files", show: false }
+
     if not DirExist(cwd) {
         msg.show := true
         msg.text := 'The `'/required/`' directory included with this app is missing. Would you like to download the required files?`nOtherwise, this app will exit.'
     }
-    else if not FileExist(ahkv1_exe) {
+    else if not FileExist(cwd "\AutoHotKey Exe\AutoHotkeyV1.exe") {
         msg.text := 'The `'\required\AutoHotKey Exe\AutoHotkeyV1.exe`' file included with this app is missing. `n`nIf you downloaded from the Github code page, you`'ll need the release to run this application.`nOr edit the _vars.ahk file with your ahkv1 64bit exe. `n`nWould you like to download the required files?`nOtherwise, this app will exit.'
         msg.show := true
+    }
+    else 
+    {
+        return 
     }
     if msg.show = True
     {
