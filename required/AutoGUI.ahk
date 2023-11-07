@@ -1617,7 +1617,7 @@ Open(Files := "", Flag := 0) {
         warn := "#Warn All, Off`n"
         ; Backup a copy of the file before saving
         FileAppend, %warn%%SciText%, %FullPath%
-        runcmd := A_ScriptDir "\AutoHotKey Exe\AutoHotkeyV2.exe " FullPath
+        runcmd := """" A_ScriptDir . "\AutoHotKey Exe\AutoHotkeyV2.exe\" """" " " . """" . FullPath """"
         Run, %runcmd%, %A_ScriptDir%
     }
     
