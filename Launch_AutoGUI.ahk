@@ -53,6 +53,7 @@ ExitApp()
 
 CheckConversionStatus()
 {
+    global attempts := 0
     ; Continuously check for conversion status
     While ProcessExist(PID)
     {
@@ -65,11 +66,17 @@ CheckConversionStatus()
                 inscript := tryRead(ahkv1CodePath)
                 if (inscript != "")
                 {
-                    writer("", logsPath) ; Clear the log file
                     try {
                         ConvertandCompile(inscript, ahkv2CodePath)
+                        writer("", logsPath) ; Clear the log file
                     }
                     catch as e {
+                        if attempts > 2 
+                        {
+                            writer("", logsPath)
+                            attempts := 0
+                        }
+                        attempts := attempts + 1
                         errorLogHandler(e.Message)
                         sleep(10)
                         continue
