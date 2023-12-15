@@ -45,7 +45,7 @@
             new_outscript .= A_LoopField "`n"
             continue
         }
-        ; =================== check for gui items =======================
+        ; =================== check for gui items ======================= 
         if InStr(A_LoopField, "Add(") {
             ret := checkforGuiItems(A_LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage)
             ; ; loop through and look for GuiControlVars[]
@@ -209,6 +209,8 @@
             new_outscript .= A_LoopField . "`n"
         }
     }
+    new_outscript := InStr(new_outscript, "ListviewListview") ? new_outscript := StrReplace(new_outscript, "ListviewListview", "_Listview") : new_outscript
+    InStr(new_outscript, "ogc") ? new_outscript := StrReplace(new_outscript, "ogc", "") : new_outscript := new_outscript
     eventList := []
     GuiItemCounter := []
     GuiItem_Storage := []
@@ -252,7 +254,7 @@ checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
                     return [1, var]
                 }
                 else {
-                    var := ctrl.item GuiItemCounter[A_Index]
+                    var := ctrl.item GuiItemCounter[A_Index] 
                     GuiCtrlStorage.Push({name: var, event: ctrl.event, function: ctrl.function})
                     GuiItemCounter[A_Index] += 1
                     return [2, var]
