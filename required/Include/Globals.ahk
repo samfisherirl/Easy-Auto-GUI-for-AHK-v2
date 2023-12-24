@@ -130,7 +130,7 @@
 , g_InitialY
 , g_InitialW
 , g_InitialH
-, g_ToolbarH := 32
+, g_ToolbarH := 50
 , g_hStatusBar
 , g_StatusBarH
 , g_TabBarPos
