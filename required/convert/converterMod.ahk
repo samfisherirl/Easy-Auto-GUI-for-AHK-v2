@@ -8,24 +8,22 @@
     ; RemoveFunction==1 loops to find `{}` while `{}` not found in line
     new_outscript := ""
     buttonFound := 0, itemFound := 0, editCount := 0, menuHandler := 0, guiShow := 0, RemoveFunction := 0, menuHandle := 0, GuiEsc := 0, FindMenu := 0, FindMenuBar := 0, MenuHandleCount := 0, ctrlcolor := 0
-    guiname := "", title := ""
-    GuiItem_Storage := []
-    Edit_Storage := []
-    GuiCtrlStorage := []
+    guiname := "", title := "",  GuiItem_Storage := [],  Edit_Storage := [],  GuiCtrlStorage := []
     if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\required\convert\temp.txt", 1)
     }
     Loop Parse, script, "`n", "`r"
     {
-        if (A_Index = 1) && not InStr(A_LoopField, "#Requires Autohotkey v2") {
-            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
-        }
+        TrimmedField := Trim(A_LoopField)
+        new_outscript := ((A_Index = 1) && not InStr(A_LoopField, "#Requires Autohotkey v2"))
+            ? "`n#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
+            : new_outscript
         if (RemoveFunction = 1) {
-            if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "}") {
+            if InStr(TrimmedField, "{") && not InStr(TrimmedField, "}") {
                 brackets += 1 ; for every opening bracket, remove until equal number of closed brackets found
                 continue
             }
-            else if InStr(A_LoopField, "}") && not InStr(Trim(A_LoopField), "{") {
+            else if InStr(A_LoopField, "}") && not InStr(TrimmedField, "{") {
                 if (brackets <= 1) {
                     RemoveFunction := 0
                     brackets := 0
@@ -125,6 +123,7 @@
             ;remove all if cases
             continue
         }
+        
         else if (Trim(A_LoopField = "Return") || Trim(A_LoopField = "return")) {
             continue
         }
@@ -140,41 +139,37 @@
                 new_outscript .= "`n"
             }
         }
-        else if (Trim(A_LoopField) = "Menu := Menu()") {
+        else if (TrimmedField = "Menu := Menu()") {
             ;fix naming convension of Menu
             new_outscript .= StrReplace(A_LoopField, "Menu := Menu()", "Menu_Storage := Menu()")
             new_outscript .= "`n"
             FindMenu := 1
         }
-        else if InStr(Trim(A_LoopField), ".New(") {
+        else if InStr(TrimmedField, ".New(") {
             ;fix naming convension of Menu
             new_outscript .= StrReplace(A_LoopField, ".New(", ".Opt(")
             new_outscript .= "`n"
             Continue
         }
-        else if (FindMenu = 1) && (InStr(Trim(A_LoopField), "Menu.Add(")) {
+        else if (FindMenu = 1) && (InStr(TrimmedField, "Menu.Add(")) {
             ;fix naming convension of Menu
-            if (StrSplit(Trim(A_LoopField), "(")[1] = "Menu.Add") {
-                new_outscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(")
-                new_outscript .= "`n"
+            if (StrSplit(TrimmedField, "(")[1] = "Menu.Add") {
+                new_outscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(") "`n"
             }
         }
-        else if (Trim(A_LoopField) = "MenuBar := Menu()") {
+        else if (TrimmedField = "MenuBar := Menu()") {
             ;fix naming convension of MenuBar
-            new_outscript .= StrReplace(A_LoopField, "MenuBar := Menu()", "MenuBar_Storage := MenuBar()")
-            new_outscript .= "`n"
+            new_outscript .= StrReplace(A_LoopField, "MenuBar := Menu()", "MenuBar_Storage := MenuBar()") "`n"
             FindMenuBar := 1
         }
-        else if (FindMenuBar = 1) && InStr(Trim(A_LoopField), "MenuBar.Add(") {
-            if (StrSplit(Trim(A_LoopField), "(")[1] = "MenuBar.Add") {
-                new_outscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenuBar_Storage.Add(")
-                new_outscript .= "`n"
+        else if (FindMenuBar = 1) && InStr(TrimmedField, "MenuBar.Add(") {
+            if (StrSplit(TrimmedField, "(")[1] = "MenuBar.Add") {
+                new_outscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenuBar_Storage.Add(") "`n"
             }
         }
         else if InStr(A_LoopField, ".MenuToolbar := MenuBar") {
             ;fix naming convension of MenuToolbar
-            new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage")
-            new_outscript .= "`n"
+            new_outscript .= StrReplace(A_LoopField, "MenuToolbar := MenuBar", "MenuBar := MenuBar_Storage") . "`n"
         }
         else if InStr(A_LoopField, ".Show(`"") && (guiShow = 0) {
             guiShow := 1
@@ -201,9 +196,7 @@
                     }
                 }
             }
-            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
-            new_outscript .= title . "`n"
-            new_outscript .= A_LoopField . "`n"
+            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n" title . "`n" A_LoopField . "`n"
         }
         else {
             new_outscript .= A_LoopField . "`n"
@@ -211,58 +204,24 @@
     }
     new_outscript := InStr(new_outscript, "ListviewListview") ? new_outscript := StrReplace(new_outscript, "ListviewListview", "_Listview") : new_outscript
     InStr(new_outscript, "ogc") ? new_outscript := StrReplace(new_outscript, "ogc", "") : new_outscript := new_outscript
-    eventList := []
-    GuiItemCounter := []
-    GuiItem_Storage := []
     return new_outscript
 }
-;.OnEvent('Close', (*) => ExitApp())
-
-/*
-removeBrokenFunctions(variable, equals) {
-    returnValue := [0, variable, equals]
-    if InStr(variable, " ") {
-        variable := StrSplit(variable, " ")[StrSplit(variable, " ").Length]
-        if InStr(variable, ".") {
-            variable := StrSplit(variable, ".")[StrSplit(variable, ".").Length]
-        }
-    }
-    returnValue[2] := variable
-    if InStr(equals, " ") {
-        if not InStr(equals, "`"") and not InStr(equals, "`'") {
-            returnValue[1] := 1
-        }
-    }
-    ; [1:=eraseline, ]
-}
-*/
 checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
-    for ctrl in GuiControlVars
-    { 
-            if InStr(LoopField, Format(".Add(`"{1}`"", ctrl.item))
-            {
-                ;if button
-                if InStr(LoopField, " := ") {
-                    ; var := Trim(StrSplit(LoopField, ":=")[1])
-                    ; GuiItem_Storage.Push(Trim(var))
-                    ; eventList.Push(event)
-                    var := StrSplit(LoopField, " := ")[1]
-                    if not IsAlnum(var) {
-                        var := cleanAlpha(var) GuiItemCounter[A_Index]
-                    }
-                    GuiCtrlStorage.Push({name: var, event: ctrl.event, function: ctrl.function})
-                    return [1, var]
-                }
-                else {
-                    var := ctrl.item GuiItemCounter[A_Index] 
-                    GuiCtrlStorage.Push({name: var, event: ctrl.event, function: ctrl.function})
-                    GuiItemCounter[A_Index] += 1
-                    return [2, var]
-                }
-            }
+    for index, ctrl in GuiControlVars
+    {
+        if InStr(LoopField, Format(".Add(`"{1}`"", ctrl.item))
+        {
+            var := (InStr(LoopField, " := ")) ? StrSplit(LoopField, " := ")[1]
+                : ctrl.item GuiItemCounter[index]
+            var := (IsAlpha(var) || IsAlnum(var)) ? var : cleanAlpha(var) GuiItemCounter[index]
+            (InStr(LoopField, " := ")) ? GuiCtrlStorage.Push({ name : var, event: ctrl.event, function: ctrl.function})
+        : GuiItemCounter[index] += 1
+        return [InStr(LoopField, " := ") ? 1: 2, var]
         }
+    }
     return [0]
 }
+
 
 tooltip_(string := "") {
     if (string != "") {
