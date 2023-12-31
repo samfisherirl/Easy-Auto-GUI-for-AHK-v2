@@ -51,48 +51,29 @@ Main() {
 ExitApp()
 
 
-CheckConversionStatus()
-{
-    global attempts := 0
-    ; Continuously check for conversion status
-    While ProcessExist(PID)
-    {
-        ; Check if the log file exists
-        if FileExist(logsPath)
-        {
+CheckConversionStatus() {
+    while ProcessExist(PID) {
+        if FileExist(logsPath) {
             status := tryRead(logsPath)
-            if (status != "")
-            {
-                inscript := tryRead(ahkv1CodePath)
-                if (inscript != "")
-                {
-                    try {
-                        ConvertandCompile(inscript, ahkv2CodePath)
-                        writer("", logsPath) ; Clear the log file
-                    }
-                    catch as e {
-                        if attempts > 2 
-                        {
-                            writer("", logsPath)
-                            attempts := 0
-                        }
-                        attempts := attempts + 1
-                        errorLogHandler(e.Message)
-                        sleep(10)
-                        continue
-                    }
+            inscript := status != "" ? tryRead(ahkv1CodePath) : ""
+            if (inscript != "") {
+                writer("", logsPath) ; Clear log file
+                try {
+                    ConvertandCompile(inscript, ahkv2CodePath)
+                }
+                catch as e {
+                    errorLogHandler(e.Message)
+                    sleep(5)
+                    continue
                 }
             }
-        }
-        else
-        {
-            Sleep(15)
+        } else {
+            Sleep(5)
             continue
         }
     }
+    ExitApp()
 }
-ExitApp()
-
 
 ; Convert script from AHK v1 to v2
 ConvertandCompile(inscript, ahkv2CodePath) {
