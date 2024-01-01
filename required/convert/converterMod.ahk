@@ -1,7 +1,14 @@
 ﻿modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
-    GuiControlVars := [{ item: "Button", event: "Click", function: "Text" }, { item: "DropDownList", event: "Change", function: "Text" }, {
-        item: "Edit", event: "Change", function: "Value" }, { item: "DateTime", event: "Change", function: "Value" }, { item: "MonthCal", event: "Change", function: "Value" }, { item: "Radio", event: "Click", function: "Value" }, { item: "CheckBox", event: "Click", function: "Value" }, { item: "ComboBox", event: "Change", function: "Text" }]
+    GuiControlVars := []
+    , GuiControlVars.Push(Map("item", "Button", "event", "Click", "function", "Text"))
+    , GuiControlVars.Push(Map("item", "DropDownList", "event", "Change", "function", "Text"))
+    , GuiControlVars.Push(Map("item", "Edit", "event", "Change", "function", "Value"))
+    , GuiControlVars.Push(Map("item", "DateTime", "event", "Change", "function", "Value"))
+    , GuiControlVars.Push(Map("item", "MonthCal", "event", "Change", "function", "Value"))
+    , GuiControlVars.Push(Map("item", "Radio", "event", "Click", "function", "Value"))
+    , GuiControlVars.Push(Map("item", "CheckBox", "event", "Click", "function", "Value"))
+    , GuiControlVars.Push(Map("item", "ComboBox", "event", "Change", "function", "Text"))
     eventList := []
     GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
@@ -204,12 +211,12 @@
 checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
     for index, ctrl in GuiControlVars
     {
-        if InStr(LoopField, Format(".Add(`"{1}`"", ctrl.item))
+        if InStr(LoopField, Format(".Add(`"{1}`"", ctrl["item"]))
         {
             var := (InStr(LoopField, " := ")) ? StrSplit(LoopField, " := ")[1]
-                : ctrl.item GuiItemCounter[index]
+                : ctrl["item"] GuiItemCounter[index]
             var := (IsAlpha(var) || IsAlnum(var)) ? var : cleanAlpha(var) GuiItemCounter[index]
-            (InStr(LoopField, " := ")) ? GuiCtrlStorage.Push({ name : var, event: ctrl.event, function: ctrl.function})
+            (InStr(LoopField, " := ")) ? GuiCtrlStorage.Push({ name : var, event: ctrl["event"], function: ctrl["function"]})
         : GuiItemCounter[index] += 1
         return [InStr(LoopField, " := ") ? 1: 2, var]
         }
