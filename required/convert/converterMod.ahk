@@ -19,20 +19,15 @@
             ? "`n#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
             : new_outscript
         if (RemoveFunction = 1) {
-            if InStr(TrimmedField, "{") && not InStr(TrimmedField, "}") {
-                brackets += 1 ; for every opening bracket, remove until equal number of closed brackets found
-                continue
+            hasOpeningBracket := InStr(TrimmedField, "{")
+            hasClosingBracket := InStr(TrimmedField, "}")
+
+            if (hasOpeningBracket && !hasClosingBracket) {
+                brackets += 1
             }
-            else if InStr(A_LoopField, "}") && not InStr(TrimmedField, "{") {
-                if (brackets <= 1) {
-                    RemoveFunction := 0
-                    brackets := 0
-                    continue
-                }
-                else if (brackets > 1) {
-                    brackets := brackets - 1
-                    continue
-                }
+            else if (!hasOpeningBracket && InStr(A_LoopField, "}")) {
+                brackets := (brackets > 1) ? brackets - 1 : 0
+                RemoveFunction := brackets = 0 ? 0 : RemoveFunction ; Conditional assignment
             }
             else {
                 continue
