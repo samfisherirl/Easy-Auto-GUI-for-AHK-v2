@@ -5,7 +5,6 @@
 - If you need help, or are having trouble getting started, here's the latest releases link.  [Direct Link](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/releases/download/v1.7/Easy-Auto-GUI-v1.7-for-AHK-v2.2.1.zip)
 - Make sure you also install autohotkey v2 [AHKv2Installer](https://www.autohotkey.com/download/ahk-v2.exe) 
 
-- Requires AHKv2
 
 #
 
