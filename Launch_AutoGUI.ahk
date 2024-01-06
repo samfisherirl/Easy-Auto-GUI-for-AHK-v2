@@ -24,25 +24,13 @@ Main()
 ; Main function
 Main() {
     global PID
-    ; Prompt user if required files are missing
-    missingFilesPrompt()
-
-    ; Display a splash screen
-    showSplashScreen()
-
-    ; Set the design mode
-    setDesignMode()
-
-    ; Clean temporary files
-    cleanFiles(FileList)
-
-    ; Run the AutoGUI command
-    Run(launch_autogui_cmd, , , &PID)
-    Sleep(1000)
-
-    ; Find and wait for Easy AutoGUI to launch
-    findEasyAutoGUI(PID)
-
+    missingFilesPrompt() ; Prompt user if required files are missing
+    ,showSplashScreen() ; Display a splash screen
+    ,setDesignMode() ; Set the design mode
+    ,cleanFiles(FileList) ; Clean temporary files
+    ,Run(launch_autogui_cmd, , , &PID) ; Run the AutoGUI command
+    ,Sleep(1000)
+    ,findEasyAutoGUI(PID) ; Find and wait for Easy AutoGUI to launch
     while ProcessExist(PID) {
         CheckConversionStatus()
     }
@@ -78,9 +66,9 @@ CheckConversionStatus() {
 ; Convert script from AHK v1 to v2
 ConvertandCompile(inscript, ahkv2CodePath) {
     script := Convert(inscript)
-    final_code := modifyAhkv2ConverterOutput(ahkv1CodePath, script)
-    writer(final_code, ahkv2CodePath)
-    writer("1", returnStatusPath)
+    ,final_code := modifyAhkv2ConverterOutput(ahkv1CodePath, script)
+    ,writer(final_code, ahkv2CodePath)
+    ,writer("1", returnStatusPath)
 }
 ; Prompt user about missing files
 missingFilesPrompt() {
