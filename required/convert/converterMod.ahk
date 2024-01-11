@@ -1,4 +1,4 @@
-﻿modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
+modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
     GuiControlVars := [
         map("item", "Button", "event", "Click", "function", "Text"),
@@ -10,22 +10,35 @@
         map("item", "CheckBox", "event", "Click", "function", "Value"),
         map("item", "ComboBox", "event", "Change", "function", "Text")
     ]
-    ,eventList := []
-    ,GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
-    ,brackets := 0 
-    ,new_outscript := ""
-    buttonFound := 0, itemFound := 0, editCount := 0, menuHandler := 0, guiShow := 0, RemoveFunction := 0, menuHandle := 0
-    ,GuiEsc := 0, FindMenu := 0, FindMenuBar := 0, MenuHandleCount := 0, ctrlcolor := 0
-    ,guiname := "", title := ""
-    ,GuiItem_Storage := []
-    ,Edit_Storage := []
-    ,GuiCtrlStorage := []
+
+    eventList := []
+        , GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
+    brackets := 0
+    new_outscript := ""
+    buttonFound := 0
+    itemFound := 0
+    editCount := 0
+    menuHandler := 0
+    guiShow := 0
+    RemoveFunction := 0
+    menuHandle := 0
+    GuiEsc := 0
+    FindMenu := 0
+    FindMenuBar := 0
+    MenuHandleCount := 0
+    ctrlcolor := 0
+    guiname := ""
+    title := ""
+    GuiItem_Storage := []
+    Edit_Storage := []
+    GuiCtrlStorage := []
     if FileExist(FNOut) {
         FileMove(FNOut, A_ScriptDir "\required\convert\temp.txt", 1)
     }
     Loop Parse, script, "`n", "`r"
     {
-        if (A_Index = 1) && not InStr(A_LoopField, "#Requires Autohotkey v2") {
+        if (A_Index = 1)
+        {
             new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
         }
         if (RemoveFunction = 1) {
@@ -36,7 +49,7 @@
             else if InStr(A_LoopField, "}") && not InStr(Trim(A_LoopField), "{") {
                 if (brackets <= 1) {
                     RemoveFunction := 0
-                    ,brackets := 0
+                        , brackets := 0
                     continue
                 }
                 else if (brackets > 1) {
@@ -48,10 +61,13 @@
                 continue
             }
         }
-        if (guiname = "") && InStr(A_LoopField, " := Gui()") {
-            guiname := StrSplit(A_LoopField, " := Gui()")[1]
-            new_outscript .= A_LoopField "`n"
-            continue
+        if (guiname = "")
+        {
+            if InStr(A_LoopField, " := Gui()") {
+                guiname := StrSplit(A_LoopField, " := Gui()")[1]
+                new_outscript .= A_LoopField "`n"
+                continue
+            }
         }
         ; =================== check for gui items =======================
         if InStr(A_LoopField, "Add(") {
@@ -60,16 +76,16 @@
             if (ret[1] = 1) {
                 ;button
                 itemFound := 1
-                ,lastGuiControl := ret[2]
-                ,oldvar := StrSplit(A_LoopField, " := ")[1]
-                ,newline := StrReplace(A_LoopField, oldvar, ret[2])
-                ,new_outscript .= newline "`n"
+                    , lastGuiControl := ret[2]
+                    , oldvar := StrSplit(A_LoopField, " := ")[1]
+                    , newline := StrReplace(A_LoopField, oldvar, ret[2])
+                    , new_outscript .= newline "`n"
                 continue
             }
             if (ret[1] = 2) {
                 new_outscript .= ret[2] " := " A_LoopField "`n"
-                ,lastGuiControl := ret[2]
-                ,itemFound := 1
+                    , lastGuiControl := ret[2]
+                    , itemFound := 1
                 continue
             }
             else {
@@ -84,11 +100,11 @@
         else if (menuHandle = 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
             ; if MenuHandler is found, add a function at the bottom of the app to handle
             menuHandle := 1
-            ,new_outscript .= A_LoopField . "`n"
+                , new_outscript .= A_LoopField . "`n"
         }
         else if InStr(A_LoopField, "MenuHandler(") {
             MenuHandleCount += 1
-            ,RemoveFunction := 1
+                , RemoveFunction := 1
         }
         ; else if InStr(A_LoopField, ".Add(`"Button`"") {
         ;     buttonFound := 1
@@ -112,7 +128,7 @@
                 string := ""
                 event_control_tooltips := ""
                 for ctrl in GuiCtrlStorage {
-                    event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.{2} `"``n`"", ctrl.name, ctrl.function)
+                    event_control_tooltips .= Format(" `n`t. `"{1} => `" {1}.{2} `"``n`"", ctrl['name'], ctrl['function'])
                 }
                 if (event_control_tooltips != "") {
                     new_outscript .= func . tooltip_(event_control_tooltips)
@@ -145,7 +161,7 @@
                     hex := StrReplace(hex, "0x", "")
                 }
                 new_outscript .= lastGuiControl ".Opt(`"Background" hex "`")"
-                ,new_outscript .= "`n"
+                    , new_outscript .= "`n"
             }
         }
         else if (Trim(A_LoopField) = "Menu := Menu()") {
@@ -194,28 +210,27 @@
                     ; ctrl.event := eventList[A_Index]
                     if eventsStringified.Length > 0 {
                         for eventstr in eventsStringified {
-                            if ctrl.name = eventstr {
+                            if ctrl['name'] = eventstr {
                                 skip := true
                             }
                         }
                     }
                     if skip = false {
-                        eventsStringified.Push(ctrl.name)
-                        new_outscript .= ctrl.name ".OnEvent(`"" ctrl.event "`", OnEventHandler)`n"
+                        eventsStringified.Push(ctrl['name'])
+                        new_outscript .= ctrl['name'] ".OnEvent(`"" ctrl['event'] "`", OnEventHandler)`n"
                     }
                 }
             }
             new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
-            ,new_outscript .= title . "`n"
-            ,new_outscript .= A_LoopField . "`n"
+                , new_outscript .= title . "`n"
+                , new_outscript .= A_LoopField . "`n"
         }
         else {
             new_outscript .= A_LoopField . "`n"
         }
     }
-    eventList := []
-    ,GuiItemCounter := []
-    ,GuiItem_Storage := []
+    new_outscript := InStr(new_outscript, "ListviewListview") ? StrReplace(new_outscript, "ListviewListview", "_Listview") : new_outscript
+    new_outscript := InStr(new_outscript, "ogc") ? StrReplace(new_outscript, "ogc", "") : new_outscript
     return new_outscript
 }
 ;.OnEvent('Close', (*) => ExitApp())
@@ -252,12 +267,12 @@ checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
                 if not IsAlnum(var) {
                     var := cleanAlpha(var) GuiItemCounter[A_Index]
                 }
-                GuiCtrlStorage.Push({ name: var, event: ctrl['event'], function: ctrl['function'] })
+                GuiCtrlStorage.Push(Map( 'name', var, 'event', ctrl['event'], 'function', ctrl['function'] ))
                 return [1, var]
             }
             else {
                 var := ctrl['item'] GuiItemCounter[A_Index]
-                GuiCtrlStorage.Push({ name: var, event: ctrl['event'], function: ctrl['function'] })
+                GuiCtrlStorage.Push(Map('name', var, 'event', ctrl['event'], 'function', ctrl['function']))
                 GuiItemCounter[A_Index] += 1
                 return [2, var]
             }
