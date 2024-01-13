@@ -30,7 +30,7 @@ Main() {
     ,cleanFiles(FileList) ; Clean temporary files
     ,Run(launch_autogui_cmd, , , &PID) ; Run the AutoGUI command
     ,Sleep(1000)
-    ,findEasyAutoGUI(PID) ; Find and wait for Easy AutoGUI to launch
+    hwnd := findEasyAutoGUI(PID) ; Find and wait for Easy AutoGUI to launch
     while ProcessExist(PID) {
         CheckConversionStatus()
     }
@@ -113,6 +113,10 @@ findEasyAutoGUI(PID) {
         else {
             Sleep(1000)
         }
+    }
+    try 
+    {
+        return WinGetID("ahk_pid " PID)
     }
 }
 
