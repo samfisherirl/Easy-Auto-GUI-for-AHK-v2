@@ -1,16 +1,22 @@
 modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
+    static lastScript := ""
+    if (lastScript = script) {
+        return
+    } else {
+        lastScript := script
+    }
     GuiControlVars := [
-        map("item", "Button", "event", "Click", "function", "Text"),
-        map("item", "DropDownList", "event", "Change", "function", "Text"),
-        map("item", "Edit", "event", "Change", "function", "Value"),
-        map("item", "DateTime", "event", "Change", "function", "Value"),
-        map("item", "MonthCal", "event", "Change", "function", "Value"),
-        map("item", "Radio", "event", "Click", "function", "Value"),
-        map("item", "CheckBox", "event", "Click", "function", "Value"),
-        map("item", "ComboBox", "event", "Change", "function", "Text")
+        map("ctrl", "Button", "event", "Click", "function", "Text"),
+        map("ctrl", "DropDownList", "event", "Change", "function", "Text"),
+        map("ctrl", "Edit", "event", "Change", "function", "Value"),
+        map("ctrl", "DateTime", "event", "Change", "function", "Value"),
+        map("ctrl", "MonthCal", "event", "Change", "function", "Value"),
+        map("ctrl", "Radio", "event", "Click", "function", "Value"),
+        map("ctrl", "CheckBox", "event", "Click", "function", "Value"),
+        map("ctrl", "ComboBox", "event", "Change", "function", "Text")
     ]
-
+    LVFunc := "`nLV_DoubleClick(LV, RowNum)`n{`n`tif not RowNum`n`t`treturn`n`tToolTip(LV.GetText(RowNum), 77, 277)`n`tSetTimer () => ToolTip(), -3000`n}`n"
     eventList := []
         , GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
@@ -30,6 +36,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     guiname := ""
     title := ""
     GuiItem_Storage := []
+    LVFound := 0
     Edit_Storage := []
     GuiCtrlStorage := []
     if FileExist(FNOut) {
@@ -41,12 +48,13 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
         {
             new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
         }
+        trimField := Trim(A_LoopField)
         if (RemoveFunction = 1) {
-            if InStr(Trim(A_LoopField), "{") && not InStr(Trim(A_LoopField), "}") {
+            if InStr(trimField, "{") && not InStr(trimField, "}") {
                 brackets += 1 ; for every opening bracket, remove until equal number of closed brackets found
                 continue
             }
-            else if InStr(A_LoopField, "}") && not InStr(Trim(A_LoopField), "{") {
+            else if InStr(A_LoopField, "}") && not InStr(trimField, "{") {
                 if (brackets <= 1) {
                     RemoveFunction := 0
                         , brackets := 0
@@ -69,7 +77,11 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                 continue
             }
         }
-        ; =================== check for gui items =======================
+        ; =================== check for gui controls =======================
+        if InStr(A_LoopField, 'Add("ListView"')
+        {
+            LVFound := StrSplit(TrimField, " := ")[1]
+        }
         if InStr(A_LoopField, "Add(") {
             ret := checkforGuiItems(A_LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage)
             ; ; loop through and look for GuiControlVars[]
@@ -92,10 +104,24 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                 lastGuiControl := StrSplit(A_LoopField, " := ")
             }
         }
-        ; =================== check for gui items =======================
+        ; =================== check for gui controls end =======================
         if InStr(A_LoopField, ".Title :=") {
             title := A_LoopField
             continue
+        }
+        else if InStr(trimField, '.Icon("')
+        {
+            obj := StrSplit(trimField, '.Icon(')[1]
+            commaSeparated := StrSplit(StrReplace(StrSplit(trimField,"(")[2], ")", ""), ",")
+            commaSeparatedCln := []
+            for str in commaSeparated
+            {
+                commaSeparatedCln.Push(StrReplace(StrReplace(StrReplace(str, '``"', ''), '"', ''), " ", ""))
+            }
+            if commaSeparatedCln.Length > 2
+            {
+                    new_outscript .= Format('{}.SetIcon("{}","{}", {})', obj, commaSeparatedCln[1], commaSeparatedCln[2], commaSeparatedCln[3]) "`n" 
+            }
         }
         else if (menuHandle = 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
             ; if MenuHandler is found, add a function at the bottom of the app to handle
@@ -164,31 +190,31 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                     , new_outscript .= "`n"
             }
         }
-        else if (Trim(A_LoopField) = "Menu := Menu()") {
+        else if (trimField = "Menu := Menu()") {
             ;fix naming convension of Menu
             new_outscript .= StrReplace(A_LoopField, "Menu := Menu()", "Menu_Storage := Menu()")
             new_outscript .= "`n"
             FindMenu := 1
         }
-        else if InStr(Trim(A_LoopField), ".New(") {
+        else if InStr(trimField, ".New(") {
             ;fix naming convension of Menu
             new_outscript .= StrReplace(A_LoopField, ".New(", ".Opt(") "`n"
             Continue
         }
-        else if (FindMenu = 1) && (InStr(Trim(A_LoopField), "Menu.Add(")) {
+        else if (FindMenu = 1) && (InStr(trimField, "Menu.Add(")) {
             ;fix naming convension of Menu
-            if (StrSplit(Trim(A_LoopField), "(")[1] = "Menu.Add") {
+            if (StrSplit(trimField, "(")[1] = "Menu.Add") {
                 new_outscript .= StrReplace(A_LoopField, "Menu.Add(", "Menu_Storage.Add(") "`n"
             }
         }
-        else if (Trim(A_LoopField) = "MenuBar := Menu()") {
+        else if (trimField = "MenuBar := Menu()") {
             ;fix naming convension of MenuBar
             new_outscript .= StrReplace(A_LoopField, "MenuBar := Menu()", "MenuBar_Storage := MenuBar()")
             new_outscript .= "`n"
             FindMenuBar := 1
         }
-        else if (FindMenuBar = 1) && InStr(Trim(A_LoopField), "MenuBar.Add(") {
-            if (StrSplit(Trim(A_LoopField), "(")[1] = "MenuBar.Add") {
+        else if (FindMenuBar = 1) && InStr(trimField, "MenuBar.Add(") {
+            if (StrSplit(trimField, "(")[1] = "MenuBar.Add") {
                 new_outscript .= StrReplace(A_LoopField, "MenuBar.Add(", "MenuBar_Storage.Add(") "`n"
             }
         }
@@ -202,6 +228,9 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             ;if found, and NO [submit] button is used
             ;user will get tooltips on value changes
             ;instead of submittion
+            if LVFound != 0 {
+                new_outscript .= LVFound '.Add(,"Sample1")`n' LVFound '.OnEvent("DoubleClick", LV_DoubleClick)`n'
+            }
             if (itemFound = 1)
             {
                 eventsStringified := []
@@ -221,9 +250,10 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                     }
                 }
             }
-            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n"
-                , new_outscript .= title . "`n"
-                , new_outscript .= A_LoopField . "`n"
+            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n" . title . "`n" A_LoopField . "`n"
+            if LVFound {
+                new_outscript .= LVFunc 
+            }
         }
         else {
             new_outscript .= A_LoopField . "`n"
@@ -233,30 +263,10 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     new_outscript := InStr(new_outscript, "ogc") ? StrReplace(new_outscript, "ogc", "") : new_outscript
     return new_outscript
 }
-;.OnEvent('Close', (*) => ExitApp())
-
-/*
-removeBrokenFunctions(variable, equals) {
-    returnValue := [0, variable, equals]
-    if InStr(variable, " ") {
-        variable := StrSplit(variable, " ")[StrSplit(variable, " ").Length]
-        if InStr(variable, ".") {
-            variable := StrSplit(variable, ".")[StrSplit(variable, ".").Length]
-        }
-    }
-    returnValue[2] := variable
-    if InStr(equals, " ") {
-        if not InStr(equals, "`"") and not InStr(equals, "`'") {
-            returnValue[1] := 1
-        }
-    }
-    ; [1:=eraseline, ]
-}
-*/
 checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
     for ctrl in GuiControlVars
     {
-        if InStr(LoopField, Format(".Add(`"{1}`"", ctrl['item']))
+        if InStr(LoopField, Format(".Add(`"{1}`"", ctrl["ctrl"]))
         {
             ;if button
             if InStr(LoopField, " := ") {
@@ -271,7 +281,7 @@ checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
                 return [1, var]
             }
             else {
-                var := ctrl['item'] GuiItemCounter[A_Index]
+                var := ctrl["ctrl"] GuiItemCounter[A_Index]
                 GuiCtrlStorage.Push(Map('name', var, 'event', ctrl['event'], 'function', ctrl['function']))
                 GuiItemCounter[A_Index] += 1
                 return [2, var]
@@ -281,11 +291,11 @@ checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
     return [0]
 }
 
-tooltip_(string := "") {
-    if (string != "") {
-        string := "`n`t. `"Active GUI element values include:``n`" " . string
+tooltip_(str := "") {
+    if (str != "") {
+        str := "`n`t. `"Active GUI element values include:``n`" " . str
     }
-    return "{`n`tToolTip(`"Click! This is a sample action.``n`"" string ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; tooltip timer`n}`n"
+    return "{`n`tToolTip(`"Click! This is a sample action.``n`"" str ", 77, 277)`n`tSetTimer () => ToolTip(), -3000 `; tooltip timer`n}`n"
 }
 
 cleanAlpha(StrIn) {
