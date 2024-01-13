@@ -36,17 +36,3 @@ Easy AutoGUI is built on and operates from ahkv1. Launch_AutoGUI is a v2 wrapper
 All help big or small is appreciated. If you have an idea or find a problem, click the Issues tab and create issue or fork and pull. Thanks!
  
  
-# DPI fix
-
-10/22/23 - I cannot dig through the code as Im traveling ATM. Here's a quick fix for small display / laptop users who run into small font, ill-fitting windows, etc. 
-
-Right click properties on exe-
-
-![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e5ba25af-e35d-4e2c-b878-6fd56216f114)  ![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/e2619da9-1c4e-49a6-b3d9-93f6fe6d48a0)
-
-
-
-
-- Instructions: Launch from Launch_AutoGUI
-- I have accounted for changes such as naming of "menubar" but there will be unforseen errors. Please notify me of those changes that need to be made in the output v2 conversion. 
- 
