@@ -1,8 +1,9 @@
 modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
 {
     static lastScript := ""
+    static lastReturned := ""
     if (lastScript = script) {
-        return
+        return lastReturned
     } else {
         lastScript := script
     }
@@ -18,15 +19,15 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     ]
     LVFunc := "`nLV_DoubleClick(LV, RowNum)`n{`n`tif not RowNum`n`t`treturn`n`tToolTip(LV.GetText(RowNum), 77, 277)`n`tSetTimer () => ToolTip(), -3000`n}`n"
     eventList := []
-        , GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
+    GuiItemCounter := [1, 1, 1, 1, 1, 1, 1, 1]
     brackets := 0
     new_outscript := ""
     buttonFound := 0
-    itemFound := 0
+    itemFound := false
     editCount := 0
     menuHandler := 0
     guiShow := 0
-    RemoveFunction := 0
+    RemoveFunction := false
     menuHandle := 0
     GuiEsc := 0
     FindMenu := 0
@@ -49,25 +50,21 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
         }
         trimField := Trim(A_LoopField)
-        if (RemoveFunction = 1) {
-            if InStr(trimField, "{") && not InStr(trimField, "}") {
+
+        if RemoveFunction {
+            if InStr(trimField, "{") && !InStr(trimField, "}") {
                 brackets += 1 ; for every opening bracket, remove until equal number of closed brackets found
-                continue
             }
-            else if InStr(A_LoopField, "}") && not InStr(trimField, "{") {
+            else if InStr(A_LoopField, "}") && !InStr(trimField, "{") {
                 if (brackets <= 1) {
-                    RemoveFunction := 0
-                        , brackets := 0
-                    continue
+                    RemoveFunction := false
+                    brackets := 0
                 }
                 else if (brackets > 1) {
                     brackets := brackets - 1
-                    continue
                 }
             }
-            else {
-                continue
-            }
+            continue
         }
         if (guiname = "")
         {
@@ -87,17 +84,17 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             ; ; loop through and look for GuiControlVars[]
             if (ret[1] = 1) {
                 ;button
-                itemFound := 1
-                    , lastGuiControl := ret[2]
-                    , oldvar := StrSplit(A_LoopField, " := ")[1]
-                    , newline := StrReplace(A_LoopField, oldvar, ret[2])
-                    , new_outscript .= newline "`n"
+                itemFound := true
+                lastGuiControl := ret[2]
+                oldvar := StrSplit(A_LoopField, " := ")[1]
+                newline := StrReplace(A_LoopField, oldvar, ret[2])
+                new_outscript .= newline "`n"
                 continue
             }
             if (ret[1] = 2) {
                 new_outscript .= ret[2] " := " A_LoopField "`n"
-                    , lastGuiControl := ret[2]
-                    , itemFound := 1
+                lastGuiControl := ret[2]
+                itemFound := true
                 continue
             }
             else {
@@ -126,11 +123,11 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
         else if (menuHandle = 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
             ; if MenuHandler is found, add a function at the bottom of the app to handle
             menuHandle := 1
-                , new_outscript .= A_LoopField . "`n"
+            new_outscript .= A_LoopField . "`n"
         }
         else if InStr(A_LoopField, "MenuHandler(") {
             MenuHandleCount += 1
-                , RemoveFunction := 1
+            RemoveFunction := true
         }
         ; else if InStr(A_LoopField, ".Add(`"Button`"") {
         ;     buttonFound := 1
@@ -149,7 +146,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                 new_outscript .= "`nMenuHandler(*)`n" tooltip_()
                 GuiEsc := 1
             }
-            if (itemFound = 1) {
+            if itemFound {
                 func := "`nOnEventHandler(*)`n"
                 string := ""
                 event_control_tooltips := ""
@@ -168,7 +165,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
         }
         else if (menuHandle = 1) && (MenuHandleCount >= 1) && InStr(A_LoopField, "MenuHandler(") {
             ;remove default menuhandler function
-            RemoveFunction := 1
+            RemoveFunction := true
             continue
         }
         else if InStr(A_LoopField, "OnEvent(`"Close`", GuiEscape)") || InStr(A_LoopField, "OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField = "") || InStr(A_LoopField, ".SetFont()") || InStr(A_LoopField, ".hwnd") || InStr(A_LoopField, "+hWnd") {
@@ -187,7 +184,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                     hex := StrReplace(hex, "0x", "")
                 }
                 new_outscript .= lastGuiControl ".Opt(`"Background" hex "`")"
-                    , new_outscript .= "`n"
+                new_outscript .= "`n"
             }
         }
         else if (trimField = "Menu := Menu()") {
@@ -231,7 +228,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             if LVFound != 0 {
                 new_outscript .= LVFound '.Add(,"Sample1")`n' LVFound '.OnEvent("DoubleClick", LV_DoubleClick)`n'
             }
-            if (itemFound = 1)
+            if itemFound
             {
                 eventsStringified := []
                 for ctrl in GuiCtrlStorage {
@@ -244,7 +241,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                             }
                         }
                     }
-                    if skip = false {
+                    if !skip {
                         eventsStringified.Push(ctrl['name'])
                         new_outscript .= ctrl['name'] ".OnEvent(`"" ctrl['event'] "`", OnEventHandler)`n"
                     }
@@ -261,6 +258,8 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     }
     new_outscript := InStr(new_outscript, "ListviewListview") ? StrReplace(new_outscript, "ListviewListview", "_Listview") : new_outscript
     new_outscript := InStr(new_outscript, "ogc") ? StrReplace(new_outscript, "ogc", "") : new_outscript
+    
+    lastReturned := new_outscript
     return new_outscript
 }
 checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
@@ -268,11 +267,7 @@ checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
     {
         if InStr(LoopField, Format(".Add(`"{1}`"", ctrl["ctrl"]))
         {
-            ;if button
             if InStr(LoopField, " := ") {
-                ; var := Trim(StrSplit(LoopField, ":=")[1])
-                ; GuiItem_Storage.Push(Trim(var))
-                ; eventList.Push(event)
                 var := StrSplit(LoopField, " := ")[1]
                 if not IsAlnum(var) {
                     var := cleanAlpha(var) GuiItemCounter[A_Index]
