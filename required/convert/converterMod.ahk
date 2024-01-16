@@ -256,7 +256,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             new_outscript .= A_LoopField . "`n"
         }
     }
-    new_outscript := InStr(new_outscript, "ListviewListview") ? StrReplace(new_outscript, "ListviewListview", "_Listview") : new_outscript
+    new_outscript := InStr(new_outscript, "ListviewListview") ? StrReplace(new_outscript, "ListviewListview", "LV_") : new_outscript
     new_outscript := InStr(new_outscript, "ogc") ? StrReplace(new_outscript, "ogc", "") : new_outscript
     
     lastReturned := new_outscript
