@@ -6,11 +6,7 @@
 - Make sure you also install autohotkey v2 [AHKv2Installer](https://www.autohotkey.com/download/ahk-v2.exe) 
 
 
-#
-
-
-
-![Produce_19](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/4c87427a-4079-4043-852e-bbc03a55c953)
+![Uploading 244899176-4c87427a-4079-4043-852e-bbc03a55c953.gif…]()
 
 
 
