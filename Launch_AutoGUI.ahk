@@ -1,5 +1,6 @@
 #Requires Autohotkey v2.0
 #SingleInstance Force
+Persistent
 cwd := A_ScriptDir "\required"
 
 #Include "*i %A_ScriptDir%\required\convert\ConvertFuncs.ahk"
@@ -7,7 +8,7 @@ cwd := A_ScriptDir "\required"
 #Include "*i %A_ScriptDir%\required\Include\splash.ahk"
 #Include "*i %A_ScriptDir%\required\convert\_vars.ahk"
 #Include "*i %A_ScriptDir%\required\convert\github.ahk"
-   
+
 ; --- Readme ---
 ; Alguimist's Easy AutoGUI for AHK-v2 is a GUI designer for creating AHK-v2 scripts with a focus on ease of use.
 ; It is built on AHKv1 but handles real-time conversion to AHKv2, making it user-friendly for both beginners and advanced users.
@@ -25,12 +26,12 @@ Main()
 Main() {
     global PID
     missingFilesPrompt() ; Prompt user if required files are missing
-    ,showSplashScreen() ; Display a splash screen
-    ,setDesignMode() ; Set the design mode
-    ,cleanFiles(FileList) ; Clean temporary files
-    ,Run(launch_autogui_cmd, , , &PID) ; Run the AutoGUI command
-    ,Sleep(1000)
-    hwnd := findEasyAutoGUI(PID) ; Find and wait for Easy AutoGUI to launch
+        , showSplashScreen() ; Display a splash screen
+        , setDesignMode() ; Set the design mode
+        , cleanFiles(FileList) ; Clean temporary files
+        , Run(launch_autogui_cmd, , , &PID) ; Run the AutoGUI command
+        , Sleep(1000)
+    EAhwnd := findEasyAutoGUI(PID) ; Find and wait for Easy AutoGUI to launch
     while ProcessExist(PID) {
         CheckConversionStatus()
     }
@@ -56,7 +57,7 @@ CheckConversionStatus() {
                 }
             }
         } else {
-            Sleep(5)
+            Sleep(10)
             continue
         }
     }
@@ -66,9 +67,9 @@ CheckConversionStatus() {
 ; Convert script from AHK v1 to v2
 ConvertandCompile(inscript, ahkv2CodePath) {
     script := Convert(inscript)
-    ,final_code := modifyAhkv2ConverterOutput(ahkv1CodePath, script)
-    ,writer(final_code, ahkv2CodePath)
-    ,writer("1", returnStatusPath)
+        , final_code := modifyAhkv2ConverterOutput(ahkv1CodePath, script)
+        , writer(final_code, ahkv2CodePath)
+        , writer("1", returnStatusPath)
 }
 ; Prompt user about missing files
 missingFilesPrompt() {
@@ -82,9 +83,9 @@ missingFilesPrompt() {
         msg.text := 'The `'\required\AutoHotKey Exe\AutoHotkeyV1.exe`' file included with this app is missing. `n`nIf you downloaded from the Github code page, you`'ll need the release to run this application.`nOr edit the _vars.ahk file with your ahkv1 64bit exe. `n`nWould you like to download the required files?`nOtherwise, this app will exit.'
         msg.show := true
     }
-    else 
+    else
     {
-        return 
+        return
     }
     if msg.show = True
     {
@@ -114,7 +115,7 @@ findEasyAutoGUI(PID) {
             Sleep(1000)
         }
     }
-    try 
+    try
     {
         return WinGetID("ahk_pid " PID)
     }
@@ -150,6 +151,7 @@ setDesignMode() {
     IniWrite "1", settings, "Editor", "DarkTheme"
     IniWrite "0", settings, "Sessions", "AutoLoadLast"
     IniWrite "0", settings, "Sessions", "SaveOnExit"
+    IniWrite "0", settings, "Editor", "WordWrap"
 }
 
 ; Check for the latest version
@@ -165,11 +167,4 @@ errorLogHandler(errorMsg) {
     logMsg := "error occurred at: " FormatTime() " => " errorMsg "`n`n`n"
     writer(logMsg, errorLog)
 }
-
-/*
-if __name__ = "__main__"
-{*/
-/*
-}
-*/
 
