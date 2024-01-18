@@ -120,10 +120,13 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                     new_outscript .= Format('{}.SetIcon("{}","{}", {})', obj, commaSeparatedCln[1], commaSeparatedCln[2], commaSeparatedCln[3]) "`n" 
             }
         }
-        else if (menuHandle = 0) && (MenuHandleCount < 1) && InStr(A_LoopField, "MenuHandler") {
+        else if InStr(A_LoopField, "MenuHandler") {
+            if (menuHandle = 0) && (MenuHandleCount < 1) 
+            {
+                menuHandle := 1
+                new_outscript .= A_LoopField . "`n"
+            }
             ; if MenuHandler is found, add a function at the bottom of the app to handle
-            menuHandle := 1
-            new_outscript .= A_LoopField . "`n"
         }
         else if InStr(A_LoopField, "MenuHandler(") {
             MenuHandleCount += 1
@@ -168,11 +171,8 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             RemoveFunction := true
             continue
         }
-        else if InStr(A_LoopField, "OnEvent(`"Close`", GuiEscape)") || InStr(A_LoopField, "OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField = "") || InStr(A_LoopField, ".SetFont()") || InStr(A_LoopField, ".hwnd") || InStr(A_LoopField, "+hWnd") {
+        else if InStr(A_LoopField, "OnEvent(`"Close`", GuiEscape)") || (Trim(A_LoopField = "Return") || Trim(A_LoopField = "return")) || InStr(A_LoopField, "OnEvent(`"Escape`", GuiEscape)") || InStr(A_LoopField, "Bind(`"Normal`")") || (A_LoopField = "") || InStr(A_LoopField, ".SetFont()") || InStr(A_LoopField, ".hwnd") || InStr(A_LoopField, "+hWnd") {
             ;remove all if cases
-            continue
-        }
-        else if (Trim(A_LoopField = "Return") || Trim(A_LoopField = "return")) {
             continue
         }
         else if InStr(A_LoopField, "ControlColor(") {
