@@ -47,10 +47,14 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     {
         if (A_Index = 1)
         {
-            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
+            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n" 
+            . ";AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n" 
+            . ";Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
+            . "myGui := Construct()`n`n"
+            . "Construct() {`n"
         }
         trimField := Trim(A_LoopField)
-
+        
         if RemoveFunction {
             if InStr(trimField, "{") && !InStr(trimField, "}") {
                 brackets += 1 ; for every opening bracket, remove until equal number of closed brackets found
@@ -221,6 +225,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
         }
         else if InStr(A_LoopField, ".Show(`"") && (guiShow = 0) {
             guiShow := 1
+            
             ;look for line before `return` (GuiShow)
             ;if found, and NO [submit] button is used
             ;user will get tooltips on value changes
@@ -258,9 +263,22 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     }
     new_outscript := InStr(new_outscript, "ListviewListview") ? StrReplace(new_outscript, "ListviewListview", "LV_") : new_outscript
     new_outscript := InStr(new_outscript, "ogc") ? StrReplace(new_outscript, "ogc", "") : new_outscript
-    
-    lastReturned := new_outscript
-    return new_outscript
+    foundConstruct := false
+    finalScript := ""
+    loop parse, new_outscript, "`n" "`r"
+    {
+        if !foundConstruct
+        {
+            if A_LoopField = "Construct() {"
+                foundConstruct := true
+            finalScript .= A_LoopField "`n"
+        }
+        else
+            finalScript .= "`t" A_LoopField "`n"
+    }
+    finalScript := finalScript "`treturn myGui`n}"
+    lastReturned := finalScript
+    return finalScript
 }
 checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
     for ctrl in GuiControlVars
