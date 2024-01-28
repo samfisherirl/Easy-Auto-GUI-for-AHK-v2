@@ -16,7 +16,18 @@ This project is built upon years of hard work done by the individuals below. I p
 - AHKv2converter was developed by https://github.com/mmikeww and https://github.com/dmtr99 among others.
 - Boiler from the autohotkey.com forum, provided MessageBox Creator within the tools menu. https://www.autohotkey.com/boards/viewtopic.php?f=83&t=78253
 - Their work served as the foundation for this project, I did very little work, just weaving the two solutions together. All the work was done by the creators just mentioned.
-  
+
+# Other Features
+
+### Clone windows
+
+![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/0e96a2fa-5635-4c91-b9f7-74458f8956eb)
+
+### Constantine
+
+![image](https://github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2/assets/98753696/06765c4c-85bc-4ef0-a420-c655f2bb50ec)
+
+
 # How it works 
 Easy AutoGUI is built on and operates from ahkv1. Launch_AutoGUI is a v2 wrapper handling conversion and launching (without the need for v1.0 install). 
 
