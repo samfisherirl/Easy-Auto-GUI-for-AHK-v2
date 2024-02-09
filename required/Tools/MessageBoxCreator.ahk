@@ -4,22 +4,27 @@
 	based on Thalon's original "Messagebox-Creator" script
 	thanks to fincs for the icon from SciTE4AutoHotkey
 
-	modified for v2 output and translated into v2 code by boiler, updated by AHK_user
+	modified for v2 output and translated into v2 code by boiler, updated by AHK_user and sashaatx
 
 	v1.0	- initial release
 	v1.1	- added option for single quotes vs. double quotes as suggested by Helgef
 			- automatically saves user preferences of the function format options:
 				(parenthesis, numeric/string options, single/double quotes)
 			- remembers last window position for next time it is run
-	v1.2    - updated for AHK v2.0-beta.1 by AHK_user
+	v1.2	- updated for AHK v2.0-beta.1 by AHK_user
+	v1.3	- updated to produce code to handle return values by sashaatx
 */
-#Requires AutoHotKey v2
+#Requires AutoHotKey v2.0-beta.1
 #SingleInstance Force
+try {
+TraySetIcon("MsgBox.ico", 1)
+} catch {
+	
+}
 
-
-splashGUI := Gui()
-showSplashScreen()
-
+buttonConditions := [
+	["Ok", "Cancel"], ["Abort", "Retry", "Ignore"], ["Yes", "No", "Cancel"], ["Yes", "No"], ["Retry", "Cancel"], ["Cancel", "Try Again", "Continue"]
+]
 Paren := IniRead("MsgBox Creator settings.ini", "Main", "Paren", 1)
 NumOpt := IniRead("MsgBox Creator settings.ini", "Main", "NumOpt", 1)
 DoubleQu := IniRead("MsgBox Creator settings.ini", "Main", "DoubleQu", 1)
@@ -101,11 +106,13 @@ DoubleQuOptCtrl.OnEvent("Click", (*) => SaveOptions(MainGui))
 SingleQuOptCtrl := MainGui.Add("Radio", "x+5 yp w50 vSingleQu", "Single")
 SingleQuOptCtrl.OnEvent("Click", (*) => SaveOptions(MainGui))
 
-MainGui.Add("Groupbox", "x10 y395 w610 h75 section", "Result")
+MainGui.Add("Groupbox", "x10 y395 w610 h95 section", "Result")
 MainGui.SetFont(, "Courier New")
 MainGui.SetFont(, "Lucida Sans Typewriter") ; preferred
-MainGui.Add("Edit", "xs+10 ys+20 w590 r3 vFunctionText")
+MainGui.Add("Edit", "xs+10 ys+20 w590 h300 r5 vFunctionText")
 
+lastParenValue := 1
+lastParenStatus := 1
 ParenOptCtrl.Value := Paren
 if NumOpt
 	NumOptCtrl.Value := 1
@@ -126,6 +133,7 @@ OnMessage(0x232, WM_EXITSIZEMOVE)
 return
 
 CreateMsgBoxFunction(this, *) {
+	global lastParenValue, lastParenStatus
 	Try
 		saved := this.Submit(0)
 	Catch {
@@ -157,6 +165,21 @@ CreateMsgBoxFunction(this, *) {
 			break
 		}
 	}
+	if (buttonSelection < 1) && (lastParenStatus = 0) {
+		ParenOptCtrl.Enabled := 1
+		ParenOptCtrl.Value := lastParenValue
+		saved.Paren := lastParenValue
+		lastParenStatus := 1
+	}
+	else if (buttonSelection > 0) && (lastParenStatus = 1) {
+			lastParenValue := ParenOptCtrl.Value
+			ParenOptCtrl.Value := 1
+			saved.Paren := 1
+			ParenOptCtrl.Enabled := 0
+			lastParenStatus := 0
+		}
+
+
 	title := EscapeCharacters(saved.Title, saved.DoubleQu)
 	text := EscapeCharacters(saved.Text, saved.DoubleQu)
 	timeout := saved.Timeout
@@ -185,10 +208,23 @@ CreateMsgBoxFunction(this, *) {
 						. (options ? options : "") ; if sum of options is 0, leave it blank, otherwise put in options
 						. (options && timeout ? " " : "") ; if there is both an option number and a timeout, insert a space
 						. timeout . ((options . timeout) ? Qu : "") ; add timeout if it exists and close quote if necessary
+						;. buttonSelection > 0 ? buttonSelectionConditions(buttonConditions) : ""
 	functionText := RTrim(functionText, ",") ; remove unnecessary commas on the right
 						. (saved.Paren ? ")" : "") ; add closing paren if selected
+	functionText := buttonSelection > 0 ? (saved.Paren ? "userResponse := " functionText buttonSelectionConditions(buttonSelection) : functionText)  : functionText
+
 	this.__Item["FunctionText"].Value := functionText
 }
+buttonSelectionConditions(index){
+	if (buttonConditions[index].Length <= 3) {
+		conditional := Format("`nif (userResponse = `"{1}`"){`n`t;action here`n} else if (userResponse = `"{2}`"){`n`t;action here`n}", buttonConditions[index][1], buttonConditions[index][2])
+	}
+	if (buttonConditions[index].Length = 3) {
+		conditional .= Format(" else if (userResponse = `"{1}`"){`n`t;action here`n}", buttonConditions[index][3])
+	}
+	return conditional
+}
+
 
 SelectIcon(thisCtrl, *) {
 	thisCtrl.Value := 1
@@ -254,21 +290,4 @@ WM_EXITSIZEMOVE(*) {
 	MainGui.GetPos(&x, &y)
 	IniWrite x, "MsgBox Creator settings.ini", "Main", "WinPosX"
 	IniWrite y, "MsgBox Creator settings.ini", "Main", "WinPosY"
-}
-
-
-showSplashScreen() {
-    splashGUI.Opt("-MinimizeBox -MaximizeBox -SysMenu +AlwaysOnTop +ToolWindow -Caption +Owner")
-    splashGUI.SetFont("s11 Italic", "Verdana")
-    splashGUI.BackColor := "0x484848"
-    splashGUI.Add("Text", "cWhite x16 y8 w538 h46", "MsgBox creator was implemented on AHKv2 by [^1]Boiler a prominent autohotkey.com contributor, and moderator. [^2]Thalon was the original creator, linked below. `n")
-    splashGUI.SetFont() ; 
-    splashGUI.SetFont("s15")
-    splashGUI.Add("Link",, "<a href=`"https://www.autohotkey.com/boards/viewtopic.php?f=83&t=78253`">[^1] @Boiler - AHKforum</a>")
-    splashGUI.SetFont("s15")
-    splashGUI.Add("Link",, "<a href=`"https://www.autohotkey.com/board/topic/10623-messagebox-creator/`">[^2] @Thalon - AHKforum</a>")
-    splashGUI.Title := "Window"
-    splashGUI.OnEvent('Close', (*) => ExitApp())
-    splashGUI.Show("")
-    Settimer () => splashGUI.Destroy(), -3000
 }
