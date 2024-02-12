@@ -46,12 +46,11 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     Loop Parse, script, "`n", "`r"
     {
         if (A_Index = 1)
-        {
-            new_outscript := "`n" "#Requires Autohotkey v2`n;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n" 
+        { ; constructor_Prelude
+            new_outscript := "`n#Requires Autohotkey v2`n;AutoGUI creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n" 
             . ";AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n" 
-            . ";Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
-            . "myGui := Construct()`n`n"
-            . "Construct() {`n"
+            . ";EasyAutoGUI-AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
+            . "if A_LineFile = A_ScriptFullPath`n{`n`tmyGui := Constructor()`n`;insertshow`n`n"
         }
         trimField := Trim(A_LoopField)
         
@@ -110,6 +109,8 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             title := A_LoopField
             continue
         }
+        if InStr(TrimField, "V1toV2: Added bracket")
+            continue
         else if InStr(trimField, '.Icon("')
         {
             obj := StrSplit(trimField, '.Icon(')[1]
@@ -252,7 +253,9 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
                     }
                 }
             }
-            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n" . title . "`n" A_LoopField . "`n"
+            showGui := ""
+            showGui := trimField
+            new_outscript .= guiname ".OnEvent('Close', (*) => ExitApp())`n" . title . "`n" 
             if LVFound {
                 new_outscript .= LVFunc 
             }
@@ -269,9 +272,10 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     {
         if !foundConstruct
         {
-            if A_LoopField = "Construct() {"
-                foundConstruct := true
-            finalScript .= A_LoopField "`n"
+            if InStr(A_LoopField, "`;insertshow")
+                foundConstruct := true, finalScript .= "`t" showGui "`n}`n`nConstructor()`n{" 
+            else 
+                finalScript .=  A_LoopField "`n"
         }
         else
             finalScript .= "`t" A_LoopField "`n"
@@ -280,6 +284,8 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
     lastReturned := finalScript
     return finalScript
 }
+                      
+
 checkforGuiItems(LoopField, &GuiControlVars, &GuiItemCounter, &GuiCtrlStorage) {
     for ctrl in GuiControlVars
     {
