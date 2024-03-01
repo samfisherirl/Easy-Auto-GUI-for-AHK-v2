@@ -1,5 +1,5 @@
 ---
-name: WARNING
+name: 'WARNING **DONOT REPORT ISSUES REGARDING FEATURES or IMPORTING GUIs** '
 about: WARNING
 title: WARNING
 labels: ''
