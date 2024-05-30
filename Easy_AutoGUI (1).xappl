@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration version="10.11" appVersion="24.2.6" publisher="Turbo.net">
+  <Expiration daysLimit="0" expirationDate="2099-01-01T00:00:00Z" expirationWarningDays="0">
+    <ExpiredMessage>The evaluation period for this application has expired. Please contact your system administrator or the application publisher for assistance.</ExpiredMessage>
+    <ExpirationWarning>This application will expire in %d days.</ExpirationWarning>
+    <UnreachableWarning>The current time could not be validated with the time server. Please check your network connection and try again.</UnreachableWarning>
+  </Expiration>
+  <Output diagnosticMode="false" includeRuntimeDotNetImage="false" allowFullIsolation="false" enableSync="false" enableAutoUpdate="false" showLaunchSettings="false" isolationLevel="WriteCopy" hub="https://turbo.net" isolationOptions="MergeUser" />
+  <Msi outputMsiPath="" title="" subject="" keywords="" productName="" productVersion="" manufacturer="" productLanguage="1033" author="" description="" manufacturerUrl="" autoBuild="False" isolatePerUser="True" applicationFolder="" upgradePreviousVersion="True" productCode="{F4F1119E-4E6C-4FAF-AE45-FCF1A511C932}" upgradeCode="{C944E122-3B9C-4188-8417-500EF203B71E}" componentId="{F7128236-8CAC-45A9-988A-B7DDA96D37A2}" />
+  <Network>
+    <Proxy enableTCP="false" enableUDP="false" />
+  </Network>
+  <Clipboard isolationMode="Merge" />
+  <Certificate />
+  <EnvironmentVariableExGlobalSettings isolationMode="WriteCopy" />
+  <Dependencies />
+  <Requirements />
+  <Packages trimDotNet="True">
+    <Java />
+  </Packages>
+  <VirtualizationSettings suppressBranding="True" deleteSandbox="False" shutdownProcessTree="False" enhancedDEPCompatibility="False" notifyProcessStarts="False" enableLegacySecurityPassthrough="False" trimUACManifest="False" forceFIPSCompliance="False" forceReadShareFiles="False" isolateWindowClasses="False" readOnlyVirtualization="False" disableXenocodeCommandLine="False" suppressSandboxCollisionCheck="False" subsystem="Inherit" targetArchitecture="x64" sandboxPath="@APPDATALOCAL@\Turbo.net\Sandbox\@TITLE@\@VERSION@" exeOptimization="False" compressPayload="False" forceIndicateRunningElevated="False" launchChildProcsAsUser="True" enableDRMCompatibility="False" faultExecutablesIntoSandbox="True" minStackSize="0" minSandboxSpaceAvail="-1" honorWow6464AccessFlag="True" suppressPopups="False" hideShellWindow="False" isDriverSVM="False" forceEntryLayerIsolation="False" stubExeCachePath="" spoonCachePath="" waitForChildOnly="True" httpUrlPassthrough="False" mergeStartupDir="False" allowGlobalWindowHooks="False" breakIdenticalSendMessageRecursion="False" extendedWinXPCompatibility="False" isolateProcessNames="False" isolateNonSystemDrives="False" isolateNetworkShares="False" disableProxySupportForRouteMaps="False" isolateDDE="False" aggressiveRegistrySandboxCachePolicy="False" chromiumSupport="False" handleExplorerShellEx="False">
+    <ChildProcessVirtualization spawnVm="true" spawnExternalComServers="false" />
+  </VirtualizationSettings>
+  <XLayers xlayerSearchPattern="" />
+  <NamedObjectIsolation enabled="False" />
+  <Dns />
+  <Device>
+    <MachineName />
+    <MachineSid />
+    <NetworkAdapters />
+    <ComputerSystemProduct />
+  </Device>
+  <EnvironmentStats />
+  <WorkingDirectory option="StartupFileDirectory" specifiedDirectory="@APPDIR@" />
+  <DisabledVmSettings />
+  <StartupShims />
+  <ShutdownShims />
+  <Scripts />
+  <ActiveDirectory />
+  <CustomMetadata />
+  <StandardMetadata />
+  <SplashImage path="" transparency="Magenta" seconds="6" />
+  <StartupFiles>
+    <StartupFile node="@PROGRAMFILES@\EasyAutoGUI\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\Launch_AutoGUI.exe" tag="" commandLine="" default="True" architecture="AnyCpu" />
+  </StartupFiles>
+  <Layers>
+    <Layer name="Default">
+      <Filesystem>
+        <Directory name="@APPDATA@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@APPDATACOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@APPDATALOCAL@" isolation="Merge" readOnly="False" hide="False" noSync="True" />
+        <Directory name="@APPDATALOCALLOW@" isolation="Merge" readOnly="False" hide="False" noSync="True" />
+        <Directory name="@APPDIR@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@DESKTOP@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@DESKTOPCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@DOCUMENTS@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@DOCUMENTSCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@DOWNLOADS@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@FAVORITES@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@FAVORITESCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@MUSIC@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@MUSICCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PICTURES@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PICTURESCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROFILE@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROFILECOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROGRAMFILES@" isolation="Merge" readOnly="False" hide="False" noSync="False">
+          <Directory name="EasyAutoGUI" isolation="Full" readOnly="False" hide="False" noSync="False">
+            <Directory name="Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1" isolation="Full" readOnly="False" hide="False" noSync="False">
+              <File name=".gitignore" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\.gitignore" />
+              <File name="Launch_AutoGUI.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\Launch_AutoGUI.ahk" />
+              <File name="Launch_AutoGUI.exe" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\Launch_AutoGUI.exe" />
+              <File name="Launch_AutoGUI_32.exe" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\Launch_AutoGUI_32.exe" />
+              <File name="License" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\License" />
+              <File name="README.md" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\README.md" />
+              <Directory name="changes_of_note" isolation="Full" readOnly="False" hide="False" noSync="False">
+                <File name="__AutoGUI.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\changes_of_note\__AutoGUI.ahk" />
+                <File name="__ConvertFuncs.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\changes_of_note\__ConvertFuncs.ahk" />
+                <File name="__GenerateCode.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\changes_of_note\__GenerateCode.ahk" />
+                <File name="__Launch_AutoGUI.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\changes_of_note\__Launch_AutoGUI.ahk" />
+                <File name="modificationsOfAHKv2ConverterOutput.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\changes_of_note\modificationsOfAHKv2ConverterOutput.ahk" />
+              </Directory>
+              <Directory name="github_tools" isolation="Full" readOnly="False" hide="False" noSync="False">
+                <File name="REGEXMATCH_todo.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\github_tools\REGEXMATCH_todo.ahk" />
+                <File name="self_xtracting_archive.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\github_tools\self_xtracting_archive.ahk" />
+                <File name="setup.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\github_tools\setup.ahk" />
+              </Directory>
+              <Directory name="required" isolation="Full" readOnly="False" hide="False" noSync="False">
+                <File name="AutoGUI.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\AutoGUI.ahk" />
+                <File name="AutoGUI.ini" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\AutoGUI.ini" />
+                <File name="errorLog.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\errorLog.txt" />
+                <File name="License.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\License.txt" />
+                <File name="listener.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\listener.ahk" />
+                <File name="ParseImport.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\ParseImport.ahk" />
+                <File name="SciLexer32.dll" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\SciLexer32.dll" />
+                <File name="SciLexer64.dll" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\SciLexer64.dll" />
+                <File name="settings.json" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\settings.json" />
+                <File name="testrun.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\testrun.ahk" />
+                <File name="updater.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\updater.ahk" />
+                <File name="versionCheck.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\versionCheck.ahk" />
+                <Directory name="AutoHotKey Exe" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="AutoHotkeyV1.exe" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\AutoHotKey Exe\AutoHotkeyV1.exe" />
+                  <File name="AutoHotkeyV2.exe" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\AutoHotKey Exe\AutoHotkeyV2.exe" />
+                </Directory>
+                <Directory name="convert" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="_vars.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\_vars.ahk" />
+                  <File name="converterMod.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\converterMod.ahk" />
+                  <File name="ConvertFuncs.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\ConvertFuncs.ahk" />
+                  <File name="empty.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\empty.txt" />
+                  <File name="example.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\example.ahk" />
+                  <File name="github.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\github.ahk" />
+                  <File name="lastCode.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lastCode.txt" />
+                  <File name="lastv1.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lastv1.txt" />
+                  <File name="lastv2.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lastv2.txt" />
+                  <File name="listener.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\listener.ahk" />
+                  <File name="log.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\log.txt" />
+                  <File name="ParseImport.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\ParseImport.ahk" />
+                  <File name="returncode.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\returncode.txt" />
+                  <File name="returnstatus.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\returnstatus.txt" />
+                  <File name="runtime (1).txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\runtime (1).txt" />
+                  <File name="runtime.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\runtime.txt" />
+                  <File name="temp.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\temp.txt" />
+                  <File name="v2converter.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\v2converter.ahk" />
+                  <Directory name="convert" isolation="Full" readOnly="False" hide="False" noSync="False">
+                    <File name="1Commands.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\convert\1Commands.ahk" />
+                    <File name="2Functions.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\convert\2Functions.ahk" />
+                    <File name="3Methods.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\convert\3Methods.ahk" />
+                    <File name="4ArrayMethods.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\convert\4ArrayMethods.ahk" />
+                    <File name="5Keywords.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\convert\5Keywords.ahk" />
+                  </Directory>
+                  <Directory name="lib" isolation="Full" readOnly="False" hide="False" noSync="False">
+                    <File name="_GuiCtlExt.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\_GuiCtlExt.ahk" />
+                    <File name="_JSONS.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\_JSONS.ahk" />
+                    <File name="ClassOrderedMap.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\ClassOrderedMap.ahk" />
+                    <File name="CustomLexer.c" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\CustomLexer.c" />
+                    <File name="CustomLexer.dll" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\CustomLexer.dll" />
+                    <File name="dbg.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\dbg.ahk" />
+                    <File name="hworld.c" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\hworld.c" />
+                    <File name="scintilla.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\scintilla.ahk" />
+                    <File name="Scintilla.dll" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\convert\lib\Scintilla.dll" />
+                  </Directory>
+                </Directory>
+                <Directory name="Icons" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="8x8.bmp" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\8x8.bmp" />
+                  <File name="A_Variables.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\A_Variables.ico" />
+                  <File name="AutoGUI.icl" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\AutoGUI.icl" />
+                  <File name="Breakpoint.xpm" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Breakpoint.xpm" />
+                  <File name="COM Inspector.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\COM Inspector.ico" />
+                  <File name="Constantine.icl" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Constantine.icl" />
+                  <File name="Directives.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Directives.ico" />
+                  <File name="DragMove.cur" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\DragMove.cur" />
+                  <File name="Error.xpm" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Error.xpm" />
+                  <File name="ErrorView.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\ErrorView.ico" />
+                  <File name="Expressive.icl" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Expressive.icl" />
+                  <File name="Handpoint.xpm" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Handpoint.xpm" />
+                  <File name="Keyboard.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Keyboard.ico" />
+                  <File name="MagicBox.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\MagicBox.ico" />
+                  <File name="Scripts Manager.icl" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Scripts Manager.icl" />
+                  <File name="Search.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Search.ico" />
+                  <File name="Structor.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Structor.ico" />
+                  <File name="Verifier.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\Verifier.ico" />
+                  <File name="WCT.ico" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Icons\WCT.ico" />
+                </Directory>
+                <Directory name="Include" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="AutoHotkey.xml" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\AutoHotkey.xml" />
+                  <File name="CloneWindow.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\CloneWindow.ahk" />
+                  <File name="ContextHelp.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\ContextHelp.ahk" />
+                  <File name="Controls.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Controls.ahk" />
+                  <File name="Debug.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Debug.ahk" />
+                  <File name="Designer.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Designer.ahk" />
+                  <File name="Editor.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Editor.ahk" />
+                  <File name="FindReplace.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\FindReplace.ahk" />
+                  <File name="FontDialog.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\FontDialog.ahk" />
+                  <File name="GenerateCode.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\GenerateCode.ahk" />
+                  <File name="Globals.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Globals.ahk" />
+                  <File name="HelpMenu.xml" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\HelpMenu.xml" />
+                  <File name="Keyboard.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Keyboard.ahk" />
+                  <File name="Keywords.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Keywords.ahk" />
+                  <File name="Menu.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Menu.ahk" />
+                  <File name="MenuEditor.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\MenuEditor.ahk" />
+                  <File name="Parser.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Parser.ahk" />
+                  <File name="Properties.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Properties.ahk" />
+                  <File name="Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Settings.ahk" />
+                  <File name="splash.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\splash.ahk" />
+                  <File name="splash.ahk.bak" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\splash.ahk.bak" />
+                  <File name="Styles.ini" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\Styles.ini" />
+                  <File name="ToolbarEditor.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\ToolbarEditor.ahk" />
+                  <File name="ToolsDialog.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Include\ToolsDialog.ahk" />
+                </Directory>
+                <Directory name="Lib" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="_GuiCtlExt.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\_GuiCtlExt.ahk" />
+                  <File name="AutoXYWH.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\AutoXYWH.ahk" />
+                  <File name="AuxLib.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\AuxLib.ahk" />
+                  <File name="ClassOrderedMap.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\ClassOrderedMap.ahk" />
+                  <File name="CommonDialogs.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\CommonDialogs.ahk" />
+                  <File name="ControlColor.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\ControlColor.ahk" />
+                  <File name="CustomLexer.c" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\CustomLexer.c" />
+                  <File name="CustomLexer.dll" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\CustomLexer.dll" />
+                  <File name="dbg.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\dbg.ahk" />
+                  <File name="DBGp.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\DBGp.ahk" />
+                  <File name="DownloadAsync.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\DownloadAsync.ahk" />
+                  <File name="EnumIncludes.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\EnumIncludes.ahk" />
+                  <File name="ExecScript.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\ExecScript.ahk" />
+                  <File name="github.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\github.ahk" />
+                  <File name="GuiButtonIcon.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\GuiButtonIcon.ahk" />
+                  <File name="GuiTabEx.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\GuiTabEx.ahk" />
+                  <File name="hworld.c" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\hworld.c" />
+                  <File name="JXON.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\JXON.ahk" />
+                  <File name="LV_GroupView.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\LV_GroupView.ahk" />
+                  <File name="ResourceID.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\ResourceID.ahk" />
+                  <File name="RunGetStdout.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\RunGetStdout.ahk" />
+                  <File name="Scintilla.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\Scintilla.ahk" />
+                  <File name="Scintilla.dll" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="True" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\Scintilla.dll" />
+                  <File name="ShellContextMenu.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\ShellContextMenu.ahk" />
+                  <File name="Toolbar.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\Toolbar.ahk" />
+                  <File name="UIA.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\UIA.ahk" />
+                  <File name="UIA_Browser.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\UIA_Browser.ahk" />
+                  <File name="WinHttpRequest.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Lib\WinHttpRequest.ahk" />
+                </Directory>
+                <Directory name="Samples" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <Directory name="GUI" isolation="Full" readOnly="False" hide="False" noSync="False">
+                    <Directory name="Clones" isolation="Full" readOnly="False" hide="False" noSync="False">
+                      <File name="Advanced Security Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Advanced Security Settings.ahk" />
+                      <File name="ConEmu Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\ConEmu Settings.ahk" />
+                      <File name="Device Installation Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Device Installation Settings.ahk" />
+                      <File name="Disk Defragmenter.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Disk Defragmenter.ahk" />
+                      <File name="ePSXe Video Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\ePSXe Video Settings.ahk" />
+                      <File name="FFmpeg Catapult.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\FFmpeg Catapult.ahk" />
+                      <File name="FileZilla Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\FileZilla Settings.ahk" />
+                      <File name="FLAC Frontend.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\FLAC Frontend.ahk" />
+                      <File name="Grab and Drag Preferences.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Grab and Drag Preferences.ahk" />
+                      <File name="Internet Download Manager Configuration.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Internet Download Manager Configuration.ahk" />
+                      <File name="IrfanView Slideshow.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\IrfanView Slideshow.ahk" />
+                      <File name="Menu Design Window.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Menu Design Window.ahk" />
+                      <File name="Notepad.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Notepad.ahk" />
+                      <File name="Taskbar and Start Menu Properties.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Taskbar and Start Menu Properties.ahk" />
+                      <File name="TightVNC Server Configuration.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\TightVNC Server Configuration.ahk" />
+                      <File name="UltraVNC Server Property Page.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\UltraVNC Server Property Page.ahk" />
+                      <File name="Windows Live Installer.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Windows Live Installer.ahk" />
+                      <File name="Windows Media Player Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\Windows Media Player Settings.ahk" />
+                      <File name="WinRAR - Archive Name and Parameters.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\WinRAR - Archive Name and Parameters.ahk" />
+                      <File name="WinRAR Settings.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\Clones\WinRAR Settings.ahk" />
+                    </Directory>
+                    <Directory name="TreeList" isolation="Full" readOnly="False" hide="False" noSync="False">
+                      <File name="TreeList Test.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\TreeList\TreeList Test.ahk" />
+                      <File name="TreeList.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Samples\GUI\TreeList\TreeList.ahk" />
+                    </Directory>
+                  </Directory>
+                </Directory>
+                <Directory name="Sessions" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="Session Saved on Exit.session" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Sessions\Session Saved on Exit.session" />
+                  <File name="temp.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Sessions\temp.ahk" />
+                  <File name="temp1" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Sessions\temp1" />
+                  <File name="temp2.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Sessions\temp2.ahk" />
+                </Directory>
+                <Directory name="Tools" isolation="Full" readOnly="False" hide="False" noSync="False">
+                  <File name="A_Variables.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\A_Variables.ahk" />
+                  <File name="COM Inspector.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\COM Inspector.ahk" />
+                  <File name="compiler.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\compiler.ahk" />
+                  <File name="Constantine.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Constantine.ahk" />
+                  <File name="Constantine.ini" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Constantine.ini" />
+                  <File name="Default Editor.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Default Editor.ahk" />
+                  <File name="DefaultTools.ini" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\DefaultTools.ini" />
+                  <File name="Directives.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Directives.ahk" />
+                  <File name="ErrorView.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\ErrorView.ahk" />
+                  <File name="Expressive.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Expressive.ahk" />
+                  <File name="Find in Files.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Find in Files.ahk" />
+                  <File name="MessageBoxCreator.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MessageBoxCreator.ahk" />
+                  <File name="MsgBox Creator settings.ini" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MsgBox Creator settings.ini" />
+                  <File name="Scripts Manager.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Scripts Manager.ahk" />
+                  <File name="Structor.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Structor.ahk" />
+                  <File name="Tools.ini" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Tools.ini" />
+                  <File name="Verifier.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Verifier.ahk" />
+                  <File name="Windows.xml" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\Windows.xml" />
+                  <Directory name="MagicBox" isolation="Full" readOnly="False" hide="False" noSync="False">
+                    <File name="MagicBox.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\MagicBox.ahk" />
+                    <File name="MagicBox.txt" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\MagicBox.txt" />
+                    <Directory name="Examples" isolation="Full" readOnly="False" hide="False" noSync="False">
+                      <File name="Close Tabs.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Close Tabs.ahk" />
+                      <File name="Error 25.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Error 25.ahk" />
+                      <File name="Filename.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Filename.ahk" />
+                      <File name="Input Box.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Input Box.ahk" />
+                      <File name="Partition.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Partition.ahk" />
+                      <File name="Pigeons.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Pigeons.ahk" />
+                      <File name="Progress.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Progress.ahk" />
+                      <File name="Types.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Types.ahk" />
+                      <File name="Virtuoso.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\Virtuoso.ahk" />
+                      <File name="XP Support.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Examples\XP Support.ahk" />
+                    </Directory>
+                    <Directory name="Functions" isolation="Full" readOnly="False" hide="False" noSync="False">
+                      <File name="FatalAppExit.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\FatalAppExit.ahk" />
+                      <File name="InputBoxEx.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\InputBoxEx.ahk" />
+                      <File name="MessageBox.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\MessageBox.ahk" />
+                      <File name="MessageBoxCheck.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\MessageBoxCheck.ahk" />
+                      <File name="MessageBoxIndirect.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\MessageBoxIndirect.ahk" />
+                      <File name="MessageBoxTimeout.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\MessageBoxTimeout.ahk" />
+                      <File name="MsgBoxEx.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\MsgBoxEx.ahk" />
+                      <File name="MsiMessageBox.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\MsiMessageBox.ahk" />
+                      <File name="ShellAbout.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\ShellAbout.ahk" />
+                      <File name="ShellMessageBox.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\ShellMessageBox.ahk" />
+                      <File name="SoftModalMessageBox.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\SoftModalMessageBox.ahk" />
+                      <File name="TaskDialog.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\TaskDialog.ahk" />
+                      <File name="TaskDialogEx.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\TaskDialogEx.ahk" />
+                      <File name="WTSSendMessage.ahk" isolation="Full" readOnly="False" hide="False" upgradeable="True" precacheable="False" source=".\Easy-Auto-GUI-v1.6.5-for-AHK-v2.2_1\required\Tools\MagicBox\Functions\WTSSendMessage.ahk" />
+                    </Directory>
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+        <Directory name="@PROGRAMFILESCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROGRAMFILESCOMMONX86@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROGRAMFILESX86@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROGRAMS@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@PROGRAMSCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@STARTMENU@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@STARTMENUCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@STARTUP@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@STARTUPCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@SYSDRIVE@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@SYSTEM@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@SYSWOW64@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@TEMPLATES@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@TEMPLATESCOMMON@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@VIDEOS@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Directory name="@WINDIR@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+      </Filesystem>
+      <Registry>
+        <Key name="@HKCR@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Key name="@HKCU@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Key name="@HKLM@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+        <Key name="@HKU@" isolation="Merge" readOnly="False" hide="False" noSync="False" />
+      </Registry>
+      <EnvironmentVariables />
+      <EnvironmentVariablesEx />
+      <PortMaps />
+      <ObjectMaps />
+      <Services />
+      <Shortcuts>
+        <Folder name="Desktop" />
+        <Folder name="Programs Menu" />
+        <Folder name="SendTo" />
+      </Shortcuts>
+      <ProgIds />
+      <Extensions />
+      <DefaultPrograms />
+      <SnapshotDirectories />
+      <ShellExtensions />
+    </Layer>
+  </Layers>
+  <HarvestSettings />
+  <Id value="{0D65003D-4B1E-40D0-AA06-81B267CB8DD9}" />
+  <OutputLocation value="." />
+  <OutputFile value="Easy_AutoGUI.exe" />
+  <ProjectType value="Application" />
+</Configuration>
