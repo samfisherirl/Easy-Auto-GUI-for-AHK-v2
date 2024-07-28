@@ -50,7 +50,7 @@ modifyAhkv2ConverterOutput(FNOut := "path", script := "code") ;outscript_path
             new_outscript := "`n#Requires Autohotkey v2`n;AutoGUI creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901`n" 
             . ";AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter`n" 
             . ";EasyAutoGUI-AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2`n`n"
-            . "if A_LineFile = A_ScriptFullPath &! A_IsCompiled`n{`n`tmyGui := Constructor()`n`;insertshow`n`n"
+            . "if A_LineFile = A_ScriptFullPath && !A_IsCompiled`n{`n`tmyGui := Constructor()`n`;insertshow`n`n"
         }
         trimField := Trim(A_LoopField)
         
