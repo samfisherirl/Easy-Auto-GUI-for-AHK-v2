@@ -2,5 +2,15 @@
 Easy-Auto-GUI-for-AHK-v2.zip
 Easy-Auto-GUI-for-AHK-v2.zip.tmp
 Launch_AutoGUI.exe
-README.md
-*.md
+required/convert/empty.txt
+required/convert/converterMod.ahk
+required/convert/lastv1.txt
+required/convert/lastv2.txt
+required/convert/log.txt
+required/convert/returncode.txt
+required/convert/returnstatus.txt
+required/convert/runtime.txt
+required/convert/temp.txt
+required/Sessions
+required/AutoHotKey Exe
+required/AutoGUI.ini
