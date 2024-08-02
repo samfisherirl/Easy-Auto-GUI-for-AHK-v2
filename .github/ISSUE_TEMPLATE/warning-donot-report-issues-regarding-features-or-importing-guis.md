@@ -11,4 +11,6 @@ assignees: ''
 
 **DONOT REPORT ISSUES REGARDING IMPORTING GUIS**
 
+**You may ask for ahkv2 specific features, functionality, or anything broken in the conversion process**
+
 This is a port of an existing application. It has limitations and I will not be expanding on the base features. Importing scripts does not work.
