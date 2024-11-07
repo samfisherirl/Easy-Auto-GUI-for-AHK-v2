@@ -9,7 +9,7 @@ assignees: ''
 
 # **DONOT REPORT ISSUES REGARDING FEATURES**
 
-# **DONOT REPORT ISSUES REGARDING IMPORTING GUIS**
+# **DONOT REPORT ISSUES REGARDING SAVING AND IMPORTING GUIS**
 
 # **You may ask for ahkv2 specific features, functionality, or anything broken in the conversion process**
 
